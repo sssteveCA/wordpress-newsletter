@@ -29,4 +29,9 @@
     $users = new Users($data);
     $users->dropTable();
  }
+
+ add_action('admin_enqueue_scripts','nl_admin_scripts',11);
+ function nl_admin_scripts(){
+    
+ }
 ?>
