@@ -77,5 +77,10 @@ function nl_scripts(){
     wp_enqueue_script('nlNewsletterJs',$nlJs,[],null,true);
 }
 
+add_action('wp_footer','nl_form_signup');
+function nl_form_signup(){
+    
+}
+
 
 ?>

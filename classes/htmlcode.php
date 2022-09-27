@@ -3,6 +3,54 @@
 namespace Newsletter\Classes;
 
 class HtmlCode{
+
+    /**
+     * Admin subscriber add form
+     */
+    public static function adminAddForm(): string{
+        $html = <<<HTML
+<div>
+    <h2 class="text-center">Aggiungi utente alla newsletter</h2>
+</div>
+<form id="nl_form_add" method="post" action="#">
+    <div id="nl_del_content" class="mt-4 mx-auto container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <label for="nl_email" class="form-label">Email</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <input type="text" id="nl_email" class="form-control" name="email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <label for="nl_lang_code" class="form-label">Codice lingua</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <input type="text" id="nl_lang_code" class="form-control" name="lang_code">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <label for="nl_unsubscibe_code" class="form-label">Codice disiscrizione</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <input type="text" id="nl_unsubscibe_code" class="form-control" name="unsubscibe_code">
+            </div>
+        </div>
+        <div class="row justify-content-between justify-content-md-evenly">
+            <div class="col-4 col-md-3">
+                <button type="submit" class="btn btn-primary">AGGIUNGI</button>
+            </div>
+            <div class="col-4 col-md-3">
+                <button type="reset" class="btn btn-danger">ANNULLA</button>
+            </div>
+        </div>
+    </div>
+</form>
+HTML;
+        return $html;
+    }
     
     /**
      * Admin subscriber delete form
