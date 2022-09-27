@@ -4,11 +4,16 @@ namespace Newsletter\Classes\Database\Tables;
 
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Classes\Database\Tables\TableErrors as Te;
+use Newsletter\Traits\SqlTrait;
 use wpdb;
 
 abstract class Table implements Te{
+
+    use SqlTrait;
+
     protected wpdb $wpdb;
     protected string $name;
+    protected string $fullname;
     protected string $charset;
     protected string $sql_create;
     protected string $sql_drop;
@@ -21,6 +26,7 @@ abstract class Table implements Te{
     }
 
     public function getName(){return $this->name;}
+    public function getFullName(){return $this->fullname;}
     public function getCharset(){return $this->charset;}
     public function getSqlCreate(){return $this->sql_create;}
     public function getSqlDrop(){return $this->sql_drop;}
@@ -33,9 +39,9 @@ abstract class Table implements Te{
         if(isset($data['name'])){
             $this->name = $data['name'];
             $this->charset = $this->wpdb->get_charset_collate();
-            $fullname = $this->wpdb->prefix.$this->name;
+            $this->fullname = $this->wpdb->prefix.$this->name;
             $this->sql_drop = <<<SQL
-DROP TABLE `{$fullname}`;
+DROP TABLE `{$this->fullname}`;
 SQL;
         }//if(isset($data['name'])){
         return $isset;
@@ -46,7 +52,8 @@ SQL;
      */
     protected function dropTable(): bool{
         $deleted = false;
-        if($this->wpdb->query($this->sql_drop) === true)$deleted = true;
+        $this->query = $this->sql_drop;
+        if($this->wpdb->query($this->query) === true)$deleted = true;
         return $deleted;
     }
 }

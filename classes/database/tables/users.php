@@ -31,6 +31,13 @@ CREATE TABLE `{$this->name}` (
 ) ENGINE=InnoDB {$this->charset};
 SQL;
     }
+
+    /**
+     * Drop the users table
+     */
+    public function dropTable(): bool{
+        return parent::dropTable();
+    }
 }
 
 ?>

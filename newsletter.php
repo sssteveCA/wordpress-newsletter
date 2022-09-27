@@ -17,9 +17,7 @@
 
  register_activation_hook(__FILE__,'nl_set_table');
  function bnl_set_table(){
-    $data = [
-        'name' => C::TABLE_USERS
-    ];
+    $data = ['name' => C::TABLE_USERS];
     $users = new Users($data);
     $create = $users->getSqlCreate();
     dbDelta($create);
@@ -27,6 +25,7 @@
 
  register_uninstall_hook(__FILE__,'nl_delete_table');
  function nl_delete_table(){
-
+    $data = ['name' => C::TABLE_USERS];
+    $users = new User($data);
  }
 ?>
