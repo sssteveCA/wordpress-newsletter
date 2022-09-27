@@ -12,9 +12,11 @@
 
  require_once(ABSPATH."wp-admin/includes/upgrade.php");
 
+ use \Newsletter\Classes\Database\Tables\Users;
+ use Interfaces\Constants as C;
+
  register_activation_hook(__FILE__,'nl_set_table');
  function bnl_set_table(){
-    global $wpdb;
-    
+
  }
 ?>
