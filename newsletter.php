@@ -40,4 +40,13 @@
     $adminJs = $plugin_dir.C::REL_JS_ADMIN;
     wp_enqueue_script('nlAdminJs',$adminJs,[],null);
  }
+
+ add_action('admin_menu','nl_menu');
+ function nl_menu(){
+    add_menu_page('Newsletter','Newsletter','administrator','nl_menu','','',1);
+    add_submenu_page('nl_menu','Invia mail','Invia mail','administrator','nl_submenu_send','nl_submenu_send');
+    add_submenu_page('nl_menu','Aggiungi utente','Aggiungi utente','administrator','nl_submenu_add','nl_submenu_add');
+    add_submenu_page('nl_menu','Elimina iscritti','Elimina iscritti','administrator','nl_submenu_del','nl_submenu_del');
+    remove_submenu_page('nl_menu','nl_menu');
+ }
 ?>
