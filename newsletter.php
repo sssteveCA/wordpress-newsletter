@@ -17,6 +17,7 @@
  use Newsletter\Interfaces\Constants as C;
  use Newsletter\Classes\Properties as Pr;
  use Newsletter\Classes\HtmlCode;
+use Newsletter\Classes\Properties;
 
  register_activation_hook(__FILE__,'nl_set_table');
  function bnl_set_table(){
@@ -66,4 +67,15 @@
     $sendHtml = HtmlCode::adminSenderForm();
     echo $sendHtml;
  }
+
+ add_action('wp_enqueue_scripts','nl_scripts',11);
+function nl_scripts(){
+    $plugin_dir = Properties::pluginUrl(__FILE__);
+    $nlCss = $plugin_dir.'/css/wp_newsletter.css';
+    $nlJs = $plugin_dir.'/js/wp_newsletter_js.php';
+    wp_enqueue_style('nlNewsletterCss',$nlCss,[],null,true);
+    wp_enqueue_script('nlNewsletterJs',$nlJs,[],null,true);
+}
+
+
 ?>
