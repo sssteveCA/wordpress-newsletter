@@ -1,6 +1,6 @@
 <?php
 
-namespace Interfaces;
+namespace Newsletter\Interfaces;
 
 interface Constants{
     const TABLE_USERS = "users";
