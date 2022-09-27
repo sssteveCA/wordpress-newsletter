@@ -33,8 +33,21 @@ abstract class Table implements Te{
         if(isset($data['name'])){
             $this->name = $data['name'];
             $this->charset = $this->wpdb->get_charset_collate();
+            $fullname = $this->wpdb->prefix.$this->name;
+            $this->sql_drop = <<<SQL
+DROP TABLE `{$fullname}`;
+SQL;
         }//if(isset($data['name'])){
         return $isset;
+    }
+
+    /**
+     * Drop an existing table in database
+     */
+    protected function dropTable(): bool{
+        $deleted = false;
+        if($this->wpdb->query($this->sql_drop) === true)$deleted = true;
+        return $deleted;
     }
 }
 
