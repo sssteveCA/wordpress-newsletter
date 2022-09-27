@@ -11,9 +11,11 @@
  */
 
  require_once(ABSPATH."wp-admin/includes/upgrade.php");
+ require_once("classes/properties.php");
 
- use \Newsletter\Classes\Database\Tables\Users;
- use \Newsletter\Interfaces\Constants as C;
+ use Newsletter\Classes\Database\Tables\Users;
+ use Newsletter\Interfaces\Constants as C;
+ use Newsletter\Classes\Properties as Pr;
 
  register_activation_hook(__FILE__,'nl_set_table');
  function bnl_set_table(){
@@ -32,6 +34,10 @@
 
  add_action('admin_enqueue_scripts','nl_admin_scripts',11);
  function nl_admin_scripts(){
-    
+    $plugin_dir = Pr::pluginUrl(__FILE__);
+    $adminCss = $plugin_dir.C::REL_CSS_ADMIN;
+    wp_enqueue_style('nlAdminCss',$adminCss,[],null);
+    $adminJs = $plugin_dir.C::REL_JS_ADMIN;
+    wp_enqueue_script('nlAdminJs',$adminJs,[],null);
  }
 ?>
