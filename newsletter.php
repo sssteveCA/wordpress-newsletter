@@ -26,6 +26,7 @@
  register_uninstall_hook(__FILE__,'nl_delete_table');
  function nl_delete_table(){
     $data = ['name' => C::TABLE_USERS];
-    $users = new User($data);
+    $users = new Users($data);
+    $users->dropTable();
  }
 ?>

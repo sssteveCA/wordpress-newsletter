@@ -4,12 +4,13 @@ namespace Newsletter\Classes\Database\Tables;
 
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Classes\Database\Tables\TableErrors as Te;
+use Newsletter\Traits\ErrorTrait;
 use Newsletter\Traits\SqlTrait;
 use wpdb;
 
 abstract class Table implements Te{
 
-    use SqlTrait;
+    use SqlTrait, ErrorTrait;
 
     protected wpdb $wpdb;
     protected string $name;
@@ -31,6 +32,18 @@ abstract class Table implements Te{
     public function getSqlCreate(){return $this->sql_create;}
     public function getSqlDrop(){return $this->sql_drop;}
 
+    protected function getError(){
+        switch($this->errno){
+            case Te::NOT_DROPPED:
+                $this->error = Te::NOT_DROPPED_MSG;
+                break;
+            default:
+                $this->error = null;
+                break;
+        }
+        return $this->error;
+    }
+
     /**
      * Assign the entry data to the proper properties
      */
@@ -51,14 +64,24 @@ SQL;
      * Drop an existing table in database
      */
     protected function dropTable(): bool{
+        $this->errno = 0;
         $deleted = false;
         $this->query = $this->sql_drop;
         if($this->wpdb->query($this->query) === true)$deleted = true;
+        else $this->errno = Te::NOT_DROPPED;
         return $deleted;
     }
 }
 
 interface TableErrors{
+    //Exceptions
     const NOTISSET_EXC = "Non sono stati forniti i dati richiesti";
+
+    //Codes
+    const NOT_DROPPED = 1;
+
+    //Messages
+    const NOT_DROPPED_MSG = "La tabella non è stata rimossa";
+
 }
 ?>

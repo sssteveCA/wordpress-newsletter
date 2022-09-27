@@ -10,6 +10,18 @@ class Users extends Table{
         $this->setSqlCreate();
     }
 
+    public function getError(){
+        if($this->errno < 50)return parent::getError();
+        else{
+            switch($this->errno){
+                default:
+                    $this->error = null;
+                    break;
+            }
+        }
+        return $this->error;
+    }
+
     /**
      * Set the creation query for this table
      */
