@@ -16,6 +16,7 @@
  use Newsletter\Classes\Database\Tables\Users;
  use Newsletter\Interfaces\Constants as C;
  use Newsletter\Classes\Properties as Pr;
+ use Newsletter\Classes\HtmlCode;
 
  register_activation_hook(__FILE__,'nl_set_table');
  function bnl_set_table(){
@@ -48,5 +49,21 @@
     add_submenu_page('nl_menu','Aggiungi utente','Aggiungi utente','administrator','nl_submenu_add','nl_submenu_add');
     add_submenu_page('nl_menu','Elimina iscritti','Elimina iscritti','administrator','nl_submenu_del','nl_submenu_del');
     remove_submenu_page('nl_menu','nl_menu');
+ }
+
+ /**
+  * Admin delete users menu item output
+  */
+ function nl_submenu_del(){
+    $delHtml = HtmlCode::adminDelForm();
+    echo $delHtml;
+ }
+
+ /**
+  * Admin email sender menu item output
+  */
+ function nl_submenu_send(){
+    $sendHtml = HtmlCode::adminSenderForm();
+    echo $sendHtml;
  }
 ?>
