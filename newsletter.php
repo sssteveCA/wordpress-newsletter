@@ -10,6 +10,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
+ require_once(ABSPATH."wp-admin/includes/plugin.php");
  require_once(ABSPATH."wp-admin/includes/upgrade.php");
  require_once("enums/languages.php");
  require_once("classes/properties.php");
@@ -86,7 +87,14 @@ function nl_scripts(){
 
 add_action('wp_footer','nl_form_signup');
 function nl_form_signup(){
-    
+   $lang = Langs::English->value;
+   //Check if Polylang plugin is active
+   if(is_plugin_active("polylang/polylang.php")){
+      if(function_exists("pll_current_language")){
+         $lang = pll_current_language(); //Get the current setted language with Polylang
+      }
+   }//if(is_plugin_active("polylang/polylang.php")){
+   echo do_shortcode("[nl_subscribe lang=\"{$lang}\"]"); 
 }
 
 add_shortcode('nl_subscribe','nl_subscribe_form');
