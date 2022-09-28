@@ -49,7 +49,7 @@ class Properties{
     /**
      * Get the values to be used in the frontend subscribe form
      */
-    public static function subscribeFormValues(Langs $lang): array{
+    public static function subscribeFormValues(Langs $lang):array {
         $values = [];
         if($lang == Langs::Italian){
             $values = [
@@ -76,6 +76,18 @@ class Properties{
            ]; 
         }
         return $values;
+    }
+
+    /**
+     * Get the terms and conditions document URL
+     */
+    public static function termsUrl(Langs $lang):string {
+        $termsUrl = "";
+        $home_url = Properties::homeUrl();
+        if($lang == Langs::Italian){ $termsUrl = $home_url."/termini-e-condizioni/";}
+        else if($lang == Langs::Espanol){ $termsUrl = $home_url."/en/terms-and-conditions/"; }
+        else{ $termsUrl = $home_url."/en/privacy-policy-3/"; }
+        return $termsUrl;
     }
 }
 
