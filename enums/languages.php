@@ -1,6 +1,6 @@
 <?php
 
-namespace Newletter\Enums;
+namespace Newsletter\Enums;
 
 enum Langs{
     case English;

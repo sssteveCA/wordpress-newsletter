@@ -11,6 +11,7 @@
  */
 
  require_once(ABSPATH."wp-admin/includes/upgrade.php");
+ require_once("enums/languages.php");
  require_once("classes/properties.php");
 
  use Newsletter\Classes\Database\Tables\Users;
