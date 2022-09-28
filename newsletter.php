@@ -4,7 +4,7 @@
  * Description: This plugin allows send email to subscribers
  * Version: 1.0
  * Requires at least: 5.0
- * Requires PHP: 7.4
+ * Requires PHP: 8.0
  * Author: Stefano Puggioni
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -68,6 +68,11 @@ use Newsletter\Classes\Properties;
     echo $sendHtml;
  }
 
+ add_action('init','nl_init');
+ function nl_init(){
+
+ }
+
  add_action('wp_enqueue_scripts','nl_scripts',11);
 function nl_scripts(){
     $plugin_dir = Properties::pluginUrl(__FILE__);
@@ -80,6 +85,11 @@ function nl_scripts(){
 add_action('wp_footer','nl_form_signup');
 function nl_form_signup(){
     
+}
+
+add_shortcode('nl_subscribe','nl_subscribe_form');
+function nl_subscribe_form($atts = []){
+
 }
 
 
