@@ -19,6 +19,7 @@
  use Newsletter\Classes\Properties as Pr;
  use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\Properties;
+use Newsletter\Enums\Langs;
 
  register_activation_hook(__FILE__,'nl_set_table');
  function bnl_set_table(){
@@ -89,8 +90,11 @@ function nl_form_signup(){
 }
 
 add_shortcode('nl_subscribe','nl_subscribe_form');
-function nl_subscribe_form($atts = []){
-
+function nl_subscribe_form($atts){
+   $a = shortcode_atts([
+      'lang' => Langs::English->value
+   ],$atts);
+   return Properties::subscribeFormValues($a['lang']);
 }
 
 

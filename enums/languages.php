@@ -2,10 +2,10 @@
 
 namespace Newsletter\Enums;
 
-enum Langs{
-    case English;
-    case Espanol;
-    case Italian;
+enum Langs:string{
+    case English = "en";
+    case Espanol = "es";
+    case Italian = "it";
 }
 
 ?>
