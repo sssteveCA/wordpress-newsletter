@@ -6,14 +6,26 @@ use Newsletter\Enums\Langs;
 class Properties{
 
     /**
+     * Get the cookie policy link
+     */
+    public static function cookieUrl(Langs $lang): string{
+        $cookieUrl = "";
+        $home_url = Properties::homeUrl();
+        if($lang == Langs::Italian){ $cookieUrl = $home_url."/cookie-policy/";}
+        else if($lang == Langs::Espanol){ $cookieUrl = $home_url."/es/cookie-policy-2/"; }
+        else{ $cookieUrl = $home_url."/en/cookie-policy-3/"; }
+        return $cookieUrl;
+    }
+
+    /**
      * Get the site home URL
      */
-    public static function homeUrl(){ return home_url(); }
+    public static function homeUrl():string { return home_url(); }
 
     /**
      * Get the privacy policy link
      */
-    public static function privacyUrl(Langs $lang){
+    public static function privacyUrl(Langs $lang):string {
         $privacyUrl = "";
         $home_url = Properties::homeUrl();
         if($lang == Langs::Italian){ $privacyUrl = $home_url."/privacy-policy/";}
@@ -25,12 +37,12 @@ class Properties{
     /**
      * Get the site plugins URL
      */
-    public static function pluginsUrl(){ return plugins_url(); }
+    public static function pluginsUrl():string { return plugins_url(); }
 
     /**
      * Get the current plugin home URL 
      */
-    public static function pluginUrl(string $plugin){
+    public static function pluginUrl(string $plugin):string {
         return plugin_dir_url($plugin);
     }
 
