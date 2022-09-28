@@ -11,6 +11,18 @@ class Properties{
     public static function homeUrl(){ return home_url(); }
 
     /**
+     * Get the privacy policy link
+     */
+    public static function privacyUrl(Langs $lang){
+        $privacyUrl = "";
+        $home_url = Properties::homeUrl();
+        if($lang == Langs::Italian){ $privacyUrl = $home_url."/privacy-policy/";}
+        else if($lang == Langs::Espanol){ $privacyUrl = $home_url."/es/privacy-policy-2/"; }
+        else{ $privacyUrl = $home_url."/en/privacy-policy-3/"; }
+        return $privacyUrl;
+    }
+
+    /**
      * Get the site plugins URL
      */
     public static function pluginsUrl(){ return plugins_url(); }
@@ -27,7 +39,6 @@ class Properties{
      */
     public static function subscribeFormValues(Langs $lang): array{
         $values = [];
-        $home_url = Properties::homeUrl();
         if($lang == Langs::Italian){
             $values = [
                 "title" => "Newsletter","ea_title" => "Indirizzo email",
