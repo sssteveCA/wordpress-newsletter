@@ -31,6 +31,9 @@ abstract class Model extends Table implements Mi{
             case Mi::ERR_INSERT:
                 $this->error = Mi::ERR_INSERT_MSG;
                 break;
+            case Mi::ERR_UPDATE:
+                $this->error = Mi::ERR_UPDATE_MSG;
+                break;
             default:
                 $this->error = null;
                 break;
@@ -70,13 +73,28 @@ SQL;
     /**
      * Insert a single row with INSERT query
      */
-    protected function insert($data,$format = null){
+    protected function insert(array $data,$format = null){
         $this->errno = 0;
         $insert = $this->wpdb->insert($this->tableName,$data,$format);
         $this->query = $this->wpdb->last_query;
         $this->queries[] = $this->query;
         if(!$insert)$this->errno = Mi::ERR_INSERT;
         return $insert;
+    }
+
+    /**
+     * Update a single row with UPDATE query
+     */
+    protected function update(string $set,string $filter,array $values){
+        $this->errno = 0;
+        $sql = <<<SQL
+UPDATE {$this->fullTableName} SET {$set} {$filter} LIMIT 1;
+SQL;
+        $this->query = $this->wpdb->prepare($sql,$values);
+        $this->queries[] = $this->query;
+        $update = $this->wpdb->query($this->query);
+        if(!$update)$this->errno = Mi::ERR_UPDATE;
+        return $update;
     }
     
 }
@@ -86,10 +104,12 @@ interface ModelInterface{
     const ERR_GET = 21;
     const ERR_DELETE = 22;
     const ERR_INSERT = 23;
+    const ERR_UPDATE = 24;
 
     //Messages
     const ERR_GET_MSG = "Errore durante la lettura dei dati";
     const ERR_DELETE_MSG = "Errore durante l'eliminazione dei dati";
     const ERR_INSERT_MSG = "Errore durante l'inserimento dei dati";
+    const ERR_UPDATE_MSG = "Errore durante l'aggiornamento dei dati";
 }
 ?>
