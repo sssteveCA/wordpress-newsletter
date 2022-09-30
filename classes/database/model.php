@@ -27,6 +27,10 @@ abstract class Model extends Table implements Mi{
                 break;
             case Mi::ERR_DELETE:
                 $this->error = Mi::ERR_DELETE_MSG;
+                break;
+            case Mi::ERR_INSERT:
+                $this->error = Mi::ERR_INSERT_MSG;
+                break;
             default:
                 $this->error = null;
                 break;
@@ -62,6 +66,18 @@ SQL;
         if(!$result)$this->errno = Mi::ERR_GET; 
         return $result; 
     }
+
+    /**
+     * Insert a single row with INSERT query
+     */
+    protected function insert($data,$format = null){
+        $this->errno = 0;
+        $insert = $this->wpdb->insert($this->tableName,$data,$format);
+        $this->query = $this->wpdb->last_query;
+        $this->queries[] = $this->query;
+        if(!$insert)$this->errno = Mi::ERR_INSERT;
+        return $insert;
+    }
     
 }
 
@@ -69,9 +85,11 @@ interface ModelInterface{
     //Numbers
     const ERR_GET = 21;
     const ERR_DELETE = 22;
+    const ERR_INSERT = 23;
 
     //Messages
     const ERR_GET_MSG = "Errore durante la lettura dei dati";
     const ERR_DELETE_MSG = "Errore durante l'eliminazione dei dati";
+    const ERR_INSERT_MSG = "Errore durante l'inserimento dei dati";
 }
 ?>
