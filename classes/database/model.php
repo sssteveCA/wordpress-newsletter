@@ -25,6 +25,8 @@ abstract class Model extends Table implements Mi{
             case Mi::ERR_GET:
                 $this->error = Mi::ERR_GET_MSG;
                 break;
+            case Mi::ERR_DELETE:
+                $this->error = Mi::ERR_DELETE_MSG;
             default:
                 $this->error = null;
                 break;
@@ -33,13 +35,28 @@ abstract class Model extends Table implements Mi{
     }
 
     /**
-     * Get a single row from SELECT query
+     * Delete a single row with DELETE query
      */
-    protected function get(string $query){
+    protected function delete(string $query, array $values){
         $this->errno = 0;
-        $this->query = <<<SQL
-        SELECT * FROM {$this->tableName} {$query}
+        $sql = <<<SQL
+DELETE FROM {$this->fullTableName} {$query} LIMIT 1;
 SQL;
+        $this->query = $this->wpdb->prepare($query,$values);
+        $del = $this->wpdb->query($this->query);
+        if(!$del)$this->errno = Mi::ERR_DELETE;
+        return $del;
+    }
+
+    /**
+     * Get a single row with SELECT query
+     */
+    protected function get(string $query, array $values){
+        $this->errno = 0;
+        $sql = <<<SQL
+SELECT * FROM {$this->fullTableName} {$query} LIMIT 1;
+SQL;
+        $this->query = $this->wpdb->prepare($sql);
         $this->queries[] = $this->query;
         $result = $this->wpdb->get_row($this->query,ARRAY_A);
         if(!$result)$this->errno = Mi::ERR_GET; 
@@ -51,8 +68,10 @@ SQL;
 interface ModelInterface{
     //Numbers
     const ERR_GET = 21;
+    const ERR_DELETE = 22;
 
     //Messages
     const ERR_GET_MSG = "Errore durante la lettura dei dati";
+    const ERR_DELETE_MSG = "Errore durante l'eliminazione dei dati";
 }
 ?>
