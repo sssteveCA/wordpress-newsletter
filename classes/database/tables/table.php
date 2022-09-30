@@ -12,11 +12,29 @@ abstract class Table implements Te{
 
     use SqlTrait, ErrorTrait;
 
+    /**
+     * Wordpress database object
+     */
     protected wpdb $wpdb;
-    protected string $name;
-    protected string $fullname;
+    /**
+     * Table name (no prefix)
+     */
+    protected string $tableName;
+    /**
+     * Table name (with prefix)
+     */
+    protected string $fullTableName;
+    /**
+     * The charset used by the table
+     */
     protected string $charset;
+    /**
+     * SQL to create the table
+     */
     protected string $sql_create;
+    /**
+     * SQL to drop the table
+     */
     protected string $sql_drop;
 
     public function __construct(array $data){
@@ -26,8 +44,8 @@ abstract class Table implements Te{
         if(!$ok)throw new NotSettedException(Te::NOTISSET_EXC);
     }
 
-    public function getName(){return $this->name;}
-    public function getFullName(){return $this->fullname;}
+    public function getTableName(){return $this->name;}
+    public function getFullTableName(){return $this->fullTableName;}
     public function getCharset(){return $this->charset;}
     public function getSqlCreate(){return $this->sql_create;}
     public function getSqlDrop(){return $this->sql_drop;}
@@ -49,12 +67,12 @@ abstract class Table implements Te{
      */
     private function assignValues(array $data): bool{
         $isset = false;
-        if(isset($data['name'])){
-            $this->name = $data['name'];
+        if(isset($data['tableName'])){
+            $this->tableName = $data['tableName'];
             $this->charset = $this->wpdb->get_charset_collate();
-            $this->fullname = $this->wpdb->prefix.$this->name;
+            $this->fullTableame = $this->wpdb->prefix.$this->tableName;
             $this->sql_drop = <<<SQL
-DROP TABLE `{$this->fullname}`;
+DROP TABLE `{$this->fullTableName}`;
 SQL;
         }//if(isset($data['name'])){
         return $isset;
