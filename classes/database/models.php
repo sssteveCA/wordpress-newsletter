@@ -27,9 +27,34 @@ abstract class Models extends Table implements Me{
         }
         return $this->error;
     }
+
+    /**
+     * Get a single or multiple rows with SELECT query
+     */
+    protected function get(string $query, array $values){
+        $this->errno = 0;
+        $sql = <<<SQL
+SELECT * FROM {$this->fullTableName} {$query};
+SQL;
+        $this->query = $this->wpdb->prepare($sql,$values);
+        $this->queries[] = $this->query;
+        $result = $this->wpdb->get_results($this->query, ARRAY_A);
+        if(!$result)$this->errno = Me::ERR_GET;
+        return $result;
+    }
 }
 
 interface ModelsErrors{
+    //Numbers
+    const ERR_GET = 21;
+    const ERR_DELETE = 22;
+    const ERR_INSERT = 23;
+    const ERR_UPDATE = 24;
 
+    //Messages
+    const ERR_GET_MSG = "Errore durante la lettura dei dati";
+    const ERR_DELETE_MSG = "Errore durante l'eliminazione dei dati";
+    const ERR_INSERT_MSG = "Errore durante l'inserimento dei dati";
+    const ERR_UPDATE_MSG = "Errore durante l'aggiornamento dei dati";
 }
 ?>
