@@ -9,35 +9,60 @@ class User extends Model implements Ue{
     /**
      * "id" field
      */
-    private $id;
+    private int $id;
     /**
-     * "username" field
+     * "firstName" field
      */
-    private $username;
+    private string $firstName;
+    /**
+     * "lastName" field
+     */
+    private string $lastName;
     /**
      * "email" field
      */
-    private $email;
+    private string $email;
     /**
-     * "creationDate" field
+     * "lang" field
      */
-    private $creationDate;
+    private string $lang;
     /**
-     * "activtionCode" field
+     * "verCode" field
      */
-    private $activationCode;
+    private string $verCode;
     /**
-     * "resetCode" field
+     * "unsubscCode" field
      */
-    private $resetCode;
+    private string $unsubscCode;
     /**
-     * "verified" field
+     * "subscribed" field
      */
-    private $verified;
+    private bool $subscribed;
     /**
-     * "resetted" field
+     * "subscDate" field
      */
-    private $resetted;
+    private string $subscDate;
+    /**
+     * "actDate" field
+     */
+    private string $actDate;
+
+
+    public function __construct(array $data)
+    {
+        parent::__construct($data);
+    }
+
+    public function getId(){return $this->id;}
+    public function getFirstName(){return $this->firstName;}
+    public function getLastName(){return $this->lastName;}
+    public function getEmail(){return $this->email;}
+    public function getLang(){return $this->lang;}
+    public function getVerCode(){return $this->verCode;}
+    public function getUnsubscCode(){return $this->unsubscCode;}
+    public function getSubscDate(){return $this->subscDate;}
+    public function getActDate(){return $this->addDate;}
+    public function isSubscribed(){return $this->subscribed;}
 }
 
 interface UserErrors{
