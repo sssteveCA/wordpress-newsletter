@@ -18,7 +18,7 @@ abstract class Model extends Table implements Mi{
     }
 
     public function getError(){
-        if($this->errno < 20){
+        if($this->errno < Table::MAX_ERRNO){
             return parent::getError();
         }
         switch($this->errno){

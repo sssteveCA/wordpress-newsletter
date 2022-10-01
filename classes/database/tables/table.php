@@ -37,6 +37,11 @@ abstract class Table implements Te{
      */
     protected string $sql_drop;
 
+    /**
+     * Max Errno number + 1 assignable to table class
+     */
+    const MAX_ERRNO = 20;
+
     public function __construct(array $data){
         global $wpdb;
         $this->wpdb = $wpdb;
