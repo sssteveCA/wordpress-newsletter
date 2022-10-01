@@ -29,6 +29,16 @@ abstract class Models extends Table implements Me{
     }
 
     /**
+     * Delete a single row with DELETE query
+     */
+    protected function delete(array $where, array $where_f = []){
+        $this->errno = 0;
+        $delete = $this->wpdb->delete($this->fullTableName,$where,$where_f);
+        if(!$delete)$this->errno = Me::ERR_DELETE;
+        return $delete;
+    }
+
+    /**
      * Get a single or multiple rows with SELECT query
      */
     protected function get(string $query, array $values){
