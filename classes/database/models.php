@@ -20,6 +20,18 @@ abstract class Models extends Table implements Me{
         }
         else{
             switch($this->errno){
+                case Me::ERR_GET:
+                    $this->error = Me::ERR_GET_MSG;
+                    break;
+                case Me::ERR_DELETE:
+                    $this->error = Me::ERR_DELETE_MSG;
+                    break;
+                case Me::ERR_INSERT:
+                    $this->error = Me::ERR_INSERT_MSG;
+                    break;
+                case Me::ERR_UPDATE:
+                    $this->error = Me::ERR_UPDATE_MSG;
+                    break;
                 default:
                     $this->error = null;
                     break;
@@ -29,11 +41,13 @@ abstract class Models extends Table implements Me{
     }
 
     /**
-     * Delete a single row with DELETE query
+     * Delete a single or multiple rows with DELETE query
      */
     protected function delete(array $where, array $where_f = []){
         $this->errno = 0;
         $delete = $this->wpdb->delete($this->fullTableName,$where,$where_f);
+        $this->query = $this->wpdb->last_query;
+        $this->queries[] = $this->query;
         if(!$delete)$this->errno = Me::ERR_DELETE;
         return $delete;
     }
@@ -51,6 +65,30 @@ SQL;
         $result = $this->wpdb->get_results($this->query, ARRAY_A);
         if(!$result)$this->errno = Me::ERR_GET;
         return $result;
+    }
+
+    /**
+     * Insert a single or multiple rows with INSERT query
+     */
+    protected function insert(array $data, array $format = []){
+        $this->errno = 0;
+        $insert = $this->wpdb->insert($this->fullTableName,$data,$format);
+        $this->query = $this->wpdb->last_query;
+        $this->queries[] = $this->query;
+        if(!$insert)$this->errno = Me::ERR_INSERT;
+        return $insert;
+    }
+
+    /**
+     * Update a single or multiple rows with UPDATE query
+     */
+    protected function update(array $data, array $where, array $format = [], array $where_f){
+        $this->errno = 0;
+        $update = $this->wpdb->update($this->fullTableName,$data,$where,$format,$where_f);
+        $this->query = $this->wpdb->last_query;
+        $this->queries[] = $this->query;
+        if(!$update)$this->errno = Me::ERR_UPDATE;
+        return $update;
     }
 }
 

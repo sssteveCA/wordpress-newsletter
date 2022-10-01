@@ -2,13 +2,13 @@
 
 namespace Newsletter\Classes\Database;
 
-use Newsletter\Classes\Database\ModelInterface as Mi;
+use Newsletter\Classes\Database\ModelErrors as Me;
 use Newsletter\Classes\Database\Tables\Table;
 use Newsletter\Traits\ErrorTrait;
 use Newsletter\Traits\SqlTrait;
 use wpdb;
 
-abstract class Model extends Table implements Mi{
+abstract class Model extends Table implements Me{
 
     use ErrorTrait, SqlTrait;
 
@@ -22,17 +22,17 @@ abstract class Model extends Table implements Mi{
             return parent::getError();
         }
         switch($this->errno){
-            case Mi::ERR_GET:
-                $this->error = Mi::ERR_GET_MSG;
+            case Me::ERR_GET:
+                $this->error = Me::ERR_GET_MSG;
                 break;
-            case Mi::ERR_DELETE:
-                $this->error = Mi::ERR_DELETE_MSG;
+            case Me::ERR_DELETE:
+                $this->error = Me::ERR_DELETE_MSG;
                 break;
-            case Mi::ERR_INSERT:
-                $this->error = Mi::ERR_INSERT_MSG;
+            case Me::ERR_INSERT:
+                $this->error = Me::ERR_INSERT_MSG;
                 break;
-            case Mi::ERR_UPDATE:
-                $this->error = Mi::ERR_UPDATE_MSG;
+            case Me::ERR_UPDATE:
+                $this->error = Me::ERR_UPDATE_MSG;
                 break;
             default:
                 $this->error = null;
@@ -51,7 +51,7 @@ DELETE FROM {$this->fullTableName} {$query} LIMIT 1;
 SQL;
         $this->query = $this->wpdb->prepare($query,$values);
         $del = $this->wpdb->query($this->query);
-        if(!$del)$this->errno = Mi::ERR_DELETE;
+        if(!$del)$this->errno = Me::ERR_DELETE;
         return $del;
     }
 
@@ -66,7 +66,7 @@ SQL;
         $this->query = $this->wpdb->prepare($sql);
         $this->queries[] = $this->query;
         $result = $this->wpdb->get_row($this->query,ARRAY_A);
-        if(!$result)$this->errno = Mi::ERR_GET; 
+        if(!$result)$this->errno = Me::ERR_GET; 
         return $result; 
     }
 
@@ -78,7 +78,7 @@ SQL;
         $insert = $this->wpdb->insert($this->tableName,$data,$format);
         $this->query = $this->wpdb->last_query;
         $this->queries[] = $this->query;
-        if(!$insert)$this->errno = Mi::ERR_INSERT;
+        if(!$insert)$this->errno = Me::ERR_INSERT;
         return $insert;
     }
 
@@ -93,13 +93,13 @@ SQL;
         $this->query = $this->wpdb->prepare($sql,$values);
         $this->queries[] = $this->query;
         $update = $this->wpdb->query($this->query);
-        if(!$update)$this->errno = Mi::ERR_UPDATE;
+        if(!$update)$this->errno = Me::ERR_UPDATE;
         return $update;
     }
     
 }
 
-interface ModelInterface{
+interface ModelErrors{
     //Numbers
     const ERR_GET = 21;
     const ERR_DELETE = 22;
