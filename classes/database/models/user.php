@@ -9,31 +9,31 @@ class User extends Model implements Ue{
     /**
      * "id" field
      */
-    private int $id;
+    private ?int $id;
     /**
      * "firstName" field
      */
-    private string $firstName;
+    private ?string $firstName;
     /**
      * "lastName" field
      */
-    private string $lastName;
+    private ?string $lastName;
     /**
      * "email" field
      */
-    private string $email;
+    private ?string $email;
     /**
      * "lang" field
      */
-    private string $lang;
+    private ?string $lang;
     /**
      * "verCode" field
      */
-    private string $verCode;
+    private ?string $verCode;
     /**
      * "unsubscCode" field
      */
-    private string $unsubscCode;
+    private ?string $unsubscCode;
     /**
      * "subscribed" field
      */
@@ -45,12 +45,13 @@ class User extends Model implements Ue{
     /**
      * "actDate" field
      */
-    private string $actDate;
+    private ?string $actDate;
 
 
     public function __construct(array $data)
     {
         parent::__construct($data);
+        $this->assignValues($data);
     }
 
     public function getId(){return $this->id;}
@@ -61,8 +62,20 @@ class User extends Model implements Ue{
     public function getVerCode(){return $this->verCode;}
     public function getUnsubscCode(){return $this->unsubscCode;}
     public function getSubscDate(){return $this->subscDate;}
-    public function getActDate(){return $this->addDate;}
+    public function getActDate(){return $this->actDate;}
     public function isSubscribed(){return $this->subscribed;}
+
+    private function assignValues(array $data){
+        $this->id = isset($data['id']) ? $data['id'] : null;
+        $this->firstName = isset($data['firstName']) ? $data['firstName'] : null;
+        $this->lastName = isset($data['lastName']) ? $data['lastName'] : null;
+        $this->email = isset($data['email']) ? $data['email'] : null;
+        $this->verCode = isset($data['verCode']) ? $data['verCode'] : null;
+        $this->unsubscCode = isset($data['unsubscCode']) ? $data['unsubscCode'] : null;
+        $this->subscribed = isset($data['subscribed']) ? $data['subscribed'] : false;
+        $this->subscDate = isset($data['subscDate']) ? $data['subscDate'] : null;
+        $this->actDate = isset($data['actDate']) ? $data['actDate'] : null;
+    }
 }
 
 interface UserErrors{
