@@ -8,7 +8,6 @@ use Newsletter\Traits\ErrorTrait;
 use Newsletter\Traits\SqlTrait;
 
 abstract class Models extends Table implements Me{
-    use ErrorTrait, SqlTrait;
 
     public function __construct(array $data){
         parent::__construct($data);

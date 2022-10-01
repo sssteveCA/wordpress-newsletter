@@ -10,8 +10,6 @@ use wpdb;
 
 abstract class Model extends Table implements Me{
 
-    use ErrorTrait, SqlTrait;
-
     public function __construct(array $data)
     {
         parent::__construct($data);
