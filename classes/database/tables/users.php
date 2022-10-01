@@ -11,7 +11,7 @@ class Users extends Table{
     }
 
     public function getError(){
-        if($this->errno < 50)return parent::getError();
+        if($this->errno < Table::MAX_ERRNO)return parent::getError();
         else{
             switch($this->errno){
                 default:

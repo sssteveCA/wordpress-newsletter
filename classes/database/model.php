@@ -40,7 +40,6 @@ abstract class Model extends Table implements Me{
         }
         return $this->error = null;
     }
-
     /**
      * Delete a single row with DELETE query
      */
