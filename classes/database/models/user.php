@@ -105,6 +105,14 @@ class User extends Model implements Ue{
         }//if($user){
         return $getOk;
     }
+
+    /**
+     * Insert a new User in the database
+     */
+    public function insertUser(array $data, array|string $format = null){
+        $insert = parent::insert($data,$format);
+        return $insert;
+    }
 }
 
 interface UserErrors{

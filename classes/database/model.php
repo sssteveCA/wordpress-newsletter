@@ -70,7 +70,7 @@ SQL;
     /**
      * Insert a single row with INSERT query
      */
-    protected function insert(array $data,$format = null){
+    protected function insert(array $data, array|string $format = null){
         $this->errno = 0;
         $insert = $this->wpdb->insert($this->tableName,$data,$format);
         $this->query = $this->wpdb->last_query;
