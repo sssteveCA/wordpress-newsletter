@@ -84,6 +84,27 @@ class User extends Model implements Ue{
         $delete = parent::delete($query,$values);
         return $delete;
     }
+
+    /**
+     * Get an User from the database
+     */
+    public function getUser(string $query, array $values){
+        $getOk = false;
+        $user = parent::get($query,$values);
+        if($user){
+            $this->id = $user["id"];
+            $this->firstName = $user["firstName"];
+            $this->lastName = $user["lastName"];
+            $this->email = $user["email"];
+            $this->lang = $user["lang"];
+            $this->verCode = $user["verCode"];
+            $this->unsubscCode = $user["unsubscCode"];
+            $this->subscribed = $user["subscribed"];
+            $this->subscDate = $user["subscDate"];
+            $this->actDate = $user["actDate"];
+        }//if($user){
+        return $getOk;
+    }
 }
 
 interface UserErrors{
