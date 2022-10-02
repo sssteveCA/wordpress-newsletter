@@ -9,12 +9,17 @@ use Newsletter\Traits\SqlTrait;
 
 abstract class Models extends Table implements Me{
 
+    /**
+     * Max error code + 1 assignable to Models class
+     */
+    const MAX_MODELS = 40;
+
     public function __construct(array $data){
         parent::__construct($data);
     }
 
-    public function getError(){
-        if($this->errno < Table::MAX_ERRNO){
+    protected function getError(){
+        if($this->errno < Table::MAX_TABLE){
             return parent::getError();
         }
         else{

@@ -11,6 +11,9 @@ class Template{
      * Newsletter HTML body
      */
     public static function mailTemplate(Langs $lang, array $params): string{
+        $facebookLogo = Properties::facebookLogoUrl();
+        $instagramLogo = Properties::instagramLogoUrl();
+        $youtubeLogo = Properties::youtubeLogoUrl();
         $messages = Template::mailTemplateMessages($lang,$params);
         $htmlTemplate = <<<HTML
 <!DOCTYPE html>
@@ -50,17 +53,17 @@ class Template{
                 <tr>
                     <td colspan="1" style="padding:20px;">
                         <a title ="Facebook" href="https://www.facebook.com/Biancalabambinadeisogni/" target="_blank">
-                            <img id="imgFacebook" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$params['facebookLogo']}" alt="Facebook" title="Facebook">
+                            <img id="imgFacebook" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$facebookLogo}" alt="Facebook" title="Facebook">
                         </a>
                     </td>
                     <td colspan="1" style="padding:20px;">
                         <a title="Instagram" href="https://www.instagram.com/lafilosofiadibianca/" target="_blank">
-                            <img id="imgInstagram" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$params['instagramLogo']}" alt="Instagram" title="Instagram">
+                            <img id="imgInstagram" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$instagramLogo}" alt="Instagram" title="Instagram">
                         </a>
                     </td>
                     <td colspan="1" style="padding:20px;">
                         <a title="Youtube" href="https://www.youtube.com/channel/UCVvGeKjn52OHK1j1IfwCrEQ" target="_blank">
-                            <img id="imgYoutube" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$params['youtubeLogo']}" alt="Youtube" title="Youtube"> 
+                            <img id="imgYoutube" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$youtubeLogo}" alt="Youtube" title="Youtube"> 
                         </a>
                     </td>
                 </tr>

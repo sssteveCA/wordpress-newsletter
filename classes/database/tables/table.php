@@ -40,7 +40,7 @@ abstract class Table implements Te{
     /**
      * Max Errno number + 1 assignable to table class
      */
-    const MAX_ERRNO = 20;
+    const MAX_TABLE = 20;
 
     public function __construct(array $data){
         global $wpdb;

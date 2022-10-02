@@ -15,8 +15,8 @@ abstract class Model extends Table implements Me{
         parent::__construct($data);
     }
 
-    public function getError(){
-        if($this->errno < Table::MAX_ERRNO){
+    protected function getError(){
+        if($this->errno < Table::MAX_TABLE){
             return parent::getError();
         }
         switch($this->errno){
