@@ -76,6 +76,14 @@ class User extends Model implements Ue{
         $this->subscDate = isset($data['subscDate']) ? $data['subscDate'] : null;
         $this->actDate = isset($data['actDate']) ? $data['actDate'] : null;
     }
+
+    /**
+     * Delete an User from the database
+     */
+    public function deleteUser(string $query, array $values){
+        $delete = parent::delete($query,$values);
+        return $delete;
+    }
 }
 
 interface UserErrors{
