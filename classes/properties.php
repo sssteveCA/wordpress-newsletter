@@ -16,9 +16,25 @@ class Properties{
     }
 
     /**
+     * Get the facebook logo URL
+     */
+    public static function facebookLogoUrl(): string{
+        $home_url = Properties::homeUrl();
+        return $home_url."/wp-content/uploads/2018/11/1000px-F_icon.svg_-e1541173415423.png";
+    }
+
+    /**
      * Get the site home URL
      */
     public static function homeUrl():string { return home_url(); }
+
+    /**
+     * Get the instagram logo URL
+     */
+    public static function instagramLogoUrl(): string{
+        $home_url = Properties::homeUrl();
+        return $home_url."/wp-content/uploads/2018/11/instagram_logo-e1541173378259.png";
+    }
 
     /**
      * Get the privacy policy link
@@ -81,6 +97,14 @@ class Properties{
         if($lang == Langs::Italian){ return $home_url."/termini-e-condizioni/";}
         else if($lang == Langs::Espanol){ return $home_url."/en/terms-and-conditions/"; }
         else{ return $home_url."/en/privacy-policy-3/"; }
+    }
+
+    /**
+     * Get the YouTube logo URL
+     */
+    public static function youtubeLogoUrl(): string{
+        $home_url = Properties::homeUrl();
+        return $home_url."/wp-content/uploads/2018/11/youtube.jpg";
     }
 }
 
