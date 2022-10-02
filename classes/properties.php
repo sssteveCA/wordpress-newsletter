@@ -6,6 +6,16 @@ use Newsletter\Enums\Langs;
 class Properties{
 
     /**
+     * Get the contacts form link
+     */
+    public static function contactsUrl(Langs $lang): string{
+        $home_url = Properties::homeUrl();
+        if($lang == Langs::Italian){ return $home_url.'/contatti/'; }
+        else if($lang == Langs::Espanol){ return $home_url.'/es/contactos-2/'; }
+        else { return $home_url.'/en/contacts-2/'; }
+    }
+
+    /**
      * Get the cookie policy link
      */
     public static function cookieUrl(Langs $lang): string{
