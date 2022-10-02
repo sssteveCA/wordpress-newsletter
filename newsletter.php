@@ -102,7 +102,7 @@ function nl_subscribe_form($atts){
    $a = shortcode_atts([
       'lang' => Langs::English->value
    ],$atts);
-   return Properties::subscribeFormValues($a['lang']);
+   return HtmlCode::subscribeFormValues($a['lang']);
 }
 
 

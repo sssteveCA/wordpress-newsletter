@@ -10,8 +10,8 @@ class Template{
     /**
      * Newsletter HTML body
      */
-    public static function mailTemplate(array $params): string{
-        $messages = [];
+    public static function mailTemplate(Langs $lang, array $params): string{
+        $messages = Template::mailTemplateMessages($lang,$params);
         $htmlTemplate = <<<HTML
 <!DOCTYPE html>
 <html lang="it">
