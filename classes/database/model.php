@@ -82,10 +82,20 @@ SQL;
     /**
      * Update a single row with UPDATE query
      */
-    protected function update(string $set,string $filter,array $values){
+    protected function update(array $set, string $filter){
         $this->errno = 0;
+        $values = [];
+        $sets = "";
+        foreach($set as $col => $val){
+            $sets .= "{$col} = '?'"; 
+            array_push($values,$val);
+            if($val != end($set)){
+                //If is not last loop
+                $sets .= ",";
+            }
+        }
         $sql = <<<SQL
-UPDATE {$this->fullTableName} SET {$set} {$filter} LIMIT 1;
+UPDATE {$this->fullTableName} SET {$sets} {$filter} LIMIT 1;
 SQL;
         $this->query = $this->wpdb->prepare($sql,$values);
         $this->queries[] = $this->query;

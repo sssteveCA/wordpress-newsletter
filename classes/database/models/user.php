@@ -78,7 +78,7 @@ class User extends Model implements Ue{
     }
 
     /**
-     * Delete an User from the database
+     * Delete an User from the table
      */
     public function deleteUser(string $query, array $values){
         $delete = parent::delete($query,$values);
@@ -86,7 +86,7 @@ class User extends Model implements Ue{
     }
 
     /**
-     * Get an User from the database
+     * Get an User from the table
      */
     public function getUser(string $query, array $values){
         $getOk = false;
@@ -107,11 +107,19 @@ class User extends Model implements Ue{
     }
 
     /**
-     * Insert a new User in the database
+     * Insert a new User in the table
      */
     public function insertUser(array $data, array|string $format = null){
         $insert = parent::insert($data,$format);
         return $insert;
+    }
+
+    /**
+     * Update an existing User in the table
+     */
+    public function updateUser(array $set, string $filter){
+        $update = parent::update($set,$filter);
+        return $update;
     }
 }
 
