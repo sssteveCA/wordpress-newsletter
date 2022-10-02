@@ -2,6 +2,8 @@
 
 namespace Newsletter\Classes;
 
+use Newsletter\Enums\Langs;
+
 class Template{
 
     /**
@@ -77,6 +79,36 @@ class Template{
 </html>
 HTML;
         return $htmlTemplate;
+    }
+
+    /**
+     * Messages to add at Mail HTML template
+     */
+    public static function mailTemplateMessages(Langs $lang, array $params): array{
+        if($lang->value == "it"){
+            return [
+                0 => 'Siamo presenti anche su questi social network',
+                1 => '<div>Ricevi questa comunicazione perché ti sei iscritto/a al servizio di newsletter di <a href="'.$params['home_url'].'">La filosofia di Bianca</a> con l\'indirizzo e-mail <a href="#" style="pointer-events: none; cursor: text; text-decoration: none; color: black;"><strong>'.$params['user_email'].'</strong></a></div>',
+                2 => '<div style="margin-top: 10px;">Puoi consultare <a href="'.$params['privacy_url'].'" target="_blank" title="Privacy">qui</a> la nostra informativa sulla privacy.<br>Per ulteriori informazioni sui tuoi dati personali, contattaci a questo <a href="'.$params['contacts_url'].'" target="_blank" title="Contattaci">link</a></div>',
+                3 => 'Puoi cancellare l\'iscrizione facendo <a href="'.$params['unsubscribe_url'].'" title="Cancella iscrizione" target="_blank">click qui</a>'
+            ];
+        }
+        else if($lang->value == "es"){
+            return [
+                0 => 'También estamos presentes en estas redes sociales',
+                1 => '<div>Recibe esta comunicación porque se ha suscrito al servicio de newsletter de <a href="'.$params['home_url'].'">La filosofia di Bianca</a> con con la dirección de correo electrónico <a href="#" style="pointer-events: none; cursor: text; text-decoration: none; color: black;"><strong>'.$params['user_email'].'</strong></a></div>',
+                2 => '<div style="margin-top: 10px;">Puede consultar nuestra política de privacidad <a href="'.$params['privacy_url'].'" target="_blank" title="Privacidad">aquí</a>.<br> Para obtener más información sobre sus datos personales, contáctenos en este <a href="'.$params['contacts_url'].'" target="_blank" title="Contáctenos">enlace</a></div>',
+                3 => 'Puede darse de baja haciendo <a href="'.$params['unsubscribe_url'].'" title="Darse de baja" target="_blank">clic aquí</a>'
+            ];
+        }
+        else{
+            return [
+                0 => 'We are also present on these social networks',
+                1 => '<div>You receive this communication because you have subscribed to the <a href="'.$params['home_url'].'">La filosofia di Bianca</a>\'s newsletter service with the email address <a href="#" style="pointer-events: none; cursor: text; text-decoration: none; color: black;"><strong>'.$params['user_email'].'</strong></a></div>',
+                2 => '<div style="margin-top: 10px;">You can consult our privacy policy <a href="'.$params['privacy_url'].'" target="_blank" title="Privacy">here</a>.<br> For more information on your personal data, contact us at this <a href="'.$params['contacts_url'].'" target="_blank" title="Contact us">link</a></div>',
+                3 => 'You can unsubscribe by <a href="'.$params['unsubscribe_url'].'" title="Unsubscribe" target="_blank">clicking here</a>'
+            ];
+        }
     }
 }
 ?>
