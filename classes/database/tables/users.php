@@ -40,8 +40,8 @@ CREATE TABLE `{$this->name}` (
     `ActDate` datetime DEFAULT NULL COMMENT 'Date which user activated his account',
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`),
-    UNIQUE KEY `codVer` (`codVer`),
-    UNIQUE KEY `codDis` (`codDis`)
+    UNIQUE KEY `codVer` (`verCode`),
+    UNIQUE KEY `codDis` (`unsubscCode`)
 ) ENGINE=InnoDB {$this->charset};
 SQL;
     }
