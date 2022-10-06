@@ -44,7 +44,7 @@ class Users extends Models implements Ue{
         return false;
     }
 
-    private function setDeleteQuery(array $users, string $field): string|null{
+    private function setDeleteQuery(array $users, string $field): array|null{
         if(in_array($field,Users::$uniques)){
             if($field == Users::$uniques[1])
                 $where_data = [
@@ -53,6 +53,10 @@ class Users extends Models implements Ue{
                 $where_data = ["field" => "verCode", "method" => "getVerCode"];
             else if($field == Users::$uniques[3])$where_data = ["field" => "unsubscCode", "method" => "getUnsubscCode"];
             else $where_data = ["field" => "id", "method" => "getId"];
+            foreach($users as $user){
+                if($user instanceof User){
+                }
+            }
         }//if(in_array($field,Users::$uniques)){
         else $this->errno = Ue::ERR_NOT_UNIQUE_FIELD;
         return null;
