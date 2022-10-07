@@ -89,31 +89,44 @@ class Users extends Models implements Ue{
     public function getUsers(array $where): array{
         $users = [];
         $this->errno = 0;
-        
+        $query = $this->setSelectQuery($where);
+        if($query){
+
+        }//if($query){
         return $users;
     }
 
     /**
-     * Set the SELECT query to get multiple users
+     * Set the array for the SELECT query to get multiple users
      */
-    private function setSelectQuery(array $where): string|null{
+    private function setSelectQuery(array $where): array|null{
         $this->errno = 0;
+        $selectArray = [
+            "query" => "",
+            "values" => []
+        ];
         if(count($where) < 0){
             //Select all users
-            return "";
+            return $selectArray;
         }//if(count($where) < 0){
         else{
-            $query = "WHERE ";
+            $selectArray['query'] .= "WHERE ";
             foreach($where as $field => $val){
                 if(in_array($field, Users::$fields)){
-                    $query .= " `{$field}` =";
-                    if(in_array($field, array(Users::$fields[0], Users::$fields[7])))$query .= " {$val}";
-                    else $query .= " '{$val}'";
-                    if($field != array_key_last($where)) $query .= ",";
-                    else $query .= ";";
+                    $selectArray['query'] .= " `{$field}` =";
+                    if(in_array($field, array(Users::$fields[0], Users::$fields[7]))){
+                        $selectArray['query'] .= " %d ";
+                    }
+                    else{
+                        $selectArray['query'] .= " %s ";
+                    } 
+                    array_push($selectArray["values"],$val);
+                    if($field != array_key_last($where)) $selectArray['query'] .= ",";
+                    else $selectArray['query'] .= ";";
                 }//if(in_array($field, Users::$fields)){
                 else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_FIELD);
             }
+            return $selectArray;
         }//else di if(count($where) < 0){
         return null;
     }
