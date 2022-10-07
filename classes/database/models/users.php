@@ -86,14 +86,22 @@ class Users extends Models implements Ue{
         return $query;
     }
 
-    public function getUsers(array $where): array{
+    /**
+     * Get multiple users from the users table
+     * @param array $where the select filter
+     * @return array|null array of User objects or null if error
+     */
+    public function getUsers(array $where): array|null{
         $users = [];
         $this->errno = 0;
         $query = $this->setSelectQuery($where);
         if($query){
-
+            $result = parent::get($query["query"],$query["values"]);
+            if($result){
+                //foreach with array Users Object
+            }
         }//if($query){
-        return $users;
+        return null;
     }
 
     /**
