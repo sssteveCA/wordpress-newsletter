@@ -10,6 +10,11 @@ use wpdb;
 
 abstract class Model extends Table implements Me{
 
+    /**
+     * Max Errno number + 1 assignable to Model class
+     */
+    const MAX_MODEL = 40;
+
     public function __construct(array $data)
     {
         parent::__construct($data);

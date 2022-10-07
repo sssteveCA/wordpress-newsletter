@@ -38,7 +38,7 @@ abstract class Table implements Te{
     protected string $sql_drop;
 
     /**
-     * Max Errno number + 1 assignable to table class
+     * Max Errno number + 1 assignable to Table class
      */
     const MAX_TABLE = 20;
 

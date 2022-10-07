@@ -69,6 +69,21 @@ class User extends Model implements Ue{
     public function getActDate(){return $this->actDate;}
     public function isSubscribed(){return $this->subscribed;}
 
+    public function getError(){
+        if($this->errno < self::MAX_MODEL){
+            return parent::getError();
+        }
+        switch($this->errno){
+            case Ue::ERR_MISSING_DATA:
+                $this->error = Ue::ERR_MISSING_DATA_MSG;
+                break;
+            default:
+                $this->error = null;
+                break;
+        }
+        return $this->error;
+    }
+
     private function assignValues(array $data){
         $this->id = isset($data['id']) ? $data['id'] : null;
         $this->firstName = isset($data['firstName']) ? $data['firstName'] : null;
@@ -114,6 +129,7 @@ class User extends Model implements Ue{
      * Insert a new User in the table
      */
     public function insertUser(){
+        $this->errno = 0;
         $insert_array = $this->insertUserArray();
         if($insert_array != null){
             $insert = parent::insert($insert_array["values"],$insert_array["format"]);
@@ -127,6 +143,7 @@ class User extends Model implements Ue{
      * Set the array to insert new user in database
      */
     private function insertUserArray(): array|null{
+        $this->errno = 0;
         if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
             $classname = __CLASS__;
             $insert_array = [
@@ -145,6 +162,7 @@ class User extends Model implements Ue{
             }//if(isset($this->firstName, $this->lastName)){
             return $insert_array;
         }//if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
+        else $this->errno = Ue::ERR_MISSING_DATA;
         return null;
     }
 
@@ -159,6 +177,10 @@ class User extends Model implements Ue{
 }
 
 interface UserErrors{
+    //Numbers
+    const ERR_MISSING_DATA = 40;
 
+    //Messages
+    const ERR_MISSING_DATA_MSG = "Uno o più dati richiesti non sono stati settati";
 }
 ?>
