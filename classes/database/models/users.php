@@ -11,7 +11,7 @@ class Users extends Models implements Ue{
     /**
      * Unique field of users table
      */
-    private static array $uniques = ['id','email','verCode','unsubscCode'];
+    private static array $fields = ['id','firstName', 'lastName','email','lang','verCode','unsubscCode','subscribed','subscDate','actDate'];
 
     public function __construct(array $data)
     {
@@ -40,9 +40,9 @@ class Users extends Models implements Ue{
      * @param array $users user objects to delete in the database
      * @param string the field used to select the users to delete
      */
-    public function deleteUsers(array $users, string $field): bool{
+    public function deleteUsers(array $where): bool{
         $this->errno = 0;
-        $delete_array = $this->setDeleteArray($users,$field);
+        $delete_array = $this->setDeleteArray($where);
         if($delete_array != null){
             $delQuery = parent::delete($delete_array["where"],$delete_array["where_format"]);
             if($this->errno == 0)return true;
@@ -53,36 +53,50 @@ class Users extends Models implements Ue{
     /**
      * Set the array for wpdb delete function
      */
-    private function setDeleteArray(array $users, string $field): array|null{
+    private function setDeleteArray(array $where): array|null{
         $this->errno = 0;
-        if(in_array($field,Users::$uniques)){
-            if($field == Users::$uniques[1])
-                $where_data = ["field" => "email", "format" => "%s", "method" => "getEmail"];
-            else if($field == Users::$uniques[2])
-                $where_data = ["field" => "verCode", "format" => "%s", "method" => "getVerCode"];
-            else if($field == Users::$uniques[3])
-                $where_data = ["field" => "unsubscCode", "format" => "%s", "method" => "getUnsubscCode"];
-            else 
-                $where_data = ["field" => "id", "format" => "%d", "method" => "getId"];
-            $where_array = [ "where" => [], "where_format" => []];
-            foreach($users as $user){
-                if($user instanceof User){
-                    $val = call_user_func(array($user, $where_data["method"]));
-                    array_push($where_array["where"], [$where_data["field"] => $val]);
-                    array_push($where_array["where_format"], $where_data["format"]);
-                }//if($user instanceof User){
-                else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_USERS_ARRAY);
-            }
-            return $where_array;
-        }//if(in_array($field,Users::$uniques)){
-        else $this->errno = Ue::ERR_NOT_UNIQUE_FIELD;
-        return null;
+        $query = [
+            "where" => [],
+            "where_format" => []
+        ];
+        foreach($where as $field => $val){
+            if(in_array($field, Users::$fields)){
+                array_push($query["where"],[$field => $val]);
+                switch($field){
+                    case Users::$fields[0]: //Id
+                    case Users::$fields[7]: //subscribed
+                        array_push($query["where_format"],"%d");
+                        break;
+                    case Users::$fields[1]:
+                    case Users::$fields[2]:
+                    case Users::$fields[3]:
+                    case Users::$fields[4]:
+                    case Users::$fields[5]:
+                    case Users::$fields[6]:
+                    case Users::$fields[8]:
+                    case Users::$fields[9]:
+                        array_push($query["where_format"],"%s");
+                        break;
+                    default:
+                        break;
+                }
+            }//if(in_array($field, Users::$fields)){
+            else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_FIELD);
+        }//foreach($where as $field => $val){
+        return $query;
+    }
+
+    public function getUsers(array $where): array{
+        $users = [];
+        $this->errno = 0;
+        
+        return $users;
     }
 }
 
 interface UsersErrors{
     //exceptions
-    const EXC_INVALID_USERS_ARRAY = "L'array degli utenti deve contenere esclusivamente oggetti utente";
+    const EXC_INVALID_FIELD = "Il campo specificato non esiste nella tabella utenti";
     //Numbers 
     const ERR_NOT_UNIQUE_FIELD = 40;
 
