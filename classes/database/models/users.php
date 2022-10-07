@@ -143,26 +143,59 @@ class Users extends Models implements Ue{
         return null;
     }
 
-    public function insertUsers(array $users): bool{
+    /**
+     * Insert multiple users in database
+     * @param array $users the array of User objects
+     * @param bool $withNames if true the query insert also 'firstName' & 'lastName' fields
+     * @return bool true if the users have been inserted, false otherwise
+     */
+    public function insertUsers(array $users, bool $withNames): bool{
         $this->errno = 0;
         return false;
     }
 
     /**
      * Set the array for the INSERT query to insert multiple users
+     * @param array $users the array of User objects
+     * @param bool $withNames if true the query insert also 'firstName' & 'lastName' fields
+     * @return array the array ready for sanitize
      */
-    private function setInsertArray(array $users): array|null{
+    private function setInsertArray(array $users, bool $withNames): array|null{
         $this->errno = 0;
+        $classname = __CLASS__;
         if(!empty($users)){
             $insertArray = [];
+            if($withNames){
+                $insertArray["query"] = <<<SQL
+ INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['firstName']}`,`{$classname::$fields['lastName']}`,`{$classname::$fields['email']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
+ SQL;
+            }
+            else{
+                $insertArray["query"] = <<<SQL
+INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['email']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
+SQL;
+            }
             foreach($users as $user){
                 if($user instanceof User){
-                    
+
                 }//if($user instanceof User){
                 else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_USERSARRAY);
             }
         }//if(!empty($users)){
         return null;
+    }
+
+    /**
+     * Check if User object contains all the required data for insert
+     */
+    private function validateUserData(User $user, bool $withNames): bool{
+        if($user->getEmail() == null) return false;
+        if($user->getLang() == null) return false;
+        if($user->getVerCode() == null) return false;
+        if(!$withNames) return true;
+        if($user->getFirstName() == null) return false;
+        if($user->getLastName() == null) return false;
+        return true;
     }
 }
 
