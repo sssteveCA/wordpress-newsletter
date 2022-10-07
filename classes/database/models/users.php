@@ -53,26 +53,26 @@ class Users extends Models implements Ue{
      */
     private function setDeleteArray(array $where): array|null{
         $this->errno = 0;
+        $classname = __CLASS__;
         $query = [
             "where" => [],
             "where_format" => []
         ];
         foreach($where as $field => $val){
-            if(in_array($field, Users::$fields)){
+            if(in_array($field, $classname::$fields)){
                 array_push($query["where"],[$field => $val]);
                 switch($field){
-                    case Users::$fields[0]: //Id
-                    case Users::$fields[7]: //subscribed
+                    case $classname::$fields['id']: //Id
+                    case $classname::$fields['subscribed']: //subscribed
                         array_push($query["where_format"],"%d");
                         break;
-                    case Users::$fields[1]:
-                    case Users::$fields[2]:
-                    case Users::$fields[3]:
-                    case Users::$fields[4]:
-                    case Users::$fields[5]:
-                    case Users::$fields[6]:
-                    case Users::$fields[8]:
-                    case Users::$fields[9]:
+                    case $classname::$fields['firstName']:
+                    case $classname::$fields['lastName']:
+                    case $classname::$fields['email']:
+                    case $classname::$fields['verCode']:
+                    case $classname::$fields['unsubscCode']:
+                    case $classname::$fields['subscDate']:
+                    case $classname::$fields['actDate']:
                         array_push($query["where_format"],"%s");
                         break;
                     default:
@@ -107,6 +107,7 @@ class Users extends Models implements Ue{
      */
     private function setSelectQuery(array $where): array|null{
         $this->errno = 0;
+        $classname = __CLASS__;
         $selectArray = [
             "query" => "",
             "values" => []
@@ -118,9 +119,9 @@ class Users extends Models implements Ue{
         else{
             $selectArray['query'] .= "WHERE ";
             foreach($where as $field => $val){
-                if(in_array($field, Users::$fields)){
+                if(in_array($field, $classname::$fields)){
                     $selectArray['query'] .= " `{$field}` =";
-                    if(in_array($field, array(Users::$fields[0], Users::$fields[7]))){
+                    if(in_array($field, array($classname::$fields['id'], $classname::$fields['subscribed']))){
                         $selectArray['query'] .= " %d ";
                     }
                     else{

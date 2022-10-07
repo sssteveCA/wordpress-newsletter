@@ -115,8 +115,11 @@ class User extends Model implements Ue{
      */
     public function insertUser(array $data, array|string $format = null){
         if(isset($this->email, $this->verCode, $this->subscDate)){
+            $classname = __CLASS__;
             $insert_array = [
-                "values" => [],
+                "values" => [
+                    $classname::$fields['email'] => $this->email
+                ],
                 "format" => []
             ];
             $insert = parent::insert($data,$format);
