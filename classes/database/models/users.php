@@ -5,13 +5,11 @@ namespace Newsletter\Classes\Database\Models;
 use Newsletter\Classes\Database\Models;
 use Newsletter\Classes\Database\Models\UsersErrors as Ue;
 use Newsletter\Exceptions\IncorrectVariableFormatException;
+use Newsletter\Traits\UserCommonTrait;
 
 class Users extends Models implements Ue{
 
-    /**
-     * Unique field of users table
-     */
-    private static array $fields = ['id','firstName', 'lastName','email','lang','verCode','unsubscCode','subscribed','subscDate','actDate'];
+    use UserCommonTrait;
 
     public function __construct(array $data)
     {

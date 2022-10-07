@@ -4,8 +4,12 @@ namespace Newsletter\Classes\Database\Models;
 
 use Newsletter\Classes\Database\Model;
 use Newsletter\Classes\Database\Models\UserErrors as Ue;
+use Newsletter\Traits\UserCommonTrait;
 
 class User extends Model implements Ue{
+
+    use UserCommonTrait;
+
     /**
      * "id" field
      */
@@ -110,8 +114,15 @@ class User extends Model implements Ue{
      * Insert a new User in the table
      */
     public function insertUser(array $data, array|string $format = null){
-        $insert = parent::insert($data,$format);
-        return $insert;
+        if(isset($this->email, $this->verCode, $this->subscDate)){
+            $insert_array = [
+                "values" => [],
+                "format" => []
+            ];
+            $insert = parent::insert($data,$format);
+        }//if(isset($this->email, $this->verCode, $this->subscDate)){
+        
+        return false;
     }
 
     /**
