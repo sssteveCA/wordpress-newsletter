@@ -91,22 +91,19 @@ trait UsersTrait{
      */
     private function setInsertArray(array $users, bool $withNames): array|null{
         $this->errno = 0;
-        $classname = __CLASS__;
         if(!empty($users)){
             $insertArray = [
                 "query" => "",
                 "values" => []
             ];
             $insertArray["query"] .= $this->setFirstPartInsertSql($withNames);
+            $currentTime = date("Y-m-d H:i:s");
             foreach($users as $user){
                 if($user instanceof User){
                     if($this->validateUserData($user,$withNames)){
-                        if($withNames){
-                            $insertArray["query"] .= "(%s,%s,%s,%s,0,{})";
-                            $userValues = [];
-                            array_push($values);
-                        }
-                        
+                        $insertSingleArray = $this->setSingleInsertValues($user, $withNames, $currentTime);
+                        $insertArray["query"] .= $insertSingleArray["query"];
+                        array_push($insertArray["values"], $insertSingleArray["values"]);
                     }//if($this->validateUserData($user,$withNames)){
                     else throw new IncorrectVariableFormatException(Ue::EXC_DATA_MISSED);
                 }//if($user instanceof User){
@@ -125,15 +122,41 @@ trait UsersTrait{
         $classname = __CLASS__;
         if($withNames){
             $first_part = <<<SQL
-INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['firstName']}`,`{$classname::$fields['lastName']}`,`{$classname::$fields['email']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
+INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['firstName']}`,`{$classname::$fields['lastName']}`,`{$classname::$fields['email']}`,`{$classname::$fields['lang']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
 SQL;
         }
         else{
             $first_part = <<<SQL
-INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['email']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
+INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['email']}`,`{$classname::$fields['lang']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
 SQL;
         }
         return $first_part;
+    }
+
+    /**
+     * Add to INSERT query, data of single user
+     * @param User $user
+     * @param bool $withNames
+     * @param string $currentTime
+     * @return array
+     */
+    private function setSingleInsertValues(User $user, bool $withNames, string $currentTime): array{
+        $insertSingleArray = [
+            "query" => "", "values" => []
+        ];
+        if($withNames){
+            $insertSingleArray["query"] = "(%s,%s,%s,%s,0,{$currentTime})";
+            $userValues = [
+                $user->getFirstName(), $user->getLastName(),$user->getEmail(),$user->getLang()
+            ];
+            array_push($insertSingleArray["values"],$userValues);
+        }//if($withNames){
+        else{
+            $insertSingleArray["query"] = "(%s,%s,0,{$currentTime})";
+            $userValues = [ $user->getEmail(),$user->getLang() ];
+            array_push($insertSingleArray["values"],$userValues);
+        }//else di if($withNames){
+        return $insertSingleArray;
     }
 
     /**
