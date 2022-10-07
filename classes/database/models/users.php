@@ -142,11 +142,34 @@ class Users extends Models implements Ue{
         }//else di if(count($where) < 0){
         return null;
     }
+
+    public function insertUsers(array $users): bool{
+        $this->errno = 0;
+        return false;
+    }
+
+    /**
+     * Set the array for the INSERT query to insert multiple users
+     */
+    private function setInsertArray(array $users): array|null{
+        $this->errno = 0;
+        if(!empty($users)){
+            $insertArray = [];
+            foreach($users as $user){
+                if($user instanceof User){
+                    
+                }//if($user instanceof User){
+                else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_USERSARRAY);
+            }
+        }//if(!empty($users)){
+        return null;
+    }
 }
 
 interface UsersErrors{
     //exceptions
     const EXC_INVALID_FIELD = "Il campo specificato non esiste nella tabella utenti";
+    const EXC_INVALID_USERSARRAY = "L' array con gli utenti non è formattato correttamente";
     //Numbers 
     const ERR_NOT_UNIQUE_FIELD = 40;
 

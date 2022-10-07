@@ -135,7 +135,6 @@ class User extends Model implements Ue{
             $insert = parent::insert($insert_array["values"],$insert_array["format"]);
             return $insert;
         }//if(isset($this->email, $this->verCode, $this->subscDate)){
-        
         return false;
     }
 

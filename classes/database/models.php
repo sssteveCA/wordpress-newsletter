@@ -74,10 +74,10 @@ SQL;
     /**
      * Insert a single or multiple rows with INSERT query
      */
-    protected function insert(array $data, array $format = []){
+    protected function insert(string $sql, array $values){
         $this->errno = 0;
-        $insert = $this->wpdb->insert($this->fullTableName,$data,$format);
-        $this->query = $this->wpdb->last_query;
+        $this->query = $this->wpdb->prepare($sql, $values);
+        $insert = $this->wpdb->query($this->query);
         $this->queries[] = $this->query;
         if(!$insert)$this->errno = Me::ERR_INSERT;
         return $insert;
