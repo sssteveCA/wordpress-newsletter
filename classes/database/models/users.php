@@ -26,6 +26,9 @@ class Users extends Models implements Ue{
                 case Ue::ERR_NOT_UNIQUE_FIELD:
                     $this->error = Ue::ERR_NOT_UNIQUE_FIELD_MSG;
                     break;
+                case Ue::ERR_VOID_INSERT_ARRAY:
+                    $this->error = Ue::ERR_VOID_INSERT_ARRAY_MSG;
+                    break;
                 default:
                     $this->error = null;
                     break;
@@ -80,6 +83,9 @@ class Users extends Models implements Ue{
      */
     public function insertUsers(array $users, bool $withNames): bool{
         $this->errno = 0;
+        $insertArray = $this->setInsertArray($users,$withNames);
+        $insert = parent::insert($insertArray["query"],$insertArray["values"]);
+        if($insert)return true;
         return false;
     }
 
@@ -92,8 +98,10 @@ interface UsersErrors{
     const EXC_DATA_MISSED = "Uno o più dati richiesti sono mancanti";
     //Numbers 
     const ERR_NOT_UNIQUE_FIELD = 40;
+    const ERR_VOID_INSERT_ARRAY = 41;
 
     //Messages
     const ERR_NOT_UNIQUE_FIELD_MSG = "Il campo fornito non è univoco";
+    const ERR_VOID_INSERT_ARRAY_MSG = "L'array con gli utenti da inserire è vuoto";
 }
 ?>

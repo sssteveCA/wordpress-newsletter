@@ -98,7 +98,7 @@ trait UsersTrait{
             ];
             $insertArray["query"] .= $this->setFirstPartInsertSql($withNames);
             $currentTime = date("Y-m-d H:i:s");
-            foreach($users as $user){
+            foreach($users as $k => $user){
                 if($user instanceof User){
                     if($this->validateUserData($user,$withNames)){
                         $insertSingleArray = $this->setSingleInsertValues($user, $withNames, $currentTime);
@@ -106,9 +106,12 @@ trait UsersTrait{
                         array_push($insertArray["values"], $insertSingleArray["values"]);
                     }//if($this->validateUserData($user,$withNames)){
                     else throw new IncorrectVariableFormatException(Ue::EXC_DATA_MISSED);
+                    if($k != array_key_last($users)) $insertArray["query"] .= ",";
+                    else $insertArray["query"] .= ";";
                 }//if($user instanceof User){
                 else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_USERSARRAY);
-            }
+            }//foreach($users as $k => $user){
+            return $insertArray;
         }//if(!empty($users)){
         return null;
     }
