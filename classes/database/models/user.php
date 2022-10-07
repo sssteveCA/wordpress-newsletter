@@ -114,6 +114,19 @@ class User extends Model implements Ue{
      * Insert a new User in the table
      */
     public function insertUser(){
+        $insert_array = $this->insertUserArray();
+        if($insert_array != null){
+            $insert = parent::insert($insert_array["values"],$insert_array["format"]);
+            return $insert;
+        }//if(isset($this->email, $this->verCode, $this->subscDate)){
+        
+        return false;
+    }
+
+    /**
+     * Set the array to insert new user in database
+     */
+    private function insertUserArray(): array|null{
         if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
             $classname = __CLASS__;
             $insert_array = [
@@ -130,11 +143,9 @@ class User extends Model implements Ue{
                 $insert_array["values"][$classname::$fields['lastName']] = $this->lastName;
                 array_push($insert_array["format"],"%s","%s");
             }//if(isset($this->firstName, $this->lastName)){
-            $insert = parent::insert($insert_array["values"],$insert_array["format"]);
-            return $insert;
-        }//if(isset($this->email, $this->verCode, $this->subscDate)){
-        
-        return false;
+            return $insert_array;
+        }//if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
+        return null;
     }
 
 
