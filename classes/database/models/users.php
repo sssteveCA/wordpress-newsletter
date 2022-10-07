@@ -17,7 +17,7 @@ class Users extends Models implements Ue{
     }
 
     public function getError(){
-        if($this->errno < Models::MAX_MODELS){
+        if($this->errno < parent::MAX_MODELS){
             return parent::getError();
         }
         else{

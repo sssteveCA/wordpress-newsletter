@@ -70,7 +70,7 @@ class User extends Model implements Ue{
     public function isSubscribed(){return $this->subscribed;}
 
     public function getError(){
-        if($this->errno < self::MAX_MODEL){
+        if($this->errno < static::MAX_MODEL){
             return parent::getError();
         }
         switch($this->errno){

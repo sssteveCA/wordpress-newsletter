@@ -19,7 +19,7 @@ abstract class Models extends Table implements Me{
     }
 
     protected function getError(){
-        if($this->errno < Table::MAX_TABLE){
+        if($this->errno < parent::MAX_TABLE){
             return parent::getError();
         }
         else{
