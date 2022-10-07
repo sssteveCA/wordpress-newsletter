@@ -97,7 +97,12 @@ class Users extends Models implements Ue{
             $result = parent::get($query["query"],$query["values"]);
             if($result){
                 //foreach with array Users Object
+                foreach($result as $row){
+                    $user = new User($row);
+                    $users[] = $user;
+                }
             }
+            return $users;
         }//if($query){
         return null;
     }

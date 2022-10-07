@@ -113,20 +113,30 @@ class User extends Model implements Ue{
     /**
      * Insert a new User in the table
      */
-    public function insertUser(array $data, array|string $format = null){
-        if(isset($this->email, $this->verCode, $this->subscDate)){
+    public function insertUser(){
+        if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
             $classname = __CLASS__;
             $insert_array = [
                 "values" => [
-                    $classname::$fields['email'] => $this->email
+                    $classname::$fields['email'] => $this->email,
+                    $classname::$fields['lang'] => $this->lang,
+                    $classname::$fields['verCode'] => $this->verCode,
+                    $classname::$fields['subscCode'] => $this->subscDate
                 ],
-                "format" => []
+                "format" => ["%s","%s","%s","%s"]
             ];
-            $insert = parent::insert($data,$format);
+            if(isset($this->firstName, $this->lastName)){
+                $insert_array["values"][$classname::$fields['firstName']] = $this->firstName;
+                $insert_array["values"][$classname::$fields['lastName']] = $this->lastName;
+                array_push($insert_array["format"],"%s","%s");
+            }//if(isset($this->firstName, $this->lastName)){
+            $insert = parent::insert($insert_array["values"],$insert_array["format"]);
+            return $insert;
         }//if(isset($this->email, $this->verCode, $this->subscDate)){
         
         return false;
     }
+
 
     /**
      * Update an existing User in the table
