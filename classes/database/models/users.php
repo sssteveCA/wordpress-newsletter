@@ -164,25 +164,47 @@ class Users extends Models implements Ue{
         $this->errno = 0;
         $classname = __CLASS__;
         if(!empty($users)){
-            $insertArray = [];
-            if($withNames){
-                $insertArray["query"] = <<<SQL
- INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['firstName']}`,`{$classname::$fields['lastName']}`,`{$classname::$fields['email']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
- SQL;
-            }
-            else{
-                $insertArray["query"] = <<<SQL
-INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['email']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
-SQL;
-            }
+            $insertArray = [
+                "query" => "",
+                "values" => []
+            ];
+            $insertArray["query"] .= $this->setFirstPartInsertSql($withNames);
             foreach($users as $user){
                 if($user instanceof User){
-
+                    if($this->validateUserData($user,$withNames)){
+                        if($withNames){
+                            $insertArray["query"] .= "(%s,%s,%s,%s,0,{})";
+                            $userValues = [];
+                            array_push($values);
+                        }
+                        
+                    }//if($this->validateUserData($user,$withNames)){
+                    else throw new IncorrectVariableFormatException(Ue::EXC_DATA_MISSED);
                 }//if($user instanceof User){
                 else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_USERSARRAY);
             }
         }//if(!empty($users)){
         return null;
+    }
+
+    /**
+     * Set the first part of INSERT query for users
+     * @param bool $withNames if true the query insert also 'firstName' & 'lastName' fields
+     * @return string the first part of the INSERT query
+     */
+    private function setFirstPartInsertSql(bool $withNames): string{
+        $classname = __CLASS__;
+        if($withNames){
+            $first_part = <<<SQL
+INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['firstName']}`,`{$classname::$fields['lastName']}`,`{$classname::$fields['email']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
+SQL;
+        }
+        else{
+            $first_part = <<<SQL
+INSERT INTO `{$this->fullTableName}` (`{$classname::$fields['email']}`,`{$classname::$fields['verCode']}`,`{$classname::$fields['subscribed']}`,`{$classname::$fields['subscDate']}`) VALUES
+SQL;
+        }
+        return $first_part;
     }
 
     /**
@@ -203,6 +225,7 @@ interface UsersErrors{
     //exceptions
     const EXC_INVALID_FIELD = "Il campo specificato non esiste nella tabella utenti";
     const EXC_INVALID_USERSARRAY = "L' array con gli utenti non è formattato correttamente";
+    const EXC_DATA_MISSED = "Uno o più dati richiesti sono mancanti";
     //Numbers 
     const ERR_NOT_UNIQUE_FIELD = 40;
 
