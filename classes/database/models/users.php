@@ -92,6 +92,31 @@ class Users extends Models implements Ue{
         
         return $users;
     }
+
+    /**
+     * Set the SELECT query to get multiple users
+     */
+    private function setSelectQuery(array $where): string|null{
+        $this->errno = 0;
+        if(count($where) < 0){
+            //Select all users
+            return "";
+        }//if(count($where) < 0){
+        else{
+            $query = "WHERE ";
+            foreach($where as $field => $val){
+                if(in_array($field, Users::$fields)){
+                    $query .= " `{$field}` =";
+                    if(in_array($field, array(Users::$fields[0], Users::$fields[7])))$query .= " {$val}";
+                    else $query .= " '{$val}'";
+                    if($field != array_key_last($where)) $query .= ",";
+                    else $query .= ";";
+                }//if(in_array($field, Users::$fields)){
+                else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_FIELD);
+            }
+        }//else di if(count($where) < 0){
+        return null;
+    }
 }
 
 interface UsersErrors{
