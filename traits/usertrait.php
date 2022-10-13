@@ -38,7 +38,7 @@ trait UserTrait{
                     $classname::$fields['email'] => $this->email,
                     $classname::$fields['lang'] => $this->lang,
                     $classname::$fields['verCode'] => $this->verCode,
-                    $classname::$fields['subscCode'] => $this->subscDate
+                    $classname::$fields['subscDate'] => $this->subscDate
                 ],
                 "format" => ["%s","%s","%s","%s"]
             ];

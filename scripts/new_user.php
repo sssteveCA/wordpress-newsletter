@@ -34,7 +34,6 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms'],$post['lang']) && 
     //var_dump($user_data);
     try{
         $user = new User($user_data);
-        echo "New user User before insertUser\r\n";
         $user->insertUser();
         $userE = $user->getErrno();
         switch($userE){

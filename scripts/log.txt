@@ -14,3 +14,83 @@ UserTrait insertUserArray insert_array => array (
     3 => '%s',
   ),
 )
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@gmail.com',
+    'lang' => 'it',
+    'verCode' => '0a60600000b1665692708BixtucwdPsCmZdaHnGwXZCopD7Ry6i95h6J5NEbv5QdhG3ugz4yMeJyroE3S6J1lIJu0rAbvqviVz05',
+    '' => '2022-10-13 20:25:08',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@gmail.com',
+    'lang' => 'it',
+    'verCode' => '0a89995300b1665692872SiH3whpDvcIKJDVuO51qERrIu4eb1D4qaBEOZxfGFCKmoMY3PPnn9mSpN7DHunviNrIlDKAZVGHoOj2',
+    '' => '2022-10-13 20:27:52',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@gmail.com',
+    'lang' => 'it',
+    'verCode' => '0a44196900b1665692988qKl6gImo3e9wUGDvn39x6rvtB8QrAR9mfyGAmN9lpYW5pJMpvBtOlpegroh3aIc0dguyknVTyQ9eLr3',
+    '' => '2022-10-13 20:29:48',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@gmail.com',
+    'lang' => 'it',
+    'verCode' => '0a75226000b1665693093ezfijYIRxEmDtkNu8rJHnMao8ALD6kwKyMeFYvaoQGWOypJLJ4vDfuyLYfSjh8maOaPnI0NNqybrCjK',
+    '' => '2022-10-13 20:31:33',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@gmail.com',
+    'lang' => 'it',
+    'verCode' => '0a16939400b1665693161AWq0iVsgRNYH2cg4wA6vr4AniXENFB4swa6JmLqiMXWDRBVxTkWjJ2km6dEyuGFQgCaXyvGXUtDc0tn',
+    'subscDate' => '2022-10-13 20:32:41',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)

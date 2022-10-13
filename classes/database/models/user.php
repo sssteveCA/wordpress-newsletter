@@ -55,12 +55,9 @@ class User extends Model implements Ue{
 
     public function __construct(array $data)
     {
-        echo "User construct\r\n";
         var_dump($data);
         parent::__construct($data);
-        echo "User after parent constructor\r\n";
         $this->assignValues($data);
-        echo "User after assignValues\r\n";
     }
 
     public function getId(){return $this->id;}
@@ -90,18 +87,14 @@ class User extends Model implements Ue{
     }
 
     private function assignValues(array $data){
-        echo "User assignValues\r\n";
         $this->id = isset($data['id']) ? $data['id'] : null;
         $this->firstName = isset($data['firstName']) ? $data['firstName'] : null;
         $this->lastName = isset($data['lastName']) ? $data['lastName'] : null;
-        echo "User assignValues after lastName\r\n";
         $this->email = isset($data['email']) ? $data['email'] : null;
         $this->lang = isset($data['lang']) ? $data['lang'] : null;
         $this->verCode = isset($data['verCode']) ? $data['verCode'] : null;
-        echo "User assignValues after verCode\r\n";
         $this->unsubscCode = isset($data['unsubscCode']) ? $data['unsubscCode'] : null;
         $this->subscribed = isset($data['subscribed']) ? $data['subscribed'] : false;
-        echo "User assignValues after subscribed\r\n";
         $this->subscDate = isset($data['subscDate']) ? $data['subscDate'] : null;
         $this->actDate = isset($data['actDate']) ? $data['actDate'] : null;
     }
@@ -141,6 +134,8 @@ class User extends Model implements Ue{
     public function insertUser(){
         $this->errno = 0;
         $insert_array = $this->insertUserArray();
+        echo "User insertUser\r\n";
+        var_dump($insert_array);
         if($insert_array != null){
             $insert = parent::insert($insert_array["values"],$insert_array["format"]);
             return $insert;

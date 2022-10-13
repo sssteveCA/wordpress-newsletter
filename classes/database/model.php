@@ -77,7 +77,7 @@ SQL;
      */
     protected function insert(array $data, array|string $format = null){
         $this->errno = 0;
-        $insert = $this->wpdb->insert($this->tableName,$data,$format);
+        $insert = $this->wpdb->insert($this->fullTableName,$data,$format);
         $this->query = $this->wpdb->last_query;
         $this->queries[] = $this->query;
         if(!$insert)$this->errno = Me::ERR_INSERT;
