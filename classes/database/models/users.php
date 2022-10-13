@@ -89,6 +89,20 @@ class Users extends Models implements Ue{
         return false;
     }
 
+    /**
+     * Update multiple users in database
+     * @param array $data the array with the new data 
+     * @param array $where the where condition
+     * @param array $format (optional) specify the format of the $data array
+     * @param array $where_f (optional) specify the format of the $where_f array
+     * @return bool true if update query successfully
+     */
+    public function updateUsers(array $data, array $where, array $format = [], array $where_f): bool{
+        $this->errno = 0;
+        $update = parent::update($data,$where,$format,$where_f);
+        if($this->errno != 0)return false;
+        return true;
+    }
 }
 
 interface UsersErrors{

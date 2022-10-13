@@ -9,15 +9,9 @@ class UserCommonTrait{
      */
     public static array $fields = [
         'id' => 'id',
-        'firstName' => 'firstName', 
-        'lastName' => 'lastName',
         'email' => 'email',
-        'lang' => 'lang',
         'verCode' => 'verCode',
         'unsubscCode' => 'unsubscCode',
-        'subscribed' => 'subscribed',
-        'subscDate' => 'subscDate',
-        'actDate' => 'actDate'
     ];
 }
 ?>
