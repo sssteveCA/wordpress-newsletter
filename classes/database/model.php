@@ -63,7 +63,7 @@ SQL;
     protected function get(string $query, array $values){
         $this->errno = 0;
         $sql = <<<SQL
-SELECT * FROM {$this->fullTableName} {$query};
+SELECT * FROM {$this->fullTableName} {$query} LIMIT 1;
 SQL;
         $this->query = $this->wpdb->prepare($sql);
         $this->queries[] = $this->query;

@@ -28,6 +28,8 @@ trait UserTrait{
      */
     private function insertUserArray(): array|null{
         $this->errno = 0;
+        $this->verCode = $this->codeGen();
+        $this->subscDate = date("Y-m-d H:i:s");
         if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
             $classname = __CLASS__;
             $insert_array = [
