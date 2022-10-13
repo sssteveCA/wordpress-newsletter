@@ -1,6 +1,9 @@
 <?php
 
 require_once("../../wp-load.php");
+require_once("../classes/database/tables/table.php");
+require_once("../classes/database/model.php");
+require_once("../classes/database/models/user.php");
 
 $inputs = file_get_contents("php://input");
 $post = json_decode($inputs,true);
