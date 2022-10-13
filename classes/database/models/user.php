@@ -5,10 +5,11 @@ namespace Newsletter\Classes\Database\Models;
 use Newsletter\Classes\Database\Model;
 use Newsletter\Classes\Database\Models\UserErrors as Ue;
 use Newsletter\Traits\UserCommonTrait;
+use Newsletter\Traits\UserTrait;
 
 class User extends Model implements Ue{
 
-    use UserCommonTrait;
+    use UserCommonTrait, UserTrait;
 
     /**
      * "id" field
@@ -137,34 +138,6 @@ class User extends Model implements Ue{
         }//if(isset($this->email, $this->verCode, $this->subscDate)){
         return false;
     }
-
-    /**
-     * Set the array to insert new user in database
-     */
-    private function insertUserArray(): array|null{
-        $this->errno = 0;
-        if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
-            $classname = __CLASS__;
-            $insert_array = [
-                "values" => [
-                    $classname::$fields['email'] => $this->email,
-                    $classname::$fields['lang'] => $this->lang,
-                    $classname::$fields['verCode'] => $this->verCode,
-                    $classname::$fields['subscCode'] => $this->subscDate
-                ],
-                "format" => ["%s","%s","%s","%s"]
-            ];
-            if(isset($this->firstName, $this->lastName)){
-                $insert_array["values"][$classname::$fields['firstName']] = $this->firstName;
-                $insert_array["values"][$classname::$fields['lastName']] = $this->lastName;
-                array_push($insert_array["format"],"%s","%s");
-            }//if(isset($this->firstName, $this->lastName)){
-            return $insert_array;
-        }//if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
-        else $this->errno = Ue::ERR_MISSING_DATA;
-        return null;
-    }
-
 
     /**
      * Update an existing User in the table
