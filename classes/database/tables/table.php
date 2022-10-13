@@ -71,16 +71,17 @@ abstract class Table implements Te{
      * Assign the entry data to the proper properties
      */
     private function assignValues(array $data): bool{
-        $isset = false;
+        echo "Table assignValues\r\n";
         if(isset($data['tableName'])){
             $this->tableName = $data['tableName'];
             $this->charset = $this->wpdb->get_charset_collate();
-            $this->fullTableame = $this->wpdb->prefix.$this->tableName;
+            $this->fullTableName = $this->wpdb->prefix.$this->tableName;
             $this->sql_drop = <<<SQL
 DROP TABLE `{$this->fullTableName}`;
 SQL;
+            return true;
         }//if(isset($data['name'])){
-        return $isset;
+        return false;
     }
 
     /**

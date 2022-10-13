@@ -1,0 +1,16 @@
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@gmail.com',
+    'lang' => 'it',
+    'verCode' => '0a75288900b1665692521bezdYZ3pfKJh37OnHAcaGVKwdsGuCmiiiLtqLJIHnoVNQENKQtpzZNffGV5VUGXLUvUcpa219nouqvS',
+    '' => '2022-10-13 20:22:01',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
