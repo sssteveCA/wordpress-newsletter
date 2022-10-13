@@ -2,7 +2,7 @@
 
 namespace Newsletter\Traits;
 
-class UserCommonTrait{
+trait UserCommonTrait{
 
     /**
      * field of users table
