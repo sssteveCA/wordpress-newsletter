@@ -114,16 +114,18 @@ class User extends Model implements Ue{
         $getOk = false;
         $user = parent::get($query,$values);
         if($user){
-            $this->id = $user["id"];
-            $this->firstName = $user["firstName"];
-            $this->lastName = $user["lastName"];
-            $this->email = $user["email"];
-            $this->lang = $user["lang"];
-            $this->verCode = $user["verCode"];
-            $this->unsubscCode = $user["unsubscCode"];
-            $this->subscribed = $user["subscribed"];
-            $this->subscDate = $user["subscDate"];
-            $this->actDate = $user["actDate"];
+            echo "User getUser result => \r\n";
+            var_dump($user);
+            $this->id = $user[User::$fields["id"]];
+            $this->firstName = $user[User::$fields["firstName"]];
+            $this->lastName = $user[User::$fields["lastName"]];
+            $this->email = $user[User::$fields["email"]];
+            $this->lang = $user[User::$fields["lang"]];
+            $this->verCode = $user[User::$fields["verCode"]];
+            $this->unsubscCode = $user[User::$fields["unsubscCode"]];
+            $this->subscribed = $user[User::$fields["subscribed"]];
+            $this->subscDate = $user[User::$fields["subscDate"]];
+            $this->actDate = $user[User::$fields["actDate"]];
         }//if($user){
         return $getOk;
     }

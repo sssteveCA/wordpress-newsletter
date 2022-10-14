@@ -66,7 +66,7 @@ SQL;
     protected function get(string $query, array $values){
         $this->errno = 0;
         $sql = <<<SQL
-SELECT * FROM {$this->fullTableName} {$query} LIMIT 1;
+SELECT * FROM `{$this->fullTableName}` {$query} LIMIT 1;
 SQL;
         $this->query = $this->wpdb->prepare($sql,$values);
         echo "Model get query => {$this->query}";
@@ -108,6 +108,7 @@ SQL;
 UPDATE {$this->fullTableName} SET {$sets} {$wheres} LIMIT 1;
 SQL;
         $this->query = $this->wpdb->prepare($sql,$values);
+        echo "Model update query => {$this->query}\r\n";
         $this->queries[] = $this->query;
         $update = $this->wpdb->query($this->query);
         if(!$update)$this->errno = Me::ERR_UPDATE;

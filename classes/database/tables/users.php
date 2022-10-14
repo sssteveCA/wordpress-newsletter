@@ -37,7 +37,7 @@ CREATE TABLE `{$this->name}` (
     `unsubscCode` varchar(191) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Unsubscribe code',
     `subscribed` tinyint(1) DEFAULT 0 COMMENT '0 = email not verified\r\n1 = email verified',
     `subscDate` datetime DEFAULT NULL COMMENT 'Date which user requested the subscribe to the newsletter',
-    `ActDate` datetime DEFAULT NULL COMMENT 'Date which user activated his account',
+    `actDate` datetime DEFAULT NULL COMMENT 'Date which user activated his account',
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`),
     UNIQUE KEY `codVer` (`verCode`),

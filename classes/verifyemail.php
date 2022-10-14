@@ -85,7 +85,7 @@ class VerifyEmail implements Vee{
         $fSubscribed = User::$fields['subscribed'];
         $fVerCode = User::$fields['verCode'];
         $query = <<<SQL
-WHERE `{$fVerCode}`= %s AND `{$fSubscribed}`='0'
+WHERE `{$fVerCode}`= %s AND `{$fSubscribed}`= 0
 SQL;
         $values = [$this->verCode];
         $this->user->getUser($query, $values);
