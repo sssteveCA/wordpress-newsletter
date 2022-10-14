@@ -143,11 +143,12 @@ HTML;
      * Create an HTML page
      * @param string $title page title
      * @param string $body the content inside the body tag
+     * @param string $styleTag (optional) <style> tag content
      * @param array $styles (optional) an array that contains css files
      * @param array $sripts (optional) an array that contains js files
      * @return string the HTML page content
      */
-    public static function genericHtml(string $title, string $body, array $styles = [], array $scripts = []):string{
+    public static function genericHtml(string $title, string $body, string $styleTag = "",array $styles = [], array $scripts = []):string{
         $stylesS = "";
         $scriptsS = "";
         if(!empty($styles)){
@@ -166,6 +167,9 @@ HTML;
         <meta charset="utf-8">
         {$stylesS}
         {$scriptsS}
+        <style>
+            {$styleTag}
+        </style>
     </head>
     <body>
         {$body}

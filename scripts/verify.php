@@ -16,15 +16,65 @@ require_once("../classes/database/model.php");
 require_once("../classes/database/models/user.php");
 require_once("../classes/verifyemail.php");
 
+use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\VerifyEmail;
+use Newsletter\Exceptions\IncorrectVariableFormatException;
+use Newsletter\Exceptions\NotSettedException;
+use Newsletter\Interfaces\Constants as C;
+use Newsletter\Interfaces\Messages as M;
 
 $html = "";
+$style = <<<HTML
+div{
+    padding-top: 20px; 
+    text-align: center; 
+    font-size: 20px; 
+    font-weight: bold;
+}
+HTML;
+$body = "";
 
-if(isset($_GET['verCode'])){
 
-}//if(isset($_GET['verCode'])){
+if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
+    try{
+        $user_data = [
+            'tableName' => C::TABLE_USERS
+        ];
+        $user = new User($user_data);
+        $verifyemail_data = [
+            'verCode' => $_GET['verCode'],
+            'user' => $user
+        ];
+        $verifyemail = new VerifyEmail($verifyemail_data);
+        $verifyemail->verifyUser();
+        $verifyemailE = $verifyemail->getErrno();
+        switch($verifyemailE){
+            case 0:
+                $body = <<<HTML
+<div>Inserisci un codice di attivazione per continuare</div>
+HTML;
+                break;
+            default:
+                http_response_code(500);
+                $error = M::ERR_UNKNOWN;
+                $body = <<<HTML
+<div>{$errors}</div>
+HTML;
+                break;
+        }
+
+    }catch(Exception $e){
+        http_response_code(500);
+        $error = M::ERR_UNKNOWN;
+        $body = <<<HTML
+<div>{$errors}</div>
+HTML;
+    }
+    $html = HtmlCode::genericHtml("Attivazione account", $body);
+}//if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
 else{
+    http_response_code(400);
     $body = <<<HTML
 <div>Inserisci un codice di attivazione per continuare</div>
 HTML;

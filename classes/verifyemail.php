@@ -26,8 +26,11 @@ class VerifyEmail implements Vee{
     public function getVerCode(){return $this->verCode;}
     public function getError(){
         switch($this->errno){
-            case Vee::FROM_USER:
-                $this->error = Vee::FROM_USER_MSG;
+            case Vee::FROM_USER_NOT_FOUND:
+                $this->error = Vee::FROM_USER_NOT_FOUND_MSG;
+                break;
+            case Vee::FROM_USER_NOT_UPDATED:
+                $this->error = Vee::FROM_USER_NOT_UPDATED_MSG;
                 break;
             default:
                 $this->error = null;
@@ -56,7 +59,7 @@ class VerifyEmail implements Vee{
         $this->user->updateUser($set, $where);
         $errnoE = $this->user->getErrno();
         if($errnoE != 0){
-            $this->errno = Vee::FROM_USER;
+            $this->errno = Vee::FROM_USER_NOT_FOUND;
             return false;
         }
         return true;
@@ -77,7 +80,7 @@ SQL;
         $this->user->getUser($query, $values);
         $userE = $this->user->getErrno();
         if($userE != 0){
-            $this->errno = Vee::FROM_USER;
+            $this->errno = Vee::FROM_USER_NOT_FOUND;
             return false;
         }
         if(!$this->userActivation())return false;
@@ -87,10 +90,12 @@ SQL;
 
 interface VerifyEmailErrors extends ExceptionMessages{
     //Number
-    const FROM_USER = 1;
+    const FROM_USER_NOT_FOUND = 1;
+    const FROM_USER_NOT_UPDATED = 2;
 
     //Message
-    const FROM_USER_MSG = "Errore nell'oggetto User";
+    const FROM_USER_NOT_FOUND_MSG = "Impossibile trovare un utente con questo codice di attivazione";
+    const FROM_USER_NOT_UPDATED_MSG = "Errore durante la modifica dello stato di attivazione";
 }
 
 ?>

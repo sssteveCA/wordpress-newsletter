@@ -55,7 +55,7 @@ class User extends Model implements Ue{
 
     public function __construct(array $data)
     {
-        var_dump($data);
+        //var_dump($data);
         parent::__construct($data);
         $this->assignValues($data);
     }
