@@ -5,10 +5,13 @@ namespace Newsletter\Classes\Database;
 use Newsletter\Classes\Database\ModelErrors as Me;
 use Newsletter\Classes\Database\Tables\Table;
 use Newsletter\Traits\ErrorTrait;
+use Newsletter\Traits\ModelTrait;
 use Newsletter\Traits\SqlTrait;
 use wpdb;
 
 abstract class Model extends Table implements Me{
+
+    use ModelTrait;
 
     /**
      * Max Errno number + 1 assignable to Model class
@@ -92,27 +95,13 @@ SQL;
         $values = [];
         $sets = "";
         $wheres = "";
-        foreach($set as $col => $val){
-            if(is_numeric($val))$format = "%d";
-            else $format = "%s";
-            $sets .= "`{$col}` = {$format}"; 
-            array_push($values,$val);
-            if($val != end($set)){
-                //If is not last loop
-                $sets .= ",";
-            }
-        }
+        $setData = $this->getUpdateSetString($set);
+        $sets .= $setData['string'];
+        array_push($values, $setData['values']);
         if(count($where) > 0){
-            $wheres = "WHERE ";
-            foreach($where as $col => $val){
-                if(is_numeric($val))$format = "%d";
-                else $format = "%s";
-                $wheres .= "`{$col}` = {$format} ";
-                array_push($values, $val);
-                if($val != end($where)){
-                    $wheres .= "AND ";
-                }
-            }//foreach($where as $col => $val){
+            $whereData = $this->getUpdateWhereString($where);
+            $wheres .= $whereData['string'];
+            array_push($values, $whereData['values']);
         }//if(count($where) > 0){
         $sql = <<<SQL
 UPDATE {$this->fullTableName} SET {$sets} {$wheres} LIMIT 1;
