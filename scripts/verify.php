@@ -52,7 +52,7 @@ if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
         switch($verifyemailE){
             case 0:
                 $body = <<<HTML
-<div>Inserisci un codice di attivazione per continuare</div>
+<div>L'account è stato attivato</div>
 HTML;
                 break;
             case Vee::FROM_USER_NOT_FOUND:

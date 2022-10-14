@@ -13,16 +13,12 @@ trait ModelTrait{
     private function getUpdateSetString(array $setArray): array{
         $sets = "";
         $values = [];
-        $setArrayMap = array_map(function($item){
-            if($item == NULL)return 'NULL';
-            else return $item;
-        },$setArray);
-        foreach($setArrayMap as $col => $val){
+        foreach($setArray as $col => $val){
             if(is_numeric($val))$format = "%d";
             else $format = "%s";
             $sets .= "`{$col}` = {$format}"; 
             array_push($values,$val);
-            if($val != end($setArrayMap)){
+            if($val != end($setArray)){
                 //If is not last loop
                 $sets .= ",";
             }
@@ -39,16 +35,12 @@ trait ModelTrait{
     private function getUpdateWhereString(array $whereArray): array{
         $wheres = "WHERE ";
         $values = [];
-        $whereArrayMap = array_map(function($item){
-            if($item == NULL)return "NULL";
-            else return $item;
-        },$whereArray);
-        foreach($whereArrayMap as $col => $val){
+        foreach($whereArray as $col => $val){
             if(is_numeric($val))$format = "%d";
             else $format = "%s";
             $wheres .= "`{$col}` = {$format} ";
             array_push($values, $val);
-            if($val != end($whereArrayMap)){
+            if($val != end($whereArray)){
                 $wheres .= "AND ";
             }
         }//foreach($where as $col => $val){

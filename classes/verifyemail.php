@@ -62,7 +62,7 @@ class VerifyEmail implements Vee{
      */
     private function userActivation(): bool{
         $set = [
-            'verCode' => 'NULL', 'subscribed' => 1
+            'verCode' => 'NULL', 'subscribed' => 1, 'actDate' => date('Y-m-d H:i:s')
         ];
         $where = [
             'verCode' => $this->verCode, 'subscribed' => 0

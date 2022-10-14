@@ -98,17 +98,19 @@ SQL;
         $wheres = "";
         $setData = $this->getUpdateSetString($set);
         $sets .= $setData['string'];
-        array_push($values, $setData['values']);
+        $values = $setData['values'];
         if(count($where) > 0){
             $whereData = $this->getUpdateWhereString($where);
             $wheres .= $whereData['string'];
-            array_push($values, $whereData['values']);
+            $values = array_merge($values, $whereData['values']);
         }//if(count($where) > 0){
         $sql = <<<SQL
-UPDATE {$this->fullTableName} SET {$sets} {$wheres} LIMIT 1;
+UPDATE `{$this->fullTableName}` SET {$sets} {$wheres} LIMIT 1;
 SQL;
+        /* echo "model update values => \r\n";
+        var_dump($values);
+        echo "\r\nModel update query => {$sql}\r\n"; */
         $this->query = $this->wpdb->prepare($sql,$values);
-        echo "Model update query => {$this->query}\r\n";
         $this->queries[] = $this->query;
         $update = $this->wpdb->query($this->query);
         if(!$update)$this->errno = Me::ERR_UPDATE;
