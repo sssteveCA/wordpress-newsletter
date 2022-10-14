@@ -7,6 +7,43 @@ use Newsletter\Classes\Properties;
 
 class Template{
 
+
+    /**
+     * Create an HTML page
+     * @param string $title page title
+     * @param string $body the content inside the body tag
+     * @param array $styles (optional) an array that contains css files
+     * @param array $sripts (optional) an array that contains js files
+     * @return string the HTML page content
+     */
+    public static function genericHtml(string $title, string $body, array $styles = [], array $scripts = []):string{
+        $stylesS = "";
+        $scriptsS = "";
+        if(!empty($styles)){
+            foreach($styles as $css)
+                $stylesS .= '<link rel="stylesheet" href="'.$css.'">';
+        }
+        if(!empty($scripts)){
+            foreach($scripts as $script)
+                $scriptsS .= '<script src="'.$script.'"></script>';
+        }
+        $html = <<<HTML
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{$title}</title>
+        <meta charset="utf-8">
+        {$stylesS}
+        {$scriptsS}
+    </head>
+    <body>
+        {$body}
+    </body>
+</html>
+HTML;
+        return $html;
+    }
+
     /**
      * Newsletter HTML body
      */
