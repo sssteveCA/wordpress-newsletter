@@ -3,8 +3,9 @@
 namespace Newsletter\Classes;
 
 use Newsletter\Classes\Database\Models\User;
+use Newsletter\Classes\VerifyEmailErrors as Vee;
 
-class VerifyEmail{
+class VerifyEmail implements Vee{
 
     private ?User $user;
 
@@ -14,6 +15,10 @@ class VerifyEmail{
     }
 
     public function getVerifiedUser(){return $this->user;}
+}
+
+interface VerifyEmailErrors{
+
 }
 
 ?>
