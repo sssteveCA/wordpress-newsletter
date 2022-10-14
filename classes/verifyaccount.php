@@ -8,6 +8,7 @@ use Newsletter\Exceptions\IncorrectVariableFormatException;
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Traits\ErrorTrait;
+use Newsletter\Interfaces\Constants as C;
 
 class VerifyEmail implements Vee{
 
@@ -43,9 +44,23 @@ class VerifyEmail implements Vee{
     }
 
 
+    /**
+     * Verify and activate the account
+     */
     public function verifyUser(): bool{
         $this->errno = 0;
-
+        $fSubscribed = User::$fields['subscribed'];
+        $fVerCode = User::$fields['verCode'];
+        $query = <<<SQL
+WHERE `{$fVerCode}`= %s AND `{$fSubscribed}`='0';
+SQL;
+        $values = [$this->verCode];
+        $this->user->getUser($query, $values);
+        $userE = $this->user->getErrno();
+        if($userE != 0){
+            $this->errno = Vee::FROM_USER;
+            return false;
+        }
         return true;
     }
 }
