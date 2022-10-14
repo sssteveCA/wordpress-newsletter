@@ -91,16 +91,32 @@ SQL;
         $this->errno = 0;
         $values = [];
         $sets = "";
+        $where = [];
+        $wheres = "";
         foreach($set as $col => $val){
-            $sets .= "{$col} = '?'"; 
+            if(is_numeric($val))$format = "%d";
+            else $format = "%s";
+            $sets .= "{$col} = {$format}"; 
             array_push($values,$val);
             if($val != end($set)){
                 //If is not last loop
                 $sets .= ",";
             }
         }
+        if(count($where) > 0){
+            $wheres = "WHERE ";
+            foreach($where as $col => $val){
+                if(is_numeric($val))$format = "%d";
+                else $format = "%s";
+                $wheres .= "{$col} = {$format}";
+                array_push($values, $val);
+                if($val != end($where)){
+                    $wheres .= ",";
+                }
+            }//foreach($where as $col => $val){
+        }//if(count($where) > 0){
         $sql = <<<SQL
-UPDATE {$this->fullTableName} SET {$sets} {$filter} LIMIT 1;
+UPDATE {$this->fullTableName} SET {$sets} {$wheres} LIMIT 1;
 SQL;
         $this->query = $this->wpdb->prepare($sql,$values);
         $this->queries[] = $this->query;

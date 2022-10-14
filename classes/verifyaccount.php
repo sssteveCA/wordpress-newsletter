@@ -43,6 +43,19 @@ class VerifyEmail implements Vee{
         return true;
     }
 
+    /**
+     * Activate the account
+     */
+    private function userActivation(): bool{
+        $set = [
+            'verCode' => 'NULL', 'subscribed' => 1
+        ];
+        $where = [
+
+        ];
+        return true;
+    }
+
 
     /**
      * Verify and activate the account
