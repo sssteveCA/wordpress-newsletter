@@ -80,6 +80,7 @@ SQL;
             $this->errno = Vee::FROM_USER;
             return false;
         }
+        if(!$this->userActivation())return false;
         return true;
     }
 }
