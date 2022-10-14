@@ -4,6 +4,7 @@ namespace Newsletter\Classes\Database\Tables;
 
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Classes\Database\Tables\TableErrors as Te;
+use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Traits\ErrorTrait;
 use Newsletter\Traits\SqlTrait;
 use wpdb;
@@ -96,9 +97,7 @@ SQL;
     }
 }
 
-interface TableErrors{
-    //Exceptions
-    const NOTISSET_EXC = "Non sono stati forniti i dati richiesti";
+interface TableErrors extends ExceptionMessages{
 
     //Codes
     const NOT_DROPPED = 1;

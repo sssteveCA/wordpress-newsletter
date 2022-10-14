@@ -5,6 +5,7 @@ namespace Newsletter\Classes\Database\Models;
 use Newsletter\Classes\Database\Models;
 use Newsletter\Classes\Database\Models\UsersErrors as Ue;
 use Newsletter\Exceptions\IncorrectVariableFormatException;
+use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Traits\UserCommonTrait;
 use Newsletter\Traits\UsersTrait;
 
@@ -105,11 +106,7 @@ class Users extends Models implements Ue{
     }
 }
 
-interface UsersErrors{
-    //exceptions
-    const EXC_INVALID_FIELD = "Il campo specificato non esiste nella tabella utenti";
-    const EXC_INVALID_USERSARRAY = "L' array con gli utenti non è formattato correttamente";
-    const EXC_DATA_MISSED = "Uno o più dati richiesti sono mancanti";
+interface UsersErrors extends ExceptionMessages{
     //Numbers 
     const ERR_NOT_UNIQUE_FIELD = 40;
     const ERR_VOID_INSERT_ARRAY = 41;
