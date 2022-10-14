@@ -135,7 +135,7 @@ class User extends Model implements Ue{
         $this->errno = 0;
         $insert_array = $this->insertUserArray();
         echo "User insertUser\r\n";
-        var_dump($insert_array);
+        //var_dump($insert_array);
         if($insert_array != null){
             $insert = parent::insert($insert_array["values"],$insert_array["format"]);
             return $insert;

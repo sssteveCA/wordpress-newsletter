@@ -35,7 +35,7 @@ CREATE TABLE `{$this->name}` (
     `lang` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'User language code',
     `verCode` varchar(191) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Verification code ',
     `unsubscCode` varchar(191) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Unsubscribe code',
-    `subscribed` tinyint(1) DEFAULT NULL COMMENT '0 = email not verified\r\n1 = email verified',
+    `subscribed` tinyint(1) DEFAULT '0' COMMENT '0 = email not verified\r\n1 = email verified',
     `subscDate` datetime DEFAULT NULL COMMENT 'Date which user requested the subscribe to the newsletter',
     `ActDate` datetime DEFAULT NULL COMMENT 'Date which user activated his account',
     PRIMARY KEY (`id`),

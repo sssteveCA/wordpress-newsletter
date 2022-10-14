@@ -47,7 +47,7 @@ abstract class Table implements Te{
         global $wpdb;
         $this->wpdb = $wpdb;
         $ok = $this->assignValues($data);
-        if(!$ok)throw new NotSettedException(Te::NOTISSET_EXC);
+        if(!$ok)throw new NotSettedException(Te::EXC_NOTISSET);
     }
 
     public function getTableName(){return $this->name;}
