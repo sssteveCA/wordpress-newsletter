@@ -9,6 +9,16 @@ use Newsletter\Traits\ErrorTrait;
 use Newsletter\Traits\SqlTrait;
 use wpdb;
 
+interface TableErrors extends ExceptionMessages{
+
+    //Codes
+    const NOT_DROPPED = 1;
+
+    //Messages
+    const NOT_DROPPED_MSG = "La tabella non è stata rimossa";
+
+}
+
 abstract class Table implements Te{
 
     use SqlTrait, ErrorTrait;
@@ -97,13 +107,4 @@ SQL;
     }
 }
 
-interface TableErrors extends ExceptionMessages{
-
-    //Codes
-    const NOT_DROPPED = 1;
-
-    //Messages
-    const NOT_DROPPED_MSG = "La tabella non è stata rimossa";
-
-}
 ?>

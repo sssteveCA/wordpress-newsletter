@@ -8,21 +8,21 @@ require_once("../exceptions/incorrectvariableformatexception.php");
 require_once("../exceptions/notsettedexception.php");
 require_once("../traits/errortrait.php");
 require_once("../traits/modeltrait.php");
+require_once("../traits/sqltrait.php");
 require_once("../traits/usertrait.php");
 require_once("../traits/usercommontrait.php");
-require_once("../classes/database/tables/table.php");
 require_once("../classes/htmlcode.php");
+require_once("../classes/database/tables/table.php");
 require_once("../classes/database/model.php");
 require_once("../classes/database/models/user.php");
 require_once("../classes/verifyemail.php");
 
+use Newsletter\Interfaces\Constants as C;
+use Newsletter\Interfaces\Messages as M;
+use Newsletter\Classes\VerifyEmailErrors as Vee;
 use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\VerifyEmail;
-use Newsletter\Exceptions\IncorrectVariableFormatException;
-use Newsletter\Exceptions\NotSettedException;
-use Newsletter\Interfaces\Constants as C;
-use Newsletter\Interfaces\Messages as M;
 
 $html = "";
 $style = <<<HTML
@@ -53,6 +53,12 @@ if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
             case 0:
                 $body = <<<HTML
 <div>Inserisci un codice di attivazione per continuare</div>
+HTML;
+                break;
+            case Vee::FROM_USER_NOT_FOUND:
+                http_response_code(400);
+                $body = <<<HTML
+<div>Codice non valido</div>
 HTML;
                 break;
             default:
