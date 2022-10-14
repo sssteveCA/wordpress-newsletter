@@ -146,8 +146,8 @@ class User extends Model implements Ue{
     /**
      * Update an existing User in the table
      */
-    public function updateUser(array $set, string $filter){
-        $update = parent::update($set,$filter);
+    public function updateUser(array $set, array $where = []){
+        $update = parent::update($set,$where);
         return $update;
     }
 }

@@ -51,8 +51,14 @@ class VerifyEmail implements Vee{
             'verCode' => 'NULL', 'subscribed' => 1
         ];
         $where = [
-
+            'verCode' => $this->verCode, 'subscribed' => 0
         ];
+        $this->user->updateUser($set, $where);
+        $errnoE = $this->user->getErrno();
+        if($errnoE != 0){
+            $this->errno = Vee::FROM_USER;
+            return false;
+        }
         return true;
     }
 

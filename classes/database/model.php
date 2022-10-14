@@ -87,16 +87,15 @@ SQL;
     /**
      * Update a single row with UPDATE query
      */
-    protected function update(array $set, string $filter){
+    protected function update(array $set, array $where = []){
         $this->errno = 0;
         $values = [];
         $sets = "";
-        $where = [];
         $wheres = "";
         foreach($set as $col => $val){
             if(is_numeric($val))$format = "%d";
             else $format = "%s";
-            $sets .= "{$col} = {$format}"; 
+            $sets .= "`{$col}` = {$format}"; 
             array_push($values,$val);
             if($val != end($set)){
                 //If is not last loop
@@ -108,10 +107,10 @@ SQL;
             foreach($where as $col => $val){
                 if(is_numeric($val))$format = "%d";
                 else $format = "%s";
-                $wheres .= "{$col} = {$format}";
+                $wheres .= "`{$col}` = {$format} ";
                 array_push($values, $val);
                 if($val != end($where)){
-                    $wheres .= ",";
+                    $wheres .= "AND ";
                 }
             }//foreach($where as $col => $val){
         }//if(count($where) > 0){
