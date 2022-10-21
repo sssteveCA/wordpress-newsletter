@@ -24,11 +24,24 @@ require_once("../classes/subscribe/userunsubscribe.php");
 use Newsletter\Classes\Subscribe\UserUnsubscribeErrors as Uue;
 use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\General;
+use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\Properties;
 use Newsletter\Classes\Subscribe\UserUnsubscribe;
 
+$html = "";
+$style = <<<HTML
+div{
+    padding-top: 20px; 
+    text-align: center; 
+    font-size: 20px; 
+    font-weight: bold;
+}
+HTML;
+$body = "";
+
 if(!isset($_REQUEST['lang'])) $_REQUEST['lang'] = 'en';
 $lang = General::languageCode($_REQUEST['lang']);
+$title = Properties::newsletterUnsubscribeTitle($lang);
 
 if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
     $unsubscCode = $_REQUEST['unsubscCode'];
@@ -60,4 +73,12 @@ else{
     http_response_code(404);
     $message = Properties::missingFormValues($lang);
 }
+
+$body = <<<HTML
+<div>{$message}</div>
+HTML;
+
+$html = HtmlCode::genericHtml($title,$body,$style);
+
+echo $html;
 ?>

@@ -64,43 +64,32 @@ if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
         $verifyemailE = $verifyemail->getErrno();
         switch($verifyemailE){
             case 0:
-                $subscribeCompleted = Properties::subscribeCompleted($lang);
-                $body = <<<HTML
-<div>{$subscribeCompleted}</div>
-HTML;
+                $message = Properties::subscribeCompleted($lang);
                 break;
             case Vee::FROM_USER_NOT_FOUND:
                 http_response_code(400);
-                $invalidCode = Properties::invalidCode($lang);
-                $body = <<<HTML
-<div>{$invalidCode}</div>
-HTML;
+                $message = Properties::invalidCode($lang);
                 break;
             default:
                 http_response_code(500);
-                $error = M::ERR_UNKNOWN;
-                $body = <<<HTML
-<div>{$errors}</div>
-HTML;
+                $message = Properties::unknownError($lang);
                 break;
         }
     }catch(Exception $e){
         http_response_code(500);
-        $error = M::ERR_UNKNOWN;
-        $body = <<<HTML
-<div>{$errors}</div>
-HTML;
+        $message = Properties::unknownError($lang);
     }
-    $html = HtmlCode::genericHtml($title, $body);
 }//if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
 else{
     http_response_code(400);
-    $insertCode = Properties::insertCode($lang);
-    $body = <<<HTML
-<div>{$insertCode}</div>
-HTML;
-    $html = HtmlCode::genericHtml($title,$body);
+    $message = Properties::insertCode($lang);   
 }
+
+$body = <<<HTML
+<div>{$message}</div>
+HTML;
+
+$html = HtmlCode::genericHtml($title,$body);
 
 echo $html;
 
