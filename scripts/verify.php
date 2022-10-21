@@ -21,14 +21,14 @@ require_once("../classes/htmlcode.php");
 require_once("../classes/database/tables/table.php");
 require_once("../classes/database/model.php");
 require_once("../classes/database/models/user.php");
-require_once("../classes/verifyemail.php");
+require_once("../classes/subscribe/verifyemail.php");
 
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 use Newsletter\Classes\VerifyEmailErrors as Vee;
 use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\HtmlCode;
-use Newsletter\Classes\VerifyEmail;
+use Newsletter\Classes\Subscribe\VerifyEmail;
 use Newsletter\Enums\Langs;
 use Newsletter\Classes\General;
 use Newsletter\Classes\Properties;

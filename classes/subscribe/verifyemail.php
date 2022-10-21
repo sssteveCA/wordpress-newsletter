@@ -1,9 +1,9 @@
 <?php
 
-namespace Newsletter\Classes;
+namespace Newsletter\Classes\Subscribe;
 
 use Newsletter\Classes\Database\Models\User;
-use Newsletter\Classes\VerifyEmailErrors as Vee;
+use Newsletter\Classes\Subscribe\VerifyEmailErrors as Vee;
 use Newsletter\Exceptions\IncorrectVariableFormatException;
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\ExceptionMessages;
