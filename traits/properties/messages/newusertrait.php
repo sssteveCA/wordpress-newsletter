@@ -24,6 +24,23 @@ trait NewUserTrait{
     }
 
     /**
+     * Get the user email already exists message in user language
+     * @param string $lang the user language
+     * @return string the user email already message
+     */
+    public static function emailExists(string $lang): string{
+        if($lang == Langs::$langs["it"]){
+            return "L'indirizzo email inserito esiste già";
+        }
+        else if($lang == Langs::$langs["es"]){
+            return "La dirección de correo electrónico ingresada ya existe";
+        }
+        else{
+            return "The email address entered already exists";
+        }
+    }
+
+    /**
      * Get the wrong email format message in user language
      * @param string $lang the user language
      * @return string the wrong email format message
