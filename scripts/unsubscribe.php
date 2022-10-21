@@ -11,6 +11,7 @@ require_once("../traits/errortrait.php");
 require_once("../traits/properties/messages/newusertrait.php");
 require_once("../traits/properties/messages/othertrait.php");
 require_once("../traits/properties/messages/verifytrait.php");
+require_once("../traits/properties/messages/unsubscribetrait.php");
 require_once("../traits/properties/propertiesmessagestrait.php");
 require_once("../traits/properties/propertiesurltrait.php");
 require_once("../classes/general.php");
@@ -39,6 +40,7 @@ if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
         $uu_error = $userUnsubsc->getErrno();
         switch($uu_error){
             case 0:
+                $message = Properties::unsubscribeComplete($lang);
                 break;
             case Uue::CODE_NOT_FOUND:
                 break;
