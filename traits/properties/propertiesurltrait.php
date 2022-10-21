@@ -1,6 +1,6 @@
 <?php
 
-namespace Newsletter\Traits;
+namespace Newsletter\Traits\Properties;
 
 use Newsletter\Classes\Properties;
 use Newsletter\Enums\Langs;
