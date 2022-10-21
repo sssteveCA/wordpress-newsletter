@@ -97,7 +97,7 @@ class User extends Model implements Ue{
         $this->lang = isset($data['lang']) ? $data['lang'] : null;
         $this->verCode = isset($data['verCode']) ? $data['verCode'] : null;
         $this->unsubscCode = isset($data['unsubscCode']) ? $data['unsubscCode'] : null;
-        $this->subscribed = isset($data['subscribed']) ? $data['subscribed'] : false;
+        $this->subscribed = isset($data['subscribed']) ? $data['subscribed'] : '0';
         $this->subscDate = isset($data['subscDate']) ? $data['subscDate'] : null;
         $this->actDate = isset($data['actDate']) ? $data['actDate'] : null;
     }

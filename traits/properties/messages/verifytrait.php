@@ -28,7 +28,7 @@ trait VerifyTrait{
      * @param string $lang the user language
      * @return string the invalid code message
      */
-    public static function invalidCode(string $lang): string{
+    public static function invalidCodeVt(string $lang): string{
         if($lang == Langs::$langs["it"]){
             return "Codice di verifica non valido";
         }

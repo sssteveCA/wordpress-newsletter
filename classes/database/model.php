@@ -54,7 +54,7 @@ abstract class Model extends Table implements Me{
         $sql = <<<SQL
 DELETE FROM {$this->fullTableName} {$query} LIMIT 1;
 SQL;
-        $this->query = $this->wpdb->prepare($query,$values);
+        $this->query = $this->wpdb->prepare($sql,$values);
         $del = $this->wpdb->query($this->query);
         if(!$del)$this->errno = Me::ERR_DELETE;
         return $del;

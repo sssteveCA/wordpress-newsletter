@@ -1,7 +1,11 @@
 <?php
 
 require_once("../../wp-load.php");
+require_once("../enums/languages.php");
+require_once("../interfaces/constants.php");
 require_once("../interfaces/exceptionmessages.php");
+require_once("../exceptions/incorrectvariableformatexception.php");
+require_once("../exceptions/notsettedexception.php");
 require_once("../traits/errortrait.php");
 require_once("../traits/modeltrait.php");
 require_once("../traits/sqltrait.php");
@@ -15,12 +19,14 @@ require_once("../traits/properties/messages/unsubscribetrait.php");
 require_once("../traits/properties/propertiesmessagestrait.php");
 require_once("../traits/properties/propertiesurltrait.php");
 require_once("../classes/general.php");
+require_once("../classes/htmlcode.php");
 require_once("../classes/properties.php");
 require_once("../classes/database/tables/table.php");
 require_once("../classes/database/model.php");
 require_once("../classes/database/models/user.php");
 require_once("../classes/subscribe/userunsubscribe.php");
 
+use Newsletter\Interfaces\Constants as C;
 use Newsletter\Classes\Subscribe\UserUnsubscribeErrors as Uue;
 use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\General;
@@ -46,7 +52,8 @@ $title = Properties::newsletterUnsubscribeTitle($lang);
 if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
     $unsubscCode = $_REQUEST['unsubscCode'];
     try{
-        $userData = ['unsubscCode' => $unsubscCode];
+        $userData = [
+           'tableName' => C::TABLE_USERS, 'unsubscCode' => $unsubscCode];
         $user = new User($userData);
         $userUnsubscData = ['user' => $user];
         $userUnsubsc = new UserUnsubscribe($userUnsubscData);
@@ -57,7 +64,7 @@ if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
                 break;
             case Uue::CODE_NOT_FOUND:
                 http_response_code(400);
-                $message = Properties::invalidCode($lang);
+                $message = Properties::invalidCodeUt($lang);
                 break;
             default:
                 http_response_code(500);
@@ -65,6 +72,7 @@ if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
                 break;
         }
     }catch(Exception $e){
+        echo "Unsubsribe exception\n ".$e->getMessage();
         http_response_code(500);
         $message = Properties::unknownError($lang);
     }

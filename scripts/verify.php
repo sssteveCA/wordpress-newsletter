@@ -68,7 +68,7 @@ if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
                 break;
             case Vee::FROM_USER_NOT_FOUND:
                 http_response_code(400);
-                $message = Properties::invalidCode($lang);
+                $message = Properties::invalidCodeVt($lang);
                 break;
             default:
                 http_response_code(500);

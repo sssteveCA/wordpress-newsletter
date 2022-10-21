@@ -11,7 +11,7 @@ trait UnsubscribeTrait{
      * @param string $lang the user language
      * @return string the invalid unsubscribe code message
      */
-    public static function invalidCode(string $lang): string{
+    public static function invalidCodeUt(string $lang): string{
         if($lang == Langs::$langs["it"]){
             return "Codice non valido";
         }
