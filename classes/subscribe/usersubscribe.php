@@ -33,6 +33,7 @@ class UserSubscribe implements Usee{
     public function __construct(array $data)
     {
         $this->checkValues($data);
+        $this->insertUser();
     }
 
     public function getUser(){return $this->user;}

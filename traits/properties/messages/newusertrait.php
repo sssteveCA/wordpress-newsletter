@@ -22,5 +22,22 @@ trait NewUserTrait{
             return "To complete the newsletter subscription click on this link";
         }
     }
+
+    /**
+     * Get the wrong email format message in user language
+     * @param string $lang the user language
+     * @return string the wrong email format message
+     */
+    public static function wrongEmailFormat(string $lang): string{
+        if($lang == Langs::$langs["it"]){
+            return "L'indirizzo email inserito non è valido";
+        }
+        else if($lang == Langs::$langs["es"]){
+            return "La dirección de correo electrónico ingresada no es válida";
+        }
+        else{
+            return "The email address entered is invalid";
+        }
+    }
 }
 ?>

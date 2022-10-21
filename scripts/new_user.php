@@ -20,7 +20,9 @@ use Newsletter\Classes\Database\Models\User;
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
+use Newsletter\Classes\Subscribe\UserSubscribeError as Usee;
 use Newsletter\Classes\Properties;
+use Newsletter\Classes\Subscribe\UserSubscribe;
 
 $inputs = file_get_contents("php://input");
 $post = json_decode($inputs,true);
@@ -39,11 +41,18 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms'],$post['lang']) && 
     //var_dump($user_data);
     try{
         $user = new User($user_data);
-        $user->insertUser();
-        $userE = $user->getErrno();
-        switch($userE){
+        $us_data = [
+            'lang' => $post['lang'],
+            'user' => $user
+        ];
+        $userSubscribe = new UserSubscribe($us_data);
+        $us_error = $userSubscribe->getErrno();
+        switch($us_error){
             case 0:
-                $response['msg'] = Properties::subscribeCompleted($post['lang']);
+                $response['msg'] = Properties::completeSubscribe($post['lang']);
+                break;
+            case Usee::INCORRECT_EMAIL:
+                http_response_code(400);
                 break;
             default:
                 http_response_code(500);
