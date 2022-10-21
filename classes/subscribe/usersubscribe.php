@@ -66,10 +66,19 @@ class UserSubscribe implements Usee{
         $this->user = $data['user'];
     }
 
+    private function checkDuplicate(): bool{
+        $user_cloned = clone $this->user;
+        $sql = "WHERE `".User::$fields["email"]."` = %s";
+        $values = [$this->user->getEmail()];
+        return $user_cloned->getUser($sql,$values);
+    }
+
     private function insertUser(): bool{
-        $this->errno = 0;
         $email = $this->user->getEmail();
         if(preg_match(UserSubscribe::$regex["email"],$email)){
+            if($this->checkDuplicate()){
+                
+            }
             $insert = $this->user->insertUser();
             if($insert) return true;
             else $this->errno = Usee::FROM_USER;

@@ -53,6 +53,7 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms'],$post['lang']) && 
                 break;
             case Usee::INCORRECT_EMAIL:
                 http_response_code(400);
+                $response['msg'] = Properties::wrongEmailFormat($post['lang']);
                 break;
             default:
                 http_response_code(500);

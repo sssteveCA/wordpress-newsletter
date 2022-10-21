@@ -111,7 +111,6 @@ class User extends Model implements Ue{
      * Get an User from the table
      */
     public function getUser(string $query, array $values){
-        $getOk = false;
         $user = parent::get($query,$values);
         if($user){
             /* echo "User getUser result => \r\n";
@@ -126,8 +125,9 @@ class User extends Model implements Ue{
             $this->subscribed = $user[User::$fields["subscribed"]];
             $this->subscDate = $user[User::$fields["subscDate"]];
             $this->actDate = $user[User::$fields["actDate"]];
+            return true;
         }//if($user){
-        return $getOk;
+        return false;
     }
 
     /**
