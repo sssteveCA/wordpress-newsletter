@@ -8,6 +8,7 @@ require_once("../interfaces/messages.php");
 require_once("../exceptions/incorrectvariableformatexception.php");
 require_once("../exceptions/notsettedexception.php");
 require_once("../traits/properties/messages/verifytrait.php");
+require_once("../traits/properties/propertiesurltrait.php");
 require_once("../traits/properties/propertiesmessagestrait.php");
 require_once("../traits/errortrait.php");
 require_once("../traits/modeltrait.php");
@@ -15,6 +16,7 @@ require_once("../traits/sqltrait.php");
 require_once("../traits/usertrait.php");
 require_once("../traits/usercommontrait.php");
 require_once("../classes/general.php");
+require_once("../classes/properties.php");
 require_once("../classes/htmlcode.php");
 require_once("../classes/database/tables/table.php");
 require_once("../classes/database/model.php");
@@ -44,6 +46,7 @@ $body = "";
 
 
 if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
+    if(!isset($_GET['lang'])) $_GET['lang'] = 'en';
     $lang = General::languageCode($_GET['lang']);
     try{
         $user_data = [
@@ -61,14 +64,14 @@ if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
             case 0:
                 $subscribeCompleted = Properties::subscribeCompleted($lang);
                 $body = <<<HTML
-<div>{{$subscribeCompleted}}</div>
+<div>{$subscribeCompleted}</div>
 HTML;
                 break;
             case Vee::FROM_USER_NOT_FOUND:
                 http_response_code(400);
                 $invalidCode = Properties::invalidCode($lang);
                 $body = <<<HTML
-<div>{{$invalidCode}}</div>
+<div>{$invalidCode}</div>
 HTML;
                 break;
             default:

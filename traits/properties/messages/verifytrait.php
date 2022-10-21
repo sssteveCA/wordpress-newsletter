@@ -41,6 +41,23 @@ trait VerifyTrait{
     }
 
     /**
+     * Get the newsletter subscribe title in user language
+     * @param string $lang the user language
+     * @return string the newsletter subscribe title
+     */
+    public static function newsletterSubscribeTitle(string $lang): string{
+        if($lang == Langs::$langs["it"]){
+            return "Iscrizione newsletter";
+        }
+        else if($lang == Langs::$langs["es"]){
+            return "Suscripción al boletín informativo";
+        }
+        else{
+            return "Newsletter subscription";
+        }
+    }
+
+    /**
      * Get the subscribe completed message in user language
      * @param string $lang the user language
      * @return string the subscribe completed message
