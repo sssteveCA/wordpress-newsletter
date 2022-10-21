@@ -24,9 +24,26 @@ trait VerifyTrait{
     }
 
     /**
+     * Get the invalid code message in user language
+     * @param string $lang the user language
+     * @return string the invalid code message
+     */
+    public static function invalidCode(string $lang): string{
+        if($lang == Langs::Italian->value){
+            return "Codice di verifica non valido";
+        }
+        else if($lang == Langs::Espanol->value){
+            return "Código de verificación invalido";
+        }
+        else{
+            return "Invalid verification code";
+        }
+    }
+
+    /**
      * Get the subscribe completed message in user language
      * @param string $lang the user language
-     * @return string the insert code message
+     * @return string the subscribe completed message
      */
     public static function subscribeCompleted(string $lang): string{
         if($lang == Langs::Italian->value){

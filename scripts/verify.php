@@ -56,8 +56,9 @@ if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
         $verifyemailE = $verifyemail->getErrno();
         switch($verifyemailE){
             case 0:
+                $subscribeCompleted = Properties::subscribeCompleted($lang);
                 $body = <<<HTML
-<div>L'account è stato attivato</div>
+<div>{{$subscribeCompleted}}</div>
 HTML;
                 break;
             case Vee::FROM_USER_NOT_FOUND:
