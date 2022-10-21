@@ -44,10 +44,12 @@ div{
 HTML;
 $body = "";
 
+if(!isset($_GET['lang'])) $_GET['lang'] = 'en';
+    $lang = General::languageCode($_GET['lang']);
+$title = Properties::newsletterSubscribeTitle($lang);
+
 
 if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
-    if(!isset($_GET['lang'])) $_GET['lang'] = 'en';
-    $lang = General::languageCode($_GET['lang']);
     try{
         $user_data = [
             'tableName' => C::TABLE_USERS
@@ -82,7 +84,6 @@ HTML;
 HTML;
                 break;
         }
-
     }catch(Exception $e){
         http_response_code(500);
         $error = M::ERR_UNKNOWN;
@@ -90,7 +91,7 @@ HTML;
 <div>{$errors}</div>
 HTML;
     }
-    $html = HtmlCode::genericHtml("Attivazione account", $body);
+    $html = HtmlCode::genericHtml($title, $body);
 }//if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
 else{
     http_response_code(400);
@@ -98,7 +99,7 @@ else{
     $body = <<<HTML
 <div>{$insertCode}</div>
 HTML;
-    $html = HtmlCode::genericHtml("Attivazione account",$body);
+    $html = HtmlCode::genericHtml($title,$body);
 }
 
 echo $html;
