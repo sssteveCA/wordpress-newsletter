@@ -25,7 +25,7 @@ require_once("../classes/subscribe/verifyemail.php");
 
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
-use Newsletter\Classes\VerifyEmailErrors as Vee;
+use Newsletter\Classes\Subscribe\VerifyEmailErrors as Vee;
 use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\Subscribe\VerifyEmail;
