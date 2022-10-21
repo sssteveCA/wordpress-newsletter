@@ -24,7 +24,7 @@ class UserSubscribe implements Usee{
 
     use ErrorTrait;
 
-    private ?User $user;
+    private User $user;
     private string $userLang;
 
     public static array $regex = [

@@ -44,19 +44,19 @@ div{
 HTML;
 $body = "";
 
-if(!isset($_GET['lang'])) $_GET['lang'] = 'en';
-    $lang = General::languageCode($_GET['lang']);
+if(!isset($_REQUEST['lang'])) $_REQUEST['lang'] = 'en';
+$lang = General::languageCode($_REQUEST['lang']);
 $title = Properties::newsletterSubscribeTitle($lang);
 
 
-if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
+if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
     try{
         $user_data = [
             'tableName' => C::TABLE_USERS
         ];
         $user = new User($user_data);
         $verifyemail_data = [
-            'verCode' => $_GET['verCode'],
+            'verCode' => $_REQUEST['verCode'],
             'user' => $user
         ];
         $verifyemail = new VerifyEmail($verifyemail_data);
@@ -92,7 +92,7 @@ HTML;
 HTML;
     }
     $html = HtmlCode::genericHtml($title, $body);
-}//if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
+}//if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
 else{
     http_response_code(400);
     $insertCode = Properties::insertCode($lang);

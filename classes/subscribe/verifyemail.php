@@ -24,7 +24,7 @@ class VerifyEmail implements Vee{
 
     use ErrorTrait;
 
-    private ?User $user;
+    private User $user;
     private string $verCode;
 
     public function __construct(array $data)
