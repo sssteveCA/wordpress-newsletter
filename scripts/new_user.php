@@ -53,7 +53,6 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
     try{
         $user = new User($user_data);
         $us_data = [
-            'lang' => $lang,
             'user' => $user
         ];
         $userSubscribe = new UserSubscribe($us_data);

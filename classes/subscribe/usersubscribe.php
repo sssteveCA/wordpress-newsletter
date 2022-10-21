@@ -25,7 +25,6 @@ class UserSubscribe implements Usee{
     use ErrorTrait;
 
     private User $user;
-    private string $userLang;
 
     public static array $regex = [
         'email' => '/^[a-zA-Z-_\.0-9]{4,40}@([a-z]{3,25}\.){1,6}[a-z]{2,10}$/',
@@ -39,7 +38,6 @@ class UserSubscribe implements Usee{
     }
 
     public function getUser(){return $this->user;}
-    public function getUserLang(){return $this->userLang;}
     public function getError(){
         switch($this->errno){
             case Usee::FROM_USER:
@@ -58,15 +56,11 @@ class UserSubscribe implements Usee{
     }
 
     private function checkValues(array $data){
-        if(!isset($data['lang'])) $data['lang'] = 'en';
-        $this->userLang = $data['lang'];
         if(!isset($data['user'])){
-            $message = Properties::unknownError($this->userLang);
-            throw new NotSettedException($message);
+            throw new NotSettedException(Usee::EXC_NOTISSET);
         }
         if(!$data['user'] instanceof User) {
-            $message = Properties::unknownError($this->userLang);
-            throw new IncorrectVariableFormatException($message);
+            throw new IncorrectVariableFormatException(Usee::EXC_INVALID_TYPE);
         }
         $this->user = $data['user'];
     }
