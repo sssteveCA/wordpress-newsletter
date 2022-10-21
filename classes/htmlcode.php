@@ -182,11 +182,11 @@ HTML;
     /**
      * Get the values to be used in the frontend subscribe form
      */
-    public static function subscribeFormValues(Langs $lang):array {
+    public static function subscribeFormValues(string $lang):array {
         $privacyUrl = Properties::privacyUrl($lang);
         $cookieUrl = Properties::cookieUrl($lang);
         $termsUrl = Properties::termsUrl($lang);
-        if($lang == Langs::Italian){
+        if($lang == Langs::$langs["it"]){
             return [
                 "title" => "Newsletter","ea_title" => "Indirizzo email",
                 "cb_label1" => "Dichiaro di aver letto l' <a href=\"{$privacyUrl}\">informativa sulla privacy</a> e sui <a href=\"{$cookieUrl}\">cookie</a>, acconsento al trattamento dei miei dati personali",
@@ -194,7 +194,7 @@ HTML;
                 "subscribe_text" => "Iscriviti","lang_code" => "it"
             ];
         }//if($lang == Langs::Italian){
-        else if($lang == Langs::Espanol){
+        else if($lang == Langs::$langs["es"]){
             return [
                 "title" => "Boletín informativo","ea_title" => "Correo electrónico",
                 "cb_label1" => "Declaro haber leído la <a href=\"{$privacyUrl}\">información sobre privacidad</a> y <a href=\"{$cookieUrl}\">cookies</a>, acepto el tratamiento de mis datos personales",

@@ -13,20 +13,20 @@ trait PropertiesUrlTrait{
     /**
      * Get the contacts form link
      */
-    public static function contactsUrl(Langs $lang): string{
+    public static function contactsUrl(string $lang): string{
         $home_url = Properties::homeUrl();
-        if($lang == Langs::Italian){ return $home_url.'/contatti/'; }
-        else if($lang == Langs::Espanol){ return $home_url.'/es/contactos-2/'; }
+        if($lang == Langs::$langs["it"]){ return $home_url.'/contatti/'; }
+        else if($lang == Langs::$langs["es"]){ return $home_url.'/es/contactos-2/'; }
         else { return $home_url.'/en/contacts-2/'; }
     }
 
     /**
      * Get the cookie policy link
      */
-    public static function cookieUrl(Langs $lang): string{
+    public static function cookieUrl(string $lang): string{
         $home_url = Properties::homeUrl();
-        if($lang == Langs::Italian){ return $home_url."/cookie-policy/";}
-        else if($lang == Langs::Espanol){ return $home_url."/es/cookie-policy-2/"; }
+        if($lang == Langs::$langs["it"]){ return $home_url."/cookie-policy/";}
+        else if($lang == Langs::$langs["es"]){ return $home_url."/es/cookie-policy-2/"; }
         else{ return $home_url."/en/cookie-policy-3/"; }
     }
 
@@ -54,10 +54,10 @@ trait PropertiesUrlTrait{
     /**
      * Get the privacy policy link
      */
-    public static function privacyUrl(Langs $lang):string {
+    public static function privacyUrl(string $lang):string {
         $home_url = Properties::homeUrl();
-        if($lang == Langs::Italian){ return $home_url."/privacy-policy/";}
-        else if($lang == Langs::Espanol){ return $home_url."/es/privacy-policy-2/"; }
+        if($lang == Langs::$langs["it"]){ return $home_url."/privacy-policy/";}
+        else if($lang == Langs::$langs["es"]){ return $home_url."/es/privacy-policy-2/"; }
         else{ return $home_url."/en/privacy-policy-3/"; }
     }
 
@@ -74,10 +74,10 @@ trait PropertiesUrlTrait{
     /**
      * Get the terms and conditions document URL
      */
-    public static function termsUrl(Langs $lang):string {
+    public static function termsUrl(string $lang):string {
         $home_url = Properties::homeUrl();
-        if($lang == Langs::Italian){ return $home_url."/termini-e-condizioni/";}
-        else if($lang == Langs::Espanol){ return $home_url."/en/terms-and-conditions/"; }
+        if($lang == Langs::$langs["it"]){ return $home_url."/termini-e-condizioni/";}
+        else if($lang == Langs::$langs["es"]){ return $home_url."/en/terms-and-conditions/"; }
         else{ return $home_url."/en/privacy-policy-3/"; }
     }
 

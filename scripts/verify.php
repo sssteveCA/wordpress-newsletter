@@ -1,11 +1,14 @@
 <?php
 
 require_once("../../wp-load.php");
+require_once("../enums/languages.php");
 require_once("../interfaces/constants.php");
 require_once("../interfaces/exceptionmessages.php");
 require_once("../interfaces/messages.php");
 require_once("../exceptions/incorrectvariableformatexception.php");
 require_once("../exceptions/notsettedexception.php");
+require_once("../traits/properties/messages/verifytrait.php");
+require_once("../traits/properties/propertiesmessagestrait.php");
 require_once("../traits/errortrait.php");
 require_once("../traits/modeltrait.php");
 require_once("../traits/sqltrait.php");
@@ -63,8 +66,9 @@ HTML;
                 break;
             case Vee::FROM_USER_NOT_FOUND:
                 http_response_code(400);
+                $invalidCode = Properties::invalidCode($lang);
                 $body = <<<HTML
-<div>Codice non valido</div>
+<div>{{$invalidCode}}</div>
 HTML;
                 break;
             default:

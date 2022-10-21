@@ -12,10 +12,10 @@ trait VerifyTrait{
      * @return string the insert code message
      */
     public static function insertCode(string $lang): string{
-        if($lang == Langs::Italian->value){
+        if($lang == Langs::$langs["it"]){
             return "Inserisci un codice di attivazione per continuare";
         }
-        else if($lang == Langs::Espanol->value){
+        else if($lang == Langs::$langs["es"]){
             return "Introduzca el código de verificación para continuar";
         }
         else{
@@ -29,10 +29,10 @@ trait VerifyTrait{
      * @return string the invalid code message
      */
     public static function invalidCode(string $lang): string{
-        if($lang == Langs::Italian->value){
+        if($lang == Langs::$langs["it"]){
             return "Codice di verifica non valido";
         }
-        else if($lang == Langs::Espanol->value){
+        else if($lang == Langs::$langs["es"]){
             return "Código de verificación invalido";
         }
         else{
@@ -46,10 +46,10 @@ trait VerifyTrait{
      * @return string the subscribe completed message
      */
     public static function subscribeCompleted(string $lang): string{
-        if($lang == Langs::Italian->value){
+        if($lang == Langs::$langs["it"]){
             return "Iscrizione alla newsletter completata";
         }
-        else if($lang == Langs::Espanol->value){
+        else if($lang == Langs::$langs["es"]){
             return "Suscripción al boletín completada";
         }
         else{

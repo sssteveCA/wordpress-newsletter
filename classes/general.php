@@ -12,10 +12,10 @@ class General{
      * @return string the language code
      */
     public static function languageCode(?string $lang_param): string{
-        $langs_array = Langs::cases();
-        if(isset($lang_param) && in_array($lang_param,$langs_array))
+        $langs = array_values(Langs::$langs);
+        if(isset($lang_param) && in_array($lang_param,$langs))
             return $lang_param;
-        else return Langs::English->value;
+        else return Langs::$langs["en"];
     }
 }
 ?>
