@@ -23,6 +23,7 @@ use Newsletter\Classes\VerifyEmailErrors as Vee;
 use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\VerifyEmail;
+use Newsletter\Enums\Langs;
 
 $html = "";
 $style = <<<HTML
@@ -37,6 +38,10 @@ $body = "";
 
 
 if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
+    $langs_array = Langs::cases();
+    if(isset($_REQUEST['lang']) && in_array($_REQUEST['lang'],$langs_array))
+        $lang = $_REQUEST['lang'];
+    else $lang = 'en';
     try{
         $user_data = [
             'tableName' => C::TABLE_USERS
