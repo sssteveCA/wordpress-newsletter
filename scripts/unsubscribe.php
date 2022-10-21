@@ -43,8 +43,12 @@ if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
                 $message = Properties::unsubscribeComplete($lang);
                 break;
             case Uue::CODE_NOT_FOUND:
+                http_response_code(400);
+                $message = Properties::invalidCode($lang);
                 break;
             default:
+                http_response_code(500);
+                $message = Properties::unknownError($lang);
                 break;
         }
     }catch(Exception $e){

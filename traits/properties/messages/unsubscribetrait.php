@@ -24,6 +24,23 @@ trait UnsubscribeTrait{
     }
 
     /**
+     * Get the newsletter unsubscribe title tag content in user language
+     * @param string $lang the user language
+     * @return string the newsletter unsubscribe title tag content
+     */
+    public static function newsletterUnsubscribeTitle(string $lang): string{
+        if($lang == Langs::$langs["it"]){
+            return "Rimozione iscrizione newsletter";
+        }
+        else if($lang == Langs::$langs["es"]){
+            return "Eliminación de la suscripción al boletín";
+        }
+        else{
+            return "Removal of newsletter subscription";
+        }
+    }
+
+    /**
      * Get the unsubscribe complete  message in user language
      * @param string $lang the user language
      * @return string the unsubscribe complete subscribe message
