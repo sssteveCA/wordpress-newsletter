@@ -11,6 +11,7 @@ require_once("../traits/modeltrait.php");
 require_once("../traits/sqltrait.php");
 require_once("../traits/usertrait.php");
 require_once("../traits/usercommontrait.php");
+require_once("../classes/general.php");
 require_once("../classes/htmlcode.php");
 require_once("../classes/database/tables/table.php");
 require_once("../classes/database/model.php");
@@ -24,6 +25,8 @@ use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\VerifyEmail;
 use Newsletter\Enums\Langs;
+use Newsletter\Classes\General;
+use Newsletter\Classes\Properties;
 
 $html = "";
 $style = <<<HTML
@@ -38,10 +41,7 @@ $body = "";
 
 
 if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
-    $langs_array = Langs::cases();
-    if(isset($_REQUEST['lang']) && in_array($_REQUEST['lang'],$langs_array))
-        $lang = $_REQUEST['lang'];
-    else $lang = 'en';
+    $lang = General::languageCode($_GET['lang']);
     try{
         $user_data = [
             'tableName' => C::TABLE_USERS
@@ -86,8 +86,9 @@ HTML;
 }//if(isset($_GET['verCode']) && $_GET['verCode'] != ''){
 else{
     http_response_code(400);
+    $insertCode = Properties::insertCode($lang);
     $body = <<<HTML
-<div>Inserisci un codice di attivazione per continuare</div>
+<div>{$insertCode}</div>
 HTML;
     $html = HtmlCode::genericHtml("Attivazione account",$body);
 }
