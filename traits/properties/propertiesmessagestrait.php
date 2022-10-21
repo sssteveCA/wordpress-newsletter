@@ -3,6 +3,8 @@
 namespace Newsletter\Traits\Properties;
 
 use Newsletter\Enums\Langs;
+use Newsletter\Traits\Properties\Messages\NewUserTrait;
+use Newsletter\Traits\Properties\Messages\OtherTrait;
 use Newsletter\Traits\Properties\Messages\VerifyTrait;
 
 /**
@@ -10,6 +12,6 @@ use Newsletter\Traits\Properties\Messages\VerifyTrait;
  */
 trait PropertiesMessagesTrait{
 
-    use VerifyTrait;
+    use NewUserTrait, OtherTrait, VerifyTrait;
 }
 ?>

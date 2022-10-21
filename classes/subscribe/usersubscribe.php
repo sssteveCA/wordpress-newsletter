@@ -2,7 +2,10 @@
 
 namespace Newsletter\Classes\Subscribe;
 
-use User;
+use Newsletter\Classes\Database\Models\User;
+use Newsletter\Classes\Properties;
+use Newsletter\Exceptions\IncorrectVariableFormatException;
+use Newsletter\Exceptions\NotSettedException;
 
 class UserSubscribe{
 
@@ -23,8 +26,17 @@ class UserSubscribe{
     public function getUserLang(){return $this->userLang;}
 
     private function checkValues(array $data){
-        $this->user = $data['user'];
+        if(!isset($data['lang'])) $data['lang'] = 'en';
         $this->userLang = $data['lang'];
+        if(!isset($data['user'])){
+            $message = Properties::unknownError($this->userLang);
+            throw new NotSettedException($message);
+        }
+        if(!$data['user'] instanceof User) {
+            $message = Properties::unknownError($this->userLang);
+            throw new IncorrectVariableFormatException($message);
+        }
+        $this->user = $data['user'];
     }
 }
 ?>
