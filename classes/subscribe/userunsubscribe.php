@@ -31,5 +31,12 @@ class UserUnsubscribe implements Uue{
         if(!$data['user'] instanceof User) throw new IncorrectVariableFormatException(Uue::EXC_INVALID_TYPE);
         $this->user = $data['user'];
     }
+
+    private function checkUnsubscribeCode(): bool{
+        $user_cloned = clone $this->user;
+        $sql = "WHERE `".User::$fields["unsubscCode"]."` = %s";
+        $values = [$this->user->getUnsubscCode()];
+        return $user_cloned->getUser($sql,$values);
+    }
 }
 ?>
