@@ -42,7 +42,7 @@ class User extends Model implements Ue{
     /**
      * "subscribed" field
      */
-    private bool $subscribed;
+    private string $subscribed;
     /**
      * "subscDate" field
      */
@@ -69,7 +69,10 @@ class User extends Model implements Ue{
     public function getUnsubscCode(){return $this->unsubscCode;}
     public function getSubscDate(){return $this->subscDate;}
     public function getActDate(){return $this->actDate;}
-    public function isSubscribed(){return $this->subscribed;}
+    public function isSubscribed(){
+        if($this->subscribed == '1') return true;
+        else return false;
+    }
 
     public function getError(){
         if($this->errno < static::MAX_MODEL){

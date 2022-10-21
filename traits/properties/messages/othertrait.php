@@ -10,6 +10,23 @@ use Newsletter\Enums\Langs;
 trait OtherTrait{
 
     /**
+     * Get the missing form values message in user language
+     * @param string $lang the user language
+     * @return string the missing form value message
+     */
+    public static function missingFormValues(string $lang): string{
+        if($lang == Langs::$langs["it"]){
+            return "Compila tutti i campi richiesti per continuare";
+        }
+        else if($lang == Langs::$langs["es"]){
+            return "Complete todos los campos requeridos para continuar";
+        }
+        else{
+            return "Fill all required fields to continue";
+        }
+    }
+
+    /**
      * Get the unknown error message in user language
      * @param string $lang the user language
      * @return string the unknown error message

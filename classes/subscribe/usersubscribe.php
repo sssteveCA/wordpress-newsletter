@@ -13,11 +13,11 @@ use Newsletter\Traits\ErrorTrait;
 interface UserSubscribeError extends ExceptionMessages{
     const FROM_USER = 1;
     const INCORRECT_EMAIL = 2;
-    const USER_EXISTS = 3;
+    const EMAIL_EXISTS = 3;
 
     const FROM_USER_MSG = "Errore dall'oggetto User";
     const INCORRECT_EMAIL_MSG = "L' indirizzo email inserito non è in un formato valido";
-    const USER_EXISTS_MSG = "Un utente con questo indirizzo email esiste già";
+    const EMAIL_EXISTS_MSG = "Un utente con questo indirizzo email esiste già";
 }
 
 class UserSubscribe implements Usee{
@@ -48,8 +48,8 @@ class UserSubscribe implements Usee{
             case Usee::INCORRECT_EMAIL:
                 $this->error = Usee::INCORRECT_EMAIL_MSG;
                 break;
-            case Usee::USER_EXISTS:
-                $this->error = Usee::USER_EXISTS_MSG;
+            case Usee::EMAIL_EXISTS:
+                $this->error = Usee::EMAIL_EXISTS_MSG;
                 break;
             default:
                 $this->error = null;
@@ -82,7 +82,7 @@ class UserSubscribe implements Usee{
         $email = $this->user->getEmail();
         if(preg_match(UserSubscribe::$regex["email"],$email)){
             if($this->checkDuplicate()){
-                $this->errno = Usee::USER_EXISTS;
+                $this->errno = Usee::EMAIL_EXISTS;
                 return false;
             }
             $insert = $this->user->insertUser();
