@@ -20,8 +20,11 @@ require_once("../classes/database/model.php");
 require_once("../classes/database/models/user.php");
 require_once("../classes/subscribe/userunsubscribe.php");
 
+use Newsletter\Classes\Subscribe\UserUnsubscribeErrors as Uue;
+use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\General;
 use Newsletter\Classes\Properties;
+use Newsletter\Classes\Subscribe\UserUnsubscribe;
 
 if(!isset($_REQUEST['lang'])) $_REQUEST['lang'] = 'en';
 $lang = General::languageCode($_REQUEST['lang']);
@@ -29,9 +32,22 @@ $lang = General::languageCode($_REQUEST['lang']);
 if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
     $unsubscCode = $_REQUEST['unsubscCode'];
     try{
-
+        $userData = ['unsubscCode' => $unsubscCode];
+        $user = new User($userData);
+        $userUnsubscData = ['user' => $user];
+        $userUnsubsc = new UserUnsubscribe($userUnsubscData);
+        $uu_error = $userUnsubsc->getErrno();
+        switch($uu_error){
+            case 0:
+                break;
+            case Uue::CODE_NOT_FOUND:
+                break;
+            default:
+                break;
+        }
     }catch(Exception $e){
-
+        http_response_code(500);
+        $message = Properties::unknownError($lang);
     }
 }//if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
 else{
