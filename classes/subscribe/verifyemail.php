@@ -61,8 +61,9 @@ class VerifyEmail implements Vee{
      * Activate the account
      */
     private function userActivation(): bool{
+        $unsubscCode = $this->user->codeGen();
         $set = [
-            'verCode' => 'NULL', 'subscribed' => 1, 'actDate' => date('Y-m-d H:i:s')
+            'unsubscCode' => $unsubscCode, 'verCode' => 'NULL', 'subscribed' => 1, 'actDate' => date('Y-m-d H:i:s')
         ];
         $where = [
             'verCode' => $this->verCode, 'subscribed' => 0
@@ -94,7 +95,10 @@ SQL;
             $this->errno = Vee::FROM_USER_NOT_FOUND;
             return false;
         }
-        if(!$this->userActivation())return false;
+        if(!$this->userActivation()){
+            $this->errno = Vee::FROM_USER_NOT_UPDATED;
+            return false;
+        }
         return true;
     }
 }

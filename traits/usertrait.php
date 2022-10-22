@@ -10,7 +10,7 @@ trait UserTrait{
     /**
      * Generate a code for account verification and unsubscribe
      */
-    private function codeGen(): string{
+    public function codeGen(): string{
         $characters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789";
         $time = str_replace('.','a', microtime());
         $time = str_replace(' ', 'b', $time);

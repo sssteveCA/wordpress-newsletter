@@ -110,3 +110,19 @@ UserTrait insertUserArray insert_array => array (
     3 => '%s',
   ),
 )
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@virgilio.com',
+    'lang' => 'es',
+    'verCode' => '0a10252600b1666420680DMvbMTRLkKB4c5GjHAOAoftmoknqGiPUXsqF6b2jyAAUbIhCdZEVT0lgW09FXmolqmg7WPx9astrttE',
+    'subscDate' => '2022-10-22 06:38:00',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
