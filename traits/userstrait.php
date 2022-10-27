@@ -77,7 +77,7 @@ trait UsersTrait{
                     //else $selectArray['query'] .= ";";
                 }//if(in_array($field, Users::$fields)){
                 else{
-                    echo "UsersTrait field exception => ".var_export($field,true)."\r\n";
+                    //echo "UsersTrait field exception => ".var_export($field,true)."\r\n";
                     throw new IncorrectVariableFormatException(Ue::EXC_INVALID_FIELD);
                 } 
             }

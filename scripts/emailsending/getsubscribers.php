@@ -35,9 +35,9 @@ try{
     $users = new Users($users_data);
     $users_where = ['subscribed' => 1];
     $users_array = $users->getUsers($users_where);
-    echo "GetSubscribers users_array => ".var_export($users_array,true)."\r\n";
+    //echo "GetSubscribers users_array => ".var_export($users_array,true)."\r\n";
     $usersE = $users->getErrno();
-    echo "GetSubscribers errno => ".var_export($usersE,true)."\r\n";
+    //echo "GetSubscribers errno => ".var_export($usersE,true)."\r\n";
     switch($usersE){
         case 0:
             $response['done'] = true;
@@ -54,7 +54,7 @@ try{
     }
 
 }catch(Exception $e){
-    echo "GetSubscribers exception => ".$e->getMessage()."\r\n";
+    //echo "GetSubscribers exception => ".$e->getMessage()."\r\n";
     http_response_code(500);
     $response['msg'] = M::ERR_UNKNOWN;
 }

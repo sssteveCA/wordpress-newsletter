@@ -77,9 +77,9 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 break;
         }
     }catch(NotSettedException $nse){
-        echo "NotSettedException\r\n";
+        //echo "NotSettedException\r\n";
     }catch(Exception $e){
-        echo "Exception\n";
+        //echo "Exception\n";
         http_response_code(500);
         $response['msg'] = Properties::unknownError($lang);
     }

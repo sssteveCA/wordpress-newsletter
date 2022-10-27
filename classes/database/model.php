@@ -89,7 +89,7 @@ SQL;
 SELECT * FROM `{$this->fullTableName}` {$query} LIMIT 1;
 SQL;
         $this->query = $this->wpdb->prepare($sql,$values);
-        echo "Model get query => {$this->query}";
+        //echo "Model get query => {$this->query}";
         $this->queries[] = $this->query;
         $result = $this->wpdb->get_row($this->query,ARRAY_A);
         if(!$result)$this->errno = Me::ERR_GET; 
