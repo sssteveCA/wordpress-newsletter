@@ -20,7 +20,7 @@ trait EmailManagerTrait{
      * @param string $email the email to check
      * @return bool true if is a newsletter subscribed email, false otherwise
      */
-    private function checkSubscribedEmail(string $email): bool{
+    private function checkSubscribedEmail(string $email): ?User{
         $user = new User([
             'tableName' => C::TABLE_USERS
         ]);
@@ -28,8 +28,8 @@ trait EmailManagerTrait{
         $values = [$email];
         $user->getUser($sql,$values);
         $userE = $user->getErrno();
-        if($userE == 0) return true;
-        return false;
+        if($userE == 0) return $user;
+        return null;
     }
 
     private function setContent(){

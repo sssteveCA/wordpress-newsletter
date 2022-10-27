@@ -2,6 +2,7 @@
 
 namespace Newsletter\Classes\Email;
 
+use Exception;
 use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Traits\EmailManagerTrait;
@@ -37,6 +38,25 @@ class EmailManager extends PHPMailer{
     public function getUsersList(){ return $this->usersList; }
     public function getSubject(){ return $this->subject; }
     public function getBody(){ return $this->body; }
+
+    /**
+     * Send the newletter to indicated subscribers
+     */
+    public function sendNewsletterEmail(){
+        $this->errno = 0;
+        foreach($this->emailsList as $email){
+            try{
+                $user = $this->checkSubscribedEmail($email);
+                if($user != null){
+
+                }//if($user != null){
+            }catch(Exception $e){
+
+            }
+            
+        }//foreach($this->emailsList as $email){
+
+    }
 
     
 

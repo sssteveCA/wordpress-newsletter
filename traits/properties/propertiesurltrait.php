@@ -31,6 +31,13 @@ trait PropertiesUrlTrait{
     }
 
     /**
+     * Get the facebook page link
+     */
+    public static function facebookPageUrl(): string{
+        return $_ENV["FACEBOOK_PAGE"];
+    }
+
+    /**
      * Get the facebook logo URL
      */
     public static function facebookLogoUrl(): string{
@@ -42,6 +49,13 @@ trait PropertiesUrlTrait{
      * Get the site home URL
      */
     public static function homeUrl():string { return home_url(); }
+
+    /**
+     * Get the instagram profile URL
+     */
+    public static function instagramProfileUrl(): string{
+        return $_ENV["INSTAGRAM_PROFILE"];
+    }
 
     /**
      * Get the instagram logo URL
@@ -79,6 +93,13 @@ trait PropertiesUrlTrait{
         if($lang == Langs::$langs["it"]){ return $home_url."/termini-e-condizioni/";}
         else if($lang == Langs::$langs["es"]){ return $home_url."/en/terms-and-conditions/"; }
         else{ return $home_url."/en/privacy-policy-3/"; }
+    }
+
+    /**
+     * Get the YouTube channerl URL
+     */
+    public static function youtubeChannelUrl(): string{
+        return $_ENV["YOUTUBE_CHANNEL"];
     }
 
     /**
