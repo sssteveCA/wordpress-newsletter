@@ -74,9 +74,12 @@ trait UsersTrait{
                     } 
                     array_push($selectArray["values"],$val);
                     if($field != array_key_last($where)) $selectArray['query'] .= ",";
-                    else $selectArray['query'] .= ";";
+                    //else $selectArray['query'] .= ";";
                 }//if(in_array($field, Users::$fields)){
-                else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_FIELD);
+                else{
+                    echo "UsersTrait field exception => ".var_export($field,true)."\r\n";
+                    throw new IncorrectVariableFormatException(Ue::EXC_INVALID_FIELD);
+                } 
             }
             return $selectArray;
         }//else di if(count($where) < 0){

@@ -84,7 +84,9 @@ abstract class Models extends Table implements Me{
         $sql = <<<SQL
 SELECT * FROM {$this->fullTableName} {$query};
 SQL;
+        echo "Models get query => ".var_export($sql,true)."\r\n";
         $this->query = $this->wpdb->prepare($sql,$values);
+        echo "Models get query prepared => ".var_export($this->query,true)."\r\n";
         $this->queries[] = $this->query;
         $result = $this->wpdb->get_results($this->query, ARRAY_A);
         if(!$result)$this->errno = Me::ERR_GET;

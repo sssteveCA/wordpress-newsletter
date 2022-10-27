@@ -79,6 +79,7 @@ class Users extends Models implements Ue{
             if($result){
                 //foreach with array Users Object
                 foreach($result as $row){
+                    $row['tableName'] = $this->getTableName();
                     $user = new User($row);
                     $users[] = $user;
                 }

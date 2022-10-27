@@ -60,7 +60,7 @@ abstract class Table implements Te{
         if(!$ok)throw new NotSettedException(Te::EXC_NOTISSET);
     }
 
-    public function getTableName(){return $this->name;}
+    public function getTableName(){return $this->tableName;}
     public function getFullTableName(){return $this->fullTableName;}
     public function getCharset(){return $this->charset;}
     public function getSqlCreate(){return $this->sql_create;}
