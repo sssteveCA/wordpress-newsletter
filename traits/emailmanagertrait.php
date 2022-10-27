@@ -12,6 +12,7 @@ use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 trait EmailManagerTrait{
 
     private function assignValues(array $data){
+        echo "\r\nEmailManagerTrait assignValues => ".var_export($data,true)."\r\n";
         if(isset($data['body'],$data['emails'],$data['from'],$data['host'],$data['password'], $data['port'],$data['subject'])){
             $this->emailsList = $data['emails'];
             $this->subject = $data['subject'];
@@ -50,7 +51,7 @@ trait EmailManagerTrait{
     }
 
     private function setServerSettings(array $data){
-        $this->SMTPDebug = SMTP::DEBUG_SERVER;
+        $this->SMTPDebug = SMTP::DEBUG_OFF;
         $this->isSMTP();
         $this->Host = $data['host'];
         $this->SMTPAuth = true;

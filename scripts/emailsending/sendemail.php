@@ -2,8 +2,10 @@
 
 require_once("../../../wp-load.php");
 require_once("../../enums/languages.php");
+require_once("../../interfaces/constants.php");
 require_once("../../interfaces/exceptionmessages.php");
 require_once("../../interfaces/messages.php");
+require_once("../../exceptions/notsettedexception.php");
 require_once("../../vendor/autoload.php");
 require_once("../../traits/properties/messages/newusertrait.php");
 require_once("../../traits/properties/messages/othertrait.php");
@@ -41,17 +43,17 @@ $input = file_get_contents("php://input");
 $post = json_decode($input,true);
 
 if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
-    if(is_array($post['emails'] && sizeof($post['emails']) > 0)){
+    if(is_array($post['emails']) && sizeof($post['emails']) > 0){
         try{
-            $dotEnv = Dotenv::createImmutable(__DIR__."../../");
+            $dotEnv = Dotenv::createImmutable("./../../");
             $dotEnv->safeLoad();
-            $from = isset($data['from']) ? $data['from'] : $_ENV['EMAIL_USERNAME'];
-            $host = isset($data['host']) ? $data['host'] : $_ENV['EMAIL_HOST'];
-            $password = isset($data['password']) ? $data['password'] : $_ENV['EMAIL_PASSWORD'];
-            $port = isset($data['port']) ? $data['port'] : $_ENV['EMAIL_PORT'];
+            $from = isset($post['from']) ? $post['from'] : $_ENV['EMAIL_USERNAME'];
+            $host = isset($post['host']) ? $post['host'] : $_ENV['EMAIL_HOST'];
+            $password = isset($post['password']) ? $post['password'] : $_ENV['EMAIL_PASSWORD'];
+            $port = isset($post['port']) ? $post['port'] : $_ENV['EMAIL_PORT'];
             $em_data = [
-                'body' => $post['body'], 'from' => $from, 'emailList' => $post['emails'], 
-                'host' => $host, 'password' => $password, 'port' => $data['port'], 'subject' => $post['subject']
+                'body' => $post['body'], 'from' => $from, 'emails' => $post['emails'], 
+                'host' => $host, 'password' => $password, 'port' => $port, 'subject' => $post['subject']
             ];
             $emailManager = new EmailManager($em_data);
             $emailManager->sendNewsletterEmail();

@@ -63,11 +63,10 @@ class EmailManager extends PHPMailer{
                 $user = $this->checkSubscribedEmail($email);
                 if($user != null){
                     $template_data = [
-                        'title' => $this->subject,
-                        'user_email' => $email,
-                        'text' => $this->body,
-                        'unsubscribed_url' => $user->getUnsubscCode()
+                        'title' => $this->subject, 'user_email' => $email,
+                        'text' => $this->body, 'unsubscribe_url' => $user->getUnsubscCode()
                     ];
+                    echo "\r\n EmailManager sendNewsletterEmail template data => ".var_export($template_data,true)."\r\n";
                     $lang = $user->getLang();
                     $htmlBody = Template::mailTemplate($lang,$template_data);
                     $this->addAddress($email);
