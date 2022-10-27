@@ -114,5 +114,6 @@ interface UsersErrors extends ExceptionMessages{
     //Messages
     const ERR_NOT_UNIQUE_FIELD_MSG = "Il campo fornito non è univoco";
     const ERR_VOID_INSERT_ARRAY_MSG = "L'array con gli utenti da inserire è vuoto";
+    
 }
 ?>

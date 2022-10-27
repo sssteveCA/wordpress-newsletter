@@ -2,6 +2,7 @@
 
 require_once("../../../wp-load.php");
 require_once("../../interfaces/constants.php");
+require_once("../../interfaces/messages.php");
 require_once("../../interfaces/exceptionmessages.php");
 require_once("../../exceptions/incorrectvariableformatexception.php");
 require_once("../../exceptions/notsettedexception.php");
@@ -15,6 +16,7 @@ require_once("../../classes/database/models/users.php");
 
 use Newsletter\Classes\Database\Models\Users;
 use Newsletter\Interfaces\Constants as C;
+use Newsletter\Interfaces\Messages as M;
 
 $response = [
     'done' => false,
@@ -36,7 +38,8 @@ try{
     }
 
 }catch(Exception $e){
-
+    http_response_code(500);
+    $response['msg'] = M::ERR_UNKNOWN;
 }
 
 

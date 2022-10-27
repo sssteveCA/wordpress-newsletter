@@ -36,6 +36,9 @@ abstract class Models extends Table implements Me{
                 case Me::ERR_UPDATE:
                     $this->error = Me::ERR_UPDATE_MSG;
                     break;
+                case Me::ERR_GET_NO_RESULT:
+                    $this->error = Me::ERR_GET_NO_RESULT_MSG;
+                    break;
                 default:
                     $this->error = null;
                     break;
@@ -68,6 +71,7 @@ SQL;
         $this->queries[] = $this->query;
         $result = $this->wpdb->get_results($this->query, ARRAY_A);
         if(!$result)$this->errno = Me::ERR_GET;
+        if($this->wpdb->num_rows < 1)$this->errno = Me::ERR_GET_NO_RESULT;
         return $result;
     }
 
@@ -102,11 +106,13 @@ interface ModelsErrors{
     const ERR_DELETE = 22;
     const ERR_INSERT = 23;
     const ERR_UPDATE = 24;
+    const ERR_GET_NO_RESULT = 25;
 
     //Messages
     const ERR_GET_MSG = "Errore durante la lettura dei dati";
     const ERR_DELETE_MSG = "Errore durante l'eliminazione dei dati";
     const ERR_INSERT_MSG = "Errore durante l'inserimento dei dati";
     const ERR_UPDATE_MSG = "Errore durante l'aggiornamento dei dati";
+    const ERR_GET_NO_RESULT_MSG = "La query di lettura non ha restituito alcun risultato";
 }
 ?>
