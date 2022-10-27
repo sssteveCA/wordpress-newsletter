@@ -66,8 +66,6 @@ class EmailManager extends PHPMailer{
         }//foreach($this->emailsList as $email){
     }
 
-    
-
 }
 
 ?>

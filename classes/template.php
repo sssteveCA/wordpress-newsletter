@@ -95,7 +95,7 @@ HTML;
         $home_url = Properties::homeUrl();
         $privacy_url = Properties::privacyUrl($lang);
         $contacts_url = Properties::contactsUrl($lang);
-        if($lang == "it"){
+        if($lang == Langs::$langs["it"]){
             return [
                 0 => 'Siamo presenti anche su questi social network',
                 1 => '<div>Ricevi questa comunicazione perché ti sei iscritto/a al servizio di newsletter di <a href="'.$home_url.'">La filosofia di Bianca</a> con l\'indirizzo e-mail <a href="#" style="pointer-events: none; cursor: text; text-decoration: none; color: black;"><strong>'.$params['user_email'].'</strong></a></div>',
@@ -103,7 +103,7 @@ HTML;
                 3 => 'Puoi cancellare l\'iscrizione facendo <a href="'.$params['unsubscribe_url'].'" title="Cancella iscrizione" target="_blank">click qui</a>'
             ];
         }
-        else if($lang == "es"){
+        else if($lang == Langs::$langs["es"]){
             return [
                 0 => 'También estamos presentes en estas redes sociales',
                 1 => '<div>Recibe esta comunicación porque se ha suscrito al servicio de newsletter de <a href="'.$home_url.'">La filosofia di Bianca</a> con con la dirección de correo electrónico <a href="#" style="pointer-events: none; cursor: text; text-decoration: none; color: black;"><strong>'.$params['user_email'].'</strong></a></div>',
