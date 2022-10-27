@@ -57,17 +57,20 @@ class EmailManager extends PHPMailer{
     public function sendNewsletterEmail(){
         $this->errno = 0;
         foreach($this->emailsList as $email){
+            $addresses = $this->getAllRecipientAddresses();
+            if(!empty($addresses))$this->clearAddresses();
             try{
                 $user = $this->checkSubscribedEmail($email);
                 if($user != null){
                     $template_data = [
                         'title' => $this->subject,
-                        'user_email' => $user->getEmail(),
+                        'user_email' => $email,
                         'text' => $this->body,
                         'unsubscribed_url' => $user->getUnsubscCode()
                     ];
                     $lang = $user->getLang();
                     $htmlBody = Template::mailTemplate($lang,$template_data);
+                    $this->addAddress($email);
                     $this->Body = $htmlBody;
                     $this->send();
                 }//if($user != null){
