@@ -6,6 +6,7 @@ use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Traits\EmailManagerTrait;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 interface EmailManagerErrors extends ExceptionMessages{
 
@@ -35,6 +36,10 @@ class EmailManager extends PHPMailer{
     public function getUsersList(){ return $this->usersList; }
     public function getSubject(){ return $this->subject; }
     public function getBody(){ return $this->body; }
+
+    private function setServerSettings(){
+        $this->SMTPDebug = SMTP::DEBUG_SERVER;
+    }
 
 }
 
