@@ -21,8 +21,6 @@ class EmailManager extends PHPMailer{
 
     private array $usersList;
     private array $emailsList;
-    private string $emailAddress;
-    private string $password;
     private string $subject;
     private string $body;
 
@@ -37,8 +35,15 @@ class EmailManager extends PHPMailer{
     public function getSubject(){ return $this->subject; }
     public function getBody(){ return $this->body; }
 
-    private function setServerSettings(){
+    private function setServerSettings(array $data){
         $this->SMTPDebug = SMTP::DEBUG_SERVER;
+        $this->isSMTP();
+        $this->Host = "";
+        $this->SMTPAuth = true;
+        $this->Username = $data['from'];
+        $this->Password = $data['password'];
+        $this->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $this->Port = 465;
     }
 
 }
