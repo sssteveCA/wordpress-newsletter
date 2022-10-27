@@ -9,7 +9,7 @@ use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Traits\UserCommonTrait;
 use Newsletter\Traits\UserTrait;
 
-interface UserErrors extends ExceptionMessages,ModelErrors{
+interface UserErrors extends ExceptionMessages{
     //Numbers
     const ERR_MISSING_DATA = 40;
 

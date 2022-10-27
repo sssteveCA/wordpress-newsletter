@@ -107,7 +107,7 @@ SQL;
     /**
      * Update a single or multiple rows with UPDATE query
      */
-    protected function update(array $data, array $where, array $format = [], array $where_f){
+    protected function update(array $data, array $where, array $format = [], array $where_f = []){
         $this->errno = 0;
         $update = $this->wpdb->update($this->fullTableName,$data,$where,$format,$where_f);
         $this->query = $this->wpdb->last_query;

@@ -10,7 +10,7 @@ use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Traits\UserCommonTrait;
 use Newsletter\Traits\UsersTrait;
 
-interface UsersErrors extends ExceptionMessages, ModelErrors{
+interface UsersErrors extends ExceptionMessages{
     //Numbers 
     const ERR_NOT_UNIQUE_FIELD = 40;
     const ERR_VOID_INSERT_ARRAY = 41;
@@ -110,7 +110,7 @@ class Users extends Models implements Ue{
      * @param array $where_f (optional) specify the format of the $where_f array
      * @return bool true if update query successfully
      */
-    public function updateUsers(array $data, array $where, array $format = [], array $where_f): bool{
+    public function updateUsers(array $data, array $where, array $format = [], array $where_f = []): bool{
         $this->errno = 0;
         $update = parent::update($data,$where,$format,$where_f);
         if($this->errno != 0)return false;

@@ -19,6 +19,7 @@ require_once("../../classes/database/models/user.php");
 require_once("../../classes/database/models/users.php");
 
 use Newsletter\Classes\Database\Models\Users;
+use Newsletter\Classes\Database\ModelErrors as Me;
 use Newsletter\Classes\Database\Models\UsersErrors as Ue;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
@@ -33,14 +34,14 @@ try{
     $users_data = ['tableName' => C::TABLE_USERS];
     $users = new Users($users_data);
     $users_where = ['subscribed' => 1];
-    $users_array = $users->getUsers([]);
+    $users_array = $users->getUsers($users_where);
     $usersE = $users->getErrno();
     switch($usersE){
         case 0:
             $response['done'] = true;
             $response['subscribers'] = subscribeData($users_array);
             break;
-        case Ue::ERR_GET_NO_RESULT:
+        case Me::ERR_GET_NO_RESULT:
             http_response_code(404);
             $response['msg'] = "Nessun iscritto trovato";
             break;
