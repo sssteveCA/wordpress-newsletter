@@ -18,7 +18,7 @@ trait EmailManagerTrait{
     /**
      * Check if email provided is a newsletter subscribed email
      * @param string $email the email to check
-     * @return bool true if is a newsletter subscribed email, false otherwise
+     * @return User the User object associated with the provided email, null if no user found
      */
     private function checkSubscribedEmail(string $email): ?User{
         $user = new User([

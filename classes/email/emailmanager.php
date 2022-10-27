@@ -5,6 +5,7 @@ namespace Newsletter\Classes\Email;
 use Exception;
 use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
+use Newsletter\Classes\Template;
 use Newsletter\Traits\EmailManagerTrait;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -48,14 +49,21 @@ class EmailManager extends PHPMailer{
             try{
                 $user = $this->checkSubscribedEmail($email);
                 if($user != null){
-
+                    $template_data = [
+                        'title' => $this->subject,
+                        'user_email' => $user->getEmail(),
+                        'text' => $this->body,
+                        'unsubscribed_url' => $user->getUnsubscCode()
+                    ];
+                    $lang = $user->getLang();
+                    $htmlBody = Template::mailTemplate($lang,$template_data);
+                    $this->Body = $htmlBody;
+                    $this->send();
                 }//if($user != null){
             }catch(Exception $e){
-
-            }
-            
+                echo "Mail Exception => ".$e->getMessage()."\r\n";
+            }      
         }//foreach($this->emailsList as $email){
-
     }
 
     

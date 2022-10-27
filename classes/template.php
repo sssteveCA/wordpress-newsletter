@@ -10,9 +10,12 @@ class Template{
     /**
      * Newsletter HTML body
      */
-    public static function mailTemplate(Langs $lang, array $params): string{
+    public static function mailTemplate(string $lang, array $params): string{
         $facebookLogo = Properties::facebookLogoUrl();
+        $facebookPage = Properties::facebookPageUrl();
         $instagramLogo = Properties::instagramLogoUrl();
+        $instagramProfile = Properties::instagramProfileUrl();
+        $youtubeChannel = Properties::youtubeChannelUrl();
         $youtubeLogo = Properties::youtubeLogoUrl();
         $messages = Template::mailTemplateMessages($lang,$params);
         $htmlTemplate = <<<HTML
@@ -52,17 +55,17 @@ class Template{
                 <!-- Link social -->
                 <tr>
                     <td colspan="1" style="padding:20px;">
-                        <a title ="Facebook" href="https://www.facebook.com/Biancalabambinadeisogni/" target="_blank">
+                        <a title ="Facebook" href="{$facebookPage}" target="_blank">
                             <img id="imgFacebook" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$facebookLogo}" alt="Facebook" title="Facebook">
                         </a>
                     </td>
                     <td colspan="1" style="padding:20px;">
-                        <a title="Instagram" href="https://www.instagram.com/lafilosofiadibianca/" target="_blank">
+                        <a title="Instagram" href="{$instagramProfile}" target="_blank">
                             <img id="imgInstagram" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$instagramLogo}" alt="Instagram" title="Instagram">
                         </a>
                     </td>
                     <td colspan="1" style="padding:20px;">
-                        <a title="Youtube" href="https://www.youtube.com/channel/UCVvGeKjn52OHK1j1IfwCrEQ" target="_blank">
+                        <a title="Youtube" href="{$youtubeChannel}" target="_blank">
                             <img id="imgYoutube" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$youtubeLogo}" alt="Youtube" title="Youtube"> 
                         </a>
                     </td>
@@ -88,11 +91,11 @@ HTML;
     /**
      * Messages to add at Mail HTML template
      */
-    public static function mailTemplateMessages(Langs $lang, array $params): array{
+    public static function mailTemplateMessages(string $lang, array $params): array{
         $home_url = Properties::homeUrl();
         $privacy_url = Properties::privacyUrl($lang);
         $contacts_url = Properties::contactsUrl($lang);
-        if($lang->value == "it"){
+        if($lang == "it"){
             return [
                 0 => 'Siamo presenti anche su questi social network',
                 1 => '<div>Ricevi questa comunicazione perché ti sei iscritto/a al servizio di newsletter di <a href="'.$home_url.'">La filosofia di Bianca</a> con l\'indirizzo e-mail <a href="#" style="pointer-events: none; cursor: text; text-decoration: none; color: black;"><strong>'.$params['user_email'].'</strong></a></div>',
@@ -100,7 +103,7 @@ HTML;
                 3 => 'Puoi cancellare l\'iscrizione facendo <a href="'.$params['unsubscribe_url'].'" title="Cancella iscrizione" target="_blank">click qui</a>'
             ];
         }
-        else if($lang->value == "es"){
+        else if($lang == "es"){
             return [
                 0 => 'También estamos presentes en estas redes sociales',
                 1 => '<div>Recibe esta comunicación porque se ha suscrito al servicio de newsletter de <a href="'.$home_url.'">La filosofia di Bianca</a> con con la dirección de correo electrónico <a href="#" style="pointer-events: none; cursor: text; text-decoration: none; color: black;"><strong>'.$params['user_email'].'</strong></a></div>',
