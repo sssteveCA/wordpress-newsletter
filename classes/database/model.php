@@ -4,6 +4,7 @@ namespace Newsletter\Classes\Database;
 
 use Newsletter\Classes\Database\ModelErrors as Me;
 use Newsletter\Classes\Database\Tables\Table;
+use Newsletter\Classes\Database\Tables\TableErrors;
 use Newsletter\Traits\ErrorTrait;
 use Newsletter\Traits\ModelTrait;
 use Newsletter\Traits\SqlTrait;
@@ -123,7 +124,7 @@ SQL;
     
 }
 
-interface ModelErrors{
+interface ModelErrors extends TableErrors{
     //Numbers
     const ERR_GET = 21;
     const ERR_DELETE = 22;

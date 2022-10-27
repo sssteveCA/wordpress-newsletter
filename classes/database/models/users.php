@@ -2,6 +2,7 @@
 
 namespace Newsletter\Classes\Database\Models;
 
+use Newsletter\Classes\Database\ModelErrors;
 use Newsletter\Classes\Database\Models;
 use Newsletter\Classes\Database\Models\UsersErrors as Ue;
 use Newsletter\Exceptions\IncorrectVariableFormatException;
@@ -106,7 +107,7 @@ class Users extends Models implements Ue{
     }
 }
 
-interface UsersErrors extends ExceptionMessages{
+interface UsersErrors extends ExceptionMessages, ModelErrors{
     //Numbers 
     const ERR_NOT_UNIQUE_FIELD = 40;
     const ERR_VOID_INSERT_ARRAY = 41;

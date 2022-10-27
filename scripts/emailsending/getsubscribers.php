@@ -15,6 +15,7 @@ require_once("../../classes/database/models.php");
 require_once("../../classes/database/models/users.php");
 
 use Newsletter\Classes\Database\Models\Users;
+use Newsletter\Classes\Database\Models\UsersErrors as Ue;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 
@@ -33,7 +34,13 @@ try{
     switch($usersE){
         case 0:
             break;
+        case Ue::ERR_GET_NO_RESULT:
+            http_response_code(404);
+            $response['msg'] = "Nessun iscritto rilevato";
+            break;
         default:
+            http_response_code(500);
+            $response['msg'] = M::ERR_UNKNOWN;
             break;
     }
 
@@ -42,7 +49,19 @@ try{
     $response['msg'] = M::ERR_UNKNOWN;
 }
 
-
-
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+
+/**
+ * Get the subscriber email and language list
+ * @param array $users the array with User object to pick the needed values
+ * @return array An array with user email/languages list
+ */
+function subscribeData(array $users): array{
+    $subscribeData = array_map(function(User $user){
+        return [
+            'email' => $user->getEmail(), 'lang' => $user->getLang()
+        ];
+    },$users);
+    return $subscribeData;
+}
 ?>

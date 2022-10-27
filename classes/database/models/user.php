@@ -3,7 +3,9 @@
 namespace Newsletter\Classes\Database\Models;
 
 use Newsletter\Classes\Database\Model;
+use Newsletter\Classes\Database\ModelErrors;
 use Newsletter\Classes\Database\Models\UserErrors as Ue;
+use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Traits\UserCommonTrait;
 use Newsletter\Traits\UserTrait;
 
@@ -157,7 +159,7 @@ class User extends Model implements Ue{
     }
 }
 
-interface UserErrors{
+interface UserErrors extends ExceptionMessages,ModelErrors{
     //Numbers
     const ERR_MISSING_DATA = 40;
 
