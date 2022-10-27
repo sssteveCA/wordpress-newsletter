@@ -7,11 +7,14 @@ use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Classes\Template;
 use Newsletter\Traits\EmailManagerTrait;
+use Newsletter\Traits\ErrorTrait;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
 interface EmailManagerErrors extends ExceptionMessages{
+    const ERR_EMAIL_SEND = 1;
 
+    const ERR_EMAIL_SEND_MSG = "C'è stato un errore durante l'invio della mail a uno o più destinatari";
 }
 
 /**
@@ -19,9 +22,8 @@ interface EmailManagerErrors extends ExceptionMessages{
  */
 class EmailManager extends PHPMailer{
 
-    use EmailManagerTrait;
+    use EmailManagerTrait, ErrorTrait;
 
-    private array $usersList;
     private array $emailsList;
     private string $subject;
     private string $body;
@@ -36,9 +38,18 @@ class EmailManager extends PHPMailer{
     }
 
     public function getEmailsList(){ return $this->emailsList; }
-    public function getUsersList(){ return $this->usersList; }
     public function getSubject(){ return $this->subject; }
     public function getBody(){ return $this->body; }
+    public function getError(){
+        switch($this->errno){
+            case Eme::ERR_EMAIL_SEND:
+                $this->error = Eme::ERR_EMAIL_SEND_MSG;
+                break;
+            default:
+                $this->error = null;
+                break;
+        }
+    }
 
     /**
      * Send the newletter to indicated subscribers
@@ -62,6 +73,7 @@ class EmailManager extends PHPMailer{
                 }//if($user != null){
             }catch(Exception $e){
                 echo "Mail Exception => ".$e->getMessage()."\r\n";
+                $this->errno = Eme::ERR_EMAIL_SEND;
             }      
         }//foreach($this->emailsList as $email){
     }
