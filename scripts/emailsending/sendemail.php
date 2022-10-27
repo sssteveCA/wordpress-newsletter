@@ -23,6 +23,8 @@ require_once("../../classes/database/models/users.php");
 require_once("../../classes/email/emailmanager.php");
 
 use Newsletter\Interfaces\Messages as M;
+use Dotenv\Dotenv;
+use Newsletter\Exceptions\NotSettedException;
 
 $response = [
     'done' => false, 'msg' => ''
@@ -33,8 +35,29 @@ $post = json_decode($input,true);
 
 if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
     if(is_array($post['emails'] && sizeof($post['emails']) > 0)){
+        try{
+            $dotEnv = Dotenv::createImmutable(__DIR__."../../");
+            $dotEnv->safeLoad();
+            $from = isset($data['from']) ? $data['from'] : $_ENV['EMAIL_USERNAME'];
+            $host = isset($data['host']) ? $data['host'] : $_ENV['EMAIL_HOST'];
+            $password = isset($data['password']) ? $data['password'] : $_ENV['EMAIL_PASSWORD'];
+            $port = isset($data['port']) ? $data['port'] : $_ENV['EMAIL_PORT'];
+            $em_data = [
+                'body' => $post['body'], 'from' => $from, 'emailList' => $post['emails'], 
+                'host' => $host, 'password' => $password, 'port' => $data['port'], 'subject' => $post['subject']
+            ];
+        }catch(NotSettedException $nse){
+            http_response_code(400);
+            $response['msg'] = $nse->getMessage();
+        }catch(Exception $e){
 
+        }
+        
     }//if(is_array($post['emails'] && sizeof($post['emails']) > 0)){
+    else{
+        http_response_code(400);
+        $response['msg'] = "Inserisci almeno un indirizzo email";
+    }
 }//if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
 else{
     http_response_code(400);

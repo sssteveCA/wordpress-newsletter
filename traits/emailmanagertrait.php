@@ -3,16 +3,22 @@
 namespace Newsletter\Traits;
 
 use Newsletter\Classes\Database\Models\User;
+use Newsletter\Exceptions\NotSettedException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Newsletter\Interfaces\Constants as C;
+use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 
 trait EmailManagerTrait{
 
     private function assignValues(array $data){
-        $this->emailsList = $data['emails'];
-        $this->subject = $data['subject'];
-        $this->body = $data['body'];
+        if(isset($data['body'],$data['emails'],$data['from'],$data['host'],$data['password'], $data['port'],$data['subject'])){
+            $this->emailsList = $data['emails'];
+            $this->subject = $data['subject'];
+            $this->body = $data['body'];
+        }
+        else throw new NotSettedException(Eme::EXC_NOTISSET);
+        
     }
 
     /**
