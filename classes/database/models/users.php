@@ -10,6 +10,17 @@ use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Traits\UserCommonTrait;
 use Newsletter\Traits\UsersTrait;
 
+interface UsersErrors extends ExceptionMessages, ModelErrors{
+    //Numbers 
+    const ERR_NOT_UNIQUE_FIELD = 40;
+    const ERR_VOID_INSERT_ARRAY = 41;
+
+    //Messages
+    const ERR_NOT_UNIQUE_FIELD_MSG = "Il campo fornito non è univoco";
+    const ERR_VOID_INSERT_ARRAY_MSG = "L'array con gli utenti da inserire è vuoto";
+    
+}
+
 class Users extends Models implements Ue{
 
     use UserCommonTrait, UsersTrait;
@@ -107,14 +118,5 @@ class Users extends Models implements Ue{
     }
 }
 
-interface UsersErrors extends ExceptionMessages, ModelErrors{
-    //Numbers 
-    const ERR_NOT_UNIQUE_FIELD = 40;
-    const ERR_VOID_INSERT_ARRAY = 41;
 
-    //Messages
-    const ERR_NOT_UNIQUE_FIELD_MSG = "Il campo fornito non è univoco";
-    const ERR_VOID_INSERT_ARRAY_MSG = "L'array con gli utenti da inserire è vuoto";
-    
-}
 ?>

@@ -7,11 +7,15 @@ require_once("../../interfaces/exceptionmessages.php");
 require_once("../../exceptions/incorrectvariableformatexception.php");
 require_once("../../exceptions/notsettedexception.php");
 require_once("../../traits/errortrait.php");
+require_once("../../traits/modeltrait.php");
 require_once("../../traits/sqltrait.php");
 require_once("../../traits/usercommontrait.php");
+require_once("../../traits/usertrait.php");
 require_once("../../traits/userstrait.php");
 require_once("../../classes/database/tables/table.php");
+require_once("../../classes/database/model.php");
 require_once("../../classes/database/models.php");
+require_once("../../classes/database/models/user.php");
 require_once("../../classes/database/models/users.php");
 
 use Newsletter\Classes\Database\Models\Users;
@@ -33,10 +37,12 @@ try{
     $usersE = $users->getErrno();
     switch($usersE){
         case 0:
+            $response['done'] = true;
+            $response['subscribers'] = subscribeData($users_array);
             break;
         case Ue::ERR_GET_NO_RESULT:
             http_response_code(404);
-            $response['msg'] = "Nessun iscritto rilevato";
+            $response['msg'] = "Nessun iscritto trovato";
             break;
         default:
             http_response_code(500);

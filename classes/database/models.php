@@ -8,6 +8,22 @@ use Newsletter\Classes\Database\Tables\TableErrors;
 use Newsletter\Traits\ErrorTrait;
 use Newsletter\Traits\SqlTrait;
 
+interface ModelsErrors extends TableErrors{
+    //Numbers
+    const ERR_GET = 21;
+    const ERR_DELETE = 22;
+    const ERR_INSERT = 23;
+    const ERR_UPDATE = 24;
+    const ERR_GET_NO_RESULT = 25;
+
+    //Messages
+    const ERR_GET_MSG = "Errore durante la lettura dei dati";
+    const ERR_DELETE_MSG = "Errore durante l'eliminazione dei dati";
+    const ERR_INSERT_MSG = "Errore durante l'inserimento dei dati";
+    const ERR_UPDATE_MSG = "Errore durante l'aggiornamento dei dati";
+    const ERR_GET_NO_RESULT_MSG = "La query di lettura non ha restituito alcun risultato";
+}
+
 abstract class Models extends Table implements Me{
 
     /**
@@ -101,19 +117,5 @@ SQL;
     }
 }
 
-interface ModelsErrors extends TableErrors{
-    //Numbers
-    const ERR_GET = 21;
-    const ERR_DELETE = 22;
-    const ERR_INSERT = 23;
-    const ERR_UPDATE = 24;
-    const ERR_GET_NO_RESULT = 25;
 
-    //Messages
-    const ERR_GET_MSG = "Errore durante la lettura dei dati";
-    const ERR_DELETE_MSG = "Errore durante l'eliminazione dei dati";
-    const ERR_INSERT_MSG = "Errore durante l'inserimento dei dati";
-    const ERR_UPDATE_MSG = "Errore durante l'aggiornamento dei dati";
-    const ERR_GET_NO_RESULT_MSG = "La query di lettura non ha restituito alcun risultato";
-}
 ?>

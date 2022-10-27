@@ -9,6 +9,14 @@ use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Traits\UserCommonTrait;
 use Newsletter\Traits\UserTrait;
 
+interface UserErrors extends ExceptionMessages,ModelErrors{
+    //Numbers
+    const ERR_MISSING_DATA = 40;
+
+    //Messages
+    const ERR_MISSING_DATA_MSG = "Uno o più dati richiesti non sono stati settati";
+}
+
 class User extends Model implements Ue{
 
     use UserCommonTrait, UserTrait;
@@ -159,11 +167,5 @@ class User extends Model implements Ue{
     }
 }
 
-interface UserErrors extends ExceptionMessages,ModelErrors{
-    //Numbers
-    const ERR_MISSING_DATA = 40;
 
-    //Messages
-    const ERR_MISSING_DATA_MSG = "Uno o più dati richiesti non sono stati settati";
-}
 ?>
