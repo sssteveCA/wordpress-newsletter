@@ -13,7 +13,7 @@ class Template{
     public static function activationMailTemplate(string $lang, array $params): string{
         $title = Properties::activationMailTitle($lang);
         $clickLink = Properties::clickActivationLink($lang,$params['link']);
-        $clickVerify = Properties::clickActivationLinkWithCode($lang,$params['verifyUrl'],$params['code']);
+        $clickVerify = Properties::clickActivationLinkWithCode($lang,$params['verifyUrl'],$params['verCode']);
         $moreInfo = Properties::moreInformation($lang);
         $htmlTemplate = <<<HTML
 <!DOCTYPE html>

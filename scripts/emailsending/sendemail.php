@@ -57,7 +57,7 @@ if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != '')
                 'host' => $host, 'password' => $password, 'port' => $port, 'subject' => $post['subject']
             ];
             $emailManager = new EmailManager($em_data);
-            $emailManager->sendNewsletterEmail();
+            $emailManager->sendNewsletterMail();
             $emErrno = $emailManager->getErrno();
             switch($emErrno){
                 case 0:

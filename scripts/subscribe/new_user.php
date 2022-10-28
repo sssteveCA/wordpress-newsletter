@@ -66,8 +66,25 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
         $us_error = $userSubscribe->getErrno();
         switch($us_error){
             case 0:
-                $response['msg'] = Properties::completeSubscribe($lang);
-                $response['done'] = true;
+                $verCode = $userSubscribe->getUser()->getVerCode();
+                $email = $userSubscribe->getUser()->getEmail();
+                $subject = Properties::activationMailTitle($lang);
+                $verifyUrl = Properties::verifyUrl();
+                $link = $verifyUrl."?lang=".$lang."&verCode=".$verCode;
+                $ae_data = [
+                    'verCode' => $verCode, 'email' => $email, 'lang' => $lang, 'link' => $link, 'subject' => $subject, 'verifyUrl' => $verifyUrl
+                ];
+                $email = sendActivationMail($ae_data);
+                switch($email){
+                    case 0:
+                        $response['msg'] = Properties::completeSubscribe($lang);
+                        $response['done'] = true;
+                        break;
+                    default:
+                        http_response_code(500);
+                        $response['msg'] = Properties::unknownError($lang);
+                        break;
+                }
                 break;
             case Usee::INCORRECT_EMAIL:
                 http_response_code(400);
@@ -100,7 +117,7 @@ echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
  * @param array an array of values for mail activation template
  * @return int the error code or 0 if no error occurs while email sending
  */
-function sendActivationEmail(array $params): int{
+function sendActivationMail(array $params): int{
     $dotenv = Dotenv::createImmutable("./../../");
     $dotenv->safeLoad();
     $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
@@ -113,9 +130,9 @@ function sendActivationEmail(array $params): int{
     ];
     $emailManager = new EmailManager($em_data);
     $activationMail_data = [
-        'code' => $params['code'], 'lang' => $params['lang'], 'link' => $params['link'], 'verifyUrl' => $params['verifyUrl']
+        'verCode' => $params['verCode'], 'lang' => $params['lang'], 'link' => $params['link'], 'verifyUrl' => $params['verifyUrl']
     ];
-    $emailManager->sendActivationEmail($activationMail_data);
+    $emailManager->sendActivationMail($activationMail_data);
     $emErrno = $emailManager->getErrno();
     return $emErrno;
 }

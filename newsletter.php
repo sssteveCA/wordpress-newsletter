@@ -102,7 +102,8 @@ function nl_subscribe_form($atts){
    $a = shortcode_atts([
       'lang' => Langs::$langs["en"]
    ],$atts);
-   return HtmlCode::subscribeFormValues($a['lang']);
+   $langParams = HtmlCode::subscribeFormValues($a['lang']);
+   return HtmlCode::wpSignupForm($langParams);
 }
 
 

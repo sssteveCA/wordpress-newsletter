@@ -60,13 +60,13 @@ class EmailManager extends PHPMailer{
     /**
      * Send the activation mail for new subscriber
      */
-    public function sendActivationEmail(array $data){
+    public function sendActivationMail(array $data){
         $this->errno = 0;
-        if(isset($data['code'],$data['link'],$data['verifyUrl']) && $data['code'] != '' && $data['link'] != '' && $data['verifyUrl'] != ''){
+        if(isset($data['verCode'],$data['lang'],$data['link'],$data['verifyUrl']) && $data['verCode'] != '' && $data['link'] != '' && $data['verifyUrl'] != ''){
             try{
                 $lang = $data['lang'];
                 $template_data = [
-                    'code' => $data['code'], 'link' => $data['link'], 'verifyUrl' => $data['verifyUrl']
+                    'verCode' => $data['verCode'], 'link' => $data['link'], 'verifyUrl' => $data['verifyUrl']
                 ];
                 $htmlBody = Template::activationMailTemplate($lang,$template_data);
                 $this->addAddress($this->email);
@@ -84,7 +84,7 @@ class EmailManager extends PHPMailer{
     /**
      * Send the newletter to indicated subscribers
      */
-    public function sendNewsletterEmail(){
+    public function sendNewsletterMail(){
         $this->errno = 0;
         foreach($this->emailsList as $email){
             $addresses = $this->getAllRecipientAddresses();
