@@ -8,6 +8,29 @@ use Newsletter\Classes\Properties;
 class Template{
 
     /**
+     * Activation mail HTML body
+     */
+    public static function activationMailTemplate(string $lang, array $params): string{
+        $htmlTemplate = <<<HTML
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+    <title>{}</title>
+    <meta charset="utf-8">
+    </head>
+    <body>
+    <p>{}</p>
+    <p><a href="{}">{}</a></p>
+    <p>{} <a href="{}">{}</a></p>
+    <p>{} {}</p>
+    <p>{}</a> </p>
+    </body>
+</html>
+HTML;
+        return $htmlTemplate;
+    }
+
+    /**
      * Newsletter HTML body
      */
     public static function mailTemplate(string $lang, array $params): string{
