@@ -6,6 +6,7 @@ use Exception;
 use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Classes\Template;
+use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Traits\EmailManagerTrait;
 use Newsletter\Traits\ErrorTrait;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -24,6 +25,10 @@ class EmailManager extends PHPMailer{
 
     use EmailManagerTrait, ErrorTrait;
 
+    public const EMAIL_NEWSLETTER = 1;
+    public const EMAIL_ACTIVATION = 2;
+
+    private string $email;
     private array $emailsList;
     private string $subject;
     private string $body;
@@ -37,6 +42,7 @@ class EmailManager extends PHPMailer{
         $this->setContent();
     }
 
+    public function getEmail(){ return $this->email; }
     public function getEmailsList(){ return $this->emailsList; }
     public function getSubject(){ return $this->subject; }
     public function getBody(){ return $this->body; }
@@ -49,6 +55,30 @@ class EmailManager extends PHPMailer{
                 $this->error = null;
                 break;
         }
+    }
+
+    /**
+     * Send the activation mail for new subscriber
+     */
+    public function sendActivationEmail(array $data){
+        $this->errno = 0;
+        if(isset($data['code'],$data['link'],$data['verifyUrl']) && $data['code'] != '' && $data['link'] != '' && $data['verifyUrl'] != ''){
+            try{
+                $lang = $data['lang'];
+                $template_data = [
+                    'code' => $data['code'], 'link' => $data['link'], 'verifyUrl' => $data['verifyUrl']
+                ];
+                $htmlBody = Template::activationMailTemplate($lang,$template_data);
+                $this->addAddress($this->email);
+                $this->Body = $htmlBody;
+                $this->AltBody = "Siamo spiacenti il tuo client di posta non supporta l'HTML";
+                $this->send();
+            }catch(Exception $e){
+                echo "Mail Exception => ".$e->getMessage()."\r\n";
+                $this->errno = Eme::ERR_EMAIL_SEND;
+            }
+        }//if(isset($data['code'],$data['link'],$data['verifyUrl']) && $data['code'] != '' && $data['link'] != '' && $data['verifyUrl'] != ''){
+        else throw new NotSettedException(Eme::EXC_NOTISSET);
     }
 
     /**
@@ -66,11 +96,12 @@ class EmailManager extends PHPMailer{
                         'title' => $this->subject, 'user_email' => $email,
                         'text' => $this->body, 'unsubscribe_url' => $user->getUnsubscCode()
                     ];
-                    echo "\r\n EmailManager sendNewsletterEmail template data => ".var_export($template_data,true)."\r\n";
+                    //echo "\r\n EmailManager sendNewsletterEmail template data => ".var_export($template_data,true)."\r\n";
                     $lang = $user->getLang();
                     $htmlBody = Template::mailTemplate($lang,$template_data);
                     $this->addAddress($email);
                     $this->Body = $htmlBody;
+                    $this->AltBody = $this->body;
                     $this->send();
                 }//if($user != null){
             }catch(Exception $e){

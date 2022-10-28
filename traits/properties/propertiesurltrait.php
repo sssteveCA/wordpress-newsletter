@@ -96,6 +96,13 @@ trait PropertiesUrlTrait{
     }
 
     /**
+     * Get the account verify URL
+     */
+    public static function verifyUrl(): string{
+        return Properties::pluginsUrl(__FILE__)."scripts/subscribe/verify.php";
+    }
+
+    /**
      * Get the YouTube channerl URL
      */
     public static function youtubeChannelUrl(): string{

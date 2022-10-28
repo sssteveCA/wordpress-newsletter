@@ -3,6 +3,7 @@
 namespace Newsletter\Traits;
 
 use Newsletter\Classes\Database\Models\User;
+use Newsletter\Classes\Email\EmailManager;
 use Newsletter\Exceptions\NotSettedException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -13,10 +14,23 @@ trait EmailManagerTrait{
 
     private function assignValues(array $data){
         echo "\r\nEmailManagerTrait assignValues => ".var_export($data,true)."\r\n";
-        if(isset($data['body'],$data['emails'],$data['from'],$data['host'],$data['password'], $data['port'],$data['subject'])){
-            $this->emailsList = $data['emails'];
-            $this->subject = $data['subject'];
-            $this->body = $data['body'];
+        if(isset($data['from'],$data['host'],$data['password'], $data['port'])){
+            $operation = isset($data['operation']) ? $data['operation'] : EmailManager::EMAIL_NEWSLETTER;
+            if($operation == EmailManager::EMAIL_ACTIVATION){
+                if(isset($data['email'],$data['subject'])){
+                    $this->email = $data['email'];
+                    $this->subject = $data['subject'];
+                }
+                else throw new NotSettedException(Eme::EXC_NOTISSET);
+            }
+            else{
+                if(isset($data['body'],$data['emails'],$data['subject'])){
+                    $this->emailsList = $data['emails'];
+                    $this->subject = $data['subject'];
+                    $this->body = $data['body'];
+                }
+                else throw new NotSettedException(Eme::EXC_NOTISSET);
+            }     
         }
         else throw new NotSettedException(Eme::EXC_NOTISSET);
         
@@ -42,7 +56,6 @@ trait EmailManagerTrait{
     private function setContent(){
         $this->isHTML(true);
         $this->Subject = $this->subject;
-        $this->AltBody = $this->body;
     }
 
     private function setRecipients(array $data){
