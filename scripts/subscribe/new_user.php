@@ -18,14 +18,19 @@ require_once("../../traits/sqltrait.php");
 require_once("../../traits/modeltrait.php");
 require_once("../../traits/usercommontrait.php");
 require_once("../../traits/usertrait.php");
+require_once("../../traits/emailmanagertrait.php");
+require_once("../../vendor/autoload.php");
 require_once("../../classes/general.php");
 require_once("../../classes/properties.php");
 require_once("../../classes/database/tables/table.php");
 require_once("../../classes/database/model.php");
 require_once("../../classes/database/models/user.php");
+require_once("../../classes/email/emailmanager.php");
 require_once("../../classes/subscribe/usersubscribe.php");
 
+use Dotenv\Dotenv;
 use Newsletter\Classes\Database\Models\User;
+use Newsletter\Classes\Email\EmailManager;
 use Newsletter\Classes\General;
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\Constants as C;
@@ -77,8 +82,6 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 $response['msg'] = Properties::unknownError($lang);
                 break;
         }
-    }catch(NotSettedException $nse){
-        //echo "NotSettedException\r\n";
     }catch(Exception $e){
         //echo "Exception\n";
         http_response_code(500);
@@ -91,4 +94,29 @@ else{
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+
+/**
+ * Send the activation mail
+ * @param array an array of values for mail activation template
+ * @return int the error code or 0 if no error occurs while email sending
+ */
+function sendActivationEmail(array $params): int{
+    $dotenv = Dotenv::createImmutable("./../../");
+    $dotenv->safeLoad();
+    $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
+    $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
+    $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
+    $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
+    $em_data = [
+        'from' => $from, 'email' => $params['email'], 
+        'host' => $host, 'password' => $password, 'port' => $port, 'subject' => $params['subject']
+    ];
+    $emailManager = new EmailManager($em_data);
+    $activationMail_data = [
+        'code' => $params['code'], 'lang' => $params['lang'], 'link' => $params['link'], 'verifyUrl' => $params['verifyUrl']
+    ];
+    $emailManager->sendActivationEmail($activationMail_data);
+    $emErrno = $emailManager->getErrno();
+    return $emErrno;
+}
 ?>
