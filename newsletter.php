@@ -87,7 +87,7 @@ function nl_scripts(){
 
 add_action('wp_footer','nl_form_signup');
 function nl_form_signup(){
-   $lang = Langs::English->value;
+   $lang = Langs::$langs["en"];
    //Check if Polylang plugin is active
    if(is_plugin_active("polylang/polylang.php")){
       if(function_exists("pll_current_language")){
@@ -100,7 +100,7 @@ function nl_form_signup(){
 add_shortcode('nl_subscribe','nl_subscribe_form');
 function nl_subscribe_form($atts){
    $a = shortcode_atts([
-      'lang' => Langs::English->value
+      'lang' => Langs::$langs["en"]
    ],$atts);
    return HtmlCode::subscribeFormValues($a['lang']);
 }

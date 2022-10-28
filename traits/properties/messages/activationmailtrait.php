@@ -2,6 +2,7 @@
 
 namespace Newsletter\Traits\Properties\Messages;
 
+use Newsletter\Classes\Properties;
 use Newsletter\Enums\Langs;
 
 trait ActivationMailTrait{
@@ -38,6 +39,52 @@ trait ActivationMailTrait{
         }
         else{
             return "To complete the newsletter subscription click on <a href=\"{$link}\">this link</a>";
+        }
+    }
+
+    /**
+     * Get the alternative way activation mail message
+     * @param string $lang the user language
+     * @param string $verifyUrl the URL to verify the account
+     * @param string $code the user activation code
+     * @return string the alternative way activation mail message
+     */
+    public static function clickActivationLinkWithCode(string $lang,string $verifyUrl, string $code): string{
+        if($lang == Langs::$langs["it"]){
+           return <<<HTML
+O in alternativa fai click su <a href="{$verifyUrl}">questo link</a><br>
+E incolla questo codice: {$code}
+HTML;
+        }
+        else if($lang == Langs::$langs["es"]){
+            return <<<HTML
+O, alternativamente, haga clic en <a href="{$verifyUrl}">este enlace</a><br>
+Y pega este código: {$code}
+HTML;
+        }
+        else{
+            return <<<HTML
+Or alternatively click on <a href="{$verifyUrl}">this link</a><br>
+And paste this code: {$code}
+HTML;
+        }
+    }
+
+    /**
+     * Get the activation mail more information message
+     * @param string $lang the user language
+     * @return string the activation mail more information message
+     */
+    public static function moreInformation(string $lang): string{
+        $contactUrl = Properties::contactsUrl($lang);
+        if($lang == Langs::$langs["it"]){
+            return "Per maggiori informazioni <a href=\"".$contactUrl."/contatti/>contattaci</a>";
+        }
+        else if($lang == Langs::$langs["es"]){
+            return "Para más información <a href=\"".$contactUrl."\">contáctenos</a>";
+        }
+        else{
+            return "For more information <a href=\"".$contactUrl."\">contact us</a>";
         }
     }
 }
