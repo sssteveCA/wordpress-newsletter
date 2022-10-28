@@ -11,19 +11,21 @@ class Template{
      * Activation mail HTML body
      */
     public static function activationMailTemplate(string $lang, array $params): string{
+        $title = Properties::activationMailTitle($lang);
+        $clickLink = Properties::clickActivationLink($lang,$params['link']);
+        $clickVerify = Properties::clickActivationLinkWithCode($lang,$params['verifyUrl'],$params['code']);
+        $moreInfo = Properties::moreInformation($lang);
         $htmlTemplate = <<<HTML
 <!DOCTYPE html>
 <html lang="it">
     <head>
-    <title>{}</title>
-    <meta charset="utf-8">
+        <title>{$title}</title>
+        <meta charset="utf-8">
     </head>
     <body>
-    <p>{}</p>
-    <p><a href="{}">{}</a></p>
-    <p>{} <a href="{}">{}</a></p>
-    <p>{} {}</p>
-    <p>{}</a> </p>
+    <p>{$clickLink}</p>
+    <p>{$clickVerify}</p>
+    <p>{$moreInfo}</p>
     </body>
 </html>
 HTML;
