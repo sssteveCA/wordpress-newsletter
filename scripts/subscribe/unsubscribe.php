@@ -12,6 +12,7 @@ require_once("../../traits/sqltrait.php");
 require_once("../../traits/usercommontrait.php");
 require_once("../../traits/usertrait.php");
 require_once("../../traits/errortrait.php");
+require_once("../../traits/properties/messages/activationmailtrait.php");
 require_once("../../traits/properties/messages/newusertrait.php");
 require_once("../../traits/properties/messages/othertrait.php");
 require_once("../../traits/properties/messages/verifytrait.php");

@@ -7,6 +7,7 @@ require_once("../../interfaces/exceptionmessages.php");
 require_once("../../interfaces/messages.php");
 require_once("../../exceptions/incorrectvariableformatexception.php");
 require_once("../../exceptions/notsettedexception.php");
+require_once("../../traits/properties/messages/activationmailtrait.php");
 require_once("../../traits/properties/messages/newusertrait.php");
 require_once("../../traits/properties/messages/othertrait.php");
 require_once("../../traits/properties/messages/unsubscribetrait.php");
