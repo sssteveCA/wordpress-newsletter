@@ -27,9 +27,11 @@ class EmailManager extends PHPMailer{
 
     public const EMAIL_NEWSLETTER = 1;
     public const EMAIL_ACTIVATION = 2;
+    public const EMAIL_USER_UNSUBCRIBE = 3;
 
     private string $email;
-    private string $nickname;
+    private string $from;
+    private string $fromNickname;
     private array $emailsList;
     private string $subject;
     private string $body;
@@ -44,7 +46,8 @@ class EmailManager extends PHPMailer{
     }
 
     public function getEmail(){ return $this->email; }
-    public function getNickname(){ return $this->username; }
+    public function getFrom(){ return $this->from; }
+    public function getFromNickname(){ return $this->fromNickname; }
     public function getEmailsList(){ return $this->emailsList; }
     public function getSubject(){ return $this->subject; }
     public function getBody(){ return $this->body; }
@@ -71,7 +74,7 @@ class EmailManager extends PHPMailer{
                     'verCode' => $data['verCode'], 'link' => $data['link'], 'verifyUrl' => $data['verifyUrl']
                 ];
                 $htmlBody = Template::activationMailTemplate($lang,$template_data);
-                $this->addAddress($this->email, $this->nickname);
+                $this->addAddress($this->email);
                 $this->Body = $htmlBody;
                 $this->AltBody = "Siamo spiacenti il tuo client di posta non supporta l'HTML";
                 $this->send();
@@ -111,6 +114,13 @@ class EmailManager extends PHPMailer{
                 $this->errno = Eme::ERR_EMAIL_SEND;
             }      
         }//foreach($this->emailsList as $email){
+    }
+
+    /**
+     * Receive a notification on your email address when an user unsubscribe from your newsletter
+     */
+    public function sendUserUnsubscribeNotify(array $data){
+
     }
 
 }

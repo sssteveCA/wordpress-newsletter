@@ -19,14 +19,18 @@ require_once("../../traits/properties/messages/verifytrait.php");
 require_once("../../traits/properties/messages/unsubscribetrait.php");
 require_once("../../traits/properties/propertiesmessagestrait.php");
 require_once("../../traits/properties/propertiesurltrait.php");
+require_once("../../traits/emailmanagertrait.php");
+require_once("../../vendor/autoload.php");
 require_once("../../classes/general.php");
 require_once("../../classes/htmlcode.php");
 require_once("../../classes/properties.php");
 require_once("../../classes/database/tables/table.php");
 require_once("../../classes/database/model.php");
 require_once("../../classes/database/models/user.php");
+require_once("../../classes/email/emailmanager.php");
 require_once("../../classes/subscribe/userunsubscribe.php");
 
+use Dotenv\Dotenv;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Classes\Subscribe\UserUnsubscribeErrors as Uue;
 use Newsletter\Classes\Database\Models\User;
@@ -90,4 +94,15 @@ HTML;
 $html = HtmlCode::genericHtml($title,$body,$style);
 
 echo $html;
+
+function sendUserUnsubscribeNotify(array $params):int{
+    $dotenv = Dotenv::createImmutable("../../");
+    $dotenv->safeLoad();
+    $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
+    $from_nickname = isset($params['nickname']) ? $params['nickname'] : $_ENV['EMAIL_NICKNAME'];
+    $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
+    $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
+    $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
+    return 0;
+}
 ?>

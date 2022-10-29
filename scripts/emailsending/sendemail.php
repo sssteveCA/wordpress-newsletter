@@ -49,11 +49,12 @@ if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != '')
             $dotEnv = Dotenv::createImmutable("./../../");
             $dotEnv->safeLoad();
             $from = isset($post['from']) ? $post['from'] : $_ENV['EMAIL_USERNAME'];
+            $fromNickname = isset($post['fromNickname']) ? $post['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
             $host = isset($post['host']) ? $post['host'] : $_ENV['EMAIL_HOST'];
             $password = isset($post['password']) ? $post['password'] : $_ENV['EMAIL_PASSWORD'];
             $port = isset($post['port']) ? $post['port'] : $_ENV['EMAIL_PORT'];
             $em_data = [
-                'body' => $post['body'], 'from' => $from, 'emails' => $post['emails'], 
+                'body' => $post['body'], 'from' => $from, 'fromNickname' => $fromNickname, 'emails' => $post['emails'], 
                 'host' => $host, 'password' => $password, 'port' => $port, 'subject' => $post['subject']
             ];
             $emailManager = new EmailManager($em_data);
