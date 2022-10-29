@@ -100,7 +100,7 @@ class EmailManager extends PHPMailer{
                 if($user != null){
                     $templateData = [
                         'title' => $this->subject, 'user_email' => $email,
-                        'text' => $this->body, 'unsubscribe_url' => $user->getUnsubscCode()
+                        'text' => $this->body, 'unsubscribe_code' => $user->getUnsubscCode()
                     ];
                     //echo "\r\n EmailManager sendNewsletterEmail template data => ".var_export($templateData,true)."\r\n";
                     $lang = $user->getLang();
