@@ -76,7 +76,7 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 $ae_data = [
                     'verCode' => $verCode, 'email' => $email, 'lang' => $lang, 'link' => $link, 'operation' => $operation, 'subject' => $subject, 'verifyUrl' => $verifyUrl
                 ];
-                echo "new_user ae_data => ".var_export($ae_data,true)."\r\n";
+                //echo "new_user ae_data => ".var_export($ae_data,true)."\r\n";
                 $email = sendActivationMail($ae_data);
                 switch($email){
                     case 0:
@@ -131,12 +131,12 @@ function sendActivationMail(array $params): int{
         'from' => $from, 'email' => $params['email'], 
         'host' => $host, 'operation' => $params['operation'], 'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
-    echo "new_user sendActivationMail em_data => ".var_export($em_data,true)."\r\n";
+    //echo "new_user sendActivationMail em_data => ".var_export($em_data,true)."\r\n";
     $emailManager = new EmailManager($em_data);
     $activationMail_data = [
         'verCode' => $params['verCode'], 'lang' => $params['lang'], 'link' => $params['link'], 'verifyUrl' => $params['verifyUrl']
     ];
-    echo "new_user sendActivationMail activationMail_data => ".var_export($activationMail_data,true)."\r\n";
+    //echo "new_user sendActivationMail activationMail_data => ".var_export($activationMail_data,true)."\r\n";
     $emailManager->sendActivationMail($activationMail_data);
     $emErrno = $emailManager->getErrno();
     return $emErrno;

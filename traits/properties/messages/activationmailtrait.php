@@ -78,7 +78,7 @@ HTML;
     public static function moreInformation(string $lang): string{
         $contactUrl = Properties::contactsUrl($lang);
         if($lang == Langs::$langs["it"]){
-            return "Per maggiori informazioni <a href=\"".$contactUrl."/contatti/>contattaci</a>";
+            return "Per maggiori informazioni <a href=\"".$contactUrl."\">contattaci</a>";
         }
         else if($lang == Langs::$langs["es"]){
             return "Para más información <a href=\"".$contactUrl."\">contáctenos</a>";
