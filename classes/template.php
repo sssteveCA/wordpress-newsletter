@@ -11,6 +11,7 @@ class Template{
      * Activation mail HTML body
      */
     public static function activationMailTemplate(string $lang, array $params): string{
+        echo "template.php activationMailTemplate params => ".var_export($params,true)."\r\n";
         $title = Properties::activationMailTitle($lang);
         $clickLink = Properties::clickActivationLink($lang,$params['link']);
         $clickVerify = Properties::clickActivationLinkWithCode($lang,$params['verifyUrl'],$params['verCode']);

@@ -22,6 +22,7 @@ require_once("../../traits/emailmanagertrait.php");
 require_once("../../vendor/autoload.php");
 require_once("../../classes/general.php");
 require_once("../../classes/properties.php");
+require_once("../../classes/template.php");
 require_once("../../classes/database/tables/table.php");
 require_once("../../classes/database/model.php");
 require_once("../../classes/database/models/user.php");
@@ -71,12 +72,12 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 $subject = Properties::activationMailTitle($lang);
                 $verifyUrl = Properties::verifyUrl();
                 $link = $verifyUrl."?lang=".$lang."&verCode=".$verCode;
+                $operation = EmailManager::EMAIL_ACTIVATION;
                 $ae_data = [
-                    'verCode' => $verCode, 'email' => $email, 'lang' => $lang, 'link' => $link, 'subject' => $subject, 'verifyUrl' => $verifyUrl
+                    'verCode' => $verCode, 'email' => $email, 'lang' => $lang, 'link' => $link, 'operation' => $operation, 'subject' => $subject, 'verifyUrl' => $verifyUrl
                 ];
                 echo "new_user ae_data => ".var_export($ae_data,true)."\r\n";
-                //$email = sendActivationMail($ae_data);
-                $email = 0;
+                $email = sendActivationMail($ae_data);
                 switch($email){
                     case 0:
                         $response['msg'] = Properties::completeSubscribe($lang);
@@ -128,12 +129,14 @@ function sendActivationMail(array $params): int{
     $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
     $em_data = [
         'from' => $from, 'email' => $params['email'], 
-        'host' => $host, 'password' => $password, 'port' => $port, 'subject' => $params['subject']
+        'host' => $host, 'operation' => $params['operation'], 'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
+    echo "new_user sendActivationMail em_data => ".var_export($em_data,true)."\r\n";
     $emailManager = new EmailManager($em_data);
     $activationMail_data = [
         'verCode' => $params['verCode'], 'lang' => $params['lang'], 'link' => $params['link'], 'verifyUrl' => $params['verifyUrl']
     ];
+    echo "new_user sendActivationMail activationMail_data => ".var_export($activationMail_data,true)."\r\n";
     $emailManager->sendActivationMail($activationMail_data);
     $emErrno = $emailManager->getErrno();
     return $emErrno;

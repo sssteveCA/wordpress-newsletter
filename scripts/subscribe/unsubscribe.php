@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../../wp-load.php");
+require_once("../../../../../wp-load.php");
 require_once("../../enums/languages.php");
 require_once("../../interfaces/constants.php");
 require_once("../../interfaces/exceptionmessages.php");
