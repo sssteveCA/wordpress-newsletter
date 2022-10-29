@@ -147,5 +147,23 @@ HTML;
             ];
         }
     }
+
+    /**
+     * Mail sended when an user unsubscribes from the newsletter
+     */
+    public static function unsubscribedUserTemplate(string $email): string{
+        return <<<HTML
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>Cancellazione utente</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div style="padding: 40px 20px; text-align: center;">L'utente con email {$email} si è cancellato dalla newsletter</div>
+    </body>
+</html>
+HTML;
+    }
 }
 ?>

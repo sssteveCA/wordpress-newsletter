@@ -124,12 +124,14 @@ function sendActivationMail(array $params): int{
     $dotenv = Dotenv::createImmutable("./../../");
     $dotenv->safeLoad();
     $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
+    $from_nickname = isset($params['nickname']) ? $params['nickname'] : $_ENV['EMAIL_NICKNAME'];
     $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
     $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
     $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
     $em_data = [
         'from' => $from, 'email' => $params['email'], 
-        'host' => $host, 'operation' => $params['operation'], 'password' => $password, 'port' => $port, 'subject' => $params['subject']
+        'host' => $host, 'nickname' => $from_nickname, 'operation' => $params['operation'],
+        'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
     //echo "new_user sendActivationMail em_data => ".var_export($em_data,true)."\r\n";
     $emailManager = new EmailManager($em_data);

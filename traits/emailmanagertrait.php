@@ -17,8 +17,9 @@ trait EmailManagerTrait{
         if(isset($data['from'],$data['host'],$data['password'], $data['port'])){
             $operation = isset($data['operation']) ? $data['operation'] : EmailManager::EMAIL_NEWSLETTER;
             if($operation == EmailManager::EMAIL_ACTIVATION){
-                if(isset($data['email'],$data['subject'])){
+                if(isset($data['email'],$data['subject'],$data['nickname'])){
                     $this->email = $data['email'];
+                    $this->nickname = $data['nickname'];
                     $this->subject = $data['subject'];
                 }
                 else throw new NotSettedException(Eme::EXC_NOTISSET);
