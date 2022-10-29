@@ -1,4 +1,5 @@
 *.css
 .env
 *.js
+*.txt
 vendor
