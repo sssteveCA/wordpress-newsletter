@@ -99,7 +99,7 @@ trait PropertiesUrlTrait{
      * Get the account verify URL
      */
     public static function verifyUrl(): string{
-        return Properties::pluginsUrl(__FILE__)."scripts/subscribe/verify.php";
+        return Properties::pluginUrl("newsletter/newsletter.php")."scripts/subscribe/verify.php";
     }
 
     /**

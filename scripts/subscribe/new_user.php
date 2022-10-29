@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../../wp-load.php");
+require_once("../../../../../wp-load.php");
 require_once("../../enums/languages.php");
 require_once("../../interfaces/exceptionmessages.php");
 require_once("../../interfaces/constants.php");
@@ -74,7 +74,9 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 $ae_data = [
                     'verCode' => $verCode, 'email' => $email, 'lang' => $lang, 'link' => $link, 'subject' => $subject, 'verifyUrl' => $verifyUrl
                 ];
-                $email = sendActivationMail($ae_data);
+                echo "new_user ae_data => ".var_export($ae_data,true)."\r\n";
+                //$email = sendActivationMail($ae_data);
+                $email = 0;
                 switch($email){
                     case 0:
                         $response['msg'] = Properties::completeSubscribe($lang);

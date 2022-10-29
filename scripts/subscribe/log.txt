@@ -14,3 +14,99 @@ UserTrait insertUserArray insert_array => array (
     3 => '%s',
   ),
 )
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@virgilio.it',
+    'lang' => 'it',
+    'verCode' => '0a84058300b1667025058uIrnEuqLTrYFYqxJHuNZ37vDJykz0BqHJh2l56shgFL9OkVw9hIGQrkROhlUCeoYTx9wPnvQmzSuOqz',
+    'subscDate' => '2022-10-29 06:30:58',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@virgilio.it',
+    'lang' => 'it',
+    'verCode' => '0a49874400b1667025162Tox35td7WHHWp8aReHmJ4yLTwk3UTZkNhTJ53WxOuHGBma429VBrU4OTymZu7HcKEbsTPreD98wkjTy',
+    'subscDate' => '2022-10-29 06:32:42',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@virgilio.it',
+    'lang' => 'it',
+    'verCode' => '0a46732800b1667025407CN2hyvKMYCNLaLLku1bRzgQvum0qX18Rix1dRszwzgz9NvqlvciH05YnEQtdpzEC488zzpPGWny6qT7',
+    'subscDate' => '2022-10-29 06:36:47',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@virgilio.it',
+    'lang' => 'it',
+    'verCode' => '0a26506400b1667025573obLm2nQ1aqjHpCwURgp3JVirUuZsZbTgkWtuu0dj6GA0ev0jS00tdFyxiHmpAASxQpN93Kmy6sxnKT8',
+    'subscDate' => '2022-10-29 06:39:33',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@virgilio.it',
+    'lang' => 'it',
+    'verCode' => '0a25053300b1667025720RtJhgKAVba8dclBdpDUgoXOkdIuXDvm80pjYOE1vzOrAwtJYfTvfjxYFZ3mYSJcDkV8F2IGzjAwUsMB',
+    'subscDate' => '2022-10-29 06:42:00',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
+UserTrait insertUserArray insert_array => array (
+  'values' => 
+  array (
+    'email' => 'steppuggio@virgilio.it',
+    'lang' => 'it',
+    'verCode' => '0a30956200b1667025786MbAKh6V3z8m1VuNO9TkBOPw4LByEobxqncUXeynGOlyfpdmnaIwZoUq6Yz3324LQbEoSQ9fOEn6f184',
+    'subscDate' => '2022-10-29 06:43:06',
+  ),
+  'format' => 
+  array (
+    0 => '%s',
+    1 => '%s',
+    2 => '%s',
+    3 => '%s',
+  ),
+)
