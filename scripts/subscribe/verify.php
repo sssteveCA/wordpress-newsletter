@@ -55,15 +55,15 @@ $title = Properties::newsletterSubscribeTitle($lang);
 
 if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
     try{
-        $user_data = [
+        $userData = [
             'tableName' => C::TABLE_USERS
         ];
-        $user = new User($user_data);
-        $verifyemail_data = [
+        $user = new User($userData);
+        $verifyEmailData = [
             'verCode' => $_REQUEST['verCode'],
             'user' => $user
         ];
-        $verifyemail = new VerifyEmail($verifyemail_data);
+        $verifyemail = new VerifyEmail($verifyEmailData);
         $verifyemail->verifyUser();
         $verifyemailE = $verifyemail->getErrno();
         switch($verifyemailE){

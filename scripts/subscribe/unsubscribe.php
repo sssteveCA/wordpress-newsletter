@@ -34,6 +34,7 @@ use Dotenv\Dotenv;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Classes\Subscribe\UserUnsubscribeErrors as Uue;
 use Newsletter\Classes\Database\Models\User;
+use Newsletter\Classes\Email\EmailManager;
 use Newsletter\Classes\General;
 use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\Properties;
@@ -62,9 +63,14 @@ if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
         $user = new User($userData);
         $userUnsubscData = ['user' => $user];
         $userUnsubsc = new UserUnsubscribe($userUnsubscData);
-        $uu_error = $userUnsubsc->getErrno();
-        switch($uu_error){
+        $uuError = $userUnsubsc->getErrno();
+        switch($uuError){
             case 0:
+                $email = $userUnsubsc->getUser()->getEmail();
+                $emData = [
+                    'email' => $email, 'operation' => EmailManager::EMAIL_USER_UNSUBCRIBE, 'subject' => 'Rimozione dalla Newsletter'
+                ];
+                sendUserUnsubscribeNotify($emData);
                 $message = Properties::unsubscribeComplete($lang);
                 break;
             case Uue::CODE_NOT_FOUND:
@@ -99,10 +105,17 @@ function sendUserUnsubscribeNotify(array $params):int{
     $dotenv = Dotenv::createImmutable("../../");
     $dotenv->safeLoad();
     $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
-    $from_nickname = isset($params['nickname']) ? $params['nickname'] : $_ENV['EMAIL_NICKNAME'];
+    $fromNickname = isset($params['fromNickname']) ? $params['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
     $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
     $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
     $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
+    $emData = [
+        'from' => $from, 'email' => $params['email'], 'fromNickname' => $fromNickname,
+        'host' => $host, 'operation' => $params['operation'],
+        'password' => $password, 'port' => $port, 'subject' => $params['subject']
+    ];
+    $emailManager = new EmailManager($emData);
+    $emailManager->sendUserUnsubscribeNotify();
     return 0;
 }
 ?>

@@ -5,6 +5,7 @@ namespace Newsletter\Classes\Email;
 use Exception;
 use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
+use Newsletter\Classes\Properties;
 use Newsletter\Classes\Template;
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Traits\EmailManagerTrait;
@@ -70,10 +71,10 @@ class EmailManager extends PHPMailer{
         if(isset($data['verCode'],$data['lang'],$data['link'],$data['verifyUrl']) && $data['verCode'] != '' && $data['link'] != '' && $data['verifyUrl'] != ''){
             try{
                 $lang = $data['lang'];
-                $template_data = [
+                $templateData = [
                     'verCode' => $data['verCode'], 'link' => $data['link'], 'verifyUrl' => $data['verifyUrl']
                 ];
-                $htmlBody = Template::activationMailTemplate($lang,$template_data);
+                $htmlBody = Template::activationMailTemplate($lang,$templateData);
                 $this->addAddress($this->email);
                 $this->Body = $htmlBody;
                 $this->AltBody = "Siamo spiacenti il tuo client di posta non supporta l'HTML";
@@ -97,20 +98,20 @@ class EmailManager extends PHPMailer{
             try{
                 $user = $this->checkSubscribedEmail($email);
                 if($user != null){
-                    $template_data = [
+                    $templateData = [
                         'title' => $this->subject, 'user_email' => $email,
                         'text' => $this->body, 'unsubscribe_url' => $user->getUnsubscCode()
                     ];
-                    //echo "\r\n EmailManager sendNewsletterEmail template data => ".var_export($template_data,true)."\r\n";
+                    //echo "\r\n EmailManager sendNewsletterEmail template data => ".var_export($templateData,true)."\r\n";
                     $lang = $user->getLang();
-                    $htmlBody = Template::mailTemplate($lang,$template_data);
+                    $htmlBody = Template::mailTemplate($lang,$templateData);
                     $this->addAddress($email);
                     $this->Body = $htmlBody;
                     $this->AltBody = $this->body;
                     $this->send();
                 }//if($user != null){
             }catch(Exception $e){
-                echo "Mail Exception => ".$e->getMessage()."\r\n";
+                //echo "Mail Exception => ".$e->getMessage()."\r\n";
                 $this->errno = Eme::ERR_EMAIL_SEND;
             }      
         }//foreach($this->emailsList as $email){
@@ -119,8 +120,18 @@ class EmailManager extends PHPMailer{
     /**
      * Receive a notification on your email address when an user unsubscribe from your newsletter
      */
-    public function sendUserUnsubscribeNotify(array $data){
-
+    public function sendUserUnsubscribeNotify(){
+        $this->errno = 0;
+        try{
+            $htmlBody = Template::unsubscribedUserTemplate($this->email);
+            $this->addAddress($this->from);
+            $this->Body = $htmlBody;
+            $this->AltBody = "L'utente con email {$this->email} si è cancellato dalla newsletter";
+            $this->send();
+        }catch(Exception $e){
+            //echo "Mail Exception => ".$e->getMessage()."\r\n";
+            $this->errno = Eme::ERR_EMAIL_SEND;
+        }
     }
 
 }

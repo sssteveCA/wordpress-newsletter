@@ -54,16 +54,16 @@ if(!isset($post['lang'])) $post['lang'] = 'en';
 $lang = General::languageCode($post['lang']);
 
 if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email'] != '' && $post['cb_privacy'] == '1' && $post['cb_terms'] == '1'){
-    $user_data = [
+    $userData = [
         'tableName' => C::TABLE_USERS,'email' => $post['email'], 'lang' => $lang
     ];
-    //var_dump($user_data);
+    //var_dump($userData);
     try{
-        $user = new User($user_data);
-        $us_data = [
+        $user = new User($userData);
+        $usData = [
             'user' => $user
         ];
-        $userSubscribe = new UserSubscribe($us_data);
+        $userSubscribe = new UserSubscribe($usData);
         $us_error = $userSubscribe->getErrno();
         switch($us_error){
             case 0:
@@ -73,11 +73,11 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 $verifyUrl = Properties::verifyUrl();
                 $link = $verifyUrl."?lang=".$lang."&verCode=".$verCode;
                 $operation = EmailManager::EMAIL_ACTIVATION;
-                $ae_data = [
+                $aeData = [
                     'verCode' => $verCode, 'email' => $email, 'lang' => $lang, 'link' => $link, 'operation' => $operation, 'subject' => $subject, 'verifyUrl' => $verifyUrl
                 ];
-                //echo "new_user ae_data => ".var_export($ae_data,true)."\r\n";
-                $email = sendActivationMail($ae_data);
+                //echo "new_user ae_data => ".var_export($aeData,true)."\r\n";
+                $email = sendActivationMail($aeData);
                 switch($email){
                     case 0:
                         $response['msg'] = Properties::completeSubscribe($lang);
@@ -128,18 +128,18 @@ function sendActivationMail(array $params): int{
     $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
     $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
     $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
-    $em_data = [
+    $emData = [
         'from' => $from, 'email' => $params['email'], 'fromNickname' => $fromNickname,
         'host' => $host, 'operation' => $params['operation'],
         'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
-    //echo "new_user sendActivationMail em_data => ".var_export($em_data,true)."\r\n";
-    $emailManager = new EmailManager($em_data);
-    $activationMail_data = [
+    //echo "new_user sendActivationMail em_data => ".var_export($emData,true)."\r\n";
+    $emailManager = new EmailManager($emData);
+    $activationMailData = [
         'verCode' => $params['verCode'], 'lang' => $params['lang'], 'link' => $params['link'], 'verifyUrl' => $params['verifyUrl']
     ];
-    //echo "new_user sendActivationMail activationMail_data => ".var_export($activationMail_data,true)."\r\n";
-    $emailManager->sendActivationMail($activationMail_data);
+    //echo "new_user sendActivationMail activationMail_data => ".var_export($activationMailData,true)."\r\n";
+    $emailManager->sendActivationMail($activationMailData);
     $emErrno = $emailManager->getErrno();
     return $emErrno;
 }
