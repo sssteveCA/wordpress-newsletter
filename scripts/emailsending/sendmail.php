@@ -46,20 +46,10 @@ $post = json_decode($input,true);
 if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
     if(is_array($post['emails']) && sizeof($post['emails']) > 0){
         try{
-            $dotEnv = Dotenv::createImmutable("./../../");
-            $dotEnv->safeLoad();
-            $from = isset($post['from']) ? $post['from'] : $_ENV['EMAIL_USERNAME'];
-            $fromNickname = isset($post['fromNickname']) ? $post['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
-            $host = isset($post['host']) ? $post['host'] : $_ENV['EMAIL_HOST'];
-            $password = isset($post['password']) ? $post['password'] : $_ENV['EMAIL_PASSWORD'];
-            $port = isset($post['port']) ? $post['port'] : $_ENV['EMAIL_PORT'];
-            $em_data = [
-                'body' => $post['body'], 'from' => $from, 'fromNickname' => $fromNickname, 'emails' => $post['emails'], 
-                'host' => $host, 'password' => $password, 'port' => $port, 'subject' => $post['subject']
+            $snData = [
+                'body' => $post['body'], 'emails' => $post['emails'], 'subject' => $post['subject']
             ];
-            $emailManager = new EmailManager($em_data);
-            $emailManager->sendNewsletterMail();
-            $emErrno = $emailManager->getErrno();
+            $emErrno = sendNewsletterMail($snData);
             switch($emErrno){
                 case 0:
                     $response['done'] = true;
@@ -92,4 +82,22 @@ else{
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+
+function sendNewsletterMail(array $params):int {
+    $dotEnv = Dotenv::createImmutable("../../");
+    $dotEnv->safeLoad();
+    $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
+    $fromNickname = isset($params['fromNickname']) ? $params['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
+    $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
+    $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
+    $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
+    $em_data = [
+        'body' => $params['body'], 'from' => $from, 'fromNickname' => $fromNickname, 'emails' => $params['emails'], 
+        'host' => $host, 'password' => $password, 'port' => $port, 'subject' => $params['subject']
+    ];
+    $emailManager = new EmailManager($em_data);
+    $emailManager->sendNewsletterMail();
+    $emErrno = $emailManager->getErrno();
+    return $emErrno;
+}
 ?>
