@@ -124,6 +124,7 @@ class EmailManager extends PHPMailer{
         $this->errno = 0;
         try{
             $htmlBody = Template::unsubscribedUserTemplate($this->email);
+            //echo "EmailManager sendUserUnsubscribeNotify htmlBody => ".var_export($htmlBody,true)."\r\n";
             $this->addAddress($this->from);
             $this->Body = $htmlBody;
             $this->AltBody = "L'utente con email {$this->email} si è cancellato dalla newsletter";

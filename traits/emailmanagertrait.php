@@ -13,7 +13,7 @@ use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 trait EmailManagerTrait{
 
     private function assignValues(array $data){
-        echo "\r\nEmailManagerTrait assignValues => ".var_export($data,true)."\r\n";
+        //echo "\r\nEmailManagerTrait assignValues => ".var_export($data,true)."\r\n";
         if(isset($data['from'],$data['fromNickname'],$data['host'],$data['password'], $data['port'])){
             $this->from = $data['from'];
             $this->fromNickname = $data['fromNickname'];

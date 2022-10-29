@@ -55,7 +55,9 @@ class UserUnsubscribe implements Uue{
         $user_cloned = clone $this->user;
         $sql = "WHERE `".User::$fields["unsubscCode"]."` = %s";
         $values = [$this->user->getUnsubscCode()];
-        return $user_cloned->getUser($sql,$values);
+        $found = $user_cloned->getUser($sql,$values);
+        if($found) $this->user = $user_cloned;
+        return $found;
     }
 
     private function deleteUser(): bool{

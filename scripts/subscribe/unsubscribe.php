@@ -24,6 +24,7 @@ require_once("../../vendor/autoload.php");
 require_once("../../classes/general.php");
 require_once("../../classes/htmlcode.php");
 require_once("../../classes/properties.php");
+require_once("../../classes/template.php");
 require_once("../../classes/database/tables/table.php");
 require_once("../../classes/database/model.php");
 require_once("../../classes/database/models/user.php");
@@ -63,8 +64,9 @@ if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
         $user = new User($userData);
         $userUnsubscData = ['user' => $user];
         $userUnsubsc = new UserUnsubscribe($userUnsubscData);
-        $uuError = $userUnsubsc->getErrno();
-        switch($uuError){
+        $uuErrno = $userUnsubsc->getErrno();
+        $uuErrno = 0;
+        switch($uuErrno){
             case 0:
                 $email = $userUnsubsc->getUser()->getEmail();
                 $emData = [
@@ -114,6 +116,7 @@ function sendUserUnsubscribeNotify(array $params):int{
         'host' => $host, 'operation' => $params['operation'],
         'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
+    //echo "unsubscribe sendUserUnsubscribeNotify emData => ".var_export($emData,true)."\r\n";
     $emailManager = new EmailManager($emData);
     $emailManager->sendUserUnsubscribeNotify();
     return 0;
