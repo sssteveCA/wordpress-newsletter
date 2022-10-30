@@ -29,6 +29,7 @@ class EmailManager extends PHPMailer{
     public const EMAIL_NEWSLETTER = 1;
     public const EMAIL_ACTIVATION = 2;
     public const EMAIL_USER_UNSUBCRIBE = 3;
+    public const EMAIL_USER_DELETE = 4;
 
     private string $email;
     private string $from;
@@ -85,6 +86,29 @@ class EmailManager extends PHPMailer{
             }
         }//if(isset($data['code'],$data['link'],$data['verifyUrl']) && $data['code'] != '' && $data['link'] != '' && $data['verifyUrl'] != ''){
         else throw new NotSettedException(Eme::EXC_NOTISSET);
+    }
+
+    /**
+     * Send an email to the used that was deleted from the newsletter by the admin
+     */
+    public function sendDeleteUserNotify(){
+        $this->errno = 0;
+        foreach($this->emailsList as $email){
+            $addresses = $this->getAllRecipientAddresses();
+            if(!empty($addresses))$this->clearAddresses();
+            try{
+                $user = $this->checkSubscribedEmail($email);
+                if($user != null){
+                    $this->addAddress($email);
+                    $this->Body = '';
+                    $this->AltBody = $this->body;
+                    $this->send();
+                }//if($user != null){
+            }catch(Exception $e){
+                //echo "Mail Exception => ".$e->getMessage()."\r\n";
+                $this->errno = Eme::ERR_EMAIL_SEND;
+            }
+        }//foreach($this->emailsList as $email){
     }
 
     /**
