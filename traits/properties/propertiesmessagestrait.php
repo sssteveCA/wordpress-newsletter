@@ -14,6 +14,6 @@ use Newsletter\Traits\Properties\Messages\VerifyTrait;
  */
 trait PropertiesMessagesTrait{
 
-    use ActivationMailTrait, NewUserTrait, OtherTrait, UnsubscribeTrait, VerifyTrait;
+    use /* ActivationMailTrait, */ NewUserTrait, OtherTrait, UnsubscribeTrait, VerifyTrait;
 }
 ?>

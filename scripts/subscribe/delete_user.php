@@ -1,6 +1,7 @@
 <?php
 
 require_once("../../../../../wp-load.php");
+require_once("../../enums/languages.php");
 require_once("../../interfaces/exceptionmessages.php");
 require_once("../../interfaces/constants.php");
 require_once("../../interfaces/messages.php");
@@ -16,9 +17,7 @@ require_once("../../traits/modeltrait.php");
 require_once("../../traits/sqltrait.php");
 require_once("../../traits/templatetrait.php");
 require_once("../../traits/usertrait.php");
-require_once("../../traits/usertrait.php");
-require_once("../../traits/userstrait.php");
-require_once("../../traits/errortrait.php");
+require_once("../../traits/usercommontrait.php");
 require_once("../../traits/emailmanagertrait.php");
 require_once("../../vendor/autoload.php");
 require_once("../../classes/properties.php");
@@ -26,7 +25,6 @@ require_once("../../classes/template.php");
 require_once("../../classes/database/tables/table.php");
 require_once("../../classes/database/model.php");
 require_once("../../classes/database/models/user.php");
-require_once("../../classes/database/models/users.php");
 require_once("../../classes/email/emailmanager.php");
 
 use Dotenv\Dotenv;
@@ -46,10 +44,10 @@ $response = [
 if(isset($post['emails']) && sizeof($post['emails']) > 0){
     if(is_array($post['emails']) && sizeof($post['emails']) > 0){
         $sdData = [
-            'body' => '', 'emails' => $post['emails'], 'subject' => ''
+            'body' => '', 'emails' => $post['emails'], 'operation' => EmailManager::EMAIL_USER_DELETE, 'subject' => ''
         ];
         try{
-            $emErrno = sendDeleteUserNotify($snData);
+            $emErrno = sendDeleteUserNotify($sdData);
             switch($emErrno){
                 case 0:
                     $response['done'] = true;
@@ -94,8 +92,8 @@ function sendDeleteUserNotify(array $params):int {
     $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
     $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
     $emData = [
-        'from' => $from, 'email' => $params['email'], 'fromNickname' => $fromNickname,
-        'host' => $host, 'operation' => $params['operation'],
+        'body' => $params['body'], 'from' => $from, 'emails' => $params['emails'], 
+        'fromNickname' => $fromNickname, 'host' => $host, 'operation' => $params['operation'],
         'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
     $emailManager = new EmailManager($emData);

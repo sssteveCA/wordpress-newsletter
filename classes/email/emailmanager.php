@@ -100,7 +100,8 @@ class EmailManager extends PHPMailer{
             try{
                 $user = $this->checkSubscribedEmail($email);
                 if($user != null){
-                    $del = $this->userDelete($user);
+                    //$del = $this->userDelete($user);
+                    $del = true;
                     if($del){
                         $this->addAddress($email);
                         $lang = $user->getLang();
@@ -109,6 +110,7 @@ class EmailManager extends PHPMailer{
                         $htmlBody = Template::deleteUserTemplate($lang,$templateData);
                         $this->subject = $subject;
                         $this->body = $htmlBody;
+                        echo "EmailManager sendUserDeleteNotify body => ".var_export($this->body,true)."\r\n";
                         $this->Subject = $this->subject;
                         $this->Body = $this->body;
                         $this->AltBody = $this->body;
