@@ -84,7 +84,7 @@ HTML,
         if($lang == Langs::$langs["it"]){
             return [
                 "moreInfo" => "Se pensi che sia stato fatto per errore scrivi una mail sulla nostra <a href=\"{$contactUrl}\">pagina dei contatti</a>",
-                "moreInfoMail" => "oppure puoi scrivere direttamente a {$params['from']}",
+                "moreInfoMail" => "oppure puoi scrivere direttamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
                 "removed" => "L'amministratore ti ha rimosso dalla newsletter.",
                 "title" => "Cancellazione utente"
             ];
@@ -92,7 +92,7 @@ HTML,
         else if($lang == Langs::$langs["es"]){
             return [
                 "moreInfo" => "Si cree que se hizo por error, escriba un correo electrónico en nuestra <a href=\"{$contactUrl}\">página de contacto</a>",
-                "moreInfoMail" => "o puedes escribir directamente a {$params['from']}",
+                "moreInfoMail" => "o puedes escribir directamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
                 "removed" => "El administrador te ha eliminado del boletín.",
                 "title" => "Eliminación del usuario"
             ];
@@ -100,7 +100,7 @@ HTML,
         else{
             return [
                 "moreInfo" => "If you think it was done by mistake write an email on our <a href=\"{$contactUrl}\">contact page</a>",
-                "moreInfoMail" => "or you can write directly to {$params['from']}",
+                "moreInfoMail" => "or you can write directly to <a href=\"{$params['from']}\">{$params['from']}</a>",
                 "removed" => "The administrator has removed you from the newsletter.",
                 "title" => "User deletion"
             ];
