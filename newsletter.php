@@ -39,14 +39,23 @@ use Newsletter\Enums\Langs;
     $users->dropTable();
  }
 
- add_action('admin_enqueue_scripts','nl_admin_scripts_send',11);
- function nl_admin_scripts_send(){
+ add_action('admin_enqueue_scripts','nl_admin_scripts',11);
+ function nl_admin_scripts(){
     $plugin_dir = Properties::pluginUrl(__FILE__);
     $page = $_REQUEST['page'];
-    $adminCss = $plugin_dir.C::REL_CSS_ADMIN_SEND;
-    wp_enqueue_style('nlAdminCssSend',$adminCss,[],null);
-    $adminJs = $plugin_dir.C::REL_JS_ADMIN_SEND;
-    wp_enqueue_script('nlAdminJsSend',$adminJs,[],null);
+    if($page == C::SLUG_ADMIN_FORM_ADD){
+
+    }
+    else if($page == C::SLUG_ADMIN_FORM_DELETE){
+
+    }
+    else if($page == C::SLUG_ADMIN_FORM_SEND){
+      $adminCss = $plugin_dir.C::REL_CSS_ADMIN_SEND;
+      wp_enqueue_style(C::H_CSS_ADMIN_FORM_SEND,$adminCss,[],null);
+      $adminJs = $plugin_dir.C::REL_JS_ADMIN_SEND;
+      wp_enqueue_script(C::H_JS_ADMIN_FORM_SEND,$adminJs,[],null);
+    }
+    
  }
 
  add_action('admin_menu','nl_menu');
@@ -102,7 +111,20 @@ function nl_form_signup(){
 
 add_action('wp_loaded','nl_after_load');
 function nl_after_load(){
-   
+   $plugin_dir = Properties::pluginUrl(__FILE__);
+   $adminCssAdd = $plugin_dir.C::REL_CSS_ADMIN_ADD;
+   $adminJsAdd = $plugin_dir.C::REL_JS_ADMIN_ADD;
+   $adminCssDel = $plugin_dir.C::REL_CSS_ADMIN_DELETE;
+   $adminJsDel = $plugin_dir.C::REL_JS_ADMIN_DELETE;
+   $adminCssSend = $plugin_dir.C::REL_CSS_ADMIN_SEND;
+   $adminJsSend = $plugin_dir.C::REL_JS_ADMIN_SEND;
+   wp_register_style(C::H_CSS_ADMIN_FORM_ADD,$adminCssAdd,[],null);
+   wp_register_script(C::H_JS_ADMIN_FORM_ADD,$adminJsAdd,[],null);
+   wp_register_style(C::H_CSS_ADMIN_FORM_DELETE,$adminCssDel,[],null);
+   wp_register_script(C::H_JS_ADMIN_FORM_DELETE,$adminJsDel,[],null);
+   wp_register_style(C::H_CSS_ADMIN_FORM_SEND,$adminCssSend,[],null);
+   wp_register_script(C::H_JS_ADMIN_FORM_SEND,$adminJsSend,[],null);
+
 }
 
 add_shortcode('nl_subscribe','nl_subscribe_form');
