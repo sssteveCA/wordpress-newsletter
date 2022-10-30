@@ -1,5 +1,8 @@
 <?php
 
+use Dotenv\Dotenv;
+use Newsletter\Classes\Email\EmailManager;
+
 require_once("../../../../../wp-load.php");
 require_once("../../interfaces/exceptionmessages.php");
 require_once("../../traits/errortrait.php");
@@ -34,5 +37,25 @@ else{
 
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+
+function sendDeleteUserNotify(array $params):int {
+    $dotenv = Dotenv::createImmutable("../../");
+    $dotenv->safeLoad();
+    $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
+    $fromNickname = isset($params['fromNickname']) ? $params['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
+    $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
+    $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
+    $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
+    $emData = [
+        'from' => $from, 'email' => $params['email'], 'fromNickname' => $fromNickname,
+        'host' => $host, 'operation' => $params['operation'],
+        'password' => $password, 'port' => $port, 'subject' => $params['subject']
+    ];
+    $emailManager = new EmailManager($emData);
+    $deleteUserMailData = ['lang' => $params['lang']];
+    $emailManager->sendDeleteUserNotify($deleteUserMailData);
+    $emErrno = $emailManager->getErrno();
+    return $emErrno;
+}
 ?>
 

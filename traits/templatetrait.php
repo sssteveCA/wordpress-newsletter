@@ -68,21 +68,24 @@ HTML,
             return [
                 "moreInfo" => "Se pensi che sia stato fatto per errore scrivi una mail sulla nostra <a href=\"{$contactUrl}\">pagina dei contatti</a>",
                 "moreInfoMail" => "oppure puoi scrivere direttamente a {$params['from']}",
-                "removed" => "L'amministratore ti ha rimosso dalla newsletter."   
+                "removed" => "L'amministratore ti ha rimosso dalla newsletter.",
+                "title" => "Cancellazione utente"
             ];
         }
         else if($lang == Langs::$langs["es"]){
             return [
                 "moreInfo" => "Si cree que se hizo por error, escriba un correo electrónico en nuestra <a href=\"{$contactUrl}\">página de contacto</a>",
                 "moreInfoMail" => "o puedes escribir directamente a {$params['from']}",
-                "removed" => "El administrador te ha eliminado del boletín."
+                "removed" => "El administrador te ha eliminado del boletín.",
+                "title" => "Eliminación del usuario"
             ];
         }
         else{
             return [
                 "moreInfo" => "If you think it was done by mistake write an email on our <a href=\"{$contactUrl}\">contact page</a>",
                 "moreInfoMail" => "or you can write directly to {$params['from']}",
-                "removed" => "The administrator has removed you from the newsletter."
+                "removed" => "The administrator has removed you from the newsletter.",
+                "title" => "User deletion"
             ];
         }
     }

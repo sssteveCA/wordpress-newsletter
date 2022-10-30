@@ -37,7 +37,8 @@ HTML;
     /**
      * Mail sent to the user when is removed from the administrator
      */
-    public static function deleteUserTemplate(array $params): string{
+    public static function deleteUserTemplate(string $lang, array $params): string{
+        $messages = Template::deleteUserMessages($lang,$params);
         return <<<HTML
         <!DOCTYPE html>
         <html lang="it">
@@ -46,10 +47,14 @@ HTML;
                 <meta charset="utf-8">
             </head>
             <body>
-                <div style="padding: 40px 20px; text-align: center;">{}</div>
+                <div style="padding: 40px 20px; text-align: center;">
+                <p>{$messages['removed']}</p>
+                <p>{$messages['moreInfo']}</p>
+                <p>{$messages['moreInfoMail']}</p>
+                </div>
             </body>
         </html>
-        HTML;
+HTML;
     }
 
     /**

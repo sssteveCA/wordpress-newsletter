@@ -91,7 +91,7 @@ class EmailManager extends PHPMailer{
     /**
      * Send an email to the used that was deleted from the newsletter by the admin
      */
-    public function sendDeleteUserNotify(){
+    public function sendDeleteUserNotify(array $data){
         $this->errno = 0;
         foreach($this->emailsList as $email){
             $addresses = $this->getAllRecipientAddresses();
@@ -100,7 +100,9 @@ class EmailManager extends PHPMailer{
                 $user = $this->checkSubscribedEmail($email);
                 if($user != null){
                     $this->addAddress($email);
-                    $this->Body = '';
+                    $templateData = ['from' => $this->from];
+                    $htmlBody = Template::deleteUserTemplate($data['lang'],$templateData);
+                    $this->Body = $htmlBody;
                     $this->AltBody = $this->body;
                     $this->send();
                 }//if($user != null){
