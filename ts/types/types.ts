@@ -5,3 +5,9 @@ export type NlFormData = {
     cb_terms: string;
     lang: string;
 };
+
+export type NlFormDataSend = {
+    subject: string;
+    message: string;
+    emails: string[];
+};
