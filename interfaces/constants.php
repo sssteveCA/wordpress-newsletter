@@ -25,7 +25,7 @@ interface Constants{
     const REL_JS_ADMIN_ADD = 'js/admin/nl_admin_add.js';
     const REL_JS_ADMIN_DELETE = 'js/admin/nl_admin_delete.js';
     const REL_JS_ADMIN_SEND = 'js/admin/nl_admin_send.js';
-    const REL_JS_WP = 'js/admin/nl_wp.js';
+    const REL_JS_WP = 'js/wp/nl_wp.js';
     const TABLE_USERS = "newsletter_users";
 
     //Slugs
