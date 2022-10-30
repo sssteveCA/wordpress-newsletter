@@ -1,0 +1,12 @@
+
+@mixin admin_form_send(){
+    form#nl_form_send{
+        >div{
+            &:first-child{
+                width: 90%;
+            }
+        }
+    }
+}
+
+@include admin_form_send();

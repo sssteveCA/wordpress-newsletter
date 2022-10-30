@@ -15,7 +15,7 @@ class HtmlCode{
     <h2 class="text-center">Aggiungi utente alla newsletter</h2>
 </div>
 <form id="nl_form_add" method="post" action="#">
-    <div id="nl_del_content" class="mt-4 mx-auto container-fluid">
+    <div id="nl_add_content" class="mt-4 mx-auto container-fluid">
         <div class="row">
             <div class="col-12 col-md-3">
                 <label for="nl_email" class="form-label">Email</label>

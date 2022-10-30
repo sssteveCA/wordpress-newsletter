@@ -37,13 +37,13 @@ use Newsletter\Enums\Langs;
     $users->dropTable();
  }
 
- add_action('admin_enqueue_scripts','nl_admin_scripts',11);
- function nl_admin_scripts(){
+ add_action('admin_enqueue_scripts','nl_admin_scripts_send',11);
+ function nl_admin_scripts_send(){
     $plugin_dir = Pr::pluginUrl(__FILE__);
-    $adminCss = $plugin_dir.C::REL_CSS_ADMIN;
-    wp_enqueue_style('nlAdminCss',$adminCss,[],null);
-    $adminJs = $plugin_dir.C::REL_JS_ADMIN;
-    wp_enqueue_script('nlAdminJs',$adminJs,[],null);
+    $adminCss = $plugin_dir.C::REL_CSS_ADMIN_SEND;
+    wp_enqueue_style('nlAdminCssSend',$adminCss,[],null);
+    $adminJs = $plugin_dir.C::REL_JS_ADMIN_SEND;
+    wp_enqueue_script('nlAdminJsSend',$adminJs,[],null);
  }
 
  add_action('admin_menu','nl_menu');

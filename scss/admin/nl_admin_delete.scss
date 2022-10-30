@@ -1,0 +1,12 @@
+
+@mixin admin_form_delete(){
+    form#nl_form_del{
+        >div{
+            &:first-child{
+                width: 90%;
+            }
+        }
+    }
+}
+
+@include admin_form_delete();
