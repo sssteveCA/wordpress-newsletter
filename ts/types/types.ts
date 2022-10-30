@@ -6,6 +6,10 @@ export type NlFormData = {
     lang: string;
 };
 
+export type NlFormDataDelete = {
+    emails: string[];
+}
+
 export type NlFormDataSend = {
     subject: string;
     message: string;
