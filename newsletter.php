@@ -14,8 +14,18 @@
  require_once(ABSPATH."wp-admin/includes/upgrade.php");
  require_once("enums/languages.php");
  require_once("interfaces/constants.php");
+ require_once("traits/properties/messages/activationmailtrait.php");
+ require_once("traits/properties/messages/newusertrait.php");
+ require_once("traits/properties/messages/othertrait.php");
+ require_once("traits/properties/messages/unsubscribetrait.php");
+ require_once("traits/properties/messages/verifytrait.php");
+ require_once("traits/properties/propertiesmessagestrait.php");
+ require_once("traits/properties/propertiesurltrait.php");
+ require_once("traits/errortrait.php");
+ require_once("traits/sqltrait.php");
  require_once("classes/properties.php");
  require_once("classes/htmlcode.php");
+ require_once("classes/database/tables/table.php");
  require_once("classes/database/tables/users.php");
 
  use Newsletter\Classes\Database\Tables\Users;
@@ -67,17 +77,17 @@ use Newsletter\Enums\Langs;
     remove_submenu_page('nl_menu','nl_menu');
  }
 
- /**
-  * Admin delete users menu item output
-  */
+ 
+ function nl_submenu_add(){
+      $addHtml = HtmlCode::adminAddForm();
+      echo $addHtml;
+ }
+
  function nl_submenu_del(){
     $delHtml = HtmlCode::adminDelForm();
     echo $delHtml;
  }
 
- /**
-  * Admin email sender menu item output
-  */
  function nl_submenu_send(){
     $sendHtml = HtmlCode::adminSenderForm();
     echo $sendHtml;
