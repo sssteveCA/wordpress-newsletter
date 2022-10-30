@@ -225,11 +225,11 @@ HTML;
             <input type="email" class="form-control" id="nl_email" required>
         </div>
         <div class="m-4 form-check">
-            <input class="form-check-input" type="checkbox" value="1" id="nl_check_pc" name="privcook">
+            <input class="form-check-input" type="checkbox" value="1" id="nl_check_pc" name="privcook" required>
             <label class="form-check-label" for="nl_check_pc">{$params['cb_label1']}</label>
         </div>
         <div class="m-4 form-check">
-            <input class="form-check-input" type="checkbox" value="1" id="nl_check_terms" name="terms">
+            <input class="form-check-input" type="checkbox" value="1" id="nl_check_terms" name="terms" required>
             <label class="form-check-label" for="nl_check_terms">{$params['cb_label2']}</label>
         </div>
         <div class="d-flex justify-content-center">
