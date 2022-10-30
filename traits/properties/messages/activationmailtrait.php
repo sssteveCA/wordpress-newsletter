@@ -12,7 +12,7 @@ trait ActivationMailTrait{
      * @param string $lang the user language
      * @return  string the activation mail <title> tag content
      */
-    public static function activationMailTitle(string $lang): string{
+    /* public static function activationMailTitle(string $lang): string{
         if($lang == Langs::$langs["it"]){
             return "Iscrizione Newsletter";
         }
@@ -22,7 +22,7 @@ trait ActivationMailTrait{
         else{
             return "Newsletter subscription"; 
         }
-    }
+    } */
 
     /**
      * Get the activation mail click link message

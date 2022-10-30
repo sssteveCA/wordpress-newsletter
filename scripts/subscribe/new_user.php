@@ -7,7 +7,7 @@ require_once("../../interfaces/constants.php");
 require_once("../../interfaces/messages.php");
 require_once("../../exceptions/notsettedexception.php");
 require_once("../../traits/errortrait.php");
-require_once("../../traits/properties/messages/activationmailtrait.php");
+//require_once("../../traits/properties/messages/activationmailtrait.php");
 require_once("../../traits/properties/messages/othertrait.php");
 require_once("../../traits/properties/messages/newusertrait.php");
 require_once("../../traits/properties/messages/unsubscribetrait.php");
@@ -71,7 +71,7 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
             case 0:
                 $verCode = $userSubscribe->getUser()->getVerCode();
                 $email = $userSubscribe->getUser()->getEmail();
-                $subject = Properties::activationMailTitle($lang);
+                $subject = Template::activationMailTitle($lang);
                 $verifyUrl = Properties::verifyUrl();
                 $link = $verifyUrl."?lang=".$lang."&verCode=".$verCode;
                 $operation = EmailManager::EMAIL_ACTIVATION;

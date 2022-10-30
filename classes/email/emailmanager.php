@@ -77,8 +77,9 @@ class EmailManager extends PHPMailer{
                 ];
                 $htmlBody = Template::activationMailTemplate($lang,$templateData);
                 $this->addAddress($this->email);
-                $this->Body = $htmlBody;
-                $this->AltBody = "Siamo spiacenti il tuo client di posta non supporta l'HTML";
+                $this->body = $htmlBody;
+                $this->Body = $this->body;
+                $this->AltBody = $this->body;
                 $this->send();
             }catch(Exception $e){
                 //echo "Mail Exception => ".$e->getMessage()."\r\n";
@@ -91,7 +92,7 @@ class EmailManager extends PHPMailer{
     /**
      * Send an email to the used that was deleted from the newsletter by the admin
      */
-    public function sendDeleteUserNotify(array $data){
+    public function sendDeleteUserNotify(){
         $this->errno = 0;
         foreach($this->emailsList as $email){
             $addresses = $this->getAllRecipientAddresses();
@@ -99,12 +100,20 @@ class EmailManager extends PHPMailer{
             try{
                 $user = $this->checkSubscribedEmail($email);
                 if($user != null){
-                    $this->addAddress($email);
-                    $templateData = ['from' => $this->from];
-                    $htmlBody = Template::deleteUserTemplate($data['lang'],$templateData);
-                    $this->Body = $htmlBody;
-                    $this->AltBody = $this->body;
-                    $this->send();
+                    $del = $this->userDelete($user);
+                    if($del){
+                        $this->addAddress($email);
+                        $lang = $user->getLang();
+                        $templateData = ['from' => $this->from];
+                        $subject = Template::deleteUserMessages($lang,$templateData)["title"];
+                        $htmlBody = Template::deleteUserTemplate($lang,$templateData);
+                        $this->subject = $subject;
+                        $this->body = $htmlBody;
+                        $this->Subject = $this->subject;
+                        $this->Body = $this->body;
+                        $this->AltBody = $this->body;
+                        $this->send();
+                    }//if($del){ 
                 }//if($user != null){
             }catch(Exception $e){
                 //echo "Mail Exception => ".$e->getMessage()."\r\n";
@@ -132,7 +141,8 @@ class EmailManager extends PHPMailer{
                     $lang = $user->getLang();
                     $htmlBody = Template::mailTemplate($lang,$templateData);
                     $this->addAddress($email);
-                    $this->Body = $htmlBody;
+                    $this->body = $htmlBody;
+                    $this->Body = $this->body;
                     $this->AltBody = $this->body;
                     $this->send();
                 }//if($user != null){
@@ -152,7 +162,8 @@ class EmailManager extends PHPMailer{
             $htmlBody = Template::unsubscribedUserTemplate($this->email);
             //echo "EmailManager sendUserUnsubscribeNotify htmlBody => ".var_export($htmlBody,true)."\r\n";
             $this->addAddress($this->from);
-            $this->Body = $htmlBody;
+            $this->body = $htmlBody;
+            $this->Body = $this->body;
             $this->AltBody = "L'utente con email {$this->email} si è cancellato dalla newsletter";
             $this->send();
         }catch(Exception $e){

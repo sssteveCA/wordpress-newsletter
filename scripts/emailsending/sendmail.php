@@ -7,7 +7,7 @@ require_once("../../interfaces/exceptionmessages.php");
 require_once("../../interfaces/messages.php");
 require_once("../../exceptions/notsettedexception.php");
 require_once("../../vendor/autoload.php");
-require_once("../../traits/properties/messages/activationmailtrait.php");
+//require_once("../../traits/properties/messages/activationmailtrait.php");
 require_once("../../traits/properties/messages/newusertrait.php");
 require_once("../../traits/properties/messages/othertrait.php");
 require_once("../../traits/properties/messages/unsubscribetrait.php");
@@ -62,7 +62,8 @@ if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != '')
                     break;
                 default:
                     http_response_code(500);
-                    $response['msg'] = M::ERR_UNKNOWN;          
+                    $response['msg'] = M::ERR_UNKNOWN;
+					break;          
             }//switch($emErrno){
         }catch(NotSettedException $nse){
             http_response_code(400);

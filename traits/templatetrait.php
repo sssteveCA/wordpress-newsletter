@@ -57,6 +57,23 @@ HTML,
     }
 
     /**
+     * Get the activation mail <title> tag content
+     * @param string $lang the user language
+     * @return  string the activation mail <title> tag content
+     */
+    public static function activationMailTitle(string $lang): string{
+        if($lang == Langs::$langs["it"]){
+            return "Iscrizione Newsletter";
+        }
+        else if($lang == Langs::$langs["es"]){
+            return "Suscripción al boletín informativo";
+        }
+        else{
+            return "Newsletter subscription"; 
+        }
+    }
+
+    /**
      * Get the messages used in the delete user notification message
      * @param string $lang the user language
      * @param array $params an array of values used in this mail

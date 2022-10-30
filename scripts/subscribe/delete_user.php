@@ -4,15 +4,25 @@ require_once("../../../../../wp-load.php");
 require_once("../../interfaces/exceptionmessages.php");
 require_once("../../interfaces/constants.php");
 require_once("../../interfaces/messages.php");
+require_once("../../exceptions/notsettedexception.php");
+require_once("../../traits/properties/messages/othertrait.php");
+require_once("../../traits/properties/messages/newusertrait.php");
+require_once("../../traits/properties/messages/unsubscribetrait.php");
+require_once("../../traits/properties/messages/verifytrait.php");
+require_once("../../traits/properties/propertiesmessagestrait.php");
+require_once("../../traits/properties/propertiesurltrait.php");
 require_once("../../traits/errortrait.php");
 require_once("../../traits/modeltrait.php");
 require_once("../../traits/sqltrait.php");
+require_once("../../traits/templatetrait.php");
 require_once("../../traits/usertrait.php");
 require_once("../../traits/usertrait.php");
 require_once("../../traits/userstrait.php");
 require_once("../../traits/errortrait.php");
 require_once("../../traits/emailmanagertrait.php");
 require_once("../../vendor/autoload.php");
+require_once("../../classes/properties.php");
+require_once("../../classes/template.php");
 require_once("../../classes/database/tables/table.php");
 require_once("../../classes/database/model.php");
 require_once("../../classes/database/models/user.php");
@@ -21,8 +31,10 @@ require_once("../../classes/email/emailmanager.php");
 
 use Dotenv\Dotenv;
 use Newsletter\Classes\Email\EmailManager;
+use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
+use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 
 $input = file_get_contents("php://input");
 $post = json_decode($input,true);
@@ -33,9 +45,32 @@ $response = [
 
 if(isset($post['emails']) && sizeof($post['emails']) > 0){
     if(is_array($post['emails']) && sizeof($post['emails']) > 0){
-        $userData = [
-            'tableName' => C::TABLE_USERS
+        $sdData = [
+            'body' => '', 'emails' => $post['emails'], 'subject' => ''
         ];
+        try{
+            $emErrno = sendDeleteUserNotify($snData);
+            switch($emErrno){
+                case 0:
+                    $response['done'] = true;
+                    $response['msg'] = "I contatti indicati sono stati rimossi dalla lista degli iscritti";
+                    break;
+                case Eme::ERR_EMAIL_SEND:
+                    http_response_code(400);
+                    $response['msg'] = $emailManager->getError();
+                    break;
+                default:
+                    http_response_code(500);
+                    $response['msg'] = M::ERR_UNKNOWN;
+                    break;
+            }
+        }catch(NotSettedException $nse){
+            http_response_code(400);
+            $response['msg'] = $nse->getMessage();
+        }catch(Exception $e){
+            http_response_code(500);
+            $response['msg'] = M::ERR_UNKNOWN;
+        }
     }//if(is_array($post['emails']) && sizeof($post['emails']) > 0){
     else{
         http_response_code(400);
@@ -64,8 +99,7 @@ function sendDeleteUserNotify(array $params):int {
         'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
     $emailManager = new EmailManager($emData);
-    $deleteUserMailData = ['lang' => $params['lang']];
-    $emailManager->sendDeleteUserNotify($deleteUserMailData);
+    $emailManager->sendDeleteUserNotify();
     $emErrno = $emailManager->getErrno();
     return $emErrno;
 }
