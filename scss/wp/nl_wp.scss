@@ -1,0 +1,9 @@
+
+
+@mixin wp_form(){
+    fieldset#nl_form_fieldset{
+        min-width: 250px;
+    }
+}
+
+@include wp_form();
