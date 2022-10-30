@@ -57,7 +57,41 @@ HTML,
     }
 
     /**
+     * Get the messages used in the delete user notification message
+     * @param string $lang the user language
+     * @param array $params an array of values used in this mail
+     * @return array an array containing the message used in delete user mail in the user language
+     */
+    public static function deleteUserMessages(string $lang, array $params): array{
+        $contactUrl = Properties::contactsUrl($lang);
+        if($lang == Langs::$langs["it"]){
+            return [
+                "moreInfo" => "Se pensi che sia stato fatto per errore scrivi una mail sulla nostra <a href=\"{$contactUrl}\">pagina dei contatti</a>",
+                "moreInfoMail" => "oppure puoi scrivere direttamente a {$params['from']}",
+                "removed" => "L'amministratore ti ha rimosso dalla newsletter."   
+            ];
+        }
+        else if($lang == Langs::$langs["es"]){
+            return [
+                "moreInfo" => "Si cree que se hizo por error, escriba un correo electrónico en nuestra <a href=\"{$contactUrl}\">página de contacto</a>",
+                "moreInfoMail" => "o puedes escribir directamente a {$params['from']}",
+                "removed" => "El administrador te ha eliminado del boletín."
+            ];
+        }
+        else{
+            return [
+                "moreInfo" => "If you think it was done by mistake write an email on our <a href=\"{$contactUrl}\">contact page</a>",
+                "moreInfoMail" => "or you can write directly to {$params['from']}",
+                "removed" => "The administrator has removed you from the newsletter."
+            ];
+        }
+    }
+
+    /**
      * Messages to add at Mail HTML template
+     * @param string $lang the user language
+     * @param array $params array of values used to build these messages
+     * @return array an array of message to use in mail Template in user language
      */
     public static function mailTemplateMessages(string $lang, array $params): array{
         $homeUrl = Properties::homeUrl();
