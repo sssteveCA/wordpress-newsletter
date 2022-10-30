@@ -35,6 +35,24 @@ HTML;
     }
 
     /**
+     * Mail sent to the user when is removed from the administrator
+     */
+    public static function deleteUserTemplate(array $params): string{
+        return <<<HTML
+        <!DOCTYPE html>
+        <html lang="it">
+            <head>
+                <title>Cancellazione utente</title>
+                <meta charset="utf-8">
+            </head>
+            <body>
+                <div style="padding: 40px 20px; text-align: center;">{}</div>
+            </body>
+        </html>
+        HTML;
+    }
+
+    /**
      * Newsletter HTML body
      */
     public static function mailTemplate(string $lang, array $params): string{
@@ -116,7 +134,7 @@ HTML;
     }
 
     /**
-     * Mail sended when an user unsubscribes from the newsletter
+     * Mail sent when an user unsubscribes from the newsletter
      */
     public static function unsubscribedUserTemplate(string $email): string{
         return <<<HTML
