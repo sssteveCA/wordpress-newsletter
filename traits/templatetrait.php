@@ -17,8 +17,8 @@ trait TemplateTrait{
      * @return array an array containing the message used in activation mail in the user language
      */
     public static  function activationMailMessages(string $lang, array $params):array {
-        $code = $params['code'];
-        $contactUrl = $params['contactUrl'];
+        $code = $params['verCode'];
+        $contactUrl = Properties::contactsUrl($lang);
         $link = $params['link'];
         $verifyUrl = $params['verifyUrl'];
         if($lang == Langs::$langs["it"]){

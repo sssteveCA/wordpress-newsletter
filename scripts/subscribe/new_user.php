@@ -40,6 +40,7 @@ use Newsletter\Interfaces\Messages as M;
 use Newsletter\Classes\Subscribe\UserSubscribeError as Usee;
 use Newsletter\Classes\Properties;
 use Newsletter\Classes\Subscribe\UserSubscribe;
+use Newsletter\Classes\Template;
 
 $inputs = file_get_contents("php://input");
 $post = json_decode($inputs,true);

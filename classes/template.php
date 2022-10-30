@@ -15,22 +15,19 @@ class Template{
      */
     public static function activationMailTemplate(string $lang, array $params): string{
         //echo "template.php activationMailTemplate params => ".var_export($params,true)."\r\n";
-        $title = Properties::activationMailTitle($lang);
-        $clickLink = Properties::clickActivationLink($lang,$params['link']);
-        $clickVerify = Properties::clickActivationLinkWithCode($lang,$params['verifyUrl'],$params['verCode']);
-        $moreInfo = Properties::moreInformation($lang);
+        $messages = Template::activationMailMessages($lang,$params);
         //echo "template.php activationMailTemplate moreInfo => ".var_export($moreInfo,true)."\r\n";
         $htmlTemplate = <<<HTML
 <!DOCTYPE html>
 <html lang="it">
     <head>
-        <title>{$title}</title>
+        <title>{$messages['title']}</title>
         <meta charset="utf-8">
     </head>
     <body>
-    <p>{$clickLink}</p>
-    <p>{$clickVerify}</p>
-    <p>{$moreInfo}</p>
+    <p>{$messages['link']}</p>
+    <p>{$messages['codeWithLink']}</p>
+    <p>{$messages['moreInfo']}</p>
     </body>
 </html>
 HTML;
