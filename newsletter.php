@@ -13,11 +13,13 @@
  require_once(ABSPATH."wp-admin/includes/plugin.php");
  require_once(ABSPATH."wp-admin/includes/upgrade.php");
  require_once("enums/languages.php");
+ require_once("interfaces/constants.php");
  require_once("classes/properties.php");
+ require_once("classes/htmlcode.php");
+ require_once("classes/database/tables/users.php");
 
  use Newsletter\Classes\Database\Tables\Users;
  use Newsletter\Interfaces\Constants as C;
- use Newsletter\Classes\Properties as Pr;
  use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\Properties;
 use Newsletter\Enums\Langs;
@@ -39,7 +41,8 @@ use Newsletter\Enums\Langs;
 
  add_action('admin_enqueue_scripts','nl_admin_scripts_send',11);
  function nl_admin_scripts_send(){
-    $plugin_dir = Pr::pluginUrl(__FILE__);
+    $plugin_dir = Properties::pluginUrl(__FILE__);
+    $page = $_REQUEST['page'];
     $adminCss = $plugin_dir.C::REL_CSS_ADMIN_SEND;
     wp_enqueue_style('nlAdminCssSend',$adminCss,[],null);
     $adminJs = $plugin_dir.C::REL_JS_ADMIN_SEND;
@@ -95,6 +98,11 @@ function nl_form_signup(){
       }
    }//if(is_plugin_active("polylang/polylang.php")){
    echo do_shortcode("[nl_subscribe lang=\"{$lang}\"]"); 
+}
+
+add_action('wp_loaded','nl_after_load');
+function nl_after_load(){
+   
 }
 
 add_shortcode('nl_subscribe','nl_subscribe_form');
