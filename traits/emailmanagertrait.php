@@ -76,6 +76,19 @@ trait EmailManagerTrait{
         $this->Port = $data['port'];
     }
 
+    /**
+     * Delete the user before send the mail
+     * @param User $user the user to delete
+     * @return bool true if user was deleted, false otherwise
+     */
+    private function userDelete(User $user): bool{
+        $sql = "WHERE `".User::$fields["email"]."` = %s";
+        $values = [$user->getEmail()];
+        $user->deleteUser($sql,$values);
+        if($user->getErrno() == 0) return true;
+        return false;
+    }
+
     
 }
 ?>

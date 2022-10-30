@@ -74,7 +74,7 @@ if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != '')
     }//if(is_array($post['emails'] && sizeof($post['emails']) > 0)){
     else{
         http_response_code(400);
-        $response['msg'] = "Inserisci almeno un indirizzo email";
+        $response['msg'] = M::ERR_ATLEAST_ONE_EMAIL;
     }
 }//if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
 else{

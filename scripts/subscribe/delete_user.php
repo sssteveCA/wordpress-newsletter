@@ -1,10 +1,9 @@
 <?php
 
-use Dotenv\Dotenv;
-use Newsletter\Classes\Email\EmailManager;
-
 require_once("../../../../../wp-load.php");
 require_once("../../interfaces/exceptionmessages.php");
+require_once("../../interfaces/constants.php");
+require_once("../../interfaces/messages.php");
 require_once("../../traits/errortrait.php");
 require_once("../../traits/modeltrait.php");
 require_once("../../traits/sqltrait.php");
@@ -20,6 +19,11 @@ require_once("../../classes/database/models/user.php");
 require_once("../../classes/database/models/users.php");
 require_once("../../classes/email/emailmanager.php");
 
+use Dotenv\Dotenv;
+use Newsletter\Classes\Email\EmailManager;
+use Newsletter\Interfaces\Constants as C;
+use Newsletter\Interfaces\Messages as M;
+
 $input = file_get_contents("php://input");
 $post = json_decode($input,true);
 
@@ -28,11 +32,19 @@ $response = [
 ];
 
 if(isset($post['emails']) && sizeof($post['emails']) > 0){
-
+    if(is_array($post['emails']) && sizeof($post['emails']) > 0){
+        $userData = [
+            'tableName' => C::TABLE_USERS
+        ];
+    }//if(is_array($post['emails']) && sizeof($post['emails']) > 0){
+    else{
+        http_response_code(400);
+        $response['msg'] = M::ERR_ATLEAST_ONE_EMAIL;
+    }
 }//if(isset($post['emails']) && sizeof($post['emails']) > 0){
 else{
     http_response_code(400);
-    $response['msg'] = "Inserisci almeno un indirizzo email";
+    $response['msg'] = M::ERR_MISSING_FORM_VALUES;
 }
 
 
