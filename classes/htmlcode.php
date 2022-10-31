@@ -26,18 +26,26 @@ class HtmlCode{
         </div>
         <div class="row">
             <div class="col-12 col-md-3">
-                <label for="nl_lang_code" class="form-label">Codice lingua</label>
+                <label for="nl_name" class="form-label">Nome</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="text" id="nl_lang_code" class="form-control" name="lang_code">
+                <input type="text" id="nl_name" class="form-control" name="name">
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-3">
-                <label for="nl_unsubscibe_code" class="form-label">Codice disiscrizione</label>
+                <label for="nl_surname" class="form-label">Cognome</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="text" id="nl_unsubscibe_code" class="form-control" name="unsubscibe_code">
+                <input type="text" id="nl_surname" class="form-control" name="surname">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <label for="nl_lang_code" class="form-label">Codice lingua</label>
+            </div>
+            <div class="col-12 col-md-9">
+                <input type="text" id="nl_lang_code" class="form-control" name="lang_code">
             </div>
         </div>
         <div class="row justify-content-between justify-content-md-evenly">

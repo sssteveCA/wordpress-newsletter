@@ -7,9 +7,10 @@ export type NlFormData = {
 };
 
 export type NlFormDataAdd = {
+    name?: string;
+    surname?: string;
     email: string;
     lang_code: string;
-    unsubcribe_code: string;
 };
 
 export type NlFormDataDelete = {
