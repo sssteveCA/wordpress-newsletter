@@ -1,3 +1,11 @@
+@use "sass:map";
+@use "../modules/globals";
+
+@function nl_send_container_widths($width){
+    @if $width < 992px{
+
+    }
+}
 
 @mixin admin_form_send(){
     form#nl_form_send{
@@ -5,6 +13,9 @@
             &:first-child{
                 width: 90%;
             }
+        }
+        div#nl_send_message{
+
         }
     }
 }
