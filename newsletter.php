@@ -3,7 +3,7 @@
  * Plugin Name: Newsletter
  * Description: This plugin allows send email to subscribers
  * Version: 1.0
- * Requires at least: 5.0
+ * Requires at least: 5.5
  * Requires PHP: 8.0
  * Author: Stefano Puggioni
  * License: GPL v2 or later
@@ -14,6 +14,9 @@
  require_once(ABSPATH."wp-admin/includes/upgrade.php");
  require_once("enums/languages.php");
  require_once("interfaces/constants.php");
+ require_once("interfaces/exceptionmessages.php");
+ require_once("exceptions/notsettedexception.php");
+ require_once("exceptions/incorrectvariableformatexception.php");
  require_once("traits/properties/messages/activationmailtrait.php");
  require_once("traits/properties/messages/newusertrait.php");
  require_once("traits/properties/messages/othertrait.php");
@@ -35,8 +38,8 @@ use Newsletter\Classes\Properties;
 use Newsletter\Enums\Langs;
 
  register_activation_hook(__FILE__,'nl_set_table');
- function bnl_set_table(){
-    $data = ['name' => C::TABLE_USERS];
+ function nl_set_table(){
+    $data = ['tableName' => C::TABLE_USERS];
     $users = new Users($data);
     $create = $users->getSqlCreate();
     dbDelta($create);
@@ -44,7 +47,7 @@ use Newsletter\Enums\Langs;
 
  register_uninstall_hook(__FILE__,'nl_delete_table');
  function nl_delete_table(){
-    $data = ['name' => C::TABLE_USERS];
+    $data = ['tableName' => C::TABLE_USERS];
     $users = new Users($data);
     $users->dropTable();
  }
