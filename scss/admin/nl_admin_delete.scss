@@ -1,10 +1,44 @@
+@use "sass:map";
+@use "../modules/globals";
+
+$xsm-breakpoint: map.get(globals.$bs-breakpoints,'xsm');
+$md-breakpoint: map.get(globals.$bs-breakpoints,'md');
+$lg-breakpoint: map.get(globals.$bs-breakpoints,'lg');
+
+@function nl_del_container_widths($width){
+    $widths-map: ();
+    @if $width >= $md-breakpoint{
+        $widths-map: ('nl_del_content_email': 50%, 'nl_del_checkbox': 40%);
+    }
+    @else if $width >= $lg-breakpoint{
+        $widths-map: ('nl_del_content_email': 45%, 'nl_del_checkbox': 35%);
+    }
+    @else{
+        $widths-map: ('nl_del_content_email': 90%,'nl_del_checkbox': 90%);
+    }
+    @return $widths-map;
+}
 
 @mixin admin_form_delete(){
     form#nl_form_del{
-        >div{
-            &:first-child{
-                width: 90%;
-            }
+        div#nl_del_content_email{
+            min-width: 250px; height: 400px; border: 1px solid black;
+        }
+        div#nl_del_checkbox{ min-width: 250px;}
+        @media only screen and (min-width: #{$xsm-breakpoint}){
+            $widths: nl_del_container_widths($xsm-breakpoint);
+            div#nl_del_content_email{ width: map.get($widths,'nl_del_content_email'); }
+            div#nl_send_checkbox{ width: map.get($widths, 'nl_del_checkbox'); }
+        }
+        @media only screen and (min-width: #{$md-breakpoint}){
+            $widths: nl_del_container_widths($md-breakpoint);
+            div#nl_del_content_email{ width: map.get($widths,'nl_del_content_email'); }
+            div#nl_send_checkbox{ width: map.get($widths, 'nl_del_checkbox'); }
+        }
+        @media only screen and (min-width: #{$lg-breakpoint}){
+            $widths: nl_del_container_widths($lg-breakpoint);
+            div#nl_del_content_email{ width: map.get($widths,'nl_del_content_email'); }
+            div#nl_send_checkbox{ width: map.get($widths, 'nl_send_checkbox'); }
         }
     }
 }

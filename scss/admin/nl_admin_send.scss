@@ -23,7 +23,7 @@ $xsm-breakpoint: map.get(globals.$bs-breakpoints,'xsm');
         div#nl_send_message{ 
             min-width: 300px; height: 400px;
             textarea{
-                width: 100%; height: 100%; resize: none;
+                width: 100%; height: 100%; resize: none; overflow: auto;
             }
         }
         div#nl_send_checkbox{ min-width: 250px; }

@@ -71,24 +71,26 @@ HTML;
             <h2 class="text-center">Elimina iscritti dalla newsletter</h2>
         </div>
         <form id="nl_form_del" method="post" action="#">
-            <div id="nl_del_content" class="mt-4 mx-auto">
+            <div id="nl_del_content" class="mt-4 mx-auto d-flex flex-column flex-md-row justify-content-md-around">
                 <div id="nl_del_content_email" class="border border-dark overflow-auto">
                 </div>
-                <div>
-                    <input type="checkbox" id="nl_check_all" value="1">
-                    <label for="nl_check_all">Seleziona tutto</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="nl_check_all_it" value="1">
-                    <label for="nl_check_all_it">Seleziona tutti gli italiani</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="nl_check_all_es" value="1">
-                    <label for="nl_check_all_es">Seleziona tutti gli spagnoli</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="nl_check_all_en" value="1">
-                    <label for="nl_check_all_en">Seleziona tutti gli inglesi</label>
+                <div id="nl_del_checkbox" class="my-3 my-md-0">
+                    <div>
+                        <input type="checkbox" id="nl_check_all" value="1">
+                        <label for="nl_check_all">Seleziona tutto</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="nl_check_all_it" value="1">
+                        <label for="nl_check_all_it">Seleziona tutti gli italiani</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="nl_check_all_es" value="1">
+                        <label for="nl_check_all_es">Seleziona tutti gli spagnoli</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="nl_check_all_en" value="1">
+                        <label for="nl_check_all_en">Seleziona tutti gli inglesi</label>
+                    </div>
                 </div>
             </div>
             <div id="nl_del_button" class="text-center mt-4">
