@@ -16,7 +16,7 @@ class HtmlCode{
 </div>
 <form id="nl_form_add" method="post" action="#">
     <div id="nl_add_content" class="mt-4 mx-auto container-fluid">
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-12 col-md-3">
                 <label for="nl_email" class="form-label">Email</label>
             </div>
@@ -24,7 +24,7 @@ class HtmlCode{
                 <input type="text" id="nl_email" class="form-control" name="email">
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-12 col-md-3">
                 <label for="nl_name" class="form-label">Nome</label>
             </div>
@@ -32,7 +32,7 @@ class HtmlCode{
                 <input type="text" id="nl_name" class="form-control" name="name">
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-12 col-md-3">
                 <label for="nl_surname" class="form-label">Cognome</label>
             </div>
@@ -40,7 +40,7 @@ class HtmlCode{
                 <input type="text" id="nl_surname" class="form-control" name="surname">
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-12 col-md-3">
                 <label for="nl_lang_code" class="form-label">Codice lingua</label>
             </div>

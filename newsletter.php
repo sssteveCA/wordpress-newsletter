@@ -54,7 +54,7 @@ use Newsletter\Enums\Langs;
 
  add_action('admin_enqueue_scripts','nl_admin_scripts',11);
  function nl_admin_scripts(){
-   file_put_contents("log.txt","newsletter.php nl_admin_scripts request page =>".var_export($_REQUEST['page'],true)."\r\n",FILE_APPEND);
+   //file_put_contents("log.txt","newsletter.php nl_admin_scripts request page =>".var_export($_REQUEST['page'],true)."\r\n",FILE_APPEND);
    if(isset($_REQUEST['page'])){
       $page = $_REQUEST['page'];
       if($page == C::SLUG_ADMIN_FORM_ADD){
