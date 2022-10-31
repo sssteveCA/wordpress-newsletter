@@ -114,12 +114,12 @@ HTML;
         </div>
         <input type="text" id="nl_subject" class="form-control" name="subject" aria-label="Oggetto" aria-describedby="nl_label_subject">
     </div>
-    <div class="d-flex flex-column flex-lg-row justify-content-lg-between">
+    <div class="d-flex flex-column justify-content-center flex-lg-row justify-content-lg-between">
         <div id="nl_send_message" class="mt-4 mx-auto">
             <textarea id="nl_msg_text" name="message" required></textarea>
         </div>
         <div id="nl_send_checkbox" class="mt-4 mx-auto">
-            <div id="nl_send_content" class="border border-dark overflow-auto">
+            <div id="nl_send_content" class="overflow-auto">
             </div>
             <div>
                 <input type="checkbox" id="nl_check_all" value="1">

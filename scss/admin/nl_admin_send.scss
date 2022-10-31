@@ -1,21 +1,41 @@
 @use "sass:map";
 @use "../modules/globals";
 
-@function nl_send_container_widths($width){
-    @if $width < 992px{
+$lg-breakpoint: map.get(globals.$bs-breakpoints,'lg');
+$xsm-breakpoint: map.get(globals.$bs-breakpoints,'xsm');
 
+@function nl_send_container_widths($width){
+    $widths-map: ();
+    @if $width < $lg-breakpoint{
+        $widths-map: ('nl_send_message': 80%, 'nl_send_checkbox': 40%);
     }
+    @else{
+        $widths-map: ('nl_send_message': 60%,'nl_send_checkbox': 30%);
+    }
+    @return $widths-map;
 }
 
 @mixin admin_form_send(){
     form#nl_form_send{
         >div{
-            &:first-child{
-                width: 90%;
+            &:first-child{ width: 90%;}
+        }
+        div#nl_send_message{ 
+            min-width: 300px; height: 400px;
+            textarea{
+                width: 100%; height: 100%; resize: none;
             }
         }
-        div#nl_send_message{
-
+        div#nl_send_checkbox{ min-width: 250px; }
+        @media only screen and (min-width: #{$xsm-breakpoint}){
+            $widths: nl_send_container_widths($xsm-breakpoint);
+            div#nl_send_message{ width: map.get($widths,'nl_send_message'); }
+            div#nl_send_checkbox{ width: map.get($widths, 'nl_send_checkbox'); }
+        }
+        @media only screen and (min-width: #{$lg-breakpoint}){
+            $widths: nl_send_container_widths($lg-breakpoint);
+            div#nl_send_message{ width: map.get($widths,'nl_send_message'); }
+            div#nl_send_checkbox{ width: map.get($widths, 'nl_send_checkbox'); }
         }
     }
 }
