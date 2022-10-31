@@ -120,24 +120,26 @@ HTML;
         <div id="nl_send_message" class="mt-4 mx-auto">
             <textarea id="nl_msg_text" name="message" required></textarea>
         </div>
-        <div id="nl_send_checkbox" class="mt-4 mx-auto">
+        <div id="nl_send_emails_content" class="mt-4 mx-auto">
             <div id="nl_send_content" class="overflow-auto">
             </div>
-            <div>
-                <input type="checkbox" id="nl_check_all" value="1">
-                <label for="nl_check_all">Seleziona tutto</label>
-            </div>
-            <div>
-                <input type="checkbox" id="nl_check_all_it" value="1">
-                <label for="nl_check_all_it">Seleziona tutti gli italiani</label>
-            </div>
-            <div>
-                <input type="checkbox" id="nl_check_all_es" value="1">
-                <label for="nl_check_all_es">Seleziona tutti gli spagnoli</label>
-            </div>
-            <div>
-                <input type="checkbox" id="nl_check_all_en" value="1">
-                <label for="nl_check_all_en">Seleziona tutti gli inglesi</label>
+            <div id="nl_send_checkbox">
+                <div>
+                    <input type="checkbox" id="nl_check_all" value="1">
+                    <label for="nl_check_all">Seleziona tutto</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="nl_check_all_it" value="1">
+                    <label for="nl_check_all_it">Seleziona tutti gli italiani</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="nl_check_all_es" value="1">
+                    <label for="nl_check_all_es">Seleziona tutti gli spagnoli</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="nl_check_all_en" value="1">
+                    <label for="nl_check_all_en">Seleziona tutti gli inglesi</label>
+                </div>
             </div>
         </div>
     </div>

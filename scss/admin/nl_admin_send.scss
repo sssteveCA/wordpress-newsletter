@@ -7,10 +7,10 @@ $xsm-breakpoint: map.get(globals.$bs-breakpoints,'xsm');
 @function nl_send_container_widths($width){
     $widths-map: ();
     @if $width < $lg-breakpoint{
-        $widths-map: ('nl_send_message': 80%, 'nl_send_checkbox': 40%);
+        $widths-map: ('nl_send_message': 80%, 'nl_send_emails_content': 40%);
     }
     @else{
-        $widths-map: ('nl_send_message': 60%,'nl_send_checkbox': 30%);
+        $widths-map: ('nl_send_message': 60%,'nl_send_emails_content': 30%);
     }
     @return $widths-map;
 }
@@ -26,16 +26,22 @@ $xsm-breakpoint: map.get(globals.$bs-breakpoints,'xsm');
                 width: 100%; height: 100%; resize: none; overflow: auto;
             }
         }
-        div#nl_send_checkbox{ min-width: 250px; }
+        div#nl_send_emails_content{ 
+            min-width: 250px;
+            >*{ width: 100%; }
+            div#nl_send_content{
+                height: 300px; border: 1px solid black
+            }
+         }
         @media only screen and (min-width: #{$xsm-breakpoint}){
             $widths: nl_send_container_widths($xsm-breakpoint);
             div#nl_send_message{ width: map.get($widths,'nl_send_message'); }
-            div#nl_send_checkbox{ width: map.get($widths, 'nl_send_checkbox'); }
+            div#nl_send_emails_content{ width: map.get($widths, 'nl_send_emails_content'); }
         }
         @media only screen and (min-width: #{$lg-breakpoint}){
             $widths: nl_send_container_widths($lg-breakpoint);
             div#nl_send_message{ width: map.get($widths,'nl_send_message'); }
-            div#nl_send_checkbox{ width: map.get($widths, 'nl_send_checkbox'); }
+            div#nl_send_emails_content{ width: map.get($widths, 'nl_send_emails_content'); }
         }
     }
 }
