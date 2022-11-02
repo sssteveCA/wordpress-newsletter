@@ -30,7 +30,5 @@
   <div>**The backend script for add user from admin panel has not been added yet</div>
   <br>
   <div>NOTE!: At the moment there aren't the Javascript files to execute the PHP scripts asynchronously from the browser. They can be called directly launching the PHP files in the scripts folder</div>
-  <br>
-  <div>NOTE!: I haven't added the administrator user check for the backend requests yet</div>
   </div>
 </div>
