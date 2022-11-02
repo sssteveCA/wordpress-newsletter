@@ -1,5 +1,7 @@
 
 export type NlFormData = {
+    name?: string;
+    surname?: string;
     email: string;
     cb_privacy: string;
     cb_terms: string;
