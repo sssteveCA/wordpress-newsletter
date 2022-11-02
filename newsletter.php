@@ -163,7 +163,7 @@ function nl_add_script_tags($tag, $handle, $src){
       case C::H_JS_ADMIN_FORM_ADD:
       case C::H_JS_ADMIN_FORM_DELETE:
       case C::H_JS_ADMIN_FORM_SEND:
-         $tag = '<script type="module" src="'.esc_url($src).'"></script>';
+         $tag = '<script type="module" src="'.esc_url($src).'" defer></script>';
          break;
       default:
          break;
