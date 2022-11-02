@@ -59,6 +59,7 @@ export class NewUser{
                 throw err;
             });
         }catch(e){
+            console.warn(e);
             this._errno = NewUser.ERR_FETCH;
         }
         return response;
@@ -66,10 +67,13 @@ export class NewUser{
 
     private async newUserPromise(): Promise<string>{
         return await new Promise<string>((resolve,reject)=>{
-            clientPost.post(NewUser.NEWUSER_URL,{
-                name: this._name, surname: this._surname, email: this._email, cb_privacy: this._cb_privacy, 
+            let postData: NlFormData = {
+                name: this._name as string, surname: this._surname as string, email: this._email, cb_privacy: this._cb_privacy, 
                 cb_terms: this._cb_terms, lang: this._lang
-            }).then(res => {
+            };
+            console.log("new_user.ts newUserPromise postData => ");
+            console.log(postData);
+            clientPost.post(NewUser.NEWUSER_URL,postData).then(res => {
                 resolve(res.data);
             }).catch(err => {
                 reject(err);

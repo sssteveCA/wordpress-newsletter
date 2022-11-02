@@ -8,13 +8,15 @@ window.addEventListener('DOMContentLoaded',()=>{
         form.addEventListener('submit', (e)=>{
             e.preventDefault();
             const data: NlFormData = {
-                name: document.getElementById('name')?.getAttribute('value') as string,
-                surname: document.getElementById('surname')?.getAttribute('value') as string,
-                email: document.getElementById('nl_email')?.getAttribute('value') as string,
-                cb_privacy: document.getElementById('nl_cb_privacy')?.getAttribute('value') as string,
-                cb_terms: document.getElementById('nl_cb_terms')?.getAttribute('value') as string,
-                lang: document.getElementById('nl_lang')?.getAttribute('value') as string
+                name: (<HTMLInputElement>document.getElementById('nl_name')).value as string,
+                surname: (<HTMLInputElement>document.getElementById('nl_surname')).value as string,
+                email: (<HTMLInputElement>document.getElementById('nl_email')).value as string,
+                cb_privacy: (<HTMLInputElement>document.getElementById('nl_cb_privacy')).value as string,
+                cb_terms: (<HTMLInputElement>document.getElementById('nl_cb_terms')).value as string,
+                lang: (<HTMLInputElement>document.getElementById('nl_lang')).value as string
             };
+            console.log("nl_wp.ts NlFormData => ");
+            console.log(data);
             let newUser: NewUser = new NewUser(data);
             newUser.newUser();
         });

@@ -1,5 +1,6 @@
 <?php
 
+require_once("../../config/cors.php");
 require_once("../../../../../wp-load.php");
 require_once("../../enums/languages.php");
 require_once("../../interfaces/exceptionmessages.php");
@@ -44,6 +45,8 @@ use Newsletter\Classes\Template;
 
 $inputs = file_get_contents("php://input");
 $post = json_decode($inputs,true);
+
+file_put_contents(C::FILE_LOG, "new_user.php post data => ".var_export($post,true)."\r\n",FILE_APPEND);
 
 //var_dump($post);
 
