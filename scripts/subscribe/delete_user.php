@@ -41,45 +41,54 @@ $response = [
     'done' => false, 'msg' => ''
 ];
 
-if(isset($post['emails']) && sizeof($post['emails']) > 0){
-    if(is_array($post['emails']) && sizeof($post['emails']) > 0){
-        $sdData = [
-            'body' => '', 'emails' => $post['emails'], 'operation' => EmailManager::EMAIL_USER_DELETE, 'subject' => ''
-        ];
-        try{
-            $emErrno = sendDeleteUserNotify($sdData);
-            switch($emErrno){
-                case 0:
-                    $response['done'] = true;
-                    $response['msg'] = "I contatti indicati sono stati rimossi dalla lista degli iscritti";
-                    break;
-                case Eme::ERR_EMAIL_SEND:
-                    http_response_code(400);
-                    $response['msg'] = $emailManager->getError();
-                    break;
-                default:
-                    http_response_code(500);
-                    $response['msg'] = M::ERR_UNKNOWN;
-                    break;
+$current_user = wp_get_current_user();
+$logged = ($current_user->ID != 0);
+$administrator = current_user_can('manage_options');
+
+if($logged && $administrator){
+    if(isset($post['emails']) && sizeof($post['emails']) > 0){
+        if(is_array($post['emails']) && sizeof($post['emails']) > 0){
+            $sdData = [
+                'body' => '', 'emails' => $post['emails'], 'operation' => EmailManager::EMAIL_USER_DELETE, 'subject' => ''
+            ];
+            try{
+                $emErrno = sendDeleteUserNotify($sdData);
+                switch($emErrno){
+                    case 0:
+                        $response['done'] = true;
+                        $response['msg'] = "I contatti indicati sono stati rimossi dalla lista degli iscritti";
+                        break;
+                    case Eme::ERR_EMAIL_SEND:
+                        http_response_code(400);
+                        $response['msg'] = $emailManager->getError();
+                        break;
+                    default:
+                        http_response_code(500);
+                        $response['msg'] = M::ERR_UNKNOWN;
+                        break;
+                }
+            }catch(NotSettedException $nse){
+                http_response_code(400);
+                $response['msg'] = $nse->getMessage();
+            }catch(Exception $e){
+                http_response_code(500);
+                $response['msg'] = M::ERR_UNKNOWN;
             }
-        }catch(NotSettedException $nse){
+        }//if(is_array($post['emails']) && sizeof($post['emails']) > 0){
+        else{
             http_response_code(400);
-            $response['msg'] = $nse->getMessage();
-        }catch(Exception $e){
-            http_response_code(500);
-            $response['msg'] = M::ERR_UNKNOWN;
+            $response['msg'] = M::ERR_ATLEAST_ONE_EMAIL;
         }
-    }//if(is_array($post['emails']) && sizeof($post['emails']) > 0){
+    }//if(isset($post['emails']) && sizeof($post['emails']) > 0){
     else{
         http_response_code(400);
-        $response['msg'] = M::ERR_ATLEAST_ONE_EMAIL;
+        $response['msg'] = M::ERR_MISSING_FORM_VALUES;
     }
-}//if(isset($post['emails']) && sizeof($post['emails']) > 0){
+}//if($logged && $administrator){
 else{
-    http_response_code(400);
-    $response['msg'] = M::ERR_MISSING_FORM_VALUES;
+    http_response_code(401);
+    $response['msg'] = M::ERR_UNAUTHORIZED;
 }
-
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 
