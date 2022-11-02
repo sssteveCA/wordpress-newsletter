@@ -65,7 +65,7 @@ class User extends Model implements Ue{
 
     public function __construct(array $data)
     {
-        //var_dump($data);
+        file_put_contents("log.txt","User constructor data => ".var_export($data,true)."\r\n",FILE_APPEND);
         parent::__construct($data);
         $this->assignValues($data);
     }
@@ -149,8 +149,7 @@ class User extends Model implements Ue{
     public function insertUser(){
         $this->errno = 0;
         $insert_array = $this->insertUserArray();
-        echo "User insertUser\r\n";
-        var_dump($insert_array);
+        file_put_contents("log.txt", "User insertUser\r\n".var_export($insert_array,true)."\r\n",FILE_APPEND);
         if($insert_array != null){
             $insert = parent::insert($insert_array["values"],$insert_array["format"]);
             return $insert;
