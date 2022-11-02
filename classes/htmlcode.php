@@ -52,6 +52,11 @@ class HtmlCode{
             <div class="col-4 col-md-3">
                 <button type="submit" class="btn btn-primary">AGGIUNGI</button>
             </div>
+            <div class="col-2">
+                <div class="spinner-border text-dark invisible" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
             <div class="col-4 col-md-3">
                 <button type="reset" class="btn btn-danger">ANNULLA</button>
             </div>
@@ -93,9 +98,18 @@ HTML;
                     </div>
                 </div>
             </div>
-            <div id="nl_del_button" class="text-center mt-4">
-                <button type="submit" id="nl_bt_del_email" class="btn btn-primary mt-4">RIMUOVI ISCRITTI</button>
-            <div>
+            <div class="container">
+                <div class="row my-4">
+                    <div class="col-6 offset-3">
+                        <button type="submit" id="nl_bt_del_email" class="btn btn-primary mt-4">RIMUOVI ISCRITTI</button>
+                    </div>
+                    <div class="col-3">
+                        <div class="spinner-border text-dark invisible" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
         HTML;   
                 return $html; 
@@ -143,9 +157,18 @@ HTML;
             </div>
         </div>
     </div>
-    <div id="nl_send_button" class="text-center mt-4">
-        <button type="submit" id="nl_bt_send_content" class="btn btn-primary">INVIA MAIL</button>
-    <div>
+    <div class="container">
+        <div class="row my-4">
+            <div id="nl_send_button" class="col-6 offset-3 text-center">
+                <button type="submit" id="nl_bt_send_content" class="btn btn-primary">INVIA MAIL</button>
+            </div>
+            <div class="col-3">
+                <div class="spinner-border text-dark invisible" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 HTML;
         return $html;
