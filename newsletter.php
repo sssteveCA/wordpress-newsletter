@@ -115,6 +115,7 @@ function nl_form_signup(){
    if(is_plugin_active("polylang/polylang.php")){
       if(function_exists("pll_current_language")){
          $lang = pll_current_language(); //Get the current setted language with Polylang
+         //file_put_contents(C::FILE_LOG,"newsletter.php nl_form_signup language => ".var_export($lang,true)."\r\n",FILE_APPEND);
       }
    }//if(is_plugin_active("polylang/polylang.php")){
    echo do_shortcode("[nl_subscribe lang=\"{$lang}\"]"); 

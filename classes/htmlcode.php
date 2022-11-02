@@ -200,7 +200,9 @@ HTML;
         $termsUrl = Properties::termsUrl($lang);
         if($lang == Langs::$langs["it"]){
             return [
-                "title" => "Newsletter","ea_title" => "Indirizzo email",
+                "title" => "Newsletter",
+                "name_title" => "Il tuo nome (opzionale)", "surname_title" => "Il tuo cognome (opzionale)",
+                "ea_title" => "Indirizzo email",
                 "cb_label1" => "Dichiaro di aver letto l' <a href=\"{$privacyUrl}\">informativa sulla privacy</a> e sui <a href=\"{$cookieUrl}\">cookie</a>, acconsento al trattamento dei miei dati personali",
                 "cb_label2" => "Ho letto e accettato i <a href=\"{$termsUrl}\">termini e condizioni</a> del servizio",
                 "subscribe_text" => "Iscriviti","lang_code" => "it"
@@ -208,7 +210,9 @@ HTML;
         }//if($lang == Langs::Italian){
         else if($lang == Langs::$langs["es"]){
             return [
-                "title" => "Boletín informativo","ea_title" => "Correo electrónico",
+                "title" => "Boletín informativo", "name_title" => "
+                Tu nombre (opcional)", "surname_title" => "Tu apellido (opcional)",
+                "ea_title" => "Correo electrónico", 
                 "cb_label1" => "Declaro haber leído la <a href=\"{$privacyUrl}\">información sobre privacidad</a> y <a href=\"{$cookieUrl}\">cookies</a>, acepto el tratamiento de mis datos personales",
                 "cb_label2" => "He leído y acepto los <a href=\"{$termsUrl}\">términos y condiciones</a> del servicio",
                 "subscribe_text" => "Subscribir","lang_code" => "es"
@@ -216,7 +220,10 @@ HTML;
         }//else if($lang == Langs::Espanol){
         else{
            return [
-            "title" => "Newsletter","ea_title" => "Email address",
+            "title" => "Newsletter", "name_title" => "
+            Your name (optional)", "surname_title" => "
+            Your surname (optional)",
+            "ea_title" => "Email address",
             "cb_label1" => "I declare that I have read the <a href=\"{$privacyUrl}\">information on privacy</a> and <a href=\"{$cookieUrl}\">cookies</a>, I agree to the processing of my personal data",
             "cb_label2" => "I have read and agreed with the <a href=\"{$termsUrl}\">terms and conditions</a> of the service",
             "subscribe_text" => "Subscribe","lang_code" => "en"
@@ -233,11 +240,21 @@ HTML;
     <legend class="text-center">{$params['title']}</legend>
     <form id="nl_form" class="ml-5 mb-5 d-flex flex-column" action="#" method="post"> 
         <div class="container">
-            <div class="row my-2 my-lg-4">
-                <div class="col-12 col-lg-6 my-2 my-lg-0">
-                    <label for="nl_email" class="form-label">{$params['ea_title']}</label>
+            <div class="row my-4">
+                <div class="col-12">
+                    <label for="nl_name" class="form-label">{$params['name_title']}</label>
+                    <input type="text" class="form-control" id="nl_name">
                 </div>
-                <div class="col-12 col-lg-6 my-2 my-lg-0">
+            </div>
+            <div class="row my-4">
+                <div class="col-12">
+                    <label for="nl_surname" class="form-label">{$params['surname_title']}</label>
+                    <input type="text" class="form-control" id="nl_surname">
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-12">
+                    <label for="nl_email" class="form-label">{$params['ea_title']}</label>
                     <input type="email" class="form-control" id="nl_email" required>
                 </div>
             </div>
@@ -258,7 +275,7 @@ HTML;
                     <button id="nl_submit" type="submit" class="btn btn-dark mb-5" disabled>{$params['subscribe_text']}</button>
                 </div>
                 <div class="col-3">
-                    <div class="spinner-border text-dark" role="status">
+                    <div id="nl_spinner" class="spinner-border text-dark invisible" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
