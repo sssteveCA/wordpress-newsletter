@@ -15,10 +15,14 @@ window.addEventListener('DOMContentLoaded',()=>{
                 cb_terms: (<HTMLInputElement>document.getElementById('nl_cb_terms')).value as string,
                 lang: (<HTMLInputElement>document.getElementById('nl_lang')).value as string
             };
+            let spinner: HTMLElement = document.getElementById('nl_spinner') as HTMLElement;
+            spinner.classList.remove('invisible');
             console.log("nl_wp.ts NlFormData => ");
             console.log(data);
             let newUser: NewUser = new NewUser(data);
-            newUser.newUser();
+            newUser.newUser().then(res => {
+                spinner.classList.add('invisible');
+            });
         });
     }//if(form){
     let cbPrivacyEl: HTMLInputElement = document.getElementById('nl_cb_privacy') as HTMLInputElement;
