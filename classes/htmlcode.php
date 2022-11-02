@@ -266,31 +266,31 @@ HTML;
             <div class="row my-4">
                 <div class="col-12">
                     <label for="nl_name" class="form-label">{$params['name_title']}</label>
-                    <input type="text" class="form-control" id="nl_name">
+                    <input type="text" class="form-control" id="nl_name" name="name">
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col-12">
                     <label for="nl_surname" class="form-label">{$params['surname_title']}</label>
-                    <input type="text" class="form-control" id="nl_surname">
+                    <input type="text" class="form-control" id="nl_surname" name="surname">
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col-12">
                     <label for="nl_email" class="form-label">{$params['ea_title']}</label>
-                    <input type="email" class="form-control" id="nl_email" required>
+                    <input type="email" class="form-control" id="nl_email" name="email" required>
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col-12 form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="nl_check_pc" name="privcook" required>
-                    <label class="form-check-label" for="nl_check_pc">{$params['cb_label1']}</label>
+                    <input class="form-check-input" type="checkbox" value="1" id="nl_cb_privacy" name="cb_privacy" required>
+                    <label class="form-check-label" for="nl_cb_privacy">{$params['cb_label1']}</label>
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col-12 form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="nl_check_terms" name="terms" required>
-                    <label class="form-check-label" for="nl_check_terms">{$params['cb_label2']}</label>
+                    <input class="form-check-input" type="checkbox" value="1" id="nl_cb_terms" name="cb_terms" required>
+                    <label class="form-check-label" for="nl_cb_terms">{$params['cb_label2']}</label>
                 </div>
             </div>
             <div class="row my-4">
