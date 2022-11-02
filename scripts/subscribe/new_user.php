@@ -62,6 +62,10 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
     $userData = [
         'tableName' => C::TABLE_USERS,'email' => $post['email'], 'lang' => $lang
     ];
+    if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
+        $userData['firstName'] = $post['name'];
+        $userData['lastName'] = $post['lastName'];
+    }
     //var_dump($userData);
     try{
         $user = new User($userData);

@@ -104,6 +104,8 @@ SQL;
         $this->errno = 0;
         $insert = $this->wpdb->insert($this->fullTableName,$data,$format);
         $this->query = $this->wpdb->last_query;
+        echo "model.php insert query => \r\n";
+        var_dump($this->query);
         $this->queries[] = $this->query;
         if(!$insert)$this->errno = Me::ERR_INSERT;
         return $insert;
