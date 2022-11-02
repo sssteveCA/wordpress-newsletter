@@ -102,7 +102,12 @@ use Newsletter\Enums\Langs;
 
  }
 
- add_action('wp_enqueue_scripts','nl_scripts',10);
+add_action('wp_enqueue_scripts','nl_libraries');
+function nl_libraries(){
+   wp_enqueue_script(C::H_JS_AXIOS_LIB);
+}
+
+ add_action('wp_enqueue_scripts','nl_scripts',11);
 function nl_scripts(){
     wp_enqueue_style(C::H_CSS_WP_FORM);
     wp_enqueue_script(C::H_JS_WP_FORM);
@@ -124,6 +129,8 @@ function nl_form_signup(){
 add_action('wp_loaded','nl_after_load');
 function nl_after_load(){
    $plugin_dir = Properties::pluginUrl(__FILE__);
+   $axiosJs = $plugin_dir.C::REL_JS_AXIOS_LIB;
+   wp_register_script(C::H_JS_AXIOS_LIB,$axiosJs,[],null);
    if(is_admin()){
       $adminCssAdd = $plugin_dir.C::REL_CSS_ADMIN_ADD;
       $adminJsAdd = $plugin_dir.C::REL_JS_ADMIN_ADD;
@@ -131,18 +138,18 @@ function nl_after_load(){
       $adminJsDel = $plugin_dir.C::REL_JS_ADMIN_DELETE;
       $adminCssSend = $plugin_dir.C::REL_CSS_ADMIN_SEND;
       $adminJsSend = $plugin_dir.C::REL_JS_ADMIN_SEND;
-      wp_register_style(C::H_CSS_ADMIN_FORM_ADD,$adminCssAdd,[],null);
-      wp_register_script(C::H_JS_ADMIN_FORM_ADD,$adminJsAdd,[],null);
-      wp_register_style(C::H_CSS_ADMIN_FORM_DELETE,$adminCssDel,[],null);
-      wp_register_script(C::H_JS_ADMIN_FORM_DELETE,$adminJsDel,[],null);
-      wp_register_style(C::H_CSS_ADMIN_FORM_SEND,$adminCssSend,[],null);
-      wp_register_script(C::H_JS_ADMIN_FORM_SEND,$adminJsSend,[],null);
+      wp_register_style(C::H_CSS_ADMIN_FORM_ADD,$adminCssAdd,[],null,true);
+      wp_register_script(C::H_JS_ADMIN_FORM_ADD,$adminJsAdd,[],null,true);
+      wp_register_style(C::H_CSS_ADMIN_FORM_DELETE,$adminCssDel,[],null,true);
+      wp_register_script(C::H_JS_ADMIN_FORM_DELETE,$adminJsDel,[],null,true);
+      wp_register_style(C::H_CSS_ADMIN_FORM_SEND,$adminCssSend,[],null,true);
+      wp_register_script(C::H_JS_ADMIN_FORM_SEND,$adminJsSend,[],null,true);
    }//if(is_admin()){
    else{
       $wpCss = $plugin_dir.C::REL_CSS_WP;
       $wpJs = $plugin_dir.C::REL_JS_WP;
-      wp_register_style(C::H_CSS_WP_FORM,$wpCss,[],null);
-      wp_register_script(C::H_JS_WP_FORM,$wpJs,[],null);
+      wp_register_style(C::H_CSS_WP_FORM,$wpCss,[],null,true);
+      wp_register_script(C::H_JS_WP_FORM,$wpJs,[],null,true);
    }
 
 }

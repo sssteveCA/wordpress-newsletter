@@ -14,6 +14,7 @@ interface Constants{
     const H_JS_ADMIN_FORM_DELETE = 'nlAdminJsDelete';
     const H_CSS_ADMIN_FORM_SEND = 'nlAdminCssSend';
     const H_JS_ADMIN_FORM_SEND = 'nlAdminJsSend';
+    const H_JS_AXIOS_LIB = 'nlAxiosLib';
     const H_CSS_WP_FORM = 'nlNewsletterCss';
     const H_JS_WP_FORM = 'nlNewsletterJs';
     
@@ -25,6 +26,7 @@ interface Constants{
     const REL_JS_ADMIN_ADD = 'js/admin/nl_admin_add.js';
     const REL_JS_ADMIN_DELETE = 'js/admin/nl_admin_delete.js';
     const REL_JS_ADMIN_SEND = 'js/admin/nl_admin_send.js';
+    const REL_JS_AXIOS_LIB = 'node_modules/axios/dist/axios.min.js';
     const REL_JS_WP = 'js/wp/nl_wp.js';
     const TABLE_USERS = "newsletter_users";
 
