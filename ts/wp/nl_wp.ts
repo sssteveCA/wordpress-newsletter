@@ -2,7 +2,6 @@ import { NewUser } from "../requests/new_user.js";
 import {NlFormData} from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
-    console.log("nl_wp load");
     let form: HTMLFormElement = document.getElementById("nl_form") as HTMLFormElement;
     if(form){
         form.addEventListener('submit', (e)=>{
@@ -17,8 +16,8 @@ window.addEventListener('DOMContentLoaded',()=>{
             };
             let spinner: HTMLElement = document.getElementById('nl_spinner') as HTMLElement;
             spinner.classList.remove('invisible');
-            console.log("nl_wp.ts NlFormData => ");
-            console.log(data);
+            /* console.log("nl_wp.ts NlFormData => ");
+            console.log(data); */
             let newUser: NewUser = new NewUser(data);
             newUser.newUser().then(res => {
                 spinner.classList.add('invisible');

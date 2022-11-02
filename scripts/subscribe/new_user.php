@@ -46,9 +46,6 @@ use Newsletter\Classes\Template;
 $inputs = file_get_contents("php://input");
 $post = json_decode($inputs,true);
 
-file_put_contents(C::FILE_LOG, "new_user.php input => ".var_export($inputs,true)."\r\n",FILE_APPEND);
-file_put_contents(C::FILE_LOG, "new_user.php post data => ".var_export($post,true)."\r\n",FILE_APPEND);
-
 //var_dump($post);
 
 $response = [

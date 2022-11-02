@@ -54,7 +54,7 @@ export class NewUser{
         this._errno = 0;
         try{
             await this.newUserPromise().then(res => {
-                console.log(res);
+                //console.log(res);
             }).catch(err => {
                 throw err;
             });
@@ -71,8 +71,8 @@ export class NewUser{
                 name: this._name as string, surname: this._surname as string, email: this._email, cb_privacy: this._cb_privacy, 
                 cb_terms: this._cb_terms, lang: this._lang
             };
-            console.log("new_user.ts newUserPromise postData => ");
-            console.log(postData);
+            /* console.log("new_user.ts newUserPromise postData => ");
+            console.log(postData); */
             clientPost.post(NewUser.NEWUSER_URL,postData).then(res => {
                 resolve(res.data);
             }).catch(err => {
