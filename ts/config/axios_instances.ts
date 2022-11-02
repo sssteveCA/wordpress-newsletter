@@ -1,5 +1,6 @@
-import axios from '../../node_modules/axios/index';
-import { Constants } from '../namespaces/constants';
+//import axios from '../../node_modules/axios/index.js';
+import { Constants } from '../namespaces/constants.js';
+declare const axios: any;
 
 export const clientPost = axios.create({
     baseURL: Constants.HOME_URL,

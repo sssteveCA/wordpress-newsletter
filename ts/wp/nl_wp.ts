@@ -1,5 +1,5 @@
-import { NewUser } from "../requests/new_user";
-import {NlFormData} from "../types/types";
+import { NewUser } from "../requests/new_user.js";
+import {NlFormData} from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
     console.log("nl_wp load");

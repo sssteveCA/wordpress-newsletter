@@ -102,7 +102,7 @@ use Newsletter\Enums\Langs;
 
  }
 
- add_action('wp_enqueue_scripts','nl_scripts',11);
+ add_action('wp_enqueue_scripts','nl_scripts',10);
 function nl_scripts(){
     wp_enqueue_style(C::H_CSS_WP_FORM);
     wp_enqueue_script(C::H_JS_WP_FORM);
