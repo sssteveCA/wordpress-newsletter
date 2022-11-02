@@ -232,20 +232,37 @@ HTML;
 <fieldset id="nl_form_fieldset" class="position-relative w-50 mx-auto border border-primary d-flex flex-column align-items-center" style="margin-bottom: 50px; min-width: 300px;">
     <legend class="text-center">{$params['title']}</legend>
     <form id="nl_form" class="ml-5 mb-5 d-flex flex-column" action="#" method="post"> 
-        <div class="m-4">
-            <label for="nl_email" class="form-label">{$params['ea_title']}</label>
-            <input type="email" class="form-control" id="nl_email" required>
-        </div>
-        <div class="m-4 form-check">
-            <input class="form-check-input" type="checkbox" value="1" id="nl_check_pc" name="privcook" required>
-            <label class="form-check-label" for="nl_check_pc">{$params['cb_label1']}</label>
-        </div>
-        <div class="m-4 form-check">
-            <input class="form-check-input" type="checkbox" value="1" id="nl_check_terms" name="terms" required>
-            <label class="form-check-label" for="nl_check_terms">{$params['cb_label2']}</label>
-        </div>
-        <div class="d-flex justify-content-center">
-            <button id="nl_submit" type="submit" class="btn btn-dark mb-5" disabled>{$params['subscribe_text']}</button>
+        <div class="container">
+            <div class="row my-2 my-lg-4">
+                <div class="col-12 col-lg-6 my-2 my-lg-0">
+                    <label for="nl_email" class="form-label">{$params['ea_title']}</label>
+                </div>
+                <div class="col-12 col-lg-6 my-2 my-lg-0">
+                    <input type="email" class="form-control" id="nl_email" required>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-12 form-check">
+                    <input class="form-check-input" type="checkbox" value="1" id="nl_check_pc" name="privcook" required>
+                    <label class="form-check-label" for="nl_check_pc">{$params['cb_label1']}</label>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-12 form-check">
+                    <input class="form-check-input" type="checkbox" value="1" id="nl_check_terms" name="terms" required>
+                    <label class="form-check-label" for="nl_check_terms">{$params['cb_label2']}</label>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-6 text-center offset-3">
+                    <button id="nl_submit" type="submit" class="btn btn-dark mb-5" disabled>{$params['subscribe_text']}</button>
+                </div>
+                <div class="col-3">
+                    <div class="spinner-border text-dark" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <input type="hidden" id="nl_lang" name="lang" value="{$params['lang_code']}">
     </form>
