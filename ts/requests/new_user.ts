@@ -9,7 +9,7 @@ export class NewUser{
     private _lang: string;
 
     constructor(data: NlFormData){
-
+        this.assignValues(data);
     }
 
     get name(){ return this._name; }
@@ -18,5 +18,14 @@ export class NewUser{
     get cb_privacy(){ return this._cb_privacy; }
     get cb_terms(){ return this._cb_terms; }
     get lang(){ return this._lang; }
+
+    private assignValues(data: NlFormData): void{
+        if(data.name) this._name = data.name;
+        if(data.surname) this._surname = data.surname;
+        this._email = data.email;
+        this._cb_privacy = data.cb_privacy;
+        this._cb_terms = data.cb_terms;
+        this._lang = data.lang;
+    }
 
 }
