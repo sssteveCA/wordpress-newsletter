@@ -1,4 +1,10 @@
 
+export type BsDialogData = {
+    title: string;
+    message: string;
+    btOkText?: string;
+}
+
 export type NlFormData = {
     name?: string;
     surname?: string;
