@@ -1,6 +1,5 @@
 
-import { Modal } from "bootstrap";
-import { BsMdDialogData } from "../types/types";
+import { BsMdDialogData } from "../types/types.js";
 
 
 export default class MessageDialog{
@@ -8,7 +7,7 @@ export default class MessageDialog{
     private _message: string;
     private _btOkText: string;
     private _html: string;
-    private _instance: Modal;
+    private _instance: bootstrap.Modal;
     private _divDialog: HTMLDivElement;
     private _btOk: HTMLButtonElement;
     private _errno: number = 0;
@@ -72,7 +71,7 @@ export default class MessageDialog{
         this._divDialog.innerHTML = this._html;
         document.body.appendChild(this._divDialog);
         let modalDiv: HTMLDivElement = document.getElementById('nl_messagedialog') as HTMLDivElement;
-        this._instance = new Modal(modalDiv,{
+        this._instance = new bootstrap.Modal(modalDiv,{
             backdrop: "static", focus: true, keyboard: false
         });
         this._instance.show();
