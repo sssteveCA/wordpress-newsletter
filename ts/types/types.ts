@@ -1,4 +1,11 @@
 
+export type BsCdDialogData = {
+    title: string;
+    message: string;
+    btYesText?: string;
+    btNoText?: string;
+}
+
 export type BsMdDialogData = {
     title: string;
     message: string;
