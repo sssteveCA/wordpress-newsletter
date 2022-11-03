@@ -17,6 +17,7 @@ export default class MessageDialog{
     constructor(data: BsDialogData){
         this.assignValues(data);
         this.setDialogHtml();
+        this.showDialog();
     }
 
     get title(){return this._title;} 
@@ -46,8 +47,8 @@ export default class MessageDialog{
 
     private setDialogHtml(): void{
         this._html = `
-<div id="nl_messagedialog" class="modal" tabindex="-1">
-    <div class="modal-dialog">
+<div id="nl_messagedialog" class="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">${this._title}</h5>
@@ -63,6 +64,19 @@ export default class MessageDialog{
     </div>
 </div>       
         `;
+    }
+
+    private showDialog(): void{
+        this._divDialog = document.createElement('div');
+        this._divDialog.setAttribute('id','nl_div_message_dialog');
+        this._divDialog.innerHTML = this._html;
+        document.body.appendChild(this._divDialog);
+        let modalDiv: HTMLDivElement = document.getElementById('nl_messagedialog') as HTMLDivElement;
+        this._instance = new Modal(modalDiv,{
+            backdrop: "static", focus: true, keyboard: false
+        });
+        this._instance.show();
+        this._btOk = document.getElementById('nl_md_ok') as HTMLButtonElement;
     }
 
 
