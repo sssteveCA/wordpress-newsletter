@@ -1,5 +1,6 @@
+import { messageDialog } from "../general/functions.js";
 import { NewUser } from "../requests/new_user.js";
-import {NlFormData} from "../types/types.js";
+import {BsMdDialogData, NlFormData} from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
     let form: HTMLFormElement = document.getElementById("nl_form") as HTMLFormElement;
@@ -21,6 +22,10 @@ window.addEventListener('DOMContentLoaded',()=>{
             let newUser: NewUser = new NewUser(data);
             newUser.newUser().then(res => {
                 spinner.classList.add('invisible');
+                let md_data: BsMdDialogData = {
+                    title: 'Iscrizione newsletter', message: res['msg']
+                };
+                messageDialog(md_data);
             });
         });
     }//if(form){

@@ -15,8 +15,10 @@ export class NewUser{
     private static NEWUSER_URL:string = Constants.PLUGIN_DIR+"/scripts/subscribe/new_user.php";
 
     public static ERR_FETCH: number = 1;
-    private static ERR_FETCH_MSG:string = "Errore durante l'esecuzione della richiesta. Se il problema persiste contattare l'amministratore del sito";
+    public static ERR_INVALID_DATA: number = 2;
 
+    private static ERR_FETCH_MSG:string = "Errore durante l'esecuzione della richiesta. Se il problema persiste contattare l'amministratore del sito";
+    private static ERR_INVALID_DATA_MSG:string = "Inserisci i dati richiesti e accetta le condizioni per continuare";
 
     constructor(data: NlFormData){
         this.assignValues(data);
@@ -34,8 +36,12 @@ export class NewUser{
             case NewUser.ERR_FETCH:
                 this._error = NewUser.ERR_FETCH_MSG;
                 break;
+            case NewUser.ERR_INVALID_DATA:
+                this._error = NewUser.ERR_INVALID_DATA_MSG;
+                break;
             default:
                 this._error = null;
+                break;
         }
         return this._error;
     }
@@ -52,22 +58,24 @@ export class NewUser{
     public async newUser(): Promise<object>{
         let response: object = {};
         this._errno = 0;
-        try{
-            await this.newUserPromise().then(res => {
-                //console.log(res);
-                let rJson: object = JSON.parse(res);
-                response = {
-                    done: rJson['done'], msg: rJson['msg']
-                }
-            }).catch(err => {
-                throw err;
-            });
-        }catch(e){
-            console.warn(e);
-            this._errno = NewUser.ERR_FETCH;
-            response = {
-                done: false, msg: this.error
-            };
+        if(this.validate()){
+            try{
+                await this.newUserPromise().then(res => {
+                    //console.log(res);
+                    let rJson: object = JSON.parse(res);
+                    response = { done: rJson['done'], msg: rJson['msg'] }
+                }).catch(err => {
+                    throw err;
+                });
+            }catch(e){
+                console.warn(e);
+                this._errno = NewUser.ERR_FETCH;
+                response = { done: false, msg: this.error };
+            }
+        }//if(this.validate()){
+        else{
+            this._errno = NewUser.ERR_INVALID_DATA;
+            response = { done: false, msg: this.error };
         }
         return response;
     }
@@ -86,6 +94,13 @@ export class NewUser{
                 reject(err);
             })
         });
+    }
+
+    private validate(): boolean{
+        if(this._email == '') return false;
+        if(this._cb_privacy != '1') return false;
+        if(this._cb_terms != '1') return false;
+        return true;
     }
 
 }
