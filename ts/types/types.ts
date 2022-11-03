@@ -1,5 +1,5 @@
 
-export type BsDialogData = {
+export type BsMdDialogData = {
     title: string;
     message: string;
     btOkText?: string;

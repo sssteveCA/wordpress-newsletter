@@ -15,7 +15,7 @@ export class NewUser{
     private static NEWUSER_URL:string = Constants.PLUGIN_DIR+"/scripts/subscribe/new_user.php";
 
     public static ERR_FETCH: number = 1;
-    private static ERR_FETCH_MSG:string = "Errore durante l'esecuzione della richiesta";
+    private static ERR_FETCH_MSG:string = "Errore durante l'esecuzione della richiesta. Se il problema persiste contattare l'amministratore del sito";
 
 
     constructor(data: NlFormData){
@@ -55,12 +55,19 @@ export class NewUser{
         try{
             await this.newUserPromise().then(res => {
                 //console.log(res);
+                let rJson: object = JSON.parse(res);
+                response = {
+                    done: rJson['done'], msg: rJson['msg']
+                }
             }).catch(err => {
                 throw err;
             });
         }catch(e){
             console.warn(e);
             this._errno = NewUser.ERR_FETCH;
+            response = {
+                done: false, msg: this.error
+            };
         }
         return response;
     }

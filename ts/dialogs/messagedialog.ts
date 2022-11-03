@@ -1,6 +1,6 @@
 
 import { Modal } from "bootstrap";
-import { BsDialogData } from "../types/types";
+import { BsMdDialogData } from "../types/types";
 
 
 export default class MessageDialog{
@@ -14,7 +14,7 @@ export default class MessageDialog{
     private _errno: number = 0;
     private _error: string|null;
 
-    constructor(data: BsDialogData){
+    constructor(data: BsMdDialogData){
         this.assignValues(data);
         this.setDialogHtml();
         this.showDialog();
@@ -37,7 +37,7 @@ export default class MessageDialog{
         return this._error;
     }
 
-    private assignValues(data: BsDialogData): void{
+    private assignValues(data: BsMdDialogData): void{
         this._title = data.title;
         this._message = data.message;
         if(data.btOkText) this._btOkText = data.btOkText;
@@ -78,6 +78,4 @@ export default class MessageDialog{
         this._instance.show();
         this._btOk = document.getElementById('nl_md_ok') as HTMLButtonElement;
     }
-
-
 }
