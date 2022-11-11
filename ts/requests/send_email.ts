@@ -17,7 +17,7 @@ export default class SendEmail{
     private static FETCH_URL: string = Constants.HOME_URL+Constants.PLUGIN_DIR+"/scripts/emailsending/getsubscribers.php";
 
     constructor(data: NlFormDataSend){
-
+        this.assignValues(data);
     }
 
     get emails(){return this._emails;}
@@ -34,5 +34,11 @@ export default class SendEmail{
                 break;
         }
         return this._error;
+    }
+
+    private assignValues(data: NlFormDataSend): void{
+        this._emails = data.emails;
+        this._subject = data.subject;
+        this._message = data.message;
     }
 }
