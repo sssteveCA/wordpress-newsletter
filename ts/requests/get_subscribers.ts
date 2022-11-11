@@ -7,7 +7,7 @@ import { Constants } from "../namespaces/constants.js";
  */
 export default class GetSubscribers{
 
-    private _subscribers: GetSubscriber[];
+    private _subscribers: GetSubscriber[] = [];
     private _errno: number = 0;
     private _error: string|null = null;
 
@@ -21,6 +21,7 @@ export default class GetSubscribers{
 
     }
 
+    get subscribers(){return this._subscribers;}
     get errno(){return this._errno;}
     get error(){
         switch(this._errno){
@@ -39,7 +40,7 @@ export default class GetSubscribers{
         let response: object = {};
         try{
             await this.getSubscribersPromise().then(res => {
-                console.log(res);
+                //console.log(res);
                 response = JSON.parse(res);
                 if(response["done"] == true){
                     this._subscribers = response["subscribers"];
