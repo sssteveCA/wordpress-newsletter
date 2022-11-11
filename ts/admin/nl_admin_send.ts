@@ -1,3 +1,4 @@
+import { GetSubscribersHtml, GetSubscribersHtmlInterface } from "../html/getsubscribershtml.js";
 import GetSubscribers from "../requests/get_subscribers.js";
 import { NlFormDataSend } from "../types/types.js";
 
@@ -5,6 +6,10 @@ window.addEventListener('DOMContentLoaded',()=>{
     let gs: GetSubscribers = new GetSubscribers();
     gs.getSubscribers().then(res => {
         console.log(gs.subscribers);
+        let gsh_data: GetSubscribersHtmlInterface = {
+            containerId: 'nl_send_content', subscribers: gs.subscribers
+        };
+        let gsh: GetSubscribersHtml = new GetSubscribersHtml(gsh_data);
     });
     let form: HTMLFormElement = document.getElementById('nl_form_send') as HTMLFormElement;
     let cb_all: HTMLInputElement = document.getElementById('nl_check_all') as HTMLInputElement;

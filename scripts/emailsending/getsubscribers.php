@@ -25,9 +25,7 @@ use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 
 $response = [
-    'done' => false,
-    'msg' => '',
-    'subscribers' => [] 
+    'done' => false,'empty' => false, 'msg' => '','subscribers' => [] 
 ];
 
 $current_user = wp_get_current_user();
@@ -50,6 +48,7 @@ if($logged && $administrator){
                 break;
             case Me::ERR_GET_NO_RESULT:
                 http_response_code(404);
+                $response['empty'] = true;
                 $response['msg'] = "Nessun iscritto trovato";
                 break;
             default:
