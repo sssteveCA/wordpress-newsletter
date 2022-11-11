@@ -1,8 +1,15 @@
 import { GetSubscribersHtml, GetSubscribersHtmlInterface } from "../html/getsubscribershtml.js";
 import GetSubscribers from "../requests/get_subscribers.js";
+import SendEmail from "../requests/send_email.js";
 import { NlFormDataSend } from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
+    let form: HTMLFormElement = document.getElementById('nl_form_send') as HTMLFormElement;
+    let cb_all: HTMLInputElement = document.getElementById('nl_check_all') as HTMLInputElement;
+    let cb_all_it: HTMLInputElement = document.getElementById('nl_check_all_it') as HTMLInputElement;
+    let cb_all_es: HTMLInputElement = document.getElementById('nl_check_all_es') as HTMLInputElement;
+    let cb_all_en: HTMLInputElement = document.getElementById('nl_check_all_en') as HTMLInputElement;
+    let send_spinner: HTMLDivElement = document.getElementById('send_spinner') as HTMLDivElement;
     let gs: GetSubscribers = new GetSubscribers();
     gs.getSubscribers().then(res => {
         console.log(gs.subscribers);
@@ -12,11 +19,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         let gsh: GetSubscribersHtml = new GetSubscribersHtml(gsh_data);
         emailSelection();
     });
-    let form: HTMLFormElement = document.getElementById('nl_form_send') as HTMLFormElement;
-    let cb_all: HTMLInputElement = document.getElementById('nl_check_all') as HTMLInputElement;
-    let cb_all_it: HTMLInputElement = document.getElementById('nl_check_all_it') as HTMLInputElement;
-    let cb_all_es: HTMLInputElement = document.getElementById('nl_check_all_es') as HTMLInputElement;
-    let cb_all_en: HTMLInputElement = document.getElementById('nl_check_all_en') as HTMLInputElement;
+    
     form.addEventListener('submit',(e)=>{
         e.preventDefault();
         let emails: string[] = checkedEmailsList();
@@ -26,8 +29,12 @@ window.addEventListener('DOMContentLoaded',()=>{
                 message: document.getElementById('nl_msg_text')?.getAttribute('value') as string,
                 emails: emails
             };
-        }//if(emails.length > 0){
-        
+            send_spinner.classList.remove("invisible");
+            let se: SendEmail = new SendEmail(data);
+            se.sendEmail().then(res => {
+                send_spinner.classList.add("invisible");
+            });
+        }//if(emails.length > 0){ 
     });//form.addEventListener('submit',(e)=>{
     cb_all.addEventListener('change',()=>{});
     cb_all_it.addEventListener('change',()=>{});

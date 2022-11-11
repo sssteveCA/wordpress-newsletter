@@ -1,5 +1,5 @@
-import { Constants } from "../namespaces/constants";
-import { NlFormDataSend } from "../types/types";
+import { Constants } from "../namespaces/constants.js";
+import { NlFormDataSend } from "../types/types.js";
 
 
 export default class SendEmail{

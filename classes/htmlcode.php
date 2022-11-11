@@ -163,7 +163,7 @@ HTML;
                 <button type="submit" id="nl_bt_send_content" class="btn btn-primary">INVIA MAIL</button>
             </div>
             <div class="col-3">
-                <div class="spinner-border text-dark invisible" role="status">
+                <div id="send_spinner" class="spinner-border text-dark invisible" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
