@@ -34,4 +34,37 @@ export default class GetSubscribers{
         return this._error;
     }
 
+    public async getSubscribers(): Promise<object>{
+        this._errno = 0;
+        let response: object = {};
+        try{
+            await this.getSubscribersPromise().then(res => {
+                console.log(res);
+                response = JSON.parse(res);
+                if(response["done"] == true){
+                    this._subscribers = response["subscribers"];
+                }
+            }).catch(err => {
+                throw err;
+            });
+        }catch(e){
+            this._errno = GetSubscribers.ERR_FETCH;
+            response = {
+                done: false, msg: ""
+            };
+        }
+        return response;
+    }
+
+    private async getSubscribersPromise(): Promise<string>{
+        let promise = await new Promise<string>((resolve,reject)=>{
+            fetch(GetSubscribers.FETCH_URL).then(res => {
+                resolve(res.text());
+            }).catch(err => {
+                reject(err);
+            });
+        });
+        return promise;
+    }
+
 }
