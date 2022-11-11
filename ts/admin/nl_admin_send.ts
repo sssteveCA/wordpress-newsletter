@@ -25,10 +25,12 @@ window.addEventListener('DOMContentLoaded',()=>{
         let emails: string[] = checkedEmailsList();
         if(emails.length > 0){
             const data: NlFormDataSend = {
-                subject: document.getElementById('nl_subject')?.getAttribute('value') as string,
-                message: document.getElementById('nl_msg_text')?.getAttribute('value') as string,
+                subject: (<HTMLTextAreaElement>document.getElementById('nl_subject')).value as string,
+                message: (<HTMLInputElement>document.getElementById('nl_msg_text')).value as string,
                 emails: emails
             };
+            /* console.log("NlFormDataSend => ");
+            console.log(data); */
             send_spinner.classList.remove("invisible");
             let se: SendEmail = new SendEmail(data);
             se.sendEmail().then(res => {

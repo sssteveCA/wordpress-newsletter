@@ -14,7 +14,7 @@ export default class SendEmail{
 
     private static ERR_FETCH_MSG: string = "Errore durante l'invio della mail";
 
-    private static FETCH_URL: string = Constants.HOME_URL+Constants.PLUGIN_DIR+"/scripts/emailsending/sendemail.php";
+    private static FETCH_URL: string = Constants.HOME_URL+Constants.PLUGIN_DIR+"/scripts/emailsending/sendmail.php";
 
     constructor(data: NlFormDataSend){
         this.assignValues(data);
@@ -47,7 +47,7 @@ export default class SendEmail{
         let response: object = {};
         try{
             await this.sendEmailPromise().then(res => {
-                console.log(res);
+                //console.log(res);
                 response = JSON.parse(res);
             }).catch(err => {
                 throw err;

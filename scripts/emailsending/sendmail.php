@@ -48,6 +48,7 @@ $administrator = current_user_can('manage_options');
 if($logged && $administrator){
     $input = file_get_contents("php://input");
     $post = json_decode($input,true);
+    $response['data'] = $post;
     if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
         if(is_array($post['emails']) && sizeof($post['emails']) > 0){
             try{
