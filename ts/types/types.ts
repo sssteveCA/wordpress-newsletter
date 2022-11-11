@@ -12,6 +12,14 @@ export type BsMdDialogData = {
     btOkText?: string;
 }
 
+/**
+ * Single subscriber getted from subscribers array (with getsubscribers.php)
+ */
+export type GetSubscriber = {
+    email: string;
+    lang: string;
+}
+
 export type NlFormData = {
     name?: string;
     surname?: string;
