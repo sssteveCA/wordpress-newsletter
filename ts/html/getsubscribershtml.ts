@@ -15,6 +15,7 @@ export class GetSubscribersHtml{
     private _table: string = "";
 
     constructor(data: GetSubscribersHtmlInterface){
+        this._containerId = data.constainerId;
         this._subscribers = data.subscribers;
     }
 
@@ -24,7 +25,7 @@ export class GetSubscribersHtml{
 
     private setTable(): void{
         if(this._subscribers.length > 0){
-            this._table = `
+            this._table += `
 <table class="table table-striped">
     <thead>
         <th scope="col"></th
@@ -32,6 +33,9 @@ export class GetSubscribersHtml{
         <th scope="col">LINGUA</th
     </htead>
     <tbody>
+`;
+            this._table = this.tableBody();
+            this._table += `
     </tbody>
 </table>
         `;
@@ -40,5 +44,21 @@ export class GetSubscribersHtml{
             this._table = `<p class="text-center fs-3 fw-bold"></p>`;
         }
     }
+
+    private tableBody(): string {
+        let tbody: string = ``;
+        this._subscribers.forEach(subscriber => {
+            tbody += `
+<tr>
+    <td><input type="checkbox" class="form-check-input"></td>
+    <td>${subscriber.email}</td>
+    <td>${subscriber.lang}</td>
+</tr>
+            `;
+        });
+        return tbody;
+    }
+
+
 
 }
