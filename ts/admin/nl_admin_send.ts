@@ -19,11 +19,15 @@ window.addEventListener('DOMContentLoaded',()=>{
     let cb_all_en: HTMLInputElement = document.getElementById('nl_check_all_en') as HTMLInputElement;
     form.addEventListener('submit',(e)=>{
         e.preventDefault();
-        const data: NlFormDataSend = {
-            subject: document.getElementById('nl_subject')?.getAttribute('value') as string,
-            message: document.getElementById('nl_msg_text')?.getAttribute('value') as string,
-            emails: []
-        };
+        let emails: string[] = checkedEmailsList();
+        if(emails.length > 0){
+            const data: NlFormDataSend = {
+                subject: document.getElementById('nl_subject')?.getAttribute('value') as string,
+                message: document.getElementById('nl_msg_text')?.getAttribute('value') as string,
+                emails: []
+            };
+        }//if(emails.length > 0){
+        
     });//form.addEventListener('submit',(e)=>{
     cb_all.addEventListener('change',()=>{});
     cb_all_it.addEventListener('change',()=>{});
@@ -31,6 +35,25 @@ window.addEventListener('DOMContentLoaded',()=>{
     cb_all_en.addEventListener('change',()=>{});
 
 });
+
+/**
+ * Get the emails that has checkbox checked 
+ * @returns the checked emails list
+ */
+function checkedEmailsList(): string[]{
+    let emails: string[] = [];
+    let trTable = document.querySelectorAll('#nl_send_content table tbody tr');
+    trTable.forEach(tr => {
+        let tds = tr.querySelectorAll('td');
+        let cb: HTMLInputElement = tr.querySelector('td:first-child input') as HTMLInputElement;
+        if(cb.checked){
+            let email: string = tds.item(1).innerText;
+            emails.push(email);
+        }
+    });//trTable.forEach(tr => {
+    console.log(emails);
+    return emails;
+}
 
 /**
  * Select all the emails or emails of a particular language in subscriber list box
@@ -47,7 +70,6 @@ function emailSelection(): void{
     check_all_el_it.addEventListener('change',(e)=>{
         let fired: HTMLInputElement = e.currentTarget as HTMLInputElement;
         selectEmails(fired.id,fired.checked);
-
     });
     check_all_el_es.addEventListener('change',(e)=>{
         let fired: HTMLInputElement = e.currentTarget as HTMLInputElement;
