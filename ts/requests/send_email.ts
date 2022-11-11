@@ -1,3 +1,4 @@
+import { clientPost } from "../config/axios_instances.js";
 import { Constants } from "../namespaces/constants.js";
 import { NlFormDataSend } from "../types/types.js";
 
@@ -61,19 +62,12 @@ export default class SendEmail{
 
     private async sendEmailPromise(): Promise<string>{
         return await new Promise<string>((resolve,reject)=>{
-            fetch(SendEmail.FETCH_URL,{
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify({
-                    emails: this._emails,
-                    subject: this._subject,
-                    body: this._message
-                })
+            clientPost.post(SendEmail.FETCH_URL,{
+                emails: this._emails,
+                subject: this._subject,
+                body: this._message  
             }).then(res => {
-                resolve(res.text());
+                resolve(res.data);
             }).catch(err => {
                 reject(err);
             });

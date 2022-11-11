@@ -1,5 +1,6 @@
 import { GetSubscriber } from "../types/types.js";
 import { Constants } from "../namespaces/constants.js";
+import { clientGet } from "../config/axios_instances.js";
 
 
 /**
@@ -59,8 +60,8 @@ export default class GetSubscribers{
 
     private async getSubscribersPromise(): Promise<string>{
         let promise = await new Promise<string>((resolve,reject)=>{
-            fetch(GetSubscribers.FETCH_URL).then(res => {
-                resolve(res.text());
+            clientGet.get(GetSubscribers.FETCH_URL).then(res => {
+                resolve(res.data);
             }).catch(err => {
                 reject(err);
             });
