@@ -1,6 +1,7 @@
 import { GetSubscriber } from "../types/types";
 
 export interface GetSubscribersHtmlInterface{
+    constainerId: string;
     subscribers: GetSubscriber[];
 }
 
@@ -9,6 +10,7 @@ export interface GetSubscribersHtmlInterface{
  */
 export class GetSubscribersHtml{
 
+    private _containerId: string;
     private _subscribers: GetSubscriber[];
     private _table: string = "";
 
@@ -16,7 +18,27 @@ export class GetSubscribersHtml{
         this._subscribers = data.subscribers;
     }
 
+    get containerId(){return this._containerId;}
     get subscribers(){return this._subscribers;}
     get table(){return this._table;}
+
+    private setTable(): void{
+        if(this._subscribers.length > 0){
+            this._table = `
+<table class="table table-striped">
+    <thead>
+        <th scope="col"></th
+        <th scope="col">EMAIL</th
+        <th scope="col">LINGUA</th
+    </htead>
+    <tbody>
+    </tbody>
+</table>
+        `;
+        }//if(this._subscribers.length > 0){
+        else{
+            this._table = `<p class="text-center fs-3 fw-bold"></p>`;
+        }
+    }
 
 }
