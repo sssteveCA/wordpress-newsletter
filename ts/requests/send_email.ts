@@ -12,9 +12,9 @@ export default class SendEmail{
 
     public static ERR_FETCH: number = 1;
 
-    private static ERR_FETCH_MSG: string = "Errore durante l'esecuzione della richiesta";
+    private static ERR_FETCH_MSG: string = "Errore durante l'invio della mail";
 
-    private static FETCH_URL: string = Constants.HOME_URL+Constants.PLUGIN_DIR+"/scripts/emailsending/getsubscribers.php";
+    private static FETCH_URL: string = Constants.HOME_URL+Constants.PLUGIN_DIR+"/scripts/emailsending/sendemail.php";
 
     constructor(data: NlFormDataSend){
         this.assignValues(data);
@@ -40,5 +40,43 @@ export default class SendEmail{
         this._emails = data.emails;
         this._subject = data.subject;
         this._message = data.message;
+    }
+
+    public async sendEmail(): Promise<object>{
+        this._errno = 0;
+        let response: object = {};
+        try{
+            await this.sendEmailPromise().then(res => {
+                console.log(res);
+                response = JSON.parse(res);
+            }).catch(err => {
+                throw err;
+            });
+        }catch(e){
+            this._errno = SendEmail.ERR_FETCH;
+            response = {done: false, msg: this.error}
+        }
+        return response;
+    }
+
+    private async sendEmailPromise(): Promise<string>{
+        return await new Promise<string>((resolve,reject)=>{
+            fetch(SendEmail.FETCH_URL,{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    emails: this._emails,
+                    subject: this._subject,
+                    body: this._message
+                })
+            }).then(res => {
+                resolve(res.text());
+            }).catch(err => {
+                reject(err);
+            });
+        });
     }
 }
