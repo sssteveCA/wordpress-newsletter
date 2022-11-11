@@ -138,17 +138,17 @@ function nl_after_load(){
       $adminJsDel = $plugin_dir.C::REL_JS_ADMIN_DELETE;
       $adminCssSend = $plugin_dir.C::REL_CSS_ADMIN_SEND;
       $adminJsSend = $plugin_dir.C::REL_JS_ADMIN_SEND;
-      wp_register_style(C::H_CSS_ADMIN_FORM_ADD,$adminCssAdd,[],null,true);
+      wp_register_style(C::H_CSS_ADMIN_FORM_ADD,$adminCssAdd,[],null);
       wp_register_script(C::H_JS_ADMIN_FORM_ADD,$adminJsAdd,[],null,true);
-      wp_register_style(C::H_CSS_ADMIN_FORM_DELETE,$adminCssDel,[],null,true);
+      wp_register_style(C::H_CSS_ADMIN_FORM_DELETE,$adminCssDel,[],null);
       wp_register_script(C::H_JS_ADMIN_FORM_DELETE,$adminJsDel,[],null,true);
-      wp_register_style(C::H_CSS_ADMIN_FORM_SEND,$adminCssSend,[],null,true);
+      wp_register_style(C::H_CSS_ADMIN_FORM_SEND,$adminCssSend,[],null);
       wp_register_script(C::H_JS_ADMIN_FORM_SEND,$adminJsSend,[],null,true);
    }//if(is_admin()){
    else{
       $wpCss = $plugin_dir.C::REL_CSS_WP;
       $wpJs = $plugin_dir.C::REL_JS_WP;
-      wp_register_style(C::H_CSS_WP_FORM,$wpCss,[],null,true);
+      wp_register_style(C::H_CSS_WP_FORM,$wpCss,[],null);
       wp_register_script(C::H_JS_WP_FORM,$wpJs,[],null,true);
    }
 

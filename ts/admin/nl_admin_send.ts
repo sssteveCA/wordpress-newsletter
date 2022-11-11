@@ -1,6 +1,9 @@
-import { NlFormDataSend } from "../types/types";
+import GetSubscribers from "../requests/get_subscribers.js";
+import { NlFormDataSend } from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
+    let gs: GetSubscribers = new GetSubscribers();
+    gs.getSubscribers();
     let form: HTMLFormElement = document.getElementById('nl_form_send') as HTMLFormElement;
     let cb_all: HTMLInputElement = document.getElementById('nl_check_all') as HTMLInputElement;
     let cb_all_it: HTMLInputElement = document.getElementById('nl_check_all_it') as HTMLInputElement;
