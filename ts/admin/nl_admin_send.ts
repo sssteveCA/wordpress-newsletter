@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded',()=>{
             const data: NlFormDataSend = {
                 subject: document.getElementById('nl_subject')?.getAttribute('value') as string,
                 message: document.getElementById('nl_msg_text')?.getAttribute('value') as string,
-                emails: []
+                emails: emails
             };
         }//if(emails.length > 0){
         
