@@ -42,39 +42,49 @@ function emailSelection(): void{
     let check_all_el_en: HTMLInputElement = document.getElementById('nl_check_all_en') as HTMLInputElement;
     check_all_el.addEventListener('change',(e)=>{
         let fired: HTMLInputElement = e.currentTarget as HTMLInputElement;
-        if(fired.checked){
-
-        }
-        else{
-
-        }
+        selectEmails(fired.id,fired.checked);
     });
     check_all_el_it.addEventListener('change',(e)=>{
         let fired: HTMLInputElement = e.currentTarget as HTMLInputElement;
-        if(fired.checked){
-
-        }
-        else{
-            
-        }
+        selectEmails(fired.id,fired.checked);
 
     });
     check_all_el_es.addEventListener('change',(e)=>{
         let fired: HTMLInputElement = e.currentTarget as HTMLInputElement;
-        if(fired.checked){
-
-        }
-        else{
-            
-        }
+        selectEmails(fired.id,fired.checked);
     });
     check_all_el_en.addEventListener('change',(e)=>{
         let fired: HTMLInputElement = e.currentTarget as HTMLInputElement;
-        if(fired.checked){
+        selectEmails(fired.id,fired.checked);
+    });
+}
 
-        }
+/**
+ * Check checkbox in emails list box when a checkbox of email select group is checked
+ */
+function selectEmails(idSelected: string, checked: boolean): void{
+    console.log(idSelected);
+    console.log(checked);
+    let checkgroup: string = "";
+    if(idSelected == 'nl_check_all_it'){checkgroup = "it";}
+    if(idSelected == 'nl_check_all_es'){checkgroup = "es";}
+    if(idSelected == 'nl_check_all_en'){checkgroup = "en";}
+    let trTable = document.querySelectorAll('#nl_send_content table tbody tr');
+    trTable.forEach(tr => {
+        let tds = tr.querySelectorAll('td');
+        let cb: HTMLInputElement = tr.querySelector('td:first-child input') as HTMLInputElement;
+        let tdLang: string = tds.item(2).innerText;
+        console.log("checkgroup => "+checkgroup);
+        console.log("tdLang => "+tdLang);
+        if(checkgroup == ""){
+            if(checked)cb.checked = true;
+            else cb.checked = false;
+        } 
         else{
-            
-        }
+            if(checkgroup == tdLang){
+                if(checked)cb.checked = true;
+                else cb.checked = false;
+            }
+        }//if(checkgroup == ""){
     });
 }
