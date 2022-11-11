@@ -29,6 +29,6 @@
   <div>*This features have not been added yet</div>
   <div>**The backend script for add user from admin panel has not been added yet</div>
   <br>
-  <div>NOTE!: At the moment there aren't the Javascript files to execute the PHP scripts asynchronously from the browser. They can be called directly launching the PHP files in the scripts folder</div>
+  <div>NOTE!: At the moment there isn't the Javascript file to execute the PHP scripts asynchronously from the browser to delete subscribers. It can be called directly launching the PHP file in the scripts folder</div>
   </div>
 </div>
