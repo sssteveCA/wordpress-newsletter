@@ -36,13 +36,13 @@ export class GetSubscribersHtml{
             this._table += `
 <table class="table table-striped">
     <thead>
-        <th scope="col"></th
-        <th scope="col">EMAIL</th
-        <th scope="col">LINGUA</th
+        <th scope="col"></th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">LINGUA</th>
     </thead>
     <tbody>
 `;
-            this._table = this.tableBody();
+            this._table += this.tableBody();
             this._table += `
     </tbody>
 </table>
