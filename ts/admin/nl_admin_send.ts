@@ -10,9 +10,10 @@ window.addEventListener('DOMContentLoaded',()=>{
     let cb_all_es: HTMLInputElement = document.getElementById('nl_check_all_es') as HTMLInputElement;
     let cb_all_en: HTMLInputElement = document.getElementById('nl_check_all_en') as HTMLInputElement;
     let send_spinner: HTMLDivElement = document.getElementById('send_spinner') as HTMLDivElement;
+    let email_send_response: HTMLDivElement = document.getElementById('email_send_response') as HTMLDivElement;
     let gs: GetSubscribers = new GetSubscribers();
     gs.getSubscribers().then(res => {
-        console.log(gs.subscribers);
+        //console.log(gs.subscribers);
         let gsh_data: GetSubscribersHtmlInterface = {
             containerId: 'nl_send_content', subscribers: gs.subscribers
         };
@@ -22,6 +23,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     
     form.addEventListener('submit',(e)=>{
         e.preventDefault();
+        email_send_response.innerHTML = "";
         let emails: string[] = checkedEmailsList();
         if(emails.length > 0){
             const data: NlFormDataSend = {
@@ -35,14 +37,16 @@ window.addEventListener('DOMContentLoaded',()=>{
             let se: SendEmail = new SendEmail(data);
             se.sendEmail().then(res => {
                 send_spinner.classList.add("invisible");
+                if(res["done"] == true) email_send_response.style.color = 'green';
+                else email_send_response.style.color = 'red';
+                email_send_response.innerHTML = res["msg"];
             });
         }//if(emails.length > 0){ 
+        else{
+            email_send_response.style.color = 'red';
+            email_send_response.innerHTML = "Seleziona almeno un indirizzo email";
+        }
     });//form.addEventListener('submit',(e)=>{
-    cb_all.addEventListener('change',()=>{});
-    cb_all_it.addEventListener('change',()=>{});
-    cb_all_es.addEventListener('change',()=>{});
-    cb_all_en.addEventListener('change',()=>{});
-
 });
 
 /**

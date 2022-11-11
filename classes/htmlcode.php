@@ -168,6 +168,9 @@ HTML;
                 </div>
             </div>
         </div>
+        <div class="row my-2">
+            <div id="email_send_response" class="col-12 text-center fw-bold fs-4"></div>
+        </div>
     </div>
 </form>
 HTML;
