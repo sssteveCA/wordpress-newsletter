@@ -100,14 +100,17 @@ HTML;
             </div>
             <div class="container">
                 <div class="row my-4">
-                    <div class="col-6 offset-3">
+                    <div class="col-6 offset-3 text-center">
                         <button type="submit" id="nl_bt_del_email" class="btn btn-primary mt-4">RIMUOVI ISCRITTI</button>
                     </div>
                     <div class="col-3">
-                        <div class="spinner-border text-dark invisible" role="status">
+                        <div id="delete_spinner" class="spinner-border text-dark invisible" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </div>
+                </div>
+                <div class="row my-2">
+                    <div id="delete_users_response" class="col-12 text-center fw-bold fs-4"></div>
                 </div>
             </div>
         </form>
