@@ -5,7 +5,7 @@
  */
  export function checkedEmailsList(idContainer: string): string[]{
     let emails: string[] = [];
-    let trTable = document.querySelectorAll('#nl_send_content table tbody tr');
+    let trTable = document.querySelectorAll(`#${idContainer} table tbody tr`);
     trTable.forEach(tr => {
         let tds = tr.querySelectorAll('td');
         let cb: HTMLInputElement = tr.querySelector('td:first-child input') as HTMLInputElement;
@@ -59,8 +59,8 @@ export function selectEmails(idContainer: string, idSelected: string, checked: b
         let tds = tr.querySelectorAll('td');
         let cb: HTMLInputElement = tr.querySelector('td:first-child input') as HTMLInputElement;
         let tdLang: string = tds.item(2).innerText;
-        console.log("checkgroup => "+checkgroup);
-        console.log("tdLang => "+tdLang);
+        /* console.log("checkgroup => "+checkgroup);
+        console.log("tdLang => "+tdLang); */
         if(checkgroup == ""){
             if(checked)cb.checked = true;
             else cb.checked = false;

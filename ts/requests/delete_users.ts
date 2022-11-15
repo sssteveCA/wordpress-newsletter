@@ -1,6 +1,6 @@
-import { clientPost } from "../config/axios_instances";
-import { Constants } from "../namespaces/constants";
-import { NlFormDataDelete } from "../types/types";
+import { clientPost } from "../config/axios_instances.js";
+import { Constants } from "../namespaces/constants.js";
+import { NlFormDataDelete } from "../types/types.js";
 
 export default class DeleteUsers{
     private _emails: string[];
