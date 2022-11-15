@@ -1,3 +1,4 @@
+import { clientPost } from "../config/axios_instances";
 import { Constants } from "../namespaces/constants";
 import { NlFormDataDelete } from "../types/types";
 
@@ -28,5 +29,34 @@ export default class DeleteUsers{
                 break;
         }
         return this._error;
+    }
+
+    public async deleteUsers(): Promise<object>{
+        this._errno = 0;
+        let response: object = {};
+        try{
+            await this.deleteUsersPromise().then(res => {
+                console.log(res);
+                response = JSON.parse(res);
+            }).catch(err => {
+                throw err;
+            });
+        }catch(e){
+            this._errno = DeleteUsers.ERR_FETCH;
+            response = {done: false, msg: this.error};
+        }
+        return response;
+    }
+
+    private async deleteUsersPromise(): Promise<string>{
+        return await new Promise<string>((resolve, reject)=>{
+            clientPost.post(DeleteUsers.FETCH_URL,{
+                emails: this._emails
+            }).then(res => {
+                resolve(res.data);
+            }).catch(err => {
+                reject(err);
+            });
+        });
     }
 }

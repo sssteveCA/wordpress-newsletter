@@ -34,9 +34,6 @@ use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 
-$input = file_get_contents("php://input");
-$post = json_decode($input,true);
-
 $response = [
     'done' => false, 'msg' => ''
 ];
@@ -46,6 +43,8 @@ $logged = ($current_user->ID != 0);
 $administrator = current_user_can('manage_options');
 
 if($logged && $administrator){
+    $input = file_get_contents("php://input");
+    $post = json_decode($input,true);
     if(isset($post['emails']) && sizeof($post['emails']) > 0){
         if(is_array($post['emails']) && sizeof($post['emails']) > 0){
             $sdData = [
