@@ -1,11 +1,14 @@
 import { checkedEmailsList, emailSelection } from "../general/admincommon.js";
 import { GetSubscribersHtml, GetSubscribersHtmlInterface } from "../html/getsubscribershtml.js";
+import DeleteUsers from "../requests/delete_users.js";
 import GetSubscribers from "../requests/get_subscribers.js";
 import { NlFormDataDelete } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
     let form: HTMLFormElement = document.getElementById('nl_form_del') as HTMLFormElement;
     let gs: GetSubscribers = new GetSubscribers();
+    let delete_spinner: HTMLDivElement = document.getElementById('delete_spinner') as HTMLDivElement;
+    let delete_users_response: HTMLDivElement = document.getElementById('delete_users_response') as HTMLDivElement;
     gs.getSubscribers().then(res => {
         console.log(res);
         let gsh_data: GetSubscribersHtmlInterface = {
@@ -21,6 +24,20 @@ window.addEventListener('DOMContentLoaded',()=>{
             const data: NlFormDataDelete = {
                 emails: emails
             };
+            let du: DeleteUsers = new DeleteUsers(data);
+            delete_spinner.classList.remove("invisible");
+            du.deleteUsers().then(obj => {
+                delete_spinner.classList.add("invisible");
+                if(obj["done"] == true){
+                   delete_users_response.style.color = 'green'; 
+                }
+                else delete_users_response.style.color = 'red';
+                delete_users_response.innerHTML = obj["msg"];
+            });
         }//if(emails.length > 0){
+        else{
+            delete_users_response.style.color = 'red';
+            delete_users_response.innerHTML = "Seleziona almeno un indirizzo email";
+        }
     });//form.addEventListener('submit', (e)=>{
 });

@@ -32,11 +32,11 @@ window.addEventListener('DOMContentLoaded',()=>{
             console.log(data); */
             send_spinner.classList.remove("invisible");
             let se: SendEmail = new SendEmail(data);
-            se.sendEmail().then(res => {
+            se.sendEmail().then(obj => {
                 send_spinner.classList.add("invisible");
-                if(res["done"] == true) email_send_response.style.color = 'green';
+                if(obj["done"] == true) email_send_response.style.color = 'green';
                 else email_send_response.style.color = 'red';
-                email_send_response.innerHTML = res["msg"];
+                email_send_response.innerHTML = obj["msg"];
             });
         }//if(emails.length > 0){ 
         else{
