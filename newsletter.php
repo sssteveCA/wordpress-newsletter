@@ -57,18 +57,22 @@ use Newsletter\Enums\Langs;
    //file_put_contents("log.txt","newsletter.php nl_admin_scripts request page =>".var_export($_REQUEST['page'],true)."\r\n",FILE_APPEND);
    if(isset($_REQUEST['page'])){
       $page = $_REQUEST['page'];
-      if($page == C::SLUG_ADMIN_FORM_ADD){
+      if($page == C::SLUG_ADMIN_FORM_ADD || $page == C::SLUG_ADMIN_FORM_DELETE || $page == C::SLUG_ADMIN_FORM_SEND){
          wp_enqueue_script(C::H_JS_AXIOS_LIB);
+
+         //Enqueue this files if you don't have Bootstrap in your Wordpress site
+         /* wp_enqueue_style(C::H_CSS_BOOTSTRAP);
+         wp_enqueue_script(C::H_JS_BOOTSTRAP); */
+      }
+      if($page == C::SLUG_ADMIN_FORM_ADD){
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_ADD);
          wp_enqueue_script(C::H_JS_ADMIN_FORM_ADD);
       }
       else if($page == C::SLUG_ADMIN_FORM_DELETE){
-         wp_enqueue_script(C::H_JS_AXIOS_LIB);
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_DELETE);
          wp_enqueue_script(C::H_JS_ADMIN_FORM_DELETE);
       }
       else if($page == C::SLUG_ADMIN_FORM_SEND){
-         wp_enqueue_script(C::H_JS_AXIOS_LIB);
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_SEND);
          wp_enqueue_script(C::H_JS_ADMIN_FORM_SEND);
       }
@@ -134,6 +138,13 @@ function nl_after_load(){
    $plugin_dir = Properties::pluginUrl(__FILE__);
    $axiosJs = $plugin_dir.C::REL_JS_AXIOS_LIB;
    wp_register_script(C::H_JS_AXIOS_LIB,$axiosJs,[],null);
+
+   //Register this files if you don't have Bootstrap in your Wordpress site 
+   /* $bootstrapCss = $plugin_dir.C::REL_CSS_BOOTSTRAP;
+   $bootstrapJs = $plugin_dir.C::REL_JS_BOOTSTRAP;
+   wp_register_style(C::H_CSS_BOOTSTRAP,$bootstrapCss,[],null);
+   wp_register_script(C::H_JS_BOOTSTRAP,$bootstrapJs,[],null); */
+
    if(is_admin()){
       $adminCssAdd = $plugin_dir.C::REL_CSS_ADMIN_ADD;
       $adminJsAdd = $plugin_dir.C::REL_JS_ADMIN_ADD;
