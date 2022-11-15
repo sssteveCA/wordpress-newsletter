@@ -58,14 +58,17 @@ use Newsletter\Enums\Langs;
    if(isset($_REQUEST['page'])){
       $page = $_REQUEST['page'];
       if($page == C::SLUG_ADMIN_FORM_ADD){
+         wp_enqueue_script(C::H_JS_AXIOS_LIB);
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_ADD);
          wp_enqueue_script(C::H_JS_ADMIN_FORM_ADD);
       }
       else if($page == C::SLUG_ADMIN_FORM_DELETE){
+         wp_enqueue_script(C::H_JS_AXIOS_LIB);
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_DELETE);
          wp_enqueue_script(C::H_JS_ADMIN_FORM_DELETE);
       }
       else if($page == C::SLUG_ADMIN_FORM_SEND){
+         wp_enqueue_script(C::H_JS_AXIOS_LIB);
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_SEND);
          wp_enqueue_script(C::H_JS_ADMIN_FORM_SEND);
       }

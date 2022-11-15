@@ -4,7 +4,7 @@ import GetSubscribers from "../requests/get_subscribers.js";
 import { NlFormDataDelete } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
-    let form: HTMLFormElement = document.getElementById('nl_form_add') as HTMLFormElement;
+    let form: HTMLFormElement = document.getElementById('nl_form_del') as HTMLFormElement;
     let gs: GetSubscribers = new GetSubscribers();
     gs.getSubscribers().then(res => {
         console.log(res);
