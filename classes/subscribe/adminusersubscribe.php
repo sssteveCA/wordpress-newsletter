@@ -39,8 +39,19 @@ class AdminUserSubscribe{
         $this->user = $data['user'];
     }
 
-    
-
-
+    private function insertUser(): bool{
+        $email = $this->user->getEmail();
+        if(preg_match(AdminUserSubscribe::$regex["email"],$email)){
+            if($this->checkDuplicate()){
+                $this->errno = Ause::EMAIL_EXISTS;
+                return false;
+            }
+            $insert = $this->user->insertUser(User::$insertArrayFunctions["backend"]);
+            if($insert) return true;
+            else $this->errno = Ause::FROM_USER;
+        }//if(preg_match(AdminUserSubscribe::$regex["email"],$email)){
+        else $this->errno = Ause::INCORRECT_EMAIL;
+        return false;
+    }
 }
 ?>
