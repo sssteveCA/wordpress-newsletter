@@ -81,7 +81,7 @@ trait UserTrait{
                 $insert_array["values"][$classname::$fields["lastName"]] = $this->lastName;
                 array_push($insert_array["format"],"%s","%s");
             }
-            file_put_contents("log.txt","UserTrait insertUserArrayAdmin insert_array => ".var_export($insert_array,true)."\r\n",FILE_APPEND);
+            //echo "UserTrait insertUserArrayAdmin insert_array => ".var_export($insert_array,true)."\r\n";
             return $insert_array;
         }//if(isset($this->email,$this->lang)){
         else $this->errno = Ue::ERR_MISSING_DATA;

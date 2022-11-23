@@ -26,7 +26,8 @@ class AdminUserSubscribe{
 
     public function __construct(array $data)
     {
-        
+        $this->checkValues($data);
+        $this->insertUser();
     }
 
     private function checkValues(array $data){
