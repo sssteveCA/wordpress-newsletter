@@ -6,6 +6,7 @@ require_once("../../enums/languages.php");
 require_once("../../interfaces/exceptionmessages.php");
 require_once("../../interfaces/constants.php");
 require_once("../../interfaces/messages.php");
+require_once("../../interfaces/subscribeerrors.php");
 require_once("../../exceptions/notsettedexception.php");
 require_once("../../exceptions/incorrectvariableformatexception.php");
 require_once("../../traits/errortrait.php");
