@@ -21,6 +21,7 @@ require_once("../../traits/usercommontrait.php");
 require_once("../../traits/usertrait.php");
 require_once("../../traits/emailmanagertrait.php");
 require_once("../../traits/templatetrait.php");
+require_once("../../traits/subscribetrait.php");
 require_once("../../vendor/autoload.php");
 require_once("../../classes/general.php");
 require_once("../../classes/properties.php");

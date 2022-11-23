@@ -9,6 +9,7 @@ use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Classes\Subscribe\UserSubscribeError as Usee;
 use Newsletter\Traits\ErrorTrait;
+use Newsletter\Traits\SubscribeTrait;
 
 interface UserSubscribeError extends ExceptionMessages{
     const FROM_USER = 1;
@@ -22,14 +23,7 @@ interface UserSubscribeError extends ExceptionMessages{
 
 class UserSubscribe implements Usee{
 
-    use ErrorTrait;
-
-    private User $user;
-
-    public static array $regex = [
-        'email' => '/^[a-zA-Z-_\.0-9]{4,40}@([a-z]{3,25}\.){1,6}[a-z]{2,10}$/',
-        //'email' => '/^[a-zA-Z-_0-9]{4,20}@([a-z]{3,15}\.){1,6}[a-z]{2,10}$/',
-    ];
+    use ErrorTrait, SubscribeTrait;
 
     public function __construct(array $data)
     {
@@ -37,7 +31,6 @@ class UserSubscribe implements Usee{
         $this->insertUser();
     }
 
-    public function getUser(){return $this->user;}
     public function getError(){
         switch($this->errno){
             case Usee::FROM_USER:
@@ -63,13 +56,6 @@ class UserSubscribe implements Usee{
             throw new IncorrectVariableFormatException(Usee::EXC_INVALID_TYPE);
         }
         $this->user = $data['user'];
-    }
-
-    private function checkDuplicate(): bool{
-        $user_cloned = clone $this->user;
-        $sql = "WHERE `".User::$fields["email"]."` = %s";
-        $values = [$this->user->getEmail()];
-        return $user_cloned->getUser($sql,$values);
     }
 
     private function insertUser(): bool{
