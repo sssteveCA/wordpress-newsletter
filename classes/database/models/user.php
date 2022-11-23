@@ -62,6 +62,11 @@ class User extends Model implements Ue{
      */
     private ?string $actDate;
 
+    /**
+     * Methods used by User class to create the array for user record creation
+     */
+    public static $insertArrayFunctions = ['backend' => 'insertUserArrayAdmin', 'frontend' => 'insertUserArray'];
+
 
     public function __construct(array $data)
     {
@@ -145,10 +150,11 @@ class User extends Model implements Ue{
 
     /**
      * Insert a new User in the table
+     * @param string $callback the function used to create the array for user record creation
      */
-    public function insertUser(){
+    public function insertUser(string $callback){
         $this->errno = 0;
-        $insert_array = $this->insertUserArray();
+        $insert_array = call_user_func(array($this, $callback));
         //file_put_contents("log.txt", "User insertUser\r\n".var_export($insert_array,true)."\r\n",FILE_APPEND);
         if($insert_array != null){
             $insert = parent::insert($insert_array["values"],$insert_array["format"]);

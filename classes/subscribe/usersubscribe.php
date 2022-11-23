@@ -60,7 +60,7 @@ class UserSubscribe implements Usee{
                 $this->errno = Usee::EMAIL_EXISTS;
                 return false;
             }
-            $insert = $this->user->insertUser();
+            $insert = $this->user->insertUser(User::$insertArrayFunctions["frontend"]);
             if($insert) return true;
             else $this->errno = Usee::FROM_USER;
         }
