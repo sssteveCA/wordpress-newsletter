@@ -29,27 +29,61 @@ trait UserTrait{
      */
     private function insertUserArray(): array|null{
         $this->errno = 0;
-        $this->verCode = $this->codeGen();
-        $this->subscDate = date("Y-m-d H:i:s");
-        if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
+        if(isset($this->email, $this->lang)){
+            $this->verCode = $this->codeGen();
+            $this->subscDate = date("Y-m-d H:i:s");
             $classname = __CLASS__;
             $insert_array = [
                 "values" => [
-                    $classname::$fields['email'] => $this->email,
-                    $classname::$fields['lang'] => $this->lang,
-                    $classname::$fields['verCode'] => $this->verCode,
-                    $classname::$fields['subscDate'] => $this->subscDate
+                    $classname::$fields["email"] => $this->email,
+                    $classname::$fields["lang"] => $this->lang,
+                    $classname::$fields["verCode"] => $this->verCode,
+                    $classname::$fields["subscDate"] => $this->subscDate
                 ],
                 "format" => ["%s","%s","%s","%s"]
             ];
             if(isset($this->firstName, $this->lastName)){
-                $insert_array["values"][$classname::$fields['firstName']] = $this->firstName;
-                $insert_array["values"][$classname::$fields['lastName']] = $this->lastName;
+                $insert_array["values"][$classname::$fields["firstName"]] = $this->firstName;
+                $insert_array["values"][$classname::$fields["lastName"]] = $this->lastName;
                 array_push($insert_array["format"],"%s","%s");
             }//if(isset($this->firstName, $this->lastName)){
                 //file_put_contents("log.txt","UserTrait insertUserArray insert_array => ".var_export($insert_array,true)."\r\n",FILE_APPEND);
             return $insert_array;
-        }//if(isset($this->email, $this->lang, $this->verCode, $this->subscDate)){
+        }//if(isset($this->email, $this->lang)){
+        else $this->errno = Ue::ERR_MISSING_DATA;
+        return null;
+    }
+
+    /**
+     * Set the array to insert new user in database from admin panel
+     */
+    private function insertUserArrayAdmin(): array|null{
+        $this->errno = 0;
+        if(isset($this->email,$this->lang)){
+            $this->unsubscCode = $this->codeGen();
+            $this->subscribed = 1;
+            $this->subscDate = date("Y-m-d H:i:s");
+            $this->actDate = $this->subscDate;
+            $classname = __CLASS__;
+            $insert_array = [
+                "values" => [
+                    $classname::$fields["email"] => $this->email,
+                    $classname::$fields["lang"] => $this->lang,
+                    $classname::$fields["unsubscCode"] => $this->unsubscCode,
+                    $classname::$fields["subscribed"] => $this->subscribed,
+                    $classname::$fields["subscDate"] => $this->subscDate,
+                    $classname::$fields["actDate"] => $this->actDate
+                ],
+                "format" => ["%s","%s","%s","%d","%s","%s"]
+            ];
+            if(isset($this->firstName,$this->lastName)){
+                $insert_array["values"][$classname::$fields["firstName"]] = $this->firstName;
+                $insert_array["values"][$classname::$fields["lastName"]] = $this->lastName;
+                array_push($insert_array["format"],"%s","%s");
+            }
+            file_put_contents("log.txt","UserTrait insertUserArrayAdmin insert_array => ".var_export($insert_array,true)."\r\n",FILE_APPEND);
+            return $insert_array;
+        }//if(isset($this->email,$this->lang)){
         else $this->errno = Ue::ERR_MISSING_DATA;
         return null;
     }
