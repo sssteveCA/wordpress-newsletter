@@ -30,7 +30,9 @@ require_once("../../classes/database/model.php");
 require_once("../../classes/database/models/user.php");
 require_once("../../classes/subscribe/adminusersubscribe.php");
 
+use Dotenv\Dotenv;
 use Newsletter\Classes\Database\Models\User;
+use Newsletter\Classes\Email\EmailManager;
 use Newsletter\Classes\Properties;
 use Newsletter\Classes\Subscribe\AdminUserSubscribe;
 use Newsletter\Interfaces\Messages as M;
@@ -97,4 +99,26 @@ else{
 } */
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+
+/**
+ * Send the mail to notify the user of the subscription
+ * @param array an array of values for mail signing up notify template
+ * @return int the error code or 0 if no error occurs while email sending
+ */
+function sendSigningUpNotify(array $params): int{
+    $dotenv = Dotenv::createImmutable("../../");
+    $dotenv->safeLoad();
+    $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
+    $fromNickname = isset($params['fromNickname']) ? $params['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
+    $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
+    $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
+    $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
+    $emData = [
+        'from' => $from, 'email' => $params['email'], 'fromNickname' => $fromNickname,
+        'host' => $host, 'operation' => $params['operation'],
+        'password' => $password, 'port' => $port, 'subject' => $params['subject']
+    ];
+    $emailManager = new EmailManager($emData);
+    return 0;
+}
 ?>
