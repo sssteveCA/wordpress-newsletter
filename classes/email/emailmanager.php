@@ -89,6 +89,10 @@ class EmailManager extends PHPMailer{
         else throw new NotSettedException(Eme::EXC_NOTISSET);
     }
 
+    public function sendAddUserNotify(){
+        
+    }
+
     /**
      * Send an email to the used that was deleted from the newsletter by the admin
      */

@@ -66,6 +66,13 @@ trait PropertiesUrlTrait{
     }
 
     /**
+     * Get the newsletter name
+     */
+    public static function newsletterName(): string{
+        return 'La filosofia di Bianca';
+    }
+
+    /**
      * Get the privacy policy link
      */
     public static function privacyUrl(string $lang):string {
