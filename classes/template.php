@@ -35,7 +35,29 @@ HTML;
     }
 
     /**
-     * Mail sent to the user when is removed from the administrator
+     * Temkplate mail sent when a uyser is added by the admin
+     */
+    public static function addUserAdminTemplate(string $lang, array $params): string{
+        return <<<HTML
+        <!DOCTYPE html>
+        <html lang="it">
+            <head>
+                <title></title>
+                <meta charset="utf-8">
+            </head>
+            <body>
+                <div style="padding: 40px 20px; text-align: center;">
+                <p></p>
+                <p></p>
+                <p></p>
+                </div>
+            </body>
+        </html>
+HTML;
+    }
+
+    /**
+     * Template mail sent to the user when is removed from the administrator
      */
     public static function deleteUserTemplate(string $lang, array $params): string{
         $messages = Template::deleteUserMessages($lang,$params);
