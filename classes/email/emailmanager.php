@@ -30,6 +30,7 @@ class EmailManager extends PHPMailer{
     public const EMAIL_ACTIVATION = 2;
     public const EMAIL_USER_UNSUBCRIBE = 3;
     public const EMAIL_USER_DELETE = 4;
+    public const EMAIL_USER_ADD_ADMIN = 5;
 
     private string $email;
     private string $from;
@@ -89,8 +90,30 @@ class EmailManager extends PHPMailer{
         else throw new NotSettedException(Eme::EXC_NOTISSET);
     }
 
-    public function sendAddUserNotify(){
-        
+    /**
+     * Send an email to the user that administrator has added to the newsletter
+     */
+    public function sendAddUserNotify(array $data){
+        $this->errno = 0;
+        if(isset($data['lang']) && $data['lang'] != ''){
+            try{
+                $lang = $data['lang'];
+                $templateData = ['from' => $this->from ];
+                $htmlBody = Template::addUserAdminTemplate($lang, $templateData);
+                $this->addAddress($this->email);
+                $subject = Template::addUserAdminMessages($lang,$templateData)["title"];
+                $this->subject = $subject;
+                $this->body = $htmlBody;
+                $this->Subject = $this->subject;
+                $this->Body = $this->body;
+                $this->AltBody = $this->body;
+                $this->send();
+            }
+            catch(Exception $e){
+                $this->errno = Eme::ERR_EMAIL_SEND;
+            }
+        }//if(isset($data['lang']) && $data['lang'] != ''){
+        else throw new NotSettedException(Eme::EXC_NOTISSET);
     }
 
     /**

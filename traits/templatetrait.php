@@ -82,31 +82,32 @@ HTML,
     public static function addUserAdminMessages(string $lang, array $params): array{
         $contactUrl = Properties::contactsUrl($lang);
         $homeUrl = Properties::homeUrl();
+        $newsletterName = Properties::newsletterName();
         if($lang == Langs::$langs["it"]){
             return [
-                "added" => "Sei stato aggiunto alla newsletter '{$params['newsletter_name']}'",
+                "added" => "Sei stato aggiunto alla newsletter '{$newsletterName}'",
                 "moreInfo" => "Se pensi che sia stato fatto per errore scrivi una mail sulla nostra <a href=\"{$contactUrl}\">pagina dei contatti</a>",
                 "moreInfoMail" => "oppure puoi scrivere direttamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
                 "receive" => "Da questo momento riceverai periodicamente delle mail da questo sito '{$homeUrl}'",
-                "title" => "Nuovo iscritto alla newsletter '{$params['newsletter_name']}'"
+                "title" => "Nuovo iscritto alla newsletter '{$newsletterName}'"
             ];
         }
         else if($lang == Langs::$langs["es"]){
             return [
-                "added" => "Has sido añadido al boletín '{$params['newsletter_name']}'",
+                "added" => "Has sido añadido al boletín '{$newsletterName}'",
                 "moreInfo" => "Si cree que se hizo por error, escriba un correo electrónico en nuestra <a href=\"{$contactUrl}\">página de contacto</a>",
                 "moreInfoMail" => "o puedes escribir directamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
                 "receive" => "A partir de ahora recibirás periódicamente correos electrónicos de este sitio '{$homeUrl}'",
-                "title" => "Nuevo suscriptor del boletín '{$params['newsletter_name']}'"
+                "title" => "Nuevo suscriptor del boletín '{$newsletterName}'"
             ];
         }
         else{
             return [
-                "added" => "You have been added to the newsletter '{$params['newsletter_name']}'",
+                "added" => "You have been added to the newsletter '{$newsletterName}'",
                 "moreInfo" => "f you think it was done by mistake write an email on our <a href=\"{$contactUrl}\">contact page</a>",
                 "moreInfoMail" => "or you can write directly to <a href=\"{$params['from']}\">{$params['from']}</a>",
                 "receive" => "From now on you will periodically receive emails from this site '{$homeUrl}'",
-                "title" => "New '{$params['newsletter_name']}' newsletter subscriber"
+                "title" => "New '{$newsletterName}' newsletter subscriber"
             ];
         }
     }

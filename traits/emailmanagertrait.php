@@ -18,7 +18,7 @@ trait EmailManagerTrait{
             $this->from = $data['from'];
             $this->fromNickname = $data['fromNickname'];
             $operation = isset($data['operation']) ? $data['operation'] : EmailManager::EMAIL_NEWSLETTER;
-            if($operation == EmailManager::EMAIL_ACTIVATION || $operation == EmailManager::EMAIL_USER_UNSUBCRIBE){
+            if($operation == EmailManager::EMAIL_ACTIVATION || $operation == EmailManager::EMAIL_USER_UNSUBCRIBE || $operation == EmailManager::EMAIL_USER_ADD_ADMIN){
                 if(isset($data['email'],$data['subject'])){
                     $this->email = $data['email'];
                     $this->subject = $data['subject'];
