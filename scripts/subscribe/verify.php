@@ -89,11 +89,12 @@ else{
     $message = Properties::insertCode($lang);   
 }
 
+
 $body = <<<HTML
 <div>{$message}</div>
 HTML;
 
-$html = HtmlCode::genericHtml($title,$body);
+$html = HtmlCode::genericHtml($title,$body,$style);
 
 echo $html;
 
