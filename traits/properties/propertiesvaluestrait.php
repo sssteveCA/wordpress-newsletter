@@ -5,7 +5,7 @@ namespace Newsletter\Traits\Properties;
 /**
  * Values get methods for Properties class
  */
-trait PropertiesValesTrait{
+trait PropertiesValuesTrait{
 
     /**
      * Get the newsletter name
