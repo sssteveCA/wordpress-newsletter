@@ -1,3 +1,4 @@
+import { AxiosError } from "../../node_modules/axios/index.js";
 import { clientPost } from "../config/axios_instances.js";
 import { Constants } from "../namespaces/constants.js";
 import { NlFormDataSend } from "../types/types.js";
@@ -54,8 +55,14 @@ export default class SendEmail{
                 throw err;
             });
         }catch(e){
-            this._errno = SendEmail.ERR_FETCH;
+            if(e instanceof AxiosError){
+                const stringError: string = e.response?.data;
+                response = JSON.parse(stringError);
+            }
+            else{
+                this._errno = SendEmail.ERR_FETCH;
             response = {done: false, msg: this.error}
+            }
         }
         return response;
     }

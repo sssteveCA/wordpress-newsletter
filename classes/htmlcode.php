@@ -61,7 +61,7 @@ class HtmlCode{
                 <button type="reset" class="btn btn-danger">ANNULLA</button>
             </div>
         </div>
-        <div class="row my-2">
+        <div class="row my-4">
             <div id="nl_add_user_response" class="col-12 text-center fw-bold fs-4"></div>
         </div>
     </div>

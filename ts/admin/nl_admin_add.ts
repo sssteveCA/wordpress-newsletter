@@ -1,4 +1,4 @@
-import { AddUserAdmin } from "../requests/add_user_admin";
+import { AddUserAdmin } from "../requests/add_user_admin.js";
 import { NlFormDataAdd } from "../types/types";
 
 window.addEventListener('DOMContentLoaded', ()=>{

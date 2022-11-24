@@ -1,3 +1,4 @@
+import { AxiosError } from "../../node_modules/axios/index.js";
 import { clientPost } from "../config/axios_instances.js";
 import { Constants } from "../namespaces/constants.js";
 import { NlFormDataDelete } from "../types/types.js";
@@ -42,8 +43,14 @@ export default class DeleteUsers{
                 throw err;
             });
         }catch(e){
-            this._errno = DeleteUsers.ERR_FETCH;
-            response = {done: false, msg: this.error};
+            if(e instanceof AxiosError){
+                const stringError: string = e.response?.data;
+                response = JSON.parse(stringError);
+            }
+            else{
+                this._errno = DeleteUsers.ERR_FETCH;
+                response = {done: false, msg: this.error};
+            }  
         }
         return response;
     }
