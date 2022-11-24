@@ -1,6 +1,19 @@
 Options -Indexes
 
-<Files .env>
+RedirectMatch 403 classes\/.*
+RedirectMatch 403 config\/.*
+RedirectMatch 403 enums\/.*
+RedirectMatch 403 exceptions\/.*
+RedirectMatch 403 interfaces\/.*
+RedirectMatch 403 traits\/.*
+RedirectMatch 403 vendor\/.*
+
+<FilesMatch "\.(ts|scss|txt|json|lock)$">
     Order allow,deny
     Deny from all
-</Files>
+</FilesMatch>
+
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
