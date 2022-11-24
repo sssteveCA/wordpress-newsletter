@@ -55,7 +55,7 @@ $administrator = current_user_can('manage_options');
 if(!isset($post['lang'])) $post['lang'] = 'en';
 $lang = General::languageCode($post['lang']);
 
-if($logged && $administrator){
+//if($logged && $administrator){
     $input = file_get_contents("php://input");
     $post = json_decode($input,true);
     if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
@@ -113,11 +113,11 @@ if($logged && $administrator){
         http_response_code(400);
         $response['msg'] = M::ERR_MISSING_FORM_VALUES;
     }
-}//if($logged && $administrator){
+/* }//if($logged && $administrator){
 else{
     http_response_code(401);
     $response['msg'] = M::ERR_UNAUTHORIZED;
-}
+} */
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 

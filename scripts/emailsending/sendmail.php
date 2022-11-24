@@ -14,7 +14,7 @@ require_once("../../traits/properties/messages/unsubscribetrait.php");
 require_once("../../traits/properties/messages/verifytrait.php");
 require_once("../../traits/properties/propertiesmessagestrait.php");
 require_once("../../traits/properties/propertiesurltrait.php");
-require_once("../../traits/properties/propertiesvaluestrait.php");
+//require_once("../../traits/properties/propertiesvaluestrait.php");
 require_once("../../traits/emailmanagertrait.php");
 require_once("../../traits/templatetrait.php");
 require_once("../../traits/errortrait.php");
@@ -49,7 +49,7 @@ $administrator = current_user_can('manage_options');
 if($logged && $administrator){
     $input = file_get_contents("php://input");
     $post = json_decode($input,true);
-    $response['data'] = $post;
+    //$response['data'] = $post;
     if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
         if(is_array($post['emails']) && sizeof($post['emails']) > 0){
             try{

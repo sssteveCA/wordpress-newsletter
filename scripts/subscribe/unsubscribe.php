@@ -19,7 +19,7 @@ require_once("../../traits/properties/messages/verifytrait.php");
 require_once("../../traits/properties/messages/unsubscribetrait.php");
 require_once("../../traits/properties/propertiesmessagestrait.php");
 require_once("../../traits/properties/propertiesurltrait.php");
-require_once("../../traits/properties/propertiesvaluestrait.php");
+//require_once("../../traits/properties/propertiesvaluestrait.php");
 require_once("../../traits/emailmanagertrait.php");
 require_once("../../traits/templatetrait.php");
 require_once("../../vendor/autoload.php");
