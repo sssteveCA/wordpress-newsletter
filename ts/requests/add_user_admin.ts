@@ -1,3 +1,4 @@
+import { clientPost } from "../config/axios_instances";
 import { Constants } from "../namespaces/constants";
 import { NlFormDataAdd } from "../types/types";
 
@@ -9,7 +10,7 @@ export class AddUserAdmin{
     private _errno: number = 0;
     private _error: string|null = null;
 
-    private static NEWUSER_URL:string = Constants.PLUGIN_DIR+"/scripts/subscribe/admin_new_user.php";
+    private static ADDUSER_URL:string = Constants.PLUGIN_DIR+"/scripts/subscribe/admin_new_user.php";
 
     public static ERR_FETCH: number = 1;
     private static ERR_FETCH_MSG:string = "Errore durante l'esecuzione della richiesta.";
@@ -40,5 +41,36 @@ export class AddUserAdmin{
         if(data.surname) this._surname = data.surname;
         this._email = data.email;
         this._lang_code = data.lang_code;
+    }
+
+    public async addUser(): Promise<object>{
+        this._errno = 0;
+        let response: object = {};
+        try{
+            await this.addUserPromise().then(res => {
+                console.log(res);
+                response = JSON.parse(res);
+            }).catch(err => {
+                throw err;
+            });
+        }catch(e){
+            console.warn(e);
+            this._errno = AddUserAdmin.ERR_FETCH;
+            response = { done: false, msg: this.error }
+        }
+        return response;
+    }
+
+    private async addUserPromise(): Promise<string>{
+        return await new Promise<string>((resolve, reject)=>{
+            let postData: NlFormDataAdd = {
+                name: this._name, surname: this._surname, email: this._email, lang_code: this._lang_code
+            };
+            clientPost.post(AddUserAdmin.ADDUSER_URL, postData).then(res =>{
+                resolve(res.data);
+            }).catch(err => {
+                reject(err);
+            })
+        });
     }
 }
