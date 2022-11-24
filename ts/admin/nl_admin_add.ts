@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
             name: (<HTMLInputElement>document.getElementById('nl_name')).value as string,
             surname: (<HTMLInputElement>document.getElementById('nl_surname')).value as string,
             email: (<HTMLInputElement>document.getElementById('nl_email')).value as string,
-            lang_code: (<HTMLInputElement>document.getElementById('nl_lang_code')).value as string,
+            lang_code: (<HTMLSelectElement>document.getElementById('nl_lang_code')).value as string,
         };
         let addUser: AddUserAdmin = new AddUserAdmin(data);
         add_spinner.classList.remove("invisible");

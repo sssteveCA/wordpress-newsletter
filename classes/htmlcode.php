@@ -42,10 +42,14 @@ class HtmlCode{
         </div>
         <div class="row mb-4">
             <div class="col-12 col-md-3">
-                <label for="nl_lang_code" class="form-label">Codice lingua</label>
+                <label for="nl_lang_code" class="form-label">Lingua</label>
             </div>
             <div class="col-12 col-md-9">
-                <input type="text" id="nl_lang_code" class="form-control" name="lang_code">
+                <select id="nl_lang_code" class="form-select" name="lang_code">
+                    <option value="it" selected>Italiano</option>
+                    <option value="es">Spagnolo</option>
+                    <option value="en">Inglese</option>
+                </select>
             </div>
         </div>
         <div class="row justify-content-between justify-content-md-evenly">
