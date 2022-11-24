@@ -14,6 +14,7 @@ require_once("../../traits/properties/messages/unsubscribetrait.php");
 require_once("../../traits/properties/messages/verifytrait.php");
 require_once("../../traits/properties/propertiesmessagestrait.php");
 require_once("../../traits/properties/propertiesurltrait.php");
+require_once("../../traits/properties/propertiesvaluestrait.php");
 require_once("../../traits/errortrait.php");
 require_once("../../traits/sqltrait.php");
 require_once("../../traits/modeltrait.php");
