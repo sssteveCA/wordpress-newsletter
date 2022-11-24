@@ -4,6 +4,11 @@
         >div{
             &:first-child{
                 width: 90%;
+                .row{
+                    select{
+                        max-width: none !important;
+                    }
+                }
             }
         }
     }

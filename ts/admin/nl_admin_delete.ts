@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     loadEmailAddresses();
     form.addEventListener('submit', (e)=>{
         e.preventDefault();
+        delete_users_response.innerHTML = "";
         let emails: string[] = checkedEmailsList('nl_del_content_email');
         if(emails.length > 0){
             const data: NlFormDataDelete = {
@@ -41,7 +42,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 function loadEmailAddresses(): void{
     let gs: GetSubscribers = new GetSubscribers();
     gs.getSubscribers().then(res => {
-        console.log(res);
+        //console.log(res);
         let gsh_data: GetSubscribersHtmlInterface = {
             containerId: 'nl_del_content_email', subscribers: gs.subscribers
         };

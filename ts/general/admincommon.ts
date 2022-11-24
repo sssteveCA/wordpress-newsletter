@@ -48,8 +48,8 @@ export function emailSelection(idContainer: string): void{
  * Check checkbox in emails list box when a checkbox of email select group is checked
  */
 export function selectEmails(idContainer: string, idSelected: string, checked: boolean): void{
-    console.log(idSelected);
-    console.log(checked);
+    /* console.log(idSelected);
+    console.log(checked); */
     let checkgroup: string = "";
     if(idSelected == 'nl_check_all_it'){checkgroup = "it";}
     if(idSelected == 'nl_check_all_es'){checkgroup = "es";}

@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
     let add_user_response: HTMLDivElement = document.getElementById('nl_add_user_response') as HTMLDivElement;
     form.addEventListener('submit',(e)=>{
         e.preventDefault();
+        add_user_response.innerHTML = "";
         const data: NlFormDataAdd = {
             name: (<HTMLInputElement>document.getElementById('nl_name')).value as string,
             surname: (<HTMLInputElement>document.getElementById('nl_surname')).value as string,
