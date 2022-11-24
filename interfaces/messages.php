@@ -7,7 +7,6 @@ namespace Newsletter\Interfaces;
  */
 interface Messages{
     const ADMIN_CONTACT = "Se il problema persiste contattare l'amministratore del sito";
-    const ERR_ADMIN_NEW_USER_UNKNOWN = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
     const ERR_ATLEAST_ONE_EMAIL = "Inserisci almeno un indirizzo email";
     const ERR_MISSING_FORM_VALUES = "Compila tutti i campi richiesti per continuare";
     const ERR_UNAUTHORIZED = "Per effettuare questa operazione devi essere collegato come amministratore";

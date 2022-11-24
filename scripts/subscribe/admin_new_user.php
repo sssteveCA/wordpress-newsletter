@@ -34,6 +34,7 @@ require_once("../../classes/subscribe/adminusersubscribe.php");
 use Dotenv\Dotenv;
 use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\Email\EmailManager;
+use Newsletter\Classes\General;
 use Newsletter\Classes\Properties;
 use Newsletter\Classes\Subscribe\AdminUserSubscribe;
 use Newsletter\Interfaces\Messages as M;
@@ -48,6 +49,9 @@ $response = [
 $current_user = wp_get_current_user();
 $logged = ($current_user->ID != 0);
 $administrator = current_user_can('manage_options');
+
+if(!isset($post['lang'])) $post['lang'] = 'en';
+$lang = General::languageCode($post['lang']);
 
 //if($logged && $administrator){
     $input = file_get_contents("php://input");
@@ -68,8 +72,19 @@ $administrator = current_user_can('manage_options');
             $ausError = $aus->getErrno();
             switch($ausError){
                 case 0:
-                    $response['done'] = true;
-                    $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
+                    $operation = EmailManager::EMAIL_USER_ADD_ADMIN;
+                    $aumData = ['email' => $aus->getUser()->getEmail(), 'operation' => $operation];
+                    $email = sendSigningUpNotify($aumData);
+                    switch($email){
+                        case 0:
+                            $response['done'] = true;
+                            $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
+                            break;
+                        default:
+                            http_response_code(500);
+                            $response['msg'] = "Impossibile inviare l'email all'utente inserito a causa di un errore sconosciuto";
+                            break;      
+                    }
                     break;
                 case Ause::INCORRECT_EMAIL:
                     http_response_code(400);
@@ -81,12 +96,12 @@ $administrator = current_user_can('manage_options');
                     break;
                 default:
                     http_response_code(500);
-                    $response['msg'] = M::ERR_ADMIN_NEW_USER_UNKNOWN;
+                    $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
                     break;
             }
         }catch(Exception $e){
             http_response_code(500);
-            $response['msg'] = M::ERR_ADMIN_NEW_USER_UNKNOWN;
+            $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
         }
     }//if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
     else{
@@ -117,9 +132,12 @@ function sendSigningUpNotify(array $params): int{
     $emData = [
         'from' => $from, 'email' => $params['email'], 'fromNickname' => $fromNickname,
         'host' => $host, 'operation' => $params['operation'],
-        'password' => $password, 'port' => $port, 'subject' => $params['subject']
+        'password' => $password, 'port' => $port, 'subject' => ''
     ];
     $emailManager = new EmailManager($emData);
-    return 0;
+    $addUserMailData = [ 'lang' => $params['lang']];
+    $emailManager->sendAddUserNotify($addUserMailData);
+    $emErrno = $emailManager->getErrno();
+    return $emErrno;
 }
 ?>

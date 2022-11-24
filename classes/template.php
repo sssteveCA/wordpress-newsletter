@@ -40,21 +40,21 @@ HTML;
     public static function addUserAdminTemplate(string $lang, array $params): string{
         $messages = Template::addUserAdminMessages($lang,$params);
         return <<<HTML
-        <!DOCTYPE html>
-        <html lang="it">
-            <head>
-                <title>{$messages['title']}</title>
-                <meta charset="utf-8">
-            </head>
-            <body>
-                <div style="padding: 40px 20px; text-align: center;">
-                <p>{$messages['added']}</p>
-                <p>{$messages['receive']}</p>
-                <p>{$messages['moreInfo']}</p>
-                <p>{$messages['moreInfoMail']}</p>
-                </div>
-            </body>
-        </html>
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>{$messages['title']}</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div style="padding: 40px 20px; text-align: center;">
+        <p>{$messages['added']}</p>
+        <p>{$messages['receive']}</p>
+        <p>{$messages['moreInfo']}</p>
+        <p>{$messages['moreInfoMail']}</p>
+        </div>
+    </body>
+</html>
 HTML;
     }
 
