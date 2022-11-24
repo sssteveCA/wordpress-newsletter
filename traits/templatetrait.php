@@ -74,10 +74,47 @@ HTML,
     }
 
     /**
+     * Get the messages used in the admin user add message
+     * @param string $lang the user language
+     * @param array $params an array of values used in this mail
+     * @return array an array containing the messages used in add user admin mail in user language
+     */
+    public static function addUserAdminMessages(string $lang, array $params): array{
+        $contactUrl = Properties::contactsUrl($lang);
+        if($lang == Langs::$langs["it"]){
+            return [
+                "added" => "Sei stato aggiunto alla newsletter '{$params['newsletter_name']}'",
+                "moreInfo" => "Se pensi che sia stato fatto per errore scrivi una mail sulla nostra <a href=\"{$contactUrl}\">pagina dei contatti</a>",
+                "moreInfoMail" => "oppure puoi scrivere direttamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
+                "receive" => "Da questo momento riceverai periodicamente delle mail da questo sito '{$params['site']}'",
+                "title" => "Nuovo iscritto alla newsletter '{$params['newsletter_name']}'"
+            ];
+        }
+        else if($lang == Langs::$langs["es"]){
+            return [
+                "added" => "Has sido añadido al boletín '{$params['newsletter_name']}'",
+                "moreInfo" => "Si cree que se hizo por error, escriba un correo electrónico en nuestra <a href=\"{$contactUrl}\">página de contacto</a>",
+                "moreInfoMail" => "o puedes escribir directamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
+                "receive" => "A partir de ahora recibirás periódicamente correos electrónicos de este sitio '{$params['site']}'",
+                "title" => "Nuevo suscriptor del boletín '{$params['newsletter_name']}'"
+            ];
+        }
+        else{
+            return [
+                "added" => "You have been added to the newsletter '{$params['newsletter_name']}'",
+                "moreInfo" => "f you think it was done by mistake write an email on our <a href=\"{$contactUrl}\">contact page</a>",
+                "moreInfoMail" => "or you can write directly to <a href=\"{$params['from']}\">{$params['from']}</a>",
+                "receive" => "From now on you will periodically receive emails from this site '{$params['site']}'",
+                "title" => "New '{$params['newsletter_name']}' newsletter subscriber"
+            ];
+        }
+    }
+
+    /**
      * Get the messages used in the delete user notification message
      * @param string $lang the user language
      * @param array $params an array of values used in this mail
-     * @return array an array containing the message used in delete user mail in the user language
+     * @return array an array containing the messages used in delete user mail in the user language
      */
     public static function deleteUserMessages(string $lang, array $params): array{
         $contactUrl = Properties::contactsUrl($lang);
