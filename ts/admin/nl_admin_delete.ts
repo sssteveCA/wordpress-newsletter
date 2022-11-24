@@ -6,8 +6,8 @@ import { NlFormDataDelete } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
     let form: HTMLFormElement = document.getElementById('nl_form_del') as HTMLFormElement;
-    let delete_spinner: HTMLDivElement = document.getElementById('delete_spinner') as HTMLDivElement;
-    let delete_users_response: HTMLDivElement = document.getElementById('delete_users_response') as HTMLDivElement;
+    let delete_spinner: HTMLDivElement = document.getElementById('nl_delete_spinner') as HTMLDivElement;
+    let delete_users_response: HTMLDivElement = document.getElementById('nl_delete_users_response') as HTMLDivElement;
     loadEmailAddresses();
     form.addEventListener('submit', (e)=>{
         e.preventDefault();

@@ -53,13 +53,16 @@ class HtmlCode{
                 <button type="submit" class="btn btn-primary">AGGIUNGI</button>
             </div>
             <div class="col-2">
-                <div class="spinner-border text-dark invisible" role="status">
+                <div id="nl_add_spinner" class="spinner-border text-dark invisible" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
             <div class="col-4 col-md-3">
                 <button type="reset" class="btn btn-danger">ANNULLA</button>
             </div>
+        </div>
+        <div class="row my-2">
+            <div id="nl_add_user_response" class="col-12 text-center fw-bold fs-4"></div>
         </div>
     </div>
 </form>
@@ -104,13 +107,13 @@ HTML;
                         <button type="submit" id="nl_bt_del_email" class="btn btn-primary mt-4">RIMUOVI ISCRITTI</button>
                     </div>
                     <div class="col-3">
-                        <div id="delete_spinner" class="spinner-border text-dark invisible" role="status">
+                        <div id="nl_delete_spinner" class="spinner-border text-dark invisible" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </div>
                 </div>
                 <div class="row my-2">
-                    <div id="delete_users_response" class="col-12 text-center fw-bold fs-4"></div>
+                    <div id="nl_delete_users_response" class="col-12 text-center fw-bold fs-4"></div>
                 </div>
             </div>
         </form>
@@ -166,13 +169,13 @@ HTML;
                 <button type="submit" id="nl_bt_send_content" class="btn btn-primary">INVIA MAIL</button>
             </div>
             <div class="col-3">
-                <div id="send_spinner" class="spinner-border text-dark invisible" role="status">
+                <div id="nl_send_spinner" class="spinner-border text-dark invisible" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
         </div>
         <div class="row my-2">
-            <div id="email_send_response" class="col-12 text-center fw-bold fs-4"></div>
+            <div id="nl_email_send_response" class="col-12 text-center fw-bold fs-4"></div>
         </div>
     </div>
 </form>

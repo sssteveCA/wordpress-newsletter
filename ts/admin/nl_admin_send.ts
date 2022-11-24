@@ -6,8 +6,8 @@ import { NlFormDataSend } from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
     let form: HTMLFormElement = document.getElementById('nl_form_send') as HTMLFormElement;
-    let send_spinner: HTMLDivElement = document.getElementById('send_spinner') as HTMLDivElement;
-    let email_send_response: HTMLDivElement = document.getElementById('email_send_response') as HTMLDivElement;
+    let send_spinner: HTMLDivElement = document.getElementById('nl_send_spinner') as HTMLDivElement;
+    let email_send_response: HTMLDivElement = document.getElementById('nl_email_send_response') as HTMLDivElement;
     let gs: GetSubscribers = new GetSubscribers();
     gs.getSubscribers().then(res => {
         //console.log(gs.subscribers);
