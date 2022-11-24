@@ -8,10 +8,10 @@ window.addEventListener('DOMContentLoaded', ()=>{
     form.addEventListener('submit',(e)=>{
         e.preventDefault();
         const data: NlFormDataAdd = {
-            name: document.getElementById('nl_name')?.getAttribute('value') as string,
-            surname: document.getElementById('nl_surname')?.getAttribute('value') as string,
-            email: document.getElementById('nl_email')?.getAttribute('value') as string,
-            lang_code: document.getElementById('nl_lang_code')?.getAttribute('value') as string,
+            name: (<HTMLInputElement>document.getElementById('nl_name')).value as string,
+            surname: (<HTMLInputElement>document.getElementById('nl_surname')).value as string,
+            email: (<HTMLInputElement>document.getElementById('nl_email')).value as string,
+            lang_code: (<HTMLInputElement>document.getElementById('nl_lang_code')).value as string,
         };
         let addUser: AddUserAdmin = new AddUserAdmin(data);
         add_spinner.classList.remove("invisible");
