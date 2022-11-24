@@ -75,7 +75,10 @@ $lang = General::languageCode($post['lang']);
             switch($ausError){
                 case 0:
                     $operation = EmailManager::EMAIL_USER_ADD_ADMIN;
-                    $aumData = ['email' => $aus->getUser()->getEmail(), 'operation' => $operation];
+                    $aumData = ['email' => $aus->getUser()->getEmail(),
+                                'lang' => $aus->getUser()->getLang(), 
+                                'operation' => $operation
+                    ];
                     $email = sendSigningUpNotify($aumData);
                     switch($email){
                         case 0:
