@@ -1,7 +1,9 @@
-import { AxiosError } from "../../node_modules/axios/index.js";
+import { AxiosStatic } from "../../node_modules/axios/index.js";
 import { clientPost } from "../config/axios_instances.js";
 import { Constants } from "../namespaces/constants.js";
 import { NlFormDataAdd } from "../types/types";
+
+declare const axios: AxiosStatic;
 
 export class AddUserAdmin{
     private _name: string;
@@ -49,14 +51,14 @@ export class AddUserAdmin{
         let response: object = {};
         try{
             await this.addUserPromise().then(res => {
-                console.log(res);
+                //console.log(res);
                 response = JSON.parse(res);
             }).catch(err => {
                 throw err;
             });
         }catch(e){
             console.warn(e);
-            if(e instanceof AxiosError){
+            if(e instanceof axios.AxiosError){
                 const stringError: string = e.response?.data;
                 response = JSON.parse(stringError);
             }
