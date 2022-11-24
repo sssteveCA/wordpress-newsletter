@@ -1,4 +1,5 @@
 import { Constants } from "../namespaces/constants";
+import { NlFormDataAdd } from "../types/types";
 
 export class AddUserAdmin{
     private _name: string;
@@ -13,8 +14,8 @@ export class AddUserAdmin{
     public static ERR_FETCH: number = 1;
     private static ERR_FETCH_MSG:string = "Errore durante l'esecuzione della richiesta.";
 
-    constructor(){
-
+    constructor(data: NlFormDataAdd){
+        this.assignValues(data);
     }
 
     get name(){return this._name;}
@@ -32,5 +33,12 @@ export class AddUserAdmin{
                 break;
         }
         return this._error;
+    }
+
+    private assignValues(data: NlFormDataAdd): void{
+        if(data.name) this._name = data.name;
+        if(data.surname) this._surname = data.surname;
+        this._email = data.email;
+        this._lang_code = data.lang_code;
     }
 }
