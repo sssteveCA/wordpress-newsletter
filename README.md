@@ -20,7 +20,7 @@
       <ul>
         <li>Admin panel to select the subscribers to whom the newsletter</li>
         <li>Admin panel to delete the selected subscribers from the newsletter contacts list</li>
-        <li>**Admin panel to add a new user skipping the email verification procedure</li>
+        <li>Admin panel to add a new user skipping the email verification procedure</li>
       </ul>
     </li>
     <li>*The backend features can also excuted with API requests, by providing the administrator credentials</li>

@@ -16,8 +16,3 @@ RedirectMatch 403 vendor\/.*
     Order allow,deny
     Deny from all
 </FilesMatch>
-
-<Files "LICENSE">
-    Order allow,deny
-    Deny from all
-</Files>
