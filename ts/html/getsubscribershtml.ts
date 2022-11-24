@@ -49,7 +49,7 @@ export class GetSubscribersHtml{
         `;
         }//if(this._subscribers.length > 0){
         else{
-            this._table = `<p class="text-center fs-3 fw-bold"></p>`;
+            this._table = `<p class="text-center fs-4 fw-bold">Nessun utente iscritto alla newsletter</p>`;
         }
         this.attach();
     }

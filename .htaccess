@@ -1,7 +1,6 @@
 Options -Indexes
 
 RedirectMatch 403 classes\/.*
-RedirectMatch 403 config\/.*
 RedirectMatch 403 enums\/.*
 RedirectMatch 403 exceptions\/.*
 RedirectMatch 403 interfaces\/.*
@@ -17,3 +16,8 @@ RedirectMatch 403 vendor\/.*
     Order allow,deny
     Deny from all
 </FilesMatch>
+
+<Files "LICENSE">
+    Order allow,deny
+    Deny from all
+</Files>
