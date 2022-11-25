@@ -1,6 +1,7 @@
 
 import { BsMdDialogData } from "../types/types.js";
 
+declare const bootstrap: any;
 
 export default class MessageDialog{
     private _title: string;

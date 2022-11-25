@@ -1,5 +1,7 @@
 import { BsCdDialogData } from "../types/types";
 
+declare const bootstrap: any;
+
 export default class ConfirmDialog{
     private _title: string;
     private _message: string;
