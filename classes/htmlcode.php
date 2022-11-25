@@ -53,15 +53,17 @@ class HtmlCode{
             </div>
         </div>
         <div class="row justify-content-between justify-content-md-evenly">
-            <div class="col-4 col-md-3">
-                <button type="submit" class="btn btn-primary">AGGIUNGI</button>
-            </div>
-            <div class="col-2">
-                <div id="nl_add_spinner" class="spinner-border text-dark invisible" role="status">
-                    <span class="visually-hidden">Loading...</span>
+            <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center my-5 my-sm-0">
+                <div>
+                    <button type="submit" class="btn btn-primary">AGGIUNGI</button>
+                </div>
+                <div class="ms-3">
+                    <div id="nl_add_spinner" class="spinner-border text-dark invisible" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             </div>
-            <div class="col-4 col-md-3">
+            <div class="col-12 col-sm-6 text-center">
                 <button type="reset" class="btn btn-danger">ANNULLA</button>
             </div>
         </div>
@@ -107,10 +109,10 @@ HTML;
             </div>
             <div class="container">
                 <div class="row my-4">
-                    <div class="col-6 offset-3 text-center">
-                        <button type="submit" id="nl_bt_del_email" class="btn btn-primary mt-4">RIMUOVI ISCRITTI</button>
+                    <div class="col-7 text-end">
+                        <button type="submit" id="nl_bt_del_email" class="btn btn-primary">RIMUOVI ISCRITTI</button>
                     </div>
-                    <div class="col-3">
+                    <div class="col-5">
                         <div id="nl_delete_spinner" class="spinner-border text-dark invisible" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
@@ -169,10 +171,10 @@ HTML;
     </div>
     <div class="container">
         <div class="row my-4">
-            <div id="nl_send_button" class="col-6 offset-3 text-center">
+            <div id="nl_send_button" class="col-7 text-end">
                 <button type="submit" id="nl_bt_send_content" class="btn btn-primary">INVIA MAIL</button>
             </div>
-            <div class="col-3">
+            <div class="col-5">
                 <div id="nl_send_spinner" class="spinner-border text-dark invisible" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
@@ -307,10 +309,10 @@ HTML;
                 </div>
             </div>
             <div class="row my-4">
-                <div class="col-6 text-center offset-3">
+                <div class="col-7 text-end">
                     <button id="nl_submit" type="submit" class="btn btn-dark mb-5" disabled>{$params['subscribe_text']}</button>
                 </div>
-                <div class="col-3">
+                <div class="col-5">
                     <div id="nl_spinner" class="spinner-border text-dark invisible" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
