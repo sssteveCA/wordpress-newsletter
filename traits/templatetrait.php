@@ -88,7 +88,7 @@ HTML,
                 "added" => "Sei stato aggiunto alla newsletter '{$newsletterName}'",
                 "moreInfo" => "Se pensi che sia stato fatto per errore scrivi una mail sulla nostra <a href=\"{$contactUrl}\">pagina dei contatti</a>",
                 "moreInfoMail" => "oppure puoi scrivere direttamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
-                "receive" => "Da questo momento riceverai periodicamente delle mail da questo sito '{$homeUrl}'",
+                "receive" => "Da questo momento riceverai periodicamente delle mail da questo sito <a href=\"{$homeUrl}\">{$homeUrl}</a>",
                 "title" => "Nuovo iscritto alla newsletter '{$newsletterName}'"
             ];
         }
@@ -97,7 +97,7 @@ HTML,
                 "added" => "Has sido añadido al boletín '{$newsletterName}'",
                 "moreInfo" => "Si cree que se hizo por error, escriba un correo electrónico en nuestra <a href=\"{$contactUrl}\">página de contacto</a>",
                 "moreInfoMail" => "o puedes escribir directamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
-                "receive" => "A partir de ahora recibirás periódicamente correos electrónicos de este sitio '{$homeUrl}'",
+                "receive" => "A partir de ahora recibirás periódicamente correos electrónicos de este sitio <a href=\"{$homeUrl}\">{$homeUrl}</a>",
                 "title" => "Nuevo suscriptor del boletín '{$newsletterName}'"
             ];
         }
@@ -106,7 +106,7 @@ HTML,
                 "added" => "You have been added to the newsletter '{$newsletterName}'",
                 "moreInfo" => "f you think it was done by mistake write an email on our <a href=\"{$contactUrl}\">contact page</a>",
                 "moreInfoMail" => "or you can write directly to <a href=\"{$params['from']}\">{$params['from']}</a>",
-                "receive" => "From now on you will periodically receive emails from this site '{$homeUrl}'",
+                "receive" => "From now on you will periodically receive emails from this site <a href=\"{$homeUrl}\">{$homeUrl}</a>",
                 "title" => "New '{$newsletterName}' newsletter subscriber"
             ];
         }
@@ -120,11 +120,12 @@ HTML,
      */
     public static function deleteUserMessages(string $lang, array $params): array{
         $contactUrl = Properties::contactsUrl($lang);
+        $newsletterName = Properties::newsletterName();
         if($lang == Langs::$langs["it"]){
             return [
                 "moreInfo" => "Se pensi che sia stato fatto per errore scrivi una mail sulla nostra <a href=\"{$contactUrl}\">pagina dei contatti</a>",
                 "moreInfoMail" => "oppure puoi scrivere direttamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
-                "removed" => "L'amministratore ti ha rimosso dalla newsletter.",
+                "removed" => "L'amministratore ti ha rimosso dalla newsletter '{$newsletterName}'.",
                 "title" => "Cancellazione utente"
             ];
         }
@@ -132,7 +133,7 @@ HTML,
             return [
                 "moreInfo" => "Si cree que se hizo por error, escriba un correo electrónico en nuestra <a href=\"{$contactUrl}\">página de contacto</a>",
                 "moreInfoMail" => "o puedes escribir directamente a <a href=\"{$params['from']}\">{$params['from']}</a>",
-                "removed" => "El administrador te ha eliminado del boletín.",
+                "removed" => "El administrador te ha eliminado del boletín '{$newsletterName}'.",
                 "title" => "Eliminación del usuario"
             ];
         }
@@ -140,7 +141,7 @@ HTML,
             return [
                 "moreInfo" => "If you think it was done by mistake write an email on our <a href=\"{$contactUrl}\">contact page</a>",
                 "moreInfoMail" => "or you can write directly to <a href=\"{$params['from']}\">{$params['from']}</a>",
-                "removed" => "The administrator has removed you from the newsletter.",
+                "removed" => "The administrator has removed you from the '{$newsletterName}' newsletter.",
                 "title" => "User deletion"
             ];
         }

@@ -44,6 +44,7 @@ class EmailManager extends PHPMailer{
         parent::__construct();
         $this->assignValues($data);
         $this->setServerSettings($data);
+        $this->setEncoding();
         $this->setRecipients($data);
         $this->setContent();
     }

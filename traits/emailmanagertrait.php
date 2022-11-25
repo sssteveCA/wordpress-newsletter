@@ -60,6 +60,11 @@ trait EmailManagerTrait{
         $this->Subject = $this->subject;
     }
 
+    private function setEncoding(){
+        $this->CharSet = 'UTF-8';
+        $this->Encoding = 'base64';
+    }
+
     private function setRecipients(array $data){
         $this->setFrom($this->from, $this->fromNickname);
         $this->addReplyTo($this->from);
@@ -67,13 +72,14 @@ trait EmailManagerTrait{
 
     private function setServerSettings(array $data){
         $this->SMTPDebug = SMTP::DEBUG_OFF;
+        //$this->SMTPDebug = SMTP::DEBUG_SERVER;
         $this->isSMTP();
         $this->Host = $data['host'];
         $this->SMTPAuth = true;
         $this->Username = $data['from'];
         $this->Password = $data['password'];
         $this->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $this->Port = $data['port'];
+        //$this->SMTPSecure = false;
     }
 
     /**
