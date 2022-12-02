@@ -13,7 +13,7 @@ export class AddUserAdmin{
     private _errno: number = 0;
     private _error: string|null = null;
 
-    private static ADDUSER_URL:string = Constants.PLUGIN_DIR+"/scripts/subscribe/admin_new_user.php";
+    private static ADDUSER_URL:string = Constants.HOME_URL+Constants.PLUGIN_DIR+"/scripts/subscribe/admin_new_user.php";
 
     public static ERR_FETCH: number = 1;
     private static ERR_FETCH_MSG:string = "Errore durante l'esecuzione della richiesta.";
