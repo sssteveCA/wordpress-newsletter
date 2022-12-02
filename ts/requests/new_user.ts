@@ -1,6 +1,7 @@
 import { NlFormData } from "../types/types.js";
 import { Constants } from "../namespaces/constants.js";
 import { clientPost } from "../config/axios_instances.js";
+import axios from "../../node_modules/axios/index.js";
 
 export class NewUser{
     private _name: string|null;
@@ -69,8 +70,14 @@ export class NewUser{
                 });
             }catch(e){
                 console.warn(e);
-                this._errno = NewUser.ERR_FETCH;
-                response = { done: false, msg: this.error };
+                if(e instanceof axios.AxiosError){
+                    const stringError: string = e.response?.data;
+                    response = JSON.parse(stringError);
+                }
+                else{
+                  this._errno = NewUser.ERR_FETCH;
+                    response = { done: false, msg: this.error };  
+                }
             }
         }//if(this.validate()){
         else{
