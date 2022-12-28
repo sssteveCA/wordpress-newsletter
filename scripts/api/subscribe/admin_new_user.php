@@ -51,10 +51,6 @@ $response = [
     'done' => false, 'msg' => ''
 ];
 
-$current_user = wp_get_current_user();
-$logged = ($current_user->ID != 0);
-$administrator = current_user_can('manage_options');
-
 if(!isset($post['lang'])) $post['lang'] = 'en';
 $lang = General::languageCode($post['lang']);
 
@@ -66,8 +62,6 @@ try{
         'password' => $_SERVER['PHP_AUTH_PW'],
         'uuid' => $_ENV['API_REST_UUID']
     ];
-    echo "apiAuthArray => \r\n";
-    var_dump($apiAuthArray);
     $authCheck = new AuthCheck($apiAuthArray);
     if($authCheck->getErrno() == 0){
         $input = file_get_contents("php://input");
@@ -143,8 +137,6 @@ echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
  * @return int the error code or 0 if no error occurs while email sending
  */
 function sendSigningUpNotify(array $params): int{
-    $dotenv = Dotenv::createImmutable("../../");
-    $dotenv->safeLoad();
     $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
     $fromNickname = isset($params['fromNickname']) ? $params['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
     $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];

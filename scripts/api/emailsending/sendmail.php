@@ -52,8 +52,6 @@ try{
         'password' => $_SERVER['PHP_AUTH_PW'],
         'uuid' => $_ENV['API_REST_UUID']
     ];
-    echo "apiAuthArray => \r\n";
-    var_dump($apiAuthArray);
     $authCheck = new AuthCheck($apiAuthArray);
     if($authCheck->getErrno() == 0){
         $input = file_get_contents("php://input");
