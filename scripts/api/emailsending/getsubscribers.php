@@ -1,22 +1,23 @@
 <?php
 
-require_once("../../../../../wp-load.php");
-require_once("../../interfaces/constants.php");
-require_once("../../interfaces/messages.php");
-require_once("../../interfaces/exceptionmessages.php");
-require_once("../../exceptions/incorrectvariableformatexception.php");
-require_once("../../exceptions/notsettedexception.php");
-require_once("../../traits/errortrait.php");
-require_once("../../traits/modeltrait.php");
-require_once("../../traits/sqltrait.php");
-require_once("../../traits/usercommontrait.php");
-require_once("../../traits/usertrait.php");
-require_once("../../traits/userstrait.php");
-require_once("../../classes/database/tables/table.php");
-require_once("../../classes/database/model.php");
-require_once("../../classes/database/models.php");
-require_once("../../classes/database/models/user.php");
-require_once("../../classes/database/models/users.php");
+require_once("../../../../../../wp-load.php");
+require_once("../../../interfaces/constants.php");
+require_once("../../../interfaces/messages.php");
+require_once("../../../interfaces/exceptionmessages.php");
+require_once("../../../exceptions/incorrectvariableformatexception.php");
+require_once("../../../exceptions/notsettedexception.php");
+require_once("../../../vendor/autoload.php");
+require_once("../../../traits/errortrait.php");
+require_once("../../../traits/modeltrait.php");
+require_once("../../../traits/sqltrait.php");
+require_once("../../../traits/usercommontrait.php");
+require_once("../../../traits/usertrait.php");
+require_once("../../../traits/userstrait.php");
+require_once("../../../classes/database/tables/table.php");
+require_once("../../../classes/database/model.php");
+require_once("../../../classes/database/models.php");
+require_once("../../../classes/database/models/user.php");
+require_once("../../../classes/database/models/users.php");
 require_once("../../../classes/api/authcheck.php");
 
 use Newsletter\Classes\Database\Models\Users;
@@ -28,21 +29,20 @@ use Dotenv\Dotenv;
 use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Exceptions\NotSettedException;
 
+file_put_contents("log.txt", "Ciaoooooooo\r\n",FILE_APPEND);
+
 $response = [
     'done' => false,'empty' => false, 'msg' => '','subscribers' => [] 
 ];
 
-$dotenv = Dotenv::createImmutable("../../../");
-$dotenv->load();
-
-$apiAuthArray = [
-    'username' => $_SERVER['PHP_AUTH_USER'],
-    'password' => $_SERVER['PHP_AUTH_PW'],
-    'uuid' => $_ENV['API_REST_UUID']
-];
-
-//if($logged && $administrator){
 try{
+    $dotenv = Dotenv::createImmutable("../../../");
+    $dotenv->load();
+    $apiAuthArray = [
+        'username' => $_SERVER['PHP_AUTH_USER'],
+        'password' => $_SERVER['PHP_AUTH_PW'],
+        'uuid' => $_ENV['API_REST_UUID']
+    ];
     $authCheck = new AuthCheck($apiAuthArray);
     if($authCheck->getErrno() == 0){
         $users_data = ['tableName' => C::TABLE_USERS];
