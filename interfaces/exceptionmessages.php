@@ -9,5 +9,6 @@ interface ExceptionMessages{
      const EXC_INVALID_USERSARRAY = "L' array con gli utenti non è formattato correttamente";
      const EXC_DATA_MISSED = "Uno o più dati richiesti sono mancanti";
      const EXC_NOTISSET = "Non sono stati forniti i dati richiesti";
+     const EXC_INSERT_CREDENTIALS = "Inserisci le credenziali per continuare";
 }
 ?>
