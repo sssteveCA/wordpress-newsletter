@@ -1,39 +1,41 @@
 <?php
 
-require_once("../../config/cors.php");
-require_once("../../../../../wp-load.php");
-require_once("../../enums/languages.php");
-require_once("../../interfaces/constants.php");
-require_once("../../interfaces/messages.php");
-require_once("../../interfaces/subscribeerrors.php");
-require_once("../../exceptions/notsettedexception.php");
-require_once("../../exceptions/incorrectvariableformatexception.php");
-require_once("../../traits/properties/messages/othertrait.php");
-require_once("../../traits/properties/messages/newusertrait.php");
-require_once("../../traits/properties/messages/unsubscribetrait.php");
-require_once("../../traits/properties/messages/verifytrait.php");
-require_once("../../traits/properties/propertiesmessagestrait.php");
-require_once("../../traits/properties/propertiesurltrait.php");
+require_once("../../../config/cors.php");
+require_once("../../../../../../wp-load.php");
+require_once("../../../enums/languages.php");
+require_once("../../../interfaces/constants.php");
+require_once("../../../interfaces/messages.php");
+require_once("../../../interfaces/subscribeerrors.php");
+require_once("../../../exceptions/notsettedexception.php");
+require_once("../../../exceptions/incorrectvariableformatexception.php");
+require_once("../../../traits/properties/messages/othertrait.php");
+require_once("../../../traits/properties/messages/newusertrait.php");
+require_once("../../../traits/properties/messages/unsubscribetrait.php");
+require_once("../../../traits/properties/messages/verifytrait.php");
+require_once("../../../traits/properties/propertiesmessagestrait.php");
+require_once("../../../traits/properties/propertiesurltrait.php");
 //require_once("../../traits/properties/propertiesvaluestrait.php");
-require_once("../../classes/properties.php");
-require_once("../../traits/errortrait.php");
-require_once("../../traits/sqltrait.php");
-require_once("../../traits/modeltrait.php");
-require_once("../../traits/usercommontrait.php");
-require_once("../../traits/usertrait.php");
-require_once("../../traits/subscribetrait.php");
-require_once("../../traits/templatetrait.php");
-require_once("../../traits/emailmanagertrait.php");
-require_once("../../vendor/autoload.php");
-require_once("../../classes/general.php");
-require_once("../../classes/template.php");
-require_once("../../classes/database/tables/table.php");
-require_once("../../classes/database/model.php");
-require_once("../../classes/database/models/user.php");
-require_once("../../classes/subscribe/adminusersubscribe.php");
-require_once("../../classes/email/emailmanager.php");
+require_once("../../../classes/properties.php");
+require_once("../../../traits/errortrait.php");
+require_once("../../../traits/sqltrait.php");
+require_once("../../../traits/modeltrait.php");
+require_once("../../../traits/usercommontrait.php");
+require_once("../../../traits/usertrait.php");
+require_once("../../../traits/subscribetrait.php");
+require_once("../../../traits/templatetrait.php");
+require_once("../../../traits/emailmanagertrait.php");
+require_once("../../../vendor/autoload.php");
+require_once("../../../classes/general.php");
+require_once("../../../classes/template.php");
+require_once("../../../classes/database/tables/table.php");
+require_once("../../../classes/database/model.php");
+require_once("../../../classes/database/models/user.php");
+require_once("../../../classes/subscribe/adminusersubscribe.php");
+require_once("../../../classes/email/emailmanager.php");
+require_once("../../../classes/api/authcheck.php");
 
 use Dotenv\Dotenv;
+use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Classes\Database\Models\User;
 use Newsletter\Classes\Email\EmailManager;
 use Newsletter\Classes\General;
@@ -43,6 +45,7 @@ use Newsletter\Interfaces\Messages as M;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Classes\Subscribe\AdminUserSubscribeErrors as Ause;
 use Newsletter\Enums\Langs;
+use Newsletter\Exceptions\NotSettedException;
 
 $response = [
     'done' => false, 'msg' => ''
@@ -55,18 +58,28 @@ $administrator = current_user_can('manage_options');
 if(!isset($post['lang'])) $post['lang'] = 'en';
 $lang = General::languageCode($post['lang']);
 
-//if($logged && $administrator){
-    $input = file_get_contents("php://input");
-    $post = json_decode($input,true);
-    if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
-        $userData = [
-            'tableName' => C::TABLE_USERS, 'email' => $post['email'], 'lang' => $post['lang_code']
-        ];
-        if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
-            $userData['firstName'] = $post['name'];
-            $userData['lastName'] = $post['surname'];
-        }//if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
-        try{
+try{
+    $dotenv = Dotenv::createImmutable("../../../");
+    $dotenv->load();
+    $apiAuthArray = [
+        'username' => $_SERVER['PHP_AUTH_USER'],
+        'password' => $_SERVER['PHP_AUTH_PW'],
+        'uuid' => $_ENV['API_REST_UUID']
+    ];
+    echo "apiAuthArray => \r\n";
+    var_dump($apiAuthArray);
+    $authCheck = new AuthCheck($apiAuthArray);
+    if($authCheck->getErrno() == 0){
+        $input = file_get_contents("php://input");
+        $post = json_decode($input,true);
+        if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
+            $userData = [
+                'tableName' => C::TABLE_USERS, 'email' => $post['email'], 'lang' => $post['lang_code']
+            ];
+            if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
+                $userData['firstName'] = $post['name'];
+                $userData['lastName'] = $post['surname'];
+            }//if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
             //echo "Admin new User userData => ".var_export($userData,true)."\r\n";
             $user = new User($userData);
             $ausData = ['user' => $user];
@@ -104,20 +117,23 @@ $lang = General::languageCode($post['lang']);
                     $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
                     break;
             }
-        }catch(Exception $e){
-            http_response_code(500);
-            $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
+        }//if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
+        else{
+            http_response_code(400);
+            $response['msg'] = M::ERR_MISSING_FORM_VALUES;
         }
-    }//if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
+    }//if($authCheck->getErrno() == 0){
     else{
-        http_response_code(400);
-        $response['msg'] = M::ERR_MISSING_FORM_VALUES;
+        http_response_code(401);
+        $response["msg"] = M::ERR_UNAUTHORIZED;
     }
-/* }//if($logged && $administrator){
-else{
+}catch(NotSettedException $nse){
     http_response_code(401);
     $response['msg'] = M::ERR_UNAUTHORIZED;
-} */
+}catch(Exception $e){
+    http_response_code(500);
+    $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
+}
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 
