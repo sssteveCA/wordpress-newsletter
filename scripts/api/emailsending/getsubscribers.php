@@ -29,8 +29,6 @@ use Dotenv\Dotenv;
 use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Exceptions\NotSettedException;
 
-file_put_contents("log.txt", "Ciaoooooooo\r\n",FILE_APPEND);
-
 $response = [
     'done' => false,'empty' => false, 'msg' => '','subscribers' => [] 
 ];
@@ -43,6 +41,8 @@ try{
         'password' => $_SERVER['PHP_AUTH_PW'],
         'uuid' => $_ENV['API_REST_UUID']
     ];
+    echo "apiAuthArray => \r\n";
+    var_dump($apiAuthArray);
     $authCheck = new AuthCheck($apiAuthArray);
     if($authCheck->getErrno() == 0){
         $users_data = ['tableName' => C::TABLE_USERS];

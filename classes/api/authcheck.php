@@ -70,12 +70,13 @@ class AuthCheck implements Ace{
         var_dump($user);
         if($user){
             $ap = new WP_Application_Passwords();
-            $pwd = $ap->get_user_application_password($user->ID, $this->uuid);
+            $pwd = $ap->get_user_application_password($user->ID,$this->uuid);
             echo "AuthCheck verifyCredentials pwd => \r\n";
             var_dump($pwd);
-            if($pwd)
+            if($pwd != null && wp_check_password($this->password, $pwd["password"]))
                 return true;
-            else $this->error = Ace::WRONG_PASSWORD;
+            else
+                $this->errno = Ace::WRONG_PASSWORD;
         }//if(get_user_by('login',$this->username)){
         else $this->errno = Ace::INVALID_USERNAME;
         return false;
