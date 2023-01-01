@@ -46,6 +46,8 @@ use Newsletter\Classes\Subscribe\UserSubscribeError as Usee;
 use Newsletter\Classes\Properties;
 use Newsletter\Classes\Subscribe\UserSubscribe;
 use Newsletter\Classes\Template;
+use Newsletter\Classes\Email\EmailManagerErrors as Eme;
+use Newsletter\Exceptions\MailNotSentException;
 
 $inputs = file_get_contents("php://input");
 $post = json_decode($inputs,true);
@@ -94,6 +96,11 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                         $response['msg'] = Properties::completeSubscribe($lang);
                         $response['done'] = true;
                         break;
+                    case Eme::ERR_EMAIL_SEND:
+                        $query = "WHERE `".User::$fields["email"]."` = %s";
+                        $values = [$user->getEmail()];
+                        $user->deleteUser($query,$values);
+                        throw new MailNotSentException;
                     default:
                         throw new Exception;
                 }

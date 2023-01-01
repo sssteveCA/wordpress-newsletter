@@ -89,6 +89,9 @@ if($logged && $administrator){
                             $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
                             break;
                         case Eme::ERR_EMAIL_SEND:
+                            $query = "WHERE `".User::$fields["email"]."` = %s";
+                            $values = [$user->getEmail()];
+                            $user->deleteUser($query,$values);
                             throw new MailNotSentException;
                         default:
                             throw new Exception;    

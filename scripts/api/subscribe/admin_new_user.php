@@ -48,6 +48,7 @@ use Newsletter\Classes\Subscribe\AdminUserSubscribeErrors as Ause;
 use Newsletter\Enums\Langs;
 use Newsletter\Exceptions\MailNotSentException;
 use Newsletter\Exceptions\NotSettedException;
+use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 
 $response = [
     'done' => false, 'msg' => ''
@@ -95,8 +96,13 @@ try{
                             $response['done'] = true;
                             $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
                             break;
+                        case Eme::ERR_EMAIL_SEND:
+                            $query = "WHERE `".User::$fields["email"]."` = %s";
+                            $values = [$user->getEmail()];
+                            $user->deleteUser($query,$values);
+                            throw new MailNotSentException;
                         default:
-                            throw new MailNotSentException;      
+                            throw new Exception;      
                     }
                     break;
                 case Ause::INCORRECT_EMAIL:
