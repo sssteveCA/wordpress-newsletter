@@ -6,6 +6,7 @@ require_once("../../interfaces/constants.php");
 require_once("../../interfaces/exceptionmessages.php");
 require_once("../../interfaces/messages.php");
 require_once("../../exceptions/notsettedexception.php");
+require_once("../../exceptions/mailnotsentexception.php");
 require_once("../../vendor/autoload.php");
 //require_once("../../traits/properties/messages/activationmailtrait.php");
 require_once("../../traits/properties/messages/newusertrait.php");
@@ -36,6 +37,7 @@ use Newsletter\Interfaces\Messages as M;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Dotenv\Dotenv;
 use Newsletter\Classes\Email\EmailManager;
+use Newsletter\Exceptions\MailNotSentException;
 use Newsletter\Exceptions\NotSettedException;
 
 $response = [
@@ -63,17 +65,16 @@ if($logged && $administrator){
                         $response['msg'] = "La mail è stata inviata a tutti i destinatari indicati";
                         break;
                     case Eme::ERR_EMAIL_SEND:
-                        http_response_code(400);
-                        $response['msg'] = $emailManager->getError();
-                        break;
+                        throw new MailNotSentException;
                     default:
-                        http_response_code(500);
-                        $response['msg'] = M::ERR_UNKNOWN;
-                        break;          
+                        throw new Exception;        
                 }//switch($emErrno){
             }catch(NotSettedException $nse){
                 http_response_code(400);
                 $response['msg'] = $nse->getMessage();
+            }catch(MailNotSentException $mnse){
+                http_response_code(500);
+                $response['msg'] = "Errore durante l'invio della mail ad uno o più destinatari indicati";
             }catch(Exception $e){
                 http_response_code(500);
                 $response['msg'] = M::ERR_UNKNOWN;

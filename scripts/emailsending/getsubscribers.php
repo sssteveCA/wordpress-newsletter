@@ -52,9 +52,7 @@ if($logged && $administrator){
                 $response['msg'] = "Nessun iscritto trovato";
                 break;
             default:
-                http_response_code(500);
-                $response['msg'] = M::ERR_UNKNOWN;
-                break;
+                throw new Exception;
         }
     
     }catch(Exception $e){

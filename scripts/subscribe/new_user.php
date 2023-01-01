@@ -95,9 +95,7 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                         $response['done'] = true;
                         break;
                     default:
-                        http_response_code(500);
-                        $response['msg'] = Properties::unknownError($lang);
-                        break;
+                        throw new Exception;
                 }
                 break;
             case Usee::INCORRECT_EMAIL:
@@ -109,9 +107,7 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 $response['msg'] = Properties::emailExists($lang);
                 break;
             default:
-                http_response_code(500);
-                $response['msg'] = Properties::unknownError($lang);
-                break;
+                throw new Exception;
         }
     }catch(Exception $e){
         //echo "Exception\n";

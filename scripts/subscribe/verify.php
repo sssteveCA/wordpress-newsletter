@@ -75,9 +75,7 @@ if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
                 $message = Properties::invalidCodeVt($lang);
                 break;
             default:
-                http_response_code(500);
-                $message = Properties::unknownError($lang);
-                break;
+                throw new Exception;
         }
     }catch(Exception $e){
         http_response_code(500);

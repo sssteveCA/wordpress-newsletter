@@ -1,11 +1,11 @@
 Options -Indexes
 
-RedirectMatch 403 classes\/.*
-RedirectMatch 403 enums\/.*
-RedirectMatch 403 exceptions\/.*
-RedirectMatch 403 interfaces\/.*
-RedirectMatch 403 traits\/.*
-RedirectMatch 403 vendor\/.*
+RedirectMatch 403 classes\/.*\.php
+RedirectMatch 403 enums\/.*\.php
+RedirectMatch 403 exceptions\/.*\.php
+RedirectMatch 403 interfaces\/.*\.php
+RedirectMatch 403 traits\/.*\.php
+RedirectMatch 403 vendor\/.*\.php
 
 <FilesMatch "\.(ts|scss|txt|json|lock)$">
     Order allow,deny

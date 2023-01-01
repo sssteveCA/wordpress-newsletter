@@ -6,6 +6,7 @@ require_once("../../../interfaces/exceptionmessages.php");
 require_once("../../../interfaces/constants.php");
 require_once("../../../interfaces/messages.php");
 require_once("../../../exceptions/notsettedexception.php");
+require_once("../../../exceptions/mailnotsentexception.php");
 require_once("../../../traits/properties/messages/othertrait.php");
 require_once("../../../traits/properties/messages/newusertrait.php");
 require_once("../../../traits/properties/messages/unsubscribetrait.php");
@@ -36,6 +37,7 @@ use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
+use Newsletter\Exceptions\MailNotSentException;
 
 $response = [
     'done' => false, 'msg' => ''
@@ -65,13 +67,9 @@ try{
                         $response['msg'] = "I contatti indicati sono stati rimossi dalla lista degli iscritti";
                         break;
                     case Eme::ERR_EMAIL_SEND:
-                        http_response_code(400);
-                        $response['msg'] = $emailManager->getError();
-                        break;
+                        throw new MailNotSentException;
                     default:
-                        http_response_code(500);
-                        $response['msg'] = M::ERR_UNKNOWN;
-                        break;
+                        throw new Exception;
                 }
             }//if(is_array($post['emails']) && sizeof($post['emails']) > 0){
             else{
@@ -91,6 +89,9 @@ try{
 }catch(NotSettedException $nse){
     http_response_code(400);
     $response['msg'] = M::ERR_UNAUTHORIZED;
+}catch(MailNotSentException $mnse){
+    http_response_code(500);
+    $response['msg'] = "Errore durante l'invio della mail ad uno o più utenti rimossi";
 }catch(Exception $e){
     http_response_code(500);
     $response['msg'] = M::ERR_UNKNOWN;

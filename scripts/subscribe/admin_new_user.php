@@ -7,6 +7,7 @@ require_once("../../interfaces/constants.php");
 require_once("../../interfaces/messages.php");
 require_once("../../interfaces/subscribeerrors.php");
 require_once("../../exceptions/notsettedexception.php");
+require_once("../../exceptions/mailnotsentexception.php");
 require_once("../../exceptions/incorrectvariableformatexception.php");
 require_once("../../traits/properties/messages/othertrait.php");
 require_once("../../traits/properties/messages/newusertrait.php");
@@ -41,8 +42,10 @@ use Newsletter\Classes\Properties;
 use Newsletter\Classes\Subscribe\AdminUserSubscribe;
 use Newsletter\Interfaces\Messages as M;
 use Newsletter\Interfaces\Constants as C;
+use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Classes\Subscribe\AdminUserSubscribeErrors as Ause;
 use Newsletter\Enums\Langs;
+use Newsletter\Exceptions\MailNotSentException;
 
 $response = [
     'done' => false, 'msg' => ''
@@ -85,10 +88,10 @@ if($logged && $administrator){
                             $response['done'] = true;
                             $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
                             break;
+                        case Eme::ERR_EMAIL_SEND:
+                            throw new MailNotSentException;
                         default:
-                            http_response_code(500);
-                            $response['msg'] = "Impossibile inviare l'email all'utente inserito a causa di un errore sconosciuto";
-                            break;      
+                            throw new Exception;    
                     }
                     break;
                 case Ause::INCORRECT_EMAIL:
@@ -100,10 +103,11 @@ if($logged && $administrator){
                     $response['msg'] = Properties::emailExists(Langs::$langs["it"]);
                     break;
                 default:
-                    http_response_code(500);
-                    $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
-                    break;
+                    throw new Exception;
             }
+        }catch(MailNotSentException $mnse){
+            http_response_code(500);
+            $response['msg'] = "Impossibile inviare la mail di notifica all'utente aggiunto";
         }catch(Exception $e){
             http_response_code(500);
             $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";

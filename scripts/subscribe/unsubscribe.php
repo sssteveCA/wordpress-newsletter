@@ -82,9 +82,7 @@ if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
                 $message = Properties::invalidCodeUt($lang);
                 break;
             default:
-                http_response_code(500);
-                $message = Properties::unknownError($lang);
-                break;
+                throw new Exception;
         }
     }catch(Exception $e){
         //echo "Unsubsribe exception\n ".$e->getMessage();

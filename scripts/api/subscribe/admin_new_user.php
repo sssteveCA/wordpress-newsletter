@@ -8,6 +8,7 @@ require_once("../../../interfaces/messages.php");
 require_once("../../../interfaces/subscribeerrors.php");
 require_once("../../../exceptions/notsettedexception.php");
 require_once("../../../exceptions/incorrectvariableformatexception.php");
+require_once("../../../exceptions/mailnotsentexception.php");
 require_once("../../../traits/properties/messages/othertrait.php");
 require_once("../../../traits/properties/messages/newusertrait.php");
 require_once("../../../traits/properties/messages/unsubscribetrait.php");
@@ -45,6 +46,7 @@ use Newsletter\Interfaces\Messages as M;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Classes\Subscribe\AdminUserSubscribeErrors as Ause;
 use Newsletter\Enums\Langs;
+use Newsletter\Exceptions\MailNotSentException;
 use Newsletter\Exceptions\NotSettedException;
 
 $response = [
@@ -94,9 +96,7 @@ try{
                             $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
                             break;
                         default:
-                            http_response_code(500);
-                            $response['msg'] = "Impossibile inviare l'email all'utente inserito a causa di un errore sconosciuto";
-                            break;      
+                            throw new MailNotSentException;      
                     }
                     break;
                 case Ause::INCORRECT_EMAIL:
@@ -125,6 +125,9 @@ try{
 }catch(NotSettedException $nse){
     http_response_code(401);
     $response['msg'] = M::ERR_UNAUTHORIZED;
+}catch(MailNotSentException $mnse){
+    http_response_code(500);
+    $response['msg'] = "Impossibile inviare l'email all'utente inserito a causa di un errore sconosciuto";
 }catch(Exception $e){
     http_response_code(500);
     $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";

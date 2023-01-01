@@ -6,6 +6,7 @@ require_once("../../../interfaces/constants.php");
 require_once("../../../interfaces/exceptionmessages.php");
 require_once("../../../interfaces/messages.php");
 require_once("../../../exceptions/notsettedexception.php");
+require_once("../../../exceptions/mailnotsentexception.php");
 require_once("../../../vendor/autoload.php");
 //require_once("../../traits/properties/messages/activationmailtrait.php");
 require_once("../../../traits/properties/messages/newusertrait.php");
@@ -73,9 +74,7 @@ try{
                         $response['msg'] = $emailManager->getError();
                         break;
                     default:
-                        http_response_code(500);
-                        $response['msg'] = M::ERR_UNKNOWN;
-                        break;          
+                        throw new Exception;    
                 }//switch($emErrno){
             }//if(is_array($post['emails'] && sizeof($post['emails']) > 0)){
             else{
