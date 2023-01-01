@@ -71,14 +71,20 @@ trait EmailManagerTrait{
     }
 
     private function setServerSettings(array $data){
-        $this->SMTPDebug = SMTP::DEBUG_OFF;
-        //$this->SMTPDebug = SMTP::DEBUG_SERVER;
+        //$this->SMTPDebug = SMTP::DEBUG_OFF;
+        $this->SMTPDebug = SMTP::DEBUG_SERVER;
         $this->isSMTP();
+        $this->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true
+            ]
+        ];
         $this->Host = $data['host'];
         $this->SMTPAuth = true;
         $this->Username = $data['from'];
         $this->Password = $data['password'];
-        $this->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        //$this->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $this->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         //$this->SMTPSecure = false;
     }
 

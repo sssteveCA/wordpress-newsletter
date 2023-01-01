@@ -84,7 +84,8 @@ class EmailManager extends PHPMailer{
                 $this->AltBody = $this->body;
                 $this->send();
             }catch(Exception $e){
-                //echo "Mail Exception => ".$e->getMessage()."\r\n";
+                echo "Mail Exception => ".$e->getMessage()."\r\n";
+                echo "Mail error => {$this->ErrorInfo}\r\n";
                 $this->errno = Eme::ERR_EMAIL_SEND;
             }
         }//if(isset($data['code'],$data['link'],$data['verifyUrl']) && $data['code'] != '' && $data['link'] != '' && $data['verifyUrl'] != ''){
