@@ -51,6 +51,9 @@ $response = [
     'done' => false, 'msg' => ''
 ];
 
+$input = file_get_contents("php://input");
+$post = json_decode($input,true);
+
 if(!isset($post['lang'])) $post['lang'] = 'en';
 $lang = General::languageCode($post['lang']);
 
@@ -64,8 +67,6 @@ try{
     ];
     $authCheck = new AuthCheck($apiAuthArray);
     if($authCheck->getErrno() == 0){
-        $input = file_get_contents("php://input");
-        $post = json_decode($input,true);
         if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
             $userData = [
                 'tableName' => C::TABLE_USERS, 'email' => $post['email'], 'lang' => $post['lang_code']

@@ -57,7 +57,7 @@ class AuthCheck implements Ace{
         $uuidTrim = trim($data["uuid"]);
         if(!($usernameTrim != "" && $passwordTrim != "" && $uuidTrim != "")) throw new NotSettedException(Em::EXC_INSERT_CREDENTIALS);
         $this->username = $usernameTrim;
-        $this->password = $passwordTrim;
+        $this->password = str_replace(" ", "",$passwordTrim);
         $this->uuid = $uuidTrim;
     }
 
