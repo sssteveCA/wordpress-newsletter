@@ -1,7 +1,9 @@
 import { NlFormData } from "../types/types.js";
 import { Constants } from "../namespaces/constants.js";
+import { AxiosStatic } from "../../node_modules/axios/index.js";
 import { clientPost } from "../config/axios_instances.js";
-import axios from "../../node_modules/axios/index.js";
+
+declare const axios: AxiosStatic;
 
 export class NewUser{
     private _name: string|null;

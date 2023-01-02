@@ -4,5 +4,5 @@
 *.txt
 node_modules
 vendor
-css/**/*.map
+*.map
 ts/namespaces/constants.ts
