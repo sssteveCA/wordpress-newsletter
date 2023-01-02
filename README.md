@@ -23,10 +23,8 @@
         <li>Admin panel to add a new user skipping the email verification procedure</li>
       </ul>
     </li>
-    <li>*The backend features can also excuted with API requests, by providing the administrator credentials</li>
+    <li>The backend features can also excuted with API requests, by providing the <a href="https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/">Wordpress Application Password</a> credentials</li>
   </ul>
-  <br>
-  <div>*This features have not been added yet</div>
   <br>
   <div><a href="https://user-images.githubusercontent.com/95185311/204027983-ec64b742-0e26-4a9f-b967-6e8227043832.mp4">Quick demo video</a></div>
   </div>
