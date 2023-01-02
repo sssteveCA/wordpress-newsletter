@@ -3,7 +3,7 @@
  * Plugin Name: Newsletter
  * Description: This plugin allows send email to subscribers
  * Version: 1.0
- * Requires at least: 5.5
+ * Requires at least: 5.6
  * Requires PHP: 8.0
  * Author: Stefano Puggioni
  * License: GPL v2 or later
