@@ -29,6 +29,14 @@ export type NlFormData = {
     lang: string;
 };
 
+export type NlFormDataElements = {
+    name: HTMLInputElement;
+    surname: HTMLInputElement;
+    email: HTMLInputElement;
+    cb_privacy: HTMLInputElement;
+    cb_terms: HTMLInputElement;
+}
+
 export type NlFormDataAdd = {
     name?: string;
     surname?: string;

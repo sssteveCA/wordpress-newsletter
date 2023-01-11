@@ -26,6 +26,8 @@ window.addEventListener('DOMContentLoaded',()=>{
                     title: 'Iscrizione newsletter', message: res['msg']
                 };
                 messageDialog(md_data);
+                if(res['done'] == true){
+                }//if(res['done'] == true){
             });
         });
     }//if(form){
