@@ -81,16 +81,14 @@ if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
         http_response_code(500);
         $message = Properties::unknownError($lang);
     }
-}//if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
-else{
-    http_response_code(400);
-    $message = Properties::insertCode($lang);   
-}
-
-
-$body = <<<HTML
+    $body = <<<HTML
 <div>{$message}</div>
 HTML;
+}//if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
+else{
+    $params = HtmlCode::verifyFormValues($lang);
+    $body = HtmlCode::wpSignupVerifyForm(basename(__FILE__),$params);
+}
 
 $html = HtmlCode::genericHtml($title,$body,$style);
 

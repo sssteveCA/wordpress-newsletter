@@ -309,6 +309,7 @@ HTML;
         $html =<<<HTML
 <fieldset id="nl_form_fieldset" class="position-relative w-50 mx-auto border border-primary d-flex flex-column align-items-center" style="margin-bottom: 50px; min-width: 300px;">
     <legend class="text-center">{$params['title']}</legend>
+    <h2 class="text-center"></h2>
     <form id="nl_form" class="ml-5 mb-5 d-flex flex-column" action="#" method="post"> 
         <div class="container">
             <div class="row my-4">
@@ -361,23 +362,25 @@ HTML;
 
     /**
      * User account verify page form
+     * @param string $actionUrl
      * @param array $params
      */
-    public static function wpSignupVerifyForm(array $params): string{
+    public static function wpSignupVerifyForm(string $actionUrl, array $params): string{
         return <<<HTML
 <fieldset id="nl_form_fieldset" class="position-relative w-50 mx-auto border border-primary d-flex flex-column align-items-center">
-    <legend class="text-center"></legend>
-    <form id="nl_form" class="ml-5 mb-5 d-flex flex-column" action="{{$params['actionUrl']}}">
+    <legend class="text-center">{$params['legend_title']}</legend>
+    <h2 class="text-center">{$params['h2_title']}</h2>
+    <form id="nl_form" class="ml-5 mb-5 d-flex flex-column" action="{$actionUrl}">
         <div class="container">
             <div class="row my-4">
                 <div class="col-12">
-                    <label for="nl_vercode" class="form-label"></label>
+                    <label for="nl_vercode" class="form-label">{$params['label_verCode']}</label>
                     <input type="text" class="form-control" id="nl_vercode" name="verCode">
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col-12 text-center">
-                    <button id="nl_submit" type="submit" class="btn btn-dark mb-5"></button>
+                    <button id="nl_submit" type="submit" class="btn btn-dark mb-5">{$params['bt_text']}</button>
                 </div>
             </div>
         </div>
