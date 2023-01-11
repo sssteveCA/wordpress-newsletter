@@ -231,6 +231,7 @@ HTML;
 
     /**
      * Get the values to be used in the frontend subscribe form
+     * @param string $lang
      */
     public static function subscribeFormValues(string $lang):array {
         $privacyUrl = Properties::privacyUrl($lang);
@@ -266,6 +267,37 @@ HTML;
             "cb_label2" => "I have read and agreed with the <a href=\"{$termsUrl}\">terms and conditions</a> of the service",
             "subscribe_text" => "Subscribe","lang_code" => "en"
            ]; 
+        }
+    }
+
+    /**
+     * Get the values to be used in the verify page form
+     * @param string $lang
+     */
+    public static function verifyFormValues(string $lang):array {
+        if($lang == Langs::$langs["it"]){
+            return [
+                "bt_text" => "VERIFICA",
+                "h2_title" => "Inserisci il codice di verifica",
+                "label_verCode" => "Codice",
+                "legend_title" => "Iscrizione newsletter"
+            ];
+        }
+        else if($lang == Langs::$langs["es"]){
+            return [
+                "bt_text" => "VERIFICAR",
+                "h2_title" => "Introduzca el código de verificación",
+                "label_verCode" => "Código",
+                "legend_title" => "Suscripción al boletín informativo"
+            ];
+        }
+        else{
+            return [
+                "bt_text" => "VERIFY",
+                "h2_title" => "Enter the verification code",
+                "label_verCode" => "Code",
+                "legend_title" => "Newsletter subscription"
+            ];
         }
     }
 
