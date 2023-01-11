@@ -71,8 +71,8 @@ trait EmailManagerTrait{
     }
 
     private function setServerSettings(array $data){
-        //$this->SMTPDebug = SMTP::DEBUG_OFF;
-        $this->SMTPDebug = SMTP::DEBUG_SERVER;
+        $this->SMTPDebug = SMTP::DEBUG_OFF;
+        //$this->SMTPDebug = SMTP::DEBUG_SERVER;
         $this->isSMTP();
         $this->SMTPOptions = [
             'ssl' => [
