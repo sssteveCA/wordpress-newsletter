@@ -28,6 +28,8 @@ window.addEventListener('DOMContentLoaded',()=>{
                 };
                 messageDialog(md_data);
                 if(res['done'] == true){
+                    formEls.name.value = ""; formEls.surname.value = ""; formEls.email.value = "";
+                    formEls.cb_privacy.checked = false; formEls.cb_terms.checked = false;
                 }//if(res['done'] == true){
             });
         });

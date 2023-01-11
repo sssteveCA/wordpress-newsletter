@@ -14,7 +14,7 @@
             emails.push(email);
         }
     });//trTable.forEach(tr => {
-    console.log(emails);
+    //console.log(emails);
     return emails;
 }
 

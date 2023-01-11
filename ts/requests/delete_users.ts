@@ -40,7 +40,7 @@ export default class DeleteUsers{
         let response: object = {};
         try{
             await this.deleteUsersPromise().then(res => {
-                console.log(res);
+                //console.log(res);
                 response = JSON.parse(res);
             }).catch(err => {
                 throw err;
