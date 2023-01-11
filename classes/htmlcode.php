@@ -271,6 +271,7 @@ HTML;
 
     /**
      * Frontend newsletter register form
+     * @param array $params
      */
     public static function wpSignupForm(array $params): string{
         $html =<<<HTML
@@ -324,6 +325,33 @@ HTML;
 </fieldset>
 HTML;
         return $html;
+    }
+
+    /**
+     * User account verify page form
+     * @param array $params
+     */
+    public static function wpSignupVerifyForm(array $params): string{
+        return <<<HTML
+<fieldset id="nl_form_fieldset" class="position-relative w-50 mx-auto border border-primary d-flex flex-column align-items-center">
+    <legend class="text-center"></legend>
+    <form id="nl_form" class="ml-5 mb-5 d-flex flex-column" action="{{$params['actionUrl']}}">
+        <div class="container">
+            <div class="row my-4">
+                <div class="col-12">
+                    <label for="nl_vercode" class="form-label"></label>
+                    <input type="text" class="form-control" id="nl_vercode" name="verCode">
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-12 text-center">
+                    <button id="nl_submit" type="submit" class="btn btn-dark mb-5"></button>
+                </div>
+            </div>
+        </div>
+    </form>    
+</fieldset>
+HTML;
     }
 }
 ?>
