@@ -35,6 +35,8 @@ export type NlFormDataElements = {
     email: HTMLInputElement;
     cb_privacy: HTMLInputElement;
     cb_terms: HTMLInputElement;
+    lang: HTMLInputElement;
+    bt_submit: HTMLButtonElement;
 }
 
 export type NlFormDataAdd = {

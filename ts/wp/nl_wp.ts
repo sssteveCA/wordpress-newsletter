@@ -1,19 +1,20 @@
 import { messageDialog } from "../general/functions.js";
 import { NewUser } from "../requests/new_user.js";
-import {BsMdDialogData, NlFormData} from "../types/types.js";
+import {BsMdDialogData, NlFormData, NlFormDataElements} from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
     let form: HTMLFormElement = document.getElementById("nl_form") as HTMLFormElement;
+    let formEls: NlFormDataElements = htmlFormElements();
     if(form){
         form.addEventListener('submit', (e)=>{
             e.preventDefault();
             const data: NlFormData = {
-                name: (<HTMLInputElement>document.getElementById('nl_name')).value as string,
-                surname: (<HTMLInputElement>document.getElementById('nl_surname')).value as string,
-                email: (<HTMLInputElement>document.getElementById('nl_email')).value as string,
-                cb_privacy: (<HTMLInputElement>document.getElementById('nl_cb_privacy')).value as string,
-                cb_terms: (<HTMLInputElement>document.getElementById('nl_cb_terms')).value as string,
-                lang: (<HTMLInputElement>document.getElementById('nl_lang')).value as string
+                name: formEls.name.value as string,
+                surname: formEls.surname.value as string,
+                email: formEls.email.value as string,
+                cb_privacy: formEls.cb_privacy.value as string,
+                cb_terms: formEls.cb_terms.value as string,
+                lang: formEls.lang.value as string
             };
             let spinner: HTMLElement = document.getElementById('nl_spinner') as HTMLElement;
             spinner.classList.remove('invisible');
@@ -31,17 +32,30 @@ window.addEventListener('DOMContentLoaded',()=>{
             });
         });
     }//if(form){
-    let cbPrivacyEl: HTMLInputElement = document.getElementById('nl_cb_privacy') as HTMLInputElement;
-    let cbTermsEl: HTMLInputElement = document.getElementById('nl_cb_terms') as HTMLInputElement;
-    let btSubmit: HTMLButtonElement = document.getElementById('nl_submit') as HTMLButtonElement;
-    if(cbPrivacyEl && cbTermsEl && btSubmit){
-        cbPrivacyEl.addEventListener('change',()=>{
-            if(cbPrivacyEl.checked && cbTermsEl.checked) btSubmit.disabled = false;
-            else btSubmit.disabled = true;
+    if(formEls.cb_privacy && formEls.cb_terms && formEls.bt_submit){
+        formEls.cb_privacy.addEventListener('change',()=>{
+            if(formEls.cb_privacy.checked && formEls.cb_terms.checked) formEls.bt_submit.disabled = false;
+            else formEls.bt_submit.disabled = true;
         });
-        cbTermsEl.addEventListener('change',()=>{
-            if(cbPrivacyEl.checked && cbTermsEl.checked) btSubmit.disabled = false;
-            else btSubmit.disabled = true;
+        formEls.cb_terms.addEventListener('change',()=>{
+            if(formEls.cb_privacy.checked && formEls.cb_terms.checked) formEls.bt_submit.disabled = false;
+            else formEls.bt_submit.disabled = true;
         });
     }//if(cbPrivacyEl && cbTermsEl && btSubmit){
 });
+
+/**
+ * Create an object that contains the Signup form HTML element references
+ * @returns 
+ */
+function htmlFormElements(): NlFormDataElements{
+    return {
+        name: document.getElementById('nl_name') as HTMLInputElement,
+        surname: document.getElementById('nl_surname') as HTMLInputElement,
+        email: document.getElementById('nl_email') as HTMLInputElement,
+        cb_privacy: document.getElementById('nl_cb_privacy') as HTMLInputElement,
+        cb_terms: document.getElementById('nl_cb_terms') as HTMLInputElement,
+        lang: document.getElementById('nl_lang') as HTMLInputElement,
+        bt_submit: document.getElementById('nl_submit') as HTMLButtonElement
+    };
+}
