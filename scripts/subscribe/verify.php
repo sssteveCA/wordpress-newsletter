@@ -90,7 +90,9 @@ else{
     $body = HtmlCode::wpSignupVerifyForm(basename(__FILE__),$params);
 }
 
-$html = HtmlCode::genericHtml($title,$body,$style);
+$html = HtmlCode::genericHtml($title,$body,$style,
+["../../node_modules/bootstrap/dist/css/bootstrap.min.css"],
+["../../node_modules/bootstrap/dist/js/bootstrap.min.js"]);
 
 echo $html;
 
