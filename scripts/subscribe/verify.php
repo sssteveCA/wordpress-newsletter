@@ -91,7 +91,7 @@ else{
 }
 
 $html = HtmlCode::genericHtml($title,$body,$style,
-["../../node_modules/bootstrap/dist/css/bootstrap.min.css"],
+["../../node_modules/bootstrap/dist/css/bootstrap.min.css","../../css/wp/verify.css"],
 ["../../node_modules/bootstrap/dist/js/bootstrap.min.js"]);
 
 echo $html;

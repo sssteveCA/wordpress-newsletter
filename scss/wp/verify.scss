@@ -1,17 +1,20 @@
+$verCodeWidth: clamp(200px, calc(100% - 50px) ,600px);
 
-$pixelSub: clamp(200px, calc(100% - 50px) ,600px);
-
-@mixin verify-form-style($inputPixel){
+@mixin verify-form-style($inputWidth){
     fieldset#nl_form_fieldset{
         margin-top: 50px;
-        min-width: 300px;
+        min-width: 400px;
         form#nl_form{
             width: 100%;
-            input#nl_vercode{
-                margin: 0 $inputPixel;
+            input#verCode{
+                width: $inputWidth;
+                margin: 0 auto;
+                &:hover{
+                    background-color: yellow;
+                }
             }
         }
     } 
 }
 
-@include verify-form-style($pixelSub);
+@include verify-form-style($verCodeWidth);
