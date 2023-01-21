@@ -81,6 +81,7 @@ trait UsersTrait{
                     throw new IncorrectVariableFormatException(Ue::EXC_INVALID_FIELD);
                 } 
             }
+            $selectArray['query'] .= "ORDER BY `{$classname::$fields['email']}` ASC";
             return $selectArray;
         }//else di if(count($where) < 0){
         return null;
