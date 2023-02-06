@@ -56,7 +56,7 @@ $post = json_decode($inputs,true);
 
 $response = [
     'msg' => '',
-    'done' => false
+    C::KEY_DONE => false
 ];
 
 if(!isset($post['lang'])) $post['lang'] = 'en';
@@ -94,7 +94,7 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 switch($email){
                     case 0:
                         $response['msg'] = Properties::completeSubscribe($lang);
-                        $response['done'] = true;
+                        $response[C::KEY_DONE] = true;
                         break;
                     case Eme::ERR_EMAIL_SEND:
                         $query = "WHERE `".User::$fields["email"]."` = %s";

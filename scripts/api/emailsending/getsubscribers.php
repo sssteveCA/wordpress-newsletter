@@ -30,7 +30,7 @@ use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Exceptions\NotSettedException;
 
 $response = [
-    'done' => false,'empty' => false, 'msg' => '','subscribers' => [] 
+    C::KEY_DONE => false,'empty' => false, 'msg' => '','subscribers' => [] 
 ];
 
 try{
@@ -52,7 +52,7 @@ try{
         //echo "GetSubscribers errno => ".var_export($usersE,true)."\r\n";
         switch($usersE){
             case 0:
-                $response['done'] = true;
+                $response[C::KEY_DONE] = true;
                 $response['subscribers'] = subscribeData($users_array);
                 break;
             case Me::ERR_GET_NO_RESULT:

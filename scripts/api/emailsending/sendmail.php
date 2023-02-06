@@ -40,9 +40,10 @@ use Dotenv\Dotenv;
 use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Classes\Email\EmailManager;
 use Newsletter\Exceptions\NotSettedException;
+use Newsletter\Interfaces\Constants as C;
 
 $response = [
-    'done' => false, 'msg' => ''
+    C::KEY_DONE => false, 'msg' => ''
 ];
 
 try{
@@ -66,7 +67,7 @@ try{
                 $emErrno = sendNewsletterMail($snData);
                 switch($emErrno){
                     case 0:
-                        $response['done'] = true;
+                        $response[C::KEY_DONE] = true;
                         $response['msg'] = "La mail è stata inviata a tutti i destinatari indicati";
                         break;
                     case Eme::ERR_EMAIL_SEND:

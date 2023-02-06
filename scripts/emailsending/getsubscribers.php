@@ -25,7 +25,7 @@ use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 
 $response = [
-    'done' => false,'empty' => false, 'msg' => '','subscribers' => [] 
+    C::KEY_DONE => false,'empty' => false, 'msg' => '','subscribers' => [] 
 ];
 
 $current_user = wp_get_current_user();
@@ -43,7 +43,7 @@ if($logged && $administrator){
         //echo "GetSubscribers errno => ".var_export($usersE,true)."\r\n";
         switch($usersE){
             case 0:
-                $response['done'] = true;
+                $response[C::KEY_DONE] = true;
                 $response['subscribers'] = subscribeData($users_array);
                 break;
             case Me::ERR_GET_NO_RESULT:

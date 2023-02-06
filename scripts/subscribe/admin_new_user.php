@@ -48,7 +48,7 @@ use Newsletter\Enums\Langs;
 use Newsletter\Exceptions\MailNotSentException;
 
 $response = [
-    'done' => false, 'msg' => ''
+    C::KEY_DONE => false, 'msg' => ''
 ];
 
 $current_user = wp_get_current_user();
@@ -85,7 +85,7 @@ if($logged && $administrator){
                     $email = sendSigningUpNotify($aumData);
                     switch($email){
                         case 0:
-                            $response['done'] = true;
+                            $response[C::KEY_DONE] = true;
                             $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
                             break;
                         case Eme::ERR_EMAIL_SEND:

@@ -38,7 +38,7 @@ use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Exceptions\MailNotSentException;
 
 $response = [
-    'done' => false, 'msg' => ''
+    C::KEY_DONE => false, 'msg' => ''
 ];
 
 $current_user = wp_get_current_user();
@@ -57,7 +57,7 @@ if($logged && $administrator){
                 $emErrno = sendDeleteUserNotify($sdData);
                 switch($emErrno){
                     case 0:
-                        $response['done'] = true;
+                        $response[C::KEY_DONE] = true;
                         $response['msg'] = "I contatti indicati sono stati rimossi dalla lista degli iscritti";
                         break;
                     case Eme::ERR_EMAIL_SEND:

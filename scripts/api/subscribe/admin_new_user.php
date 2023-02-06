@@ -51,7 +51,7 @@ use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 
 $response = [
-    'done' => false, 'msg' => ''
+    C::KEY_DONE => false, 'msg' => ''
 ];
 
 $input = file_get_contents("php://input");
@@ -93,7 +93,7 @@ try{
                     $email = sendSigningUpNotify($aumData);
                     switch($email){
                         case 0:
-                            $response['done'] = true;
+                            $response[C::KEY_DONE] = true;
                             $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
                             break;
                         case Eme::ERR_EMAIL_SEND:
