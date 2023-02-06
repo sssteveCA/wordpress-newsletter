@@ -25,7 +25,7 @@ use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 
 $response = [
-    C::KEY_DONE => false,'empty' => false, 'msg' => '','subscribers' => [] 
+    C::KEY_DONE => false,'empty' => false, C::KEY_MESSAGE => '','subscribers' => [] 
 ];
 
 $current_user = wp_get_current_user();
@@ -49,7 +49,7 @@ if($logged && $administrator){
             case Me::ERR_GET_NO_RESULT:
                 http_response_code(404);
                 $response['empty'] = true;
-                $response['msg'] = "Nessun iscritto trovato";
+                $response[C::KEY_MESSAGE] = "Nessun iscritto trovato";
                 break;
             default:
                 throw new Exception;
@@ -58,12 +58,12 @@ if($logged && $administrator){
     }catch(Exception $e){
         //echo "GetSubscribers exception => ".$e->getMessage()."\r\n";
         http_response_code(500);
-        $response['msg'] = M::ERR_UNKNOWN;
+        $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;
     }
 }//if($logged && $administrator){
 else{
     http_response_code(401);
-    $response['msg'] = M::ERR_UNAUTHORIZED;
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);

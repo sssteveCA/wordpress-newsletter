@@ -40,7 +40,7 @@ use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Exceptions\MailNotSentException;
 
 $response = [
-    C::KEY_DONE => false, 'msg' => ''
+    C::KEY_DONE => false, C::KEY_MESSAGE => ''
 ];
 
 try{
@@ -64,7 +64,7 @@ try{
                 switch($emErrno){
                     case 0:
                         $response[C::KEY_DONE] = true;
-                        $response['msg'] = "I contatti indicati sono stati rimossi dalla lista degli iscritti";
+                        $response[C::KEY_MESSAGE] = "I contatti indicati sono stati rimossi dalla lista degli iscritti";
                         break;
                     case Eme::ERR_EMAIL_SEND:
                         throw new MailNotSentException;
@@ -74,27 +74,27 @@ try{
             }//if(is_array($post['emails']) && sizeof($post['emails']) > 0){
             else{
                 http_response_code(400);
-                $response['msg'] = M::ERR_ATLEAST_ONE_EMAIL;
+                $response[C::KEY_MESSAGE] = M::ERR_ATLEAST_ONE_EMAIL;
             }
         }//if(isset($post['emails']) && sizeof($post['emails']) > 0){
         else{
             http_response_code(400);
-            $response['msg'] = M::ERR_MISSING_FORM_VALUES;
+            $response[C::KEY_MESSAGE] = M::ERR_MISSING_FORM_VALUES;
         }
     }//if($authCheck->getErrno() == 0){
     else{
         http_response_code(401);
-        $response["msg"] = M::ERR_UNAUTHORIZED;
+        $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
     }  
 }catch(NotSettedException $nse){
     http_response_code(400);
-    $response['msg'] = M::ERR_UNAUTHORIZED;
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(MailNotSentException $mnse){
     http_response_code(500);
-    $response['msg'] = "Errore durante l'invio della mail ad uno o più utenti rimossi";
+    $response[C::KEY_MESSAGE] = "Errore durante l'invio della mail ad uno o più utenti rimossi";
 }catch(Exception $e){
     http_response_code(500);
-    $response['msg'] = M::ERR_UNKNOWN;
+    $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);

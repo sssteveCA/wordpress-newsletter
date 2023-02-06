@@ -30,7 +30,7 @@ use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Exceptions\NotSettedException;
 
 $response = [
-    C::KEY_DONE => false,'empty' => false, 'msg' => '','subscribers' => [] 
+    C::KEY_DONE => false,'empty' => false, C::KEY_MESSAGE => '','subscribers' => [] 
 ];
 
 try{
@@ -58,7 +58,7 @@ try{
             case Me::ERR_GET_NO_RESULT:
                 http_response_code(404);
                 $response['empty'] = true;
-                $response['msg'] = "Nessun iscritto trovato";
+                $response[C::KEY_MESSAGE] = "Nessun iscritto trovato";
                 break;
             default:
                 throw new Exception;
@@ -66,15 +66,15 @@ try{
     }//if($authCheck->getErrno() == 0){
     else{
         http_response_code(401);
-        $response['msg'] = M::ERR_UNAUTHORIZED;
+        $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
     }
 }catch(NotSettedException $nse){
     http_response_code(401);
-    $response['msg'] = M::ERR_UNAUTHORIZED;
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(Exception $e){
     //echo "GetSubscribers exception => ".$e->getMessage()."\r\n";
     http_response_code(500);
-    $response['msg'] = M::ERR_UNKNOWN;
+    $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);

@@ -38,7 +38,7 @@ use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Exceptions\MailNotSentException;
 
 $response = [
-    C::KEY_DONE => false, 'msg' => ''
+    C::KEY_DONE => false, C::KEY_MESSAGE => ''
 ];
 
 $current_user = wp_get_current_user();
@@ -58,7 +58,7 @@ if($logged && $administrator){
                 switch($emErrno){
                     case 0:
                         $response[C::KEY_DONE] = true;
-                        $response['msg'] = "I contatti indicati sono stati rimossi dalla lista degli iscritti";
+                        $response[C::KEY_MESSAGE] = "I contatti indicati sono stati rimossi dalla lista degli iscritti";
                         break;
                     case Eme::ERR_EMAIL_SEND:
                         throw new MailNotSentException;
@@ -67,28 +67,28 @@ if($logged && $administrator){
                 }
             }catch(NotSettedException $nse){
                 http_response_code(400);
-                $response['msg'] = $nse->getMessage();
+                $response[C::KEY_MESSAGE] = $nse->getMessage();
             }catch(MailNotSentException $mnse){
                 http_response_code(500);
-                $response['msg'] = "Errore durante l'invio della mail di notifica all'utente rimosso";
+                $response[C::KEY_MESSAGE] = "Errore durante l'invio della mail di notifica all'utente rimosso";
             }catch(Exception $e){
                 http_response_code(500);
-                $response['msg'] = M::ERR_UNKNOWN;
+                $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;
             }
         }//if(is_array($post['emails']) && sizeof($post['emails']) > 0){
         else{
             http_response_code(400);
-            $response['msg'] = M::ERR_ATLEAST_ONE_EMAIL;
+            $response[C::KEY_MESSAGE] = M::ERR_ATLEAST_ONE_EMAIL;
         }
     }//if(isset($post['emails']) && sizeof($post['emails']) > 0){
     else{
         http_response_code(400);
-        $response['msg'] = M::ERR_MISSING_FORM_VALUES;
+        $response[C::KEY_MESSAGE] = M::ERR_MISSING_FORM_VALUES;
     }
 }//if($logged && $administrator){
 else{
     http_response_code(401);
-    $response['msg'] = M::ERR_UNAUTHORIZED;
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);

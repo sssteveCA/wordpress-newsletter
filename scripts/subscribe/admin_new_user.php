@@ -48,7 +48,7 @@ use Newsletter\Enums\Langs;
 use Newsletter\Exceptions\MailNotSentException;
 
 $response = [
-    C::KEY_DONE => false, 'msg' => ''
+    C::KEY_DONE => false, C::KEY_MESSAGE => ''
 ];
 
 $current_user = wp_get_current_user();
@@ -86,7 +86,7 @@ if($logged && $administrator){
                     switch($email){
                         case 0:
                             $response[C::KEY_DONE] = true;
-                            $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
+                            $response[C::KEY_MESSAGE] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
                             break;
                         case Eme::ERR_EMAIL_SEND:
                             $query = "WHERE `".User::$fields["email"]."` = %s";
@@ -99,31 +99,31 @@ if($logged && $administrator){
                     break;
                 case Ause::INCORRECT_EMAIL:
                     http_response_code(400);
-                    $response['msg'] = Properties::wrongEmailFormat(Langs::$langs["it"]);
+                    $response[C::KEY_MESSAGE] = Properties::wrongEmailFormat(Langs::$langs["it"]);
                     break;
                 case Ause::EMAIL_EXISTS:
                     http_response_code(400);
-                    $response['msg'] = Properties::emailExists(Langs::$langs["it"]);
+                    $response[C::KEY_MESSAGE] = Properties::emailExists(Langs::$langs["it"]);
                     break;
                 default:
                     throw new Exception;
             }
         }catch(MailNotSentException $mnse){
             http_response_code(500);
-            $response['msg'] = "Impossibile inviare la mail di notifica all'utente aggiunto";
+            $response[C::KEY_MESSAGE] = "Impossibile inviare la mail di notifica all'utente aggiunto";
         }catch(Exception $e){
             http_response_code(500);
-            $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
+            $response[C::KEY_MESSAGE] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
         }
     }//if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
     else{
         http_response_code(400);
-        $response['msg'] = M::ERR_MISSING_FORM_VALUES;
+        $response[C::KEY_MESSAGE] = M::ERR_MISSING_FORM_VALUES;
     }
 }//if($logged && $administrator){
 else{
     http_response_code(401);
-    $response['msg'] = M::ERR_UNAUTHORIZED;
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);

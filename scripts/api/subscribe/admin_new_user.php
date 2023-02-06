@@ -51,7 +51,7 @@ use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 
 $response = [
-    C::KEY_DONE => false, 'msg' => ''
+    C::KEY_DONE => false, C::KEY_MESSAGE => ''
 ];
 
 $input = file_get_contents("php://input");
@@ -94,7 +94,7 @@ try{
                     switch($email){
                         case 0:
                             $response[C::KEY_DONE] = true;
-                            $response['msg'] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
+                            $response[C::KEY_MESSAGE] = "L'utente inserito è stato aggiunto alla lista degli iscritti";
                             break;
                         case Eme::ERR_EMAIL_SEND:
                             $query = "WHERE `".User::$fields["email"]."` = %s";
@@ -107,36 +107,36 @@ try{
                     break;
                 case Ause::INCORRECT_EMAIL:
                     http_response_code(400);
-                    $response['msg'] = Properties::wrongEmailFormat(Langs::$langs["it"]);
+                    $response[C::KEY_MESSAGE] = Properties::wrongEmailFormat(Langs::$langs["it"]);
                     break;
                 case Ause::EMAIL_EXISTS:
                     http_response_code(400);
-                    $response['msg'] = Properties::emailExists(Langs::$langs["it"]);
+                    $response[C::KEY_MESSAGE] = Properties::emailExists(Langs::$langs["it"]);
                     break;
                 default:
                     http_response_code(500);
-                    $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
+                    $response[C::KEY_MESSAGE] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
                     break;
             }
         }//if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
         else{
             http_response_code(400);
-            $response['msg'] = M::ERR_MISSING_FORM_VALUES;
+            $response[C::KEY_MESSAGE] = M::ERR_MISSING_FORM_VALUES;
         }
     }//if($authCheck->getErrno() == 0){
     else{
         http_response_code(401);
-        $response["msg"] = M::ERR_UNAUTHORIZED;
+        $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
     }
 }catch(NotSettedException $nse){
     http_response_code(401);
-    $response['msg'] = M::ERR_UNAUTHORIZED;
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(MailNotSentException $mnse){
     http_response_code(500);
-    $response['msg'] = "Impossibile inviare l'email all'utente inserito a causa di un errore sconosciuto";
+    $response[C::KEY_MESSAGE] = "Impossibile inviare l'email all'utente inserito a causa di un errore sconosciuto";
 }catch(Exception $e){
     http_response_code(500);
-    $response['msg'] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
+    $response[C::KEY_MESSAGE] = "Impossibile aggiungere l'utente inserito a causa di un errore sconosciuto";
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);

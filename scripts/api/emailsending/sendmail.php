@@ -43,7 +43,7 @@ use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\Constants as C;
 
 $response = [
-    C::KEY_DONE => false, 'msg' => ''
+    C::KEY_DONE => false, C::KEY_MESSAGE => ''
 ];
 
 try{
@@ -68,11 +68,11 @@ try{
                 switch($emErrno){
                     case 0:
                         $response[C::KEY_DONE] = true;
-                        $response['msg'] = "La mail è stata inviata a tutti i destinatari indicati";
+                        $response[C::KEY_MESSAGE] = "La mail è stata inviata a tutti i destinatari indicati";
                         break;
                     case Eme::ERR_EMAIL_SEND:
                         http_response_code(400);
-                        $response['msg'] = $emailManager->getError();
+                        $response[C::KEY_MESSAGE] = $emailManager->getError();
                         break;
                     default:
                         throw new Exception;    
@@ -80,31 +80,31 @@ try{
             }//if(is_array($post['emails'] && sizeof($post['emails']) > 0)){
             else{
                 http_response_code(400);
-                $response['msg'] = M::ERR_ATLEAST_ONE_EMAIL;
+                $response[C::KEY_MESSAGE] = M::ERR_ATLEAST_ONE_EMAIL;
             }
         }//if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
         else{
             http_response_code(400);
-            $response['msg'] = M::ERR_MISSING_FORM_VALUES;
+            $response[C::KEY_MESSAGE] = M::ERR_MISSING_FORM_VALUES;
         }
     }//if($authCheck->getErrno() == 0){
     else{
         http_response_code(401);
-        $response["msg"] = M::ERR_UNAUTHORIZED;
+        $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
     }
 }catch(NotSettedException $nse){
     http_response_code(400);
-    $response['msg'] = M::ERR_UNAUTHORIZED;
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(Exception $e){
     http_response_code(500);
-    $response['msg'] = M::ERR_UNKNOWN;
+    $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;
 }
     
 
 //}//if($logged && $administrator){
 /* else{
     http_response_code(401);
-    $response['msg'] = M::ERR_UNAUTHORIZED;
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 } */
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);

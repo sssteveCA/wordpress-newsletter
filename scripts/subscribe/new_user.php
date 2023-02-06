@@ -55,8 +55,8 @@ $post = json_decode($inputs,true);
 //var_dump($post);
 
 $response = [
-    'msg' => '',
-    C::KEY_DONE => false
+    C::KEY_DONE => false,
+    C::KEY_MESSAGE => '',
 ];
 
 if(!isset($post['lang'])) $post['lang'] = 'en';
@@ -93,7 +93,7 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 $email = sendActivationMail($aeData);
                 switch($email){
                     case 0:
-                        $response['msg'] = Properties::completeSubscribe($lang);
+                        $response[C::KEY_MESSAGE] = Properties::completeSubscribe($lang);
                         $response[C::KEY_DONE] = true;
                         break;
                     case Eme::ERR_EMAIL_SEND:
@@ -107,11 +107,11 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 break;
             case Usee::INCORRECT_EMAIL:
                 http_response_code(400);
-                $response['msg'] = Properties::wrongEmailFormat($lang);
+                $response[C::KEY_MESSAGE] = Properties::wrongEmailFormat($lang);
                 break;
             case Usee::EMAIL_EXISTS:
                 http_response_code(400);
-                $response['msg'] = Properties::emailExists($lang);
+                $response[C::KEY_MESSAGE] = Properties::emailExists($lang);
                 break;
             default:
                 throw new Exception;
@@ -119,12 +119,12 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
     }catch(Exception $e){
         //echo "Exception\n";
         http_response_code(500);
-        $response['msg'] = Properties::unknownError($lang);
+        $response[C::KEY_MESSAGE] = Properties::unknownError($lang);
     }
 }//if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email'] != '' && $post['cb_privacy'] == '1' && $post['cb_terms']){
 else{
     http_response_code(400);
-    $response['msg'] = Properties::missingFormValues($lang);
+    $response[C::KEY_MESSAGE] = Properties::missingFormValues($lang);
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
