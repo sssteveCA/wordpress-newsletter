@@ -30,7 +30,7 @@ use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Exceptions\NotSettedException;
 
 $response = [
-    C::KEY_DONE => false,'empty' => false, C::KEY_MESSAGE => '','subscribers' => [] 
+    C::KEY_DONE => false, C::KEY_EMPTY => false, C::KEY_MESSAGE => '','subscribers' => [] 
 ];
 
 try{
@@ -57,7 +57,7 @@ try{
                 break;
             case Me::ERR_GET_NO_RESULT:
                 http_response_code(404);
-                $response['empty'] = true;
+                $response[C::KEY_EMPTY] = true;
                 $response[C::KEY_MESSAGE] = "Nessun iscritto trovato";
                 break;
             default:

@@ -22,6 +22,7 @@ interface Constants{
 
     //Keys
     const KEY_DONE = 'done';
+    const KEY_EMPTY = 'empty';
     const KEY_MESSAGE = 'msg';
     
     //Paths
