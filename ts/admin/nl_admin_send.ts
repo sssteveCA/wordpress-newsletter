@@ -1,5 +1,6 @@
 import { checkedEmailsList, emailSelection } from "../general/admincommon.js";
 import { GetSubscribersHtml, GetSubscribersHtmlInterface } from "../html/getsubscribershtml.js";
+import { Constants } from "../namespaces/constants.js";
 import GetSubscribers from "../requests/get_subscribers.js";
 import SendEmail from "../requests/send_email.js";
 import { NlFormDataSend } from "../types/types.js";
@@ -34,9 +35,9 @@ window.addEventListener('DOMContentLoaded',()=>{
             let se: SendEmail = new SendEmail(data);
             se.sendEmail().then(obj => {
                 send_spinner.classList.add("invisible");
-                if(obj["done"] == true) email_send_response.style.color = 'green';
+                if(obj[Constants.KEY_DONE] == true) email_send_response.style.color = 'green';
                 else email_send_response.style.color = 'red';
-                email_send_response.innerHTML = obj["msg"];
+                email_send_response.innerHTML = obj[Constants.KEY_MESSAGE];
             });
         }//if(emails.length > 0){ 
         else{

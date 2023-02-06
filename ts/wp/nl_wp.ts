@@ -1,4 +1,5 @@
 import { messageDialog } from "../general/functions.js";
+import { Constants } from "../namespaces/constants.js";
 import { NewUser } from "../requests/new_user.js";
 import {BsMdDialogData, NlFormData, NlFormDataElements} from "../types/types.js";
 
@@ -24,13 +25,13 @@ window.addEventListener('DOMContentLoaded',()=>{
             newUser.newUser().then(res => {
                 spinner.classList.add('invisible');
                 let md_data: BsMdDialogData = {
-                    title: 'Iscrizione newsletter', message: res['msg']
+                    title: 'Iscrizione newsletter', message: res[Constants.KEY_MESSAGE]
                 };
                 messageDialog(md_data);
-                if(res['done'] == true){
+                if(res[Constants.KEY_DONE] == true){
                     formEls.name.value = ""; formEls.surname.value = ""; formEls.email.value = "";
                     formEls.cb_privacy.checked = false; formEls.cb_terms.checked = false;
-                }//if(res['done'] == true){
+                }//if(res[Constants.KEY_DONE] == true){
             });
         });
     }//if(form){

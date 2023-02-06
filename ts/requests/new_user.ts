@@ -66,7 +66,7 @@ export class NewUser{
                 await this.newUserPromise().then(res => {
                     //console.log(res);
                     let rJson: object = JSON.parse(res);
-                    response = { done: rJson['done'], msg: rJson['msg'] }
+                    response = { done: rJson[Constants.KEY_DONE], msg: rJson[Constants.KEY_MESSAGE] }
                 }).catch(err => {
                     throw err;
                 });

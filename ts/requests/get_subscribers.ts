@@ -43,7 +43,7 @@ export default class GetSubscribers{
             await this.getSubscribersPromise().then(res => {
                 //console.log(res);
                 response = JSON.parse(res);
-                if(response["done"] == true){
+                if(response[Constants.KEY_DONE] == true){
                     this._subscribers = response["subscribers"];
                 }
             }).catch(err => {

@@ -1,3 +1,4 @@
+import { Constants } from "../namespaces/constants.js";
 import { AddUserAdmin } from "../requests/add_user_admin.js";
 import { NlFormDataAdd } from "../types/types";
 
@@ -18,9 +19,9 @@ window.addEventListener('DOMContentLoaded', ()=>{
         add_spinner.classList.remove("invisible");
         addUser.addUser().then(obj => {
             add_spinner.classList.add("invisible");
-            if(obj["done"] == true) add_user_response.style.color = 'green';
+            if(obj[Constants.KEY_DONE] == true) add_user_response.style.color = 'green';
             else add_user_response.style.color = 'red';
-            add_user_response.innerHTML = obj["msg"];
+            add_user_response.innerHTML = obj[Constants.KEY_MESSAGE];
         });
     });//form.addEventListener('submit',(e)=>{
 });

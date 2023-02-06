@@ -1,5 +1,6 @@
 import { checkedEmailsList, emailSelection } from "../general/admincommon.js";
 import { GetSubscribersHtml, GetSubscribersHtmlInterface } from "../html/getsubscribershtml.js";
+import { Constants } from "../namespaces/constants.js";
 import DeleteUsers from "../requests/delete_users.js";
 import GetSubscribers from "../requests/get_subscribers.js";
 import { NlFormDataDelete } from "../types/types";
@@ -21,7 +22,7 @@ window.addEventListener('DOMContentLoaded',()=>{
             delete_spinner.classList.remove("invisible");
             du.deleteUsers().then(obj => {
                 delete_spinner.classList.add("invisible");
-                if(obj["done"] == true){
+                if(obj[Constants.KEY_DONE] == true){
                     loadEmailAddresses();
                    delete_users_response.style.color = 'green'; 
                 }
