@@ -64,7 +64,7 @@ $lang = General::languageCode($post['lang']);
 
 if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email'] != '' && $post['cb_privacy'] == '1' && $post['cb_terms'] == '1'){
     $userData = [
-        'tableName' => C::TABLE_USERS,'email' => $post['email'], 'lang' => $lang
+        'tableName' => C::TABLE_USERS,'email' => trim($post['email']), 'lang' => $lang
     ];
     if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
         $userData['firstName'] = $post['name'];

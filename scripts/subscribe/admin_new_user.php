@@ -63,7 +63,7 @@ if($logged && $administrator){
     $post = json_decode($input,true);
     if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
         $userData = [
-            'tableName' => C::TABLE_USERS, 'email' => $post['email'], 'lang' => $post['lang_code']
+            'tableName' => C::TABLE_USERS, 'email' => trim($post['email']), 'lang' => $post['lang_code']
         ];
         if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
             $userData['firstName'] = $post['name'];
