@@ -19,6 +19,10 @@ interface Constants{
     const H_JS_BOOTSTRAP = 'nlBootstrapJs';
     const H_CSS_WP_FORM = 'nlNewsletterCss';
     const H_JS_WP_FORM = 'nlNewsletterJs';
+
+    //Keys
+    const KEY_DONE = 'done';
+    const KEY_MESSAGE = 'msg';
     
     //Paths
     const REL_CSS_ADMIN_ADD = 'css/admin/nl_admin_add.css';
