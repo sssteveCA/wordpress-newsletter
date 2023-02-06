@@ -56,6 +56,7 @@ if($logged && $administrator){
     if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
         if(is_array($post['emails']) && sizeof($post['emails']) > 0){
             try{
+                if($post['subject'] == '')$post['subject'] = ' '; //Avoid display '(no subject)' in the sent mail
                 $snData = [
                     'body' => $post['body'], 'emails' => $post['emails'], 'subject' => $post['subject']
                 ];

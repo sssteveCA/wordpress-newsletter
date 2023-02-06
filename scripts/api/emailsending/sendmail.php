@@ -39,6 +39,7 @@ use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Dotenv\Dotenv;
 use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Classes\Email\EmailManager;
+use Newsletter\Exceptions\MailNotSentException;
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\Constants as C;
 
@@ -61,6 +62,7 @@ try{
         //$response['data'] = $post;
         if(isset($post['emails'],$post['subject'],$post['body']) && $post['body'] != ''){
             if(is_array($post['emails']) && sizeof($post['emails']) > 0){
+                if($post['subject'] == '')$post['subject'] = ' '; //Avoid display '(no subject)' in the sent mail
                 $snData = [
                     'body' => $post['body'], 'emails' => $post['emails'], 'subject' => $post['subject']
                 ];
@@ -95,6 +97,9 @@ try{
 }catch(NotSettedException $nse){
     http_response_code(400);
     $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
+}catch(MailNotSentException $mnse){
+    http_response_code(500);
+    $response[C::KEY_MESSAGE] = "Errore durante l'invio della mail ad uno o più destinatari indicati";
 }catch(Exception $e){
     http_response_code(500);
     $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;
