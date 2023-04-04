@@ -12,6 +12,7 @@ use Newsletter\Traits\EmailManagerTrait;
 use Newsletter\Traits\ErrorTrait;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use Newsletter\Interfaces\Constants as C;
 
 interface EmailManagerErrors extends ExceptionMessages{
     const ERR_EMAIL_SEND = 1;
@@ -157,7 +158,20 @@ class EmailManager extends PHPMailer{
      */
     public function sendNewsletterMail(){
         $this->errno = 0;
+        $sub_body = substr($this->body,0,300);
+        $log_content = "";
+        $log_content .= <<<CONTENT
+------------------------------------------------
+CONTENUTO MAIL: {$sub_body}
+
+CONTENT;
+        file_put_contents(C::FILE_LOG,$log_content,FILE_APPEND);
+        $log_content = "";
         foreach($this->emailsList as $email){
+            $log_content .= <<<CONTENT
+
+INDIRIZZO EMAIL: {$email}
+CONTENT;
             $addresses = $this->getAllRecipientAddresses();
             if(!empty($addresses))$this->clearAddresses();
             try{
@@ -175,12 +189,17 @@ class EmailManager extends PHPMailer{
                     $this->Body = $this->body;
                     $this->AltBody = $this->body;
                     $this->send();
+                    $log_content .= " => INVIATO\r\n";
                 }//if($user != null){
             }catch(Exception $e){
+                $log_content .= " => NON INVIATO\r\n";
                 //echo "Mail Exception => ".$e->getMessage()."\r\n";
                 $this->errno = Eme::ERR_EMAIL_SEND;
-            }      
+            }/* finally{
+                
+            }   */   
         }//foreach($this->emailsList as $email){
+        file_put_contents(C::FILE_LOG,$log_content,FILE_APPEND);
     }
 
     /**

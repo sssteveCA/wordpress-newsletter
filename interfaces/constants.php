@@ -5,7 +5,7 @@ namespace Newsletter\Interfaces;
 interface Constants{
 
     //Log
-    const FILE_LOG = 'log.txt';
+    const FILE_LOG = 'log_newsletter.txt';
 
     //Handles
     const H_CSS_ADMIN_FORM_ADD = 'nlAdminCssAdd';
