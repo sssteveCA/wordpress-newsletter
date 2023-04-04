@@ -35,6 +35,45 @@ HTML;
     }
 
     /**
+     * Get the pre unsubscribe form
+     * @param string $lang the user language
+     * @param string $script_path the unsubscribe script path
+     * @param string $unsusbc_code the unsubscribe code
+     * @return string the pre unsubscribe form 
+     */
+    public static function preUnsubscribeForm(string $lang, string $script_path, string $unsubsc_code): string{
+        if($lang == Langs::$langs["it"])
+            $params = [
+                "confirm" => "CONFERMA",
+                "message" => "Per cancellare la tua iscrizione alla newsletter fai click sul pulsante 'CONFERMA' qui sotto"
+            ];
+        else if($lang == Langs::$langs["es"])
+            $params = [
+                "confirm" => "CONFIRMAR",
+                "message" => "Para darse de baja del boletín, haga clic en el botón 'CONFIRMAR' a continuación"
+            ];
+        else
+            $params = [
+                "confirm" => "CONFIRM",
+                "message" => "To unsubscribe from the newsletter click on the 'CONFIRM' button below"
+            ];
+        return <<<HTML
+<form id="fUnsubscribe" method="get" action="{$script_path}?unsubscCode={$unsubsc_code}">
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-md-10 col-lg-8 h4 text-center">{$params['message']}</div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg">{$params['confirm']}</button>
+            </div>
+        </div>
+    </div>
+</form> 
+HTML;
+    }
+
+    /**
      * Get the title of the pre unsubscribe script
      * @param string $lang the user language
      * @return string the pre unsubscribe title tag content

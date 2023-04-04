@@ -20,21 +20,15 @@ $arrData = [
 ];
 
 if(isset($_REQUEST["unsubscCode"]) && $_REQUEST["unsubscCode"]){
-    $arrData['body'] = <<<HTML
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8 h4 text-center">
-        </div>
-    </div>
-</div>
-HTML;
+    $unsubsc_code = $_REQUEST["unsubscCode"];
+    $arr_data['body'] = '';
 }//if(isset($_REQUEST["unsubscCode"]) && $_REQUEST["unsubscCode"]){
 else{
-    $arrData['body'] = <<<HTML
+    $error_message = Properties::preUnsubscribeErrorMessage($lang);
+    $arr_data['body'] = <<<HTML
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-        </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-12 col-md-10 col-lg-8">{$error_message}</div>
     </div>
 </div>
 HTML;
