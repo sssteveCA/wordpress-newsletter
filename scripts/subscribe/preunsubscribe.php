@@ -1,5 +1,6 @@
 <?php
 use Newsletter\Classes\General;
+use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\Properties;
 
 require_once("../../../../../wp-load.php");
@@ -31,7 +32,7 @@ $arrData = [
 if(isset($_REQUEST["unsubscCode"]) && $_REQUEST["unsubscCode"]){
     $script_path = "./unsubscribe.php";
     $unsubsc_code = $_REQUEST["unsubscCode"];
-    $arr_data['body'] = Properties::preUnsubscribeForm($lang,$script_path,$unsubsc_code);
+    $arr_data['body'] = HtmlCode::preUnsubscribeForm($lang,$script_path,$unsubsc_code);
 }//if(isset($_REQUEST["unsubscCode"]) && $_REQUEST["unsubscCode"]){
 else{
     $error_message = Properties::preUnsubscribeErrorMessage($lang);

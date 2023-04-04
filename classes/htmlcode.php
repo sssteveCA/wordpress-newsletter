@@ -230,6 +230,35 @@ HTML;
     }
 
     /**
+     * Get the pre unsubscribe form
+     * @param string $lang the user language
+     * @param string $script_path the unsubscribe script path
+     * @param string $unsusbc_code the unsubscribe code
+     * @return string the pre unsubscribe form 
+     */
+    public static function preUnsubscribeForm(string $lang, string $script_path, string $unsubsc_code): string{
+        $params = Properties::preUnsubscribeFormMessages($lang);
+        return <<<HTML
+<form id="fUnsubscribe" method="get" action="{$script_path}?unsubscCode={$unsubsc_code}">
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-md-10 col-lg-8 h4 text-center">{$params['message']}</div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg">{$params['confirm']}</button>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div id="form-message" class="col-12 col-md-10 col-lg-8 text-center"></div>
+        </div>
+        
+    </div>
+</form> 
+HTML;
+    }
+
+    /**
      * Get the values to be used in the frontend subscribe form
      * @param string $lang
      */
