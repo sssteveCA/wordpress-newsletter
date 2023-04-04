@@ -13,7 +13,8 @@ trait PreUnsubscribeTrait{
      * @return string the pre unsubscribe title tag content
      */
     public static function preUnsubscribeErrorMessage(string $lang): string{
-        $contactsUrl = Properties::contactsUrl($lang);
+        $contactsUrl = "";
+        //$contactsUrl = Properties::contactsUrl($lang);
         if($lang == Langs::$langs["it"]){
             return <<<HTML
 Impossibile trovare i dati richiesti per completare la disiscrizione, riprova.
