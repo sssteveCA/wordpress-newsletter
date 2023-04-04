@@ -12,7 +12,7 @@ if(!isset($_REQUEST['lang'])) $_REQUEST['lang'] = 'en';
 $lang = General::languageCode($_REQUEST['lang']);
 
 $arrData = [
-    'title' => '',
+    'title' => Properties::preUnsubscribeTitle($lang),
     'body' => '',
     'styleTag' => '',
     'styles' => [],
@@ -23,7 +23,7 @@ if(isset($_REQUEST["unsubscCode"]) && $_REQUEST["unsubscCode"]){
     $arrData['body'] = <<<HTML
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
+        <div class="col-12 col-md-10 col-lg-8 h4 text-center">
         </div>
     </div>
 </div>
