@@ -19,12 +19,15 @@ require_once("../../classes/htmlcode.php");
 if(!isset($_REQUEST['lang'])) $_REQUEST['lang'] = 'en';
 $lang = General::languageCode($_REQUEST['lang']);
 
-$arrData = [
+$arr_data = [
     'title' => Properties::preUnsubscribeTitle($lang),
     'body' => '',
-    'styleTag' => '',
-    'styles' => [],
+    'style_tag' => '',
+    'styles' => [
+        '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+    ],
     'scripts' => [
+        '../../node_modules/bootstrap/dist/js/bootstrap.min.js',
         '../../js/scripts/preunsubscribe.js'
     ]
 ];
@@ -44,4 +47,6 @@ else{
 </div>
 HTML;
 }
+
+echo HtmlCode::genericHtml($arr_data['title'],$arr_data['body'],$arr_data['style_tag'],$arr_data['styles'],$arr_data['scripts']);
 ?>

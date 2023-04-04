@@ -1,6 +1,6 @@
-import { Constants } from "../namespaces/constants";
-import { UnsubscribeUser } from "../requests/unsubscribe_user";
-import { NlUnsubscribeUserData } from "../types/types";
+import { Constants } from "../namespaces/constants.js";
+import { UnsubscribeUser } from "../requests/unsubscribe_user.js";
+import { NlUnsubscribeUserData } from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
     const spinner = document.getElementById('nl_spinner') as HTMLDivElement;
@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     const form = document.getElementById('fUnsubscribe') as HTMLFormElement;
     form.addEventListener('submit',(e)=>{
         e.preventDefault();
+        uu_response_div.innerHTML = "";
         const data: NlUnsubscribeUserData = {
             lang: (<HTMLInputElement>document.querySelector('input[name=lang]')).value,
             unsubscribe_code: (<HTMLInputElement>document.querySelector('input[name=unsubsc_code]')).value

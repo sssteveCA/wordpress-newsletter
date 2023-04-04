@@ -96,12 +96,12 @@ else{
     $message = Properties::missingFormValues($lang);
 }
 
-if(isset($_REQUEST['ajax']) && $_REQUEST['ajax'] == '1'){
+if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
     if(http_response_code() == 200)
         $response = [ C::KEY_DONE => true, C::KEY_MESSAGE => $message ];
     else 
         $response = [ C::KEY_DONE => true, C::KEY_MESSAGE => $message ];
-}//if(isset($_REQUEST['ajax']) && $_REQUEST['ajax'] == '1'){
+}//if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
 else{
     $body = <<<HTML
 <div>{$message}</div>

@@ -106,7 +106,7 @@ trait PropertiesUrlTrait{
      * Get the unsubscribe script URL
      */
     public static function unsubscribeUrl(): string{
-        return Properties::pluginUrl("newsletter/newsletter.php")."scripts/subscribe/unsubscribe.php";
+        return Properties::pluginUrl("newsletter/newsletter.php")."scripts/subscribe/preunsubscribe.php";
     }
 
     /**
