@@ -91,9 +91,14 @@ else{
     $body = HtmlCode::wpSignupVerifyForm(basename(__FILE__),$params);
 }
 
-$html = HtmlCode::genericHtml($title,$body,$style,
-["../../node_modules/bootstrap/dist/css/bootstrap.min.css","../../css/wp/verify.css"],
-["../../node_modules/bootstrap/dist/js/bootstrap.min.js"]);
+$css_arr = [
+    ['href' => '../../node_modules/bootstrap/dist/css/bootstrap.min.css'],
+    ['href' => '../../css/wp/verify.css']
+];
+$js_arr = [
+    ["../../node_modules/bootstrap/dist/js/bootstrap.min.js"]
+];
+$html = HtmlCode::genericHtml($title,$body,$style,$css_arr,$js_arr);
 
 echo $html;
 

@@ -201,13 +201,19 @@ HTML;
     public static function genericHtml(string $title, string $body, string $styleTag = "",array $styles = [], array $scripts = []):string{
         $stylesS = "";
         $scriptsS = "";
-        if(!empty($styles)){
-            foreach($styles as $css)
-                $stylesS .= '<link rel="stylesheet" href="'.$css.'">';
+        $styles_map = array_map(function($style){
+            return '<link rel="stylesheet" href="'.$style['href'].'">';
+        },$styles);
+        $scripts_map = array_map(function($script){
+            if(isset($script['type'])) $type = 'type="'.$script['type'].'"';
+            else $type = "";
+            return '<script '.$type.' src="'.$script['src'].'"></script>';
+        },$scripts);
+        if(!empty($styles_map)){
+            foreach($styles_map as $style) $stylesS .= $style;
         }
-        if(!empty($scripts)){
-            foreach($scripts as $script)
-                $scriptsS .= '<script src="'.$script.'"></script>';
+        if(!empty($scripts_map)){
+            foreach($scripts_map as $script) $scriptsS .= $script;
         }
         $html = <<<HTML
 <!DOCTYPE html>

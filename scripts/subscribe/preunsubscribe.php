@@ -24,11 +24,11 @@ $arr_data = [
     'body' => '',
     'style_tag' => '',
     'styles' => [
-        '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+        ['href' => '../../node_modules/bootstrap/dist/css/bootstrap.min.css']
     ],
     'scripts' => [
-        '../../node_modules/bootstrap/dist/js/bootstrap.min.js',
-        '../../js/scripts/preunsubscribe.js'
+        [ 'src' => '../../node_modules/bootstrap/dist/js/bootstrap.min.js' ],
+        [ 'src' => '../../js/scripts/preunsubscribe.js', 'type' => 'module' ]  
     ]
 ];
 
