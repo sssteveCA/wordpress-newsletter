@@ -2,6 +2,10 @@ import { NlUnsubscribeUserData } from "../types/types";
 import { Languages } from "../enums/enums";
 import { Constants } from "../namespaces/constants";
 import { Messages } from "../namespaces/messages";
+import { clientGet } from "../config/axios_instances";
+import { AxiosStatic } from "../../node_modules/axios/index";
+
+declare const axios: AxiosStatic;
 
 export class UnsubscribeUser{
 
@@ -37,5 +41,42 @@ export class UnsubscribeUser{
                 break;
         }
         return this._error;
+    }
+
+    public async unsubscribe(): Promise<object>{
+        let response: object = {};
+        this._errno = 0;
+        try{
+            await this.unsubscribePromise().then(res => {
+                console.log(res);
+                response = JSON.parse(res);
+            }).catch(err => {
+                throw err;
+            })
+        }catch(e){
+            this._errno = UnsubscribeUser.ERR_FETCH;
+            if(e instanceof axios.AxiosError){
+                const stringError: string = e.response?.data;
+                response = JSON.parse(stringError);
+            }
+            else{
+                response = {
+                    done: false, msg: this.error
+                }
+            }        
+        }
+        return response;
+    }
+
+    private async unsubscribePromise(): Promise<string>{
+        return await new Promise<string>((resolve,reject)=>{
+            clientGet.get(`${UnsubscribeUser.FETCH_URL}?unsubscCode=${this._unsubscribe_code}`)
+            .then(res => {
+                resolve(res.data)
+            })
+            .catch(err => {
+                reject(err)
+            })
+        })
     }
 }
