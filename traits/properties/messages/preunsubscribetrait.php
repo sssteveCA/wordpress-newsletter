@@ -78,6 +78,29 @@ HTML;
     }
 
     /**
+     * Get the pre unsubscribe messages form messages
+     * @param string $lang the user language
+     * @return array the pre unsubscribe messages form array
+     */
+    public static function preUnsubscribeFormMessages(string $lang): array{
+        if($lang == Langs::$langs["it"])
+            return [
+                "confirm" => "CONFERMA",
+                "message" => "Per cancellare la tua iscrizione alla newsletter fai click sul pulsante 'CONFERMA' qui sotto"
+            ];
+        else if($lang == Langs::$langs["es"])
+            return [
+                "confirm" => "CONFIRMAR",
+                "message" => "Para darse de baja del boletín, haga clic en el botón 'CONFIRMAR' a continuación"
+            ];
+        else
+            return [
+                "confirm" => "CONFIRM",
+                "message" => "To unsubscribe from the newsletter click on the 'CONFIRM' button below"
+            ];
+    }
+
+    /**
      * Get the title of the pre unsubscribe script
      * @param string $lang the user language
      * @return string the pre unsubscribe title tag content
