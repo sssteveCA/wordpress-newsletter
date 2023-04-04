@@ -96,13 +96,22 @@ else{
     $message = Properties::missingFormValues($lang);
 }
 
-$body = <<<HTML
+if(isset($_REQUEST['ajax']) && $_REQUEST['ajax'] == '1'){
+    if(http_response_code() == 200)
+        $response = [ C::KEY_DONE => true, C::KEY_MESSAGE => $message ];
+    else 
+        $response = [ C::KEY_DONE => true, C::KEY_MESSAGE => $message ];
+}//if(isset($_REQUEST['ajax']) && $_REQUEST['ajax'] == '1'){
+else{
+    $body = <<<HTML
 <div>{$message}</div>
 HTML;
 
-$html = HtmlCode::genericHtml($title,$body,$style);
+    $html = HtmlCode::genericHtml($title,$body,$style);
 
-echo $html;
+    echo $html;
+}
+
 
 function sendUserUnsubscribeNotify(array $params):int{
     $dotenv = Dotenv::createImmutable("../../");

@@ -69,9 +69,9 @@ export class UnsubscribeUser{
     }
 
     private async unsubscribePromise(): Promise<string>{
+        let url = `${UnsubscribeUser.FETCH_URL}?unsubscCode=${this._unsubscribe_code}&ajax=1`
         return await new Promise<string>((resolve,reject)=>{
-            clientGet.get(`${UnsubscribeUser.FETCH_URL}?unsubscCode=${this._unsubscribe_code}`)
-            .then(res => {
+            clientGet.get(url).then(res => {
                 resolve(res.data)
             })
             .catch(err => {
