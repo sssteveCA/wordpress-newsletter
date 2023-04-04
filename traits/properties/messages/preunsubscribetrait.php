@@ -68,6 +68,10 @@ HTML;
                 <button type="submit" class="btn btn-primary btn-lg">{$params['confirm']}</button>
             </div>
         </div>
+        <div class="row justify-content-center mt-5">
+            <div id="form-message" class="col-12 col-md-10 col-lg-8 text-center"></div>
+        </div>
+        
     </div>
 </form> 
 HTML;

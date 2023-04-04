@@ -6,23 +6,23 @@ import SendEmail from "../requests/send_email.js";
 import { NlFormDataSend } from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
-    let form: HTMLFormElement = document.getElementById('nl_form_send') as HTMLFormElement;
-    let send_spinner: HTMLDivElement = document.getElementById('nl_send_spinner') as HTMLDivElement;
-    let email_send_response: HTMLDivElement = document.getElementById('nl_email_send_response') as HTMLDivElement;
-    let gs: GetSubscribers = new GetSubscribers();
+    const form: HTMLFormElement = document.getElementById('nl_form_send') as HTMLFormElement;
+    const send_spinner: HTMLDivElement = document.getElementById('nl_send_spinner') as HTMLDivElement;
+    const email_send_response: HTMLDivElement = document.getElementById('nl_email_send_response') as HTMLDivElement;
+    const gs: GetSubscribers = new GetSubscribers();
     gs.getSubscribers().then(res => {
         //console.log(gs.subscribers);
-        let gsh_data: GetSubscribersHtmlInterface = {
+        const gsh_data: GetSubscribersHtmlInterface = {
             containerId: 'nl_send_content', subscribers: gs.subscribers
         };
-        let gsh: GetSubscribersHtml = new GetSubscribersHtml(gsh_data);
+        const gsh: GetSubscribersHtml = new GetSubscribersHtml(gsh_data);
         emailSelection('nl_send_content');
     });
     
     form.addEventListener('submit',(e)=>{
         e.preventDefault();
         email_send_response.innerHTML = "";
-        let emails: string[] = checkedEmailsList('nl_send_content');
+        const emails: string[] = checkedEmailsList('nl_send_content');
         if(emails.length > 0){
             const data: NlFormDataSend = {
                 subject: (<HTMLTextAreaElement>document.getElementById('nl_subject')).value as string,
@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded',()=>{
             /* console.log("NlFormDataSend => ");
             console.log(data); */
             send_spinner.classList.remove("invisible");
-            let se: SendEmail = new SendEmail(data);
+            const se: SendEmail = new SendEmail(data);
             se.sendEmail().then(obj => {
                 send_spinner.classList.add("invisible");
                 if(obj[Constants.KEY_DONE] == true) email_send_response.style.color = 'green';

@@ -54,12 +54,12 @@ export class UnsubscribeUser{
                 throw err;
             })
         }catch(e){
-            this._errno = UnsubscribeUser.ERR_FETCH;
             if(e instanceof axios.AxiosError){
                 const stringError: string = e.response?.data;
                 response = JSON.parse(stringError);
             }
             else{
+                this._errno = UnsubscribeUser.ERR_FETCH;
                 response = {
                     done: false, msg: this.error
                 }
