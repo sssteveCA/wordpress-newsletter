@@ -240,17 +240,22 @@ HTML;
         $params = Properties::preUnsubscribeFormMessages($lang);
         return <<<HTML
 <form id="fUnsubscribe" method="get" action="{$script_path}?unsubscCode={$unsubsc_code}">
+    <input type="hidden" name="lang" value="{$lang}">
+    <input type="hidden" name="unsubsc_code" value="{$unsubsc_code}">
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-12 col-md-10 col-lg-8 h4 text-center">{$params['message']}</div>
         </div>
         <div class="row justify-content-center mt-5">
-            <div class="col-12 text-center">
+            <div class="col-12 d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary btn-lg">{$params['confirm']}</button>
+                <div id="nl_spinner" class="spinner-border text-dark invisible ms-1" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </div>
         <div class="row justify-content-center mt-5">
-            <div id="form-message" class="col-12 col-md-10 col-lg-8 text-center"></div>
+            <div id="nl_unsubscribe_user_response" class="col-12 text-center fw-bold fs-4"></div>
         </div>
         
     </div>
