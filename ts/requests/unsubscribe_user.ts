@@ -1,6 +1,7 @@
 import { NlUnsubscribeUserData } from "../types/types";
 import { Languages } from "../enums/enums";
 import { Constants } from "../namespaces/constants";
+import { Messages } from "../namespaces/messages";
 
 export class UnsubscribeUser{
 
@@ -11,7 +12,7 @@ export class UnsubscribeUser{
 
     public static ERR_FETCH: number = 1;
 
-    private static ERR_FETCH_MSG: string = "Errore durante la disiscrizione. Se il problema persiste contattare l'amministratore del sito.";
+    private static ERR_FETCH_MSG: string = Messages.ERR_UNSUBSCRIBE_USER;
 
     private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/subscribe/delete_user.php";
 
