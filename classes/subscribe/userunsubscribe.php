@@ -67,7 +67,7 @@ class UserUnsubscribe implements Uue{
         }
         $sql = "WHERE `".User::$fields["unsubscCode"]."` = %s";
         $values = [$this->user->getUnsubscCode()];
-        //$this->user->deleteUser($sql,$values);
+        $this->user->deleteUser($sql,$values);
         if($this->user->getErrno() != 0){
             $this->errno = Uue::FROM_USER;
             return false;

@@ -18,7 +18,7 @@ export class UnsubscribeUser{
 
     private static ERR_FETCH_MSG: string = Messages.ERR_UNSUBSCRIBE_USER;
 
-    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/subscribe/delete_user.php";
+    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/subscribe/unsubscribe.php";
 
     constructor(data: NlUnsubscribeUserData){
         if(data.lang)
@@ -48,7 +48,7 @@ export class UnsubscribeUser{
         this._errno = 0;
         try{
             await this.unsubscribePromise().then(res => {
-                console.log(res);
+                //console.log(res);
                 response = JSON.parse(res);
             }).catch(err => {
                 throw err;
@@ -56,20 +56,19 @@ export class UnsubscribeUser{
         }catch(e){
             if(e instanceof axios.AxiosError){
                 const stringError: string = e.response?.data;
+                //console.log(stringError);
                 response = JSON.parse(stringError);
             }
             else{
                 this._errno = UnsubscribeUser.ERR_FETCH;
-                response = {
-                    done: false, msg: this.error
-                }
+                response = { done: false, msg: this.error }
             }        
         }
         return response;
     }
 
     private async unsubscribePromise(): Promise<string>{
-        let url = `${UnsubscribeUser.FETCH_URL}?unsubscCode=${this._unsubscribe_code}&ajax=1`
+        let url = `${UnsubscribeUser.FETCH_URL}?lang=${this._lang}&unsubscCode=${this._unsubscribe_code}&ajax=1`
         return await new Promise<string>((resolve,reject)=>{
             clientGet.get(url).then(res => {
                 resolve(res.data)

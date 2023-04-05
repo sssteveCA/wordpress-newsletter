@@ -253,7 +253,7 @@ HTML;
             <div class="col-12 col-md-10 col-lg-8 h4 text-center">{$params['message']}</div>
         </div>
         <div class="row justify-content-center mt-5">
-            <div class="col-12 d-flex justify-content-center">
+            <div class="col-12 d-flex justify-content-center align-items-center">
                 <button type="submit" class="btn btn-primary btn-lg">{$params['confirm']}</button>
                 <div id="nl_spinner" class="spinner-border text-dark invisible ms-1" role="status">
                     <span class="visually-hidden">Loading...</span>
