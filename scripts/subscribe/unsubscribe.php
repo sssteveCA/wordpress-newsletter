@@ -16,6 +16,7 @@ require_once("../../traits/errortrait.php");
 require_once("../../traits/properties/messages/newusertrait.php");
 require_once("../../traits/properties/messages/othertrait.php");
 require_once("../../traits/properties/messages/verifytrait.php");
+require_once("../../traits/properties/messages/preunsubscribetrait.php");
 require_once("../../traits/properties/messages/unsubscribetrait.php");
 require_once("../../traits/properties/propertiesmessagestrait.php");
 require_once("../../traits/properties/propertiesurltrait.php");
@@ -95,13 +96,29 @@ else{
     $message = Properties::missingFormValues($lang);
 }
 
-$body = <<<HTML
+if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
+    if(http_response_code() == 200)
+        $response = [ C::KEY_DONE => true, C::KEY_MESSAGE => $message ];
+    else 
+        $response = [ C::KEY_DONE => true, C::KEY_MESSAGE => $message ];
+    echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+}//if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
+else{
+    $style = <<<HTML
+div{
+    padding-top: 20px; 
+    text-align: center; 
+    font-size: 20px; 
+    font-weight: bold;
+}
+HTML;
+    $body = <<<HTML
 <div>{$message}</div>
 HTML;
+    $html = HtmlCode::genericHtml($title,$body,$style);
+    echo $html;
+}
 
-$html = HtmlCode::genericHtml($title,$body,$style);
-
-echo $html;
 
 function sendUserUnsubscribeNotify(array $params):int{
     $dotenv = Dotenv::createImmutable("../../");

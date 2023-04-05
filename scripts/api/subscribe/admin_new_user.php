@@ -11,6 +11,7 @@ require_once("../../../exceptions/incorrectvariableformatexception.php");
 require_once("../../../exceptions/mailnotsentexception.php");
 require_once("../../../traits/properties/messages/othertrait.php");
 require_once("../../../traits/properties/messages/newusertrait.php");
+require_once("../../../traits/properties/messages/preunsubscribetrait.php");
 require_once("../../../traits/properties/messages/unsubscribetrait.php");
 require_once("../../../traits/properties/messages/verifytrait.php");
 require_once("../../../traits/properties/propertiesmessagestrait.php");

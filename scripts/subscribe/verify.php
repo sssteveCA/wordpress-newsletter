@@ -10,6 +10,7 @@ require_once("../../exceptions/notsettedexception.php");
 require_once("../../traits/properties/messages/activationmailtrait.php");
 require_once("../../traits/properties/messages/newusertrait.php");
 require_once("../../traits/properties/messages/othertrait.php");
+require_once("../../traits/properties/messages/preunsubscribetrait.php");
 require_once("../../traits/properties/messages/unsubscribetrait.php");
 require_once("../../traits/properties/messages/verifytrait.php");
 require_once("../../traits/properties/propertiesurltrait.php");
@@ -90,9 +91,14 @@ else{
     $body = HtmlCode::wpSignupVerifyForm(basename(__FILE__),$params);
 }
 
-$html = HtmlCode::genericHtml($title,$body,$style,
-["../../node_modules/bootstrap/dist/css/bootstrap.min.css","../../css/wp/verify.css"],
-["../../node_modules/bootstrap/dist/js/bootstrap.min.js"]);
+$css_arr = [
+    ['href' => '../../node_modules/bootstrap/dist/css/bootstrap.min.css'],
+    ['href' => '../../css/wp/verify.css']
+];
+$js_arr = [
+    ["../../node_modules/bootstrap/dist/js/bootstrap.min.js"]
+];
+$html = HtmlCode::genericHtml($title,$body,$style,$css_arr,$js_arr);
 
 echo $html;
 
