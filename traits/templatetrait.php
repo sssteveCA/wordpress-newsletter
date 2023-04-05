@@ -27,7 +27,7 @@ trait TemplateTrait{
 O in alternativa fai click su <a href="{$verifyUrl}">questo link</a><br>
 E incolla questo codice: {$code}
 HTML,
-                "link" => "Per completare l'iscrizione alla newsletter fare click a <a href=\"{$link}\">questo link</a>",
+                "link" => "Per completare l'iscrizione alla newsletter fai click a <a href=\"{$link}\">questo link</a>",
                 "moreInfo" => "Per maggiori informazioni <a href=\"".$contactUrl."\">contattaci</a>",
                 "title" => "Iscrizione Newsletter"
             ];
