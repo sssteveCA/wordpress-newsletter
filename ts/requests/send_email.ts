@@ -18,7 +18,7 @@ export default class SendEmail{
 
     private static ERR_FETCH_MSG: string = "Errore durante l'invio della mail";
 
-    private static FETCH_URL: string = Constants.HOME_URL+Constants.PLUGIN_DIR+"/scripts/emailsending/sendmail.php";
+    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/emailsending/sendmail.php";
 
     constructor(data: NlFormDataSend){
         this.assignValues(data);

@@ -55,3 +55,8 @@ export type NlFormDataSend = {
     message: string;
     emails: string[];
 };
+
+export type NlUnsubscribeUserData = {
+    lang?: string;
+    unsubscribe_code: string;
+}

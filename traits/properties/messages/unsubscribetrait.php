@@ -56,5 +56,7 @@ trait UnsubscribeTrait{
             return "You have unsubscribed from the newsletter";
         }
     }
+
+    
 }
 ?>

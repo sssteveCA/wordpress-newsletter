@@ -6,6 +6,7 @@ use Newsletter\Enums\Langs;
 use Newsletter\Traits\Properties\Messages\ActivationMailTrait;
 use Newsletter\Traits\Properties\Messages\NewUserTrait;
 use Newsletter\Traits\Properties\Messages\OtherTrait;
+use Newsletter\Traits\Properties\Messages\PreUnsubscribeTrait;
 use Newsletter\Traits\Properties\Messages\UnsubscribeTrait;
 use Newsletter\Traits\Properties\Messages\VerifyTrait;
 
@@ -14,6 +15,6 @@ use Newsletter\Traits\Properties\Messages\VerifyTrait;
  */
 trait PropertiesMessagesTrait{
 
-    use /* ActivationMailTrait, */ NewUserTrait, OtherTrait, UnsubscribeTrait, VerifyTrait;
+    use /* ActivationMailTrait, */ NewUserTrait, OtherTrait, PreUnsubscribeTrait, UnsubscribeTrait, VerifyTrait;
 }
 ?>

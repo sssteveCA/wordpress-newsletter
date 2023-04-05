@@ -201,13 +201,19 @@ HTML;
     public static function genericHtml(string $title, string $body, string $styleTag = "",array $styles = [], array $scripts = []):string{
         $stylesS = "";
         $scriptsS = "";
-        if(!empty($styles)){
-            foreach($styles as $css)
-                $stylesS .= '<link rel="stylesheet" href="'.$css.'">';
+        $styles_map = array_map(function($style){
+            return '<link rel="stylesheet" href="'.$style['href'].'">';
+        },$styles);
+        $scripts_map = array_map(function($script){
+            if(isset($script['type'])) $type = 'type="'.$script['type'].'"';
+            else $type = "";
+            return '<script '.$type.' src="'.$script['src'].'"></script>';
+        },$scripts);
+        if(!empty($styles_map)){
+            foreach($styles_map as $style) $stylesS .= $style;
         }
-        if(!empty($scripts)){
-            foreach($scripts as $script)
-                $scriptsS .= '<script src="'.$script.'"></script>';
+        if(!empty($scripts_map)){
+            foreach($scripts_map as $script) $scriptsS .= $script;
         }
         $html = <<<HTML
 <!DOCTYPE html>
@@ -227,6 +233,40 @@ HTML;
 </html>
 HTML;
         return $html;
+    }
+
+    /**
+     * Get the pre unsubscribe form
+     * @param string $lang the user language
+     * @param string $script_path the unsubscribe script path
+     * @param string $unsusbc_code the unsubscribe code
+     * @return string the pre unsubscribe form 
+     */
+    public static function preUnsubscribeForm(string $lang, string $script_path, string $unsubsc_code): string{
+        $params = Properties::preUnsubscribeFormMessages($lang);
+        return <<<HTML
+<form id="fUnsubscribe" method="get" action="{$script_path}?unsubscCode={$unsubsc_code}">
+    <input type="hidden" name="lang" value="{$lang}">
+    <input type="hidden" name="unsubsc_code" value="{$unsubsc_code}">
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-md-10 col-lg-8 h4 text-center">{$params['message']}</div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn btn-primary btn-lg">{$params['confirm']}</button>
+                <div id="nl_spinner" class="spinner-border text-dark invisible ms-1" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div id="nl_unsubscribe_user_response" class="col-12 text-center fw-bold fs-4"></div>
+        </div>
+        
+    </div>
+</form> 
+HTML;
     }
 
     /**

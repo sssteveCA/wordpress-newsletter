@@ -4,8 +4,8 @@ import { NewUser } from "../requests/new_user.js";
 import {BsMdDialogData, NlFormData, NlFormDataElements} from "../types/types.js";
 
 window.addEventListener('DOMContentLoaded',()=>{
-    let form: HTMLFormElement = document.getElementById("nl_form") as HTMLFormElement;
-    let formEls: NlFormDataElements = htmlFormElements();
+    const form: HTMLFormElement = document.getElementById("nl_form") as HTMLFormElement;
+    const formEls: NlFormDataElements = htmlFormElements();
     if(form){
         form.addEventListener('submit', (e)=>{
             e.preventDefault();
@@ -17,14 +17,14 @@ window.addEventListener('DOMContentLoaded',()=>{
                 cb_terms: formEls.cb_terms.value as string,
                 lang: formEls.lang.value as string
             };
-            let spinner: HTMLElement = document.getElementById('nl_spinner') as HTMLElement;
+            const spinner: HTMLElement = document.getElementById('nl_spinner') as HTMLElement;
             spinner.classList.remove('invisible');
             /* console.log("nl_wp.ts NlFormData => ");
             console.log(data); */
-            let newUser: NewUser = new NewUser(data);
+            const newUser: NewUser = new NewUser(data);
             newUser.newUser().then(res => {
                 spinner.classList.add('invisible');
-                let md_data: BsMdDialogData = {
+                const md_data: BsMdDialogData = {
                     title: 'Iscrizione newsletter', message: res[Constants.KEY_MESSAGE]
                 };
                 messageDialog(md_data);
