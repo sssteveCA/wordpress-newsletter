@@ -41,8 +41,8 @@ trait PropertiesUrlTrait{
      * Get the facebook logo URL
      */
     public static function facebookLogoUrl(): string{
-        $home_url = Properties::homeUrl();
-        return $home_url."/wp-content/uploads/2018/11/1000px-F_icon.svg_-e1541173415423.png";
+        $plugin_dir = Properties::pluginsUrl();
+        return $plugin_dir."/assets/images/facebook_logo.png";
     }
 
     /**
@@ -61,8 +61,8 @@ trait PropertiesUrlTrait{
      * Get the instagram logo URL
      */
     public static function instagramLogoUrl(): string{
-        $home_url = Properties::homeUrl();
-        return $home_url."/wp-content/uploads/2018/11/instagram_logo-e1541173378259.png";
+        $plugin_dir = Properties::pluginsUrl();
+        return $plugin_dir."/assets/images/instagram_logo.png";
     }
 
     /**
@@ -127,8 +127,8 @@ trait PropertiesUrlTrait{
      * Get the YouTube logo URL
      */
     public static function youtubeLogoUrl(): string{
-        $home_url = Properties::homeUrl();
-        return $home_url."/wp-content/uploads/2018/11/youtube.jpg";
+        $plugin_dir = Properties::pluginsUrl();
+        return $plugin_dir."/assets/images/youtube_logo.png";
     }
 }
 ?>
