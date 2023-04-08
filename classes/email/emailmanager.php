@@ -32,6 +32,7 @@ class EmailManager extends PHPMailer{
     public const EMAIL_USER_UNSUBCRIBE = 3;
     public const EMAIL_USER_DELETE = 4;
     public const EMAIL_USER_ADD_ADMIN = 5;
+    public const EMAIL_NEW_SUBSCRIBER = 6;
 
     private string $email;
     private string $from;
@@ -78,9 +79,8 @@ class EmailManager extends PHPMailer{
                 $templateData = [
                     'verCode' => $data['verCode'], 'link' => $data['link'], 'verifyUrl' => $data['verifyUrl']
                 ];
-                $htmlBody = Template::activationMailTemplate($lang,$templateData);
                 $this->addAddress($this->email);
-                $this->body = $htmlBody;
+                $this->body = Template::activationMailTemplate($lang,$templateData);
                 $this->Body = $this->body;
                 $this->AltBody = $this->body;
                 $this->send();
@@ -102,11 +102,9 @@ class EmailManager extends PHPMailer{
             try{
                 $lang = $data['lang'];
                 $templateData = ['from' => $this->from ];
-                $htmlBody = Template::addUserAdminTemplate($lang, $templateData);
                 $this->addAddress($this->email);
-                $subject = Template::addUserAdminMessages($lang,$templateData)["title"];
-                $this->subject = $subject;
-                $this->body = $htmlBody;
+                $this->subject = Template::addUserAdminMessages($lang,$templateData)["title"];
+                $this->body = Template::addUserAdminTemplate($lang, $templateData);
                 $this->Subject = $this->subject;
                 $this->Body = $this->body;
                 $this->AltBody = $this->body;
@@ -120,7 +118,7 @@ class EmailManager extends PHPMailer{
     }
 
     /**
-     * Send an email to the used that was deleted from the newsletter by the admin
+     * Send an email to the users that was deleted from the newsletter by the admin
      */
     public function sendDeleteUserNotify(){
         $this->errno = 0;
@@ -135,10 +133,8 @@ class EmailManager extends PHPMailer{
                         $this->addAddress($email);
                         $lang = $user->getLang();
                         $templateData = ['from' => $this->from];
-                        $subject = Template::deleteUserMessages($lang,$templateData)["title"];
-                        $htmlBody = Template::deleteUserTemplate($lang,$templateData);
-                        $this->subject = $subject;
-                        $this->body = $htmlBody;
+                        $this->subject = Template::deleteUserMessages($lang,$templateData)["title"];
+                        $this->body = Template::deleteUserTemplate($lang,$templateData);
                         //echo "EmailManager sendUserDeleteNotify body => ".var_export($this->body,true)."\r\n";
                         $this->Subject = $this->subject;
                         $this->Body = $this->body;
@@ -203,15 +199,31 @@ CONTENT;
     }
 
     /**
+     * Receive a notification when a new user has subscribed to the newsletter
+     */
+    public function sendNewSubscriberNotify(){
+        $this->errno = 0;
+        try{
+            $this->addAddress($this->from);
+            $this->body = Template::newSubscriberTemplate($this->email);
+            $this->Body = $this->body;
+            $this->AltBody = "L'utente con email {$this->email} si è iscritto alla newsletter";
+            $this->send();
+        }
+        catch(Exception $e){
+            $this->errno = Eme::ERR_EMAIL_SEND;
+        }
+    }
+
+    /**
      * Receive a notification on your email address when an user unsubscribe from your newsletter
      */
     public function sendUserUnsubscribeNotify(){
         $this->errno = 0;
         try{
-            $htmlBody = Template::unsubscribedUserTemplate($this->email);
             //echo "EmailManager sendUserUnsubscribeNotify htmlBody => ".var_export($htmlBody,true)."\r\n";
             $this->addAddress($this->from);
-            $this->body = $htmlBody;
+            $this->body = Template::unsubscribedUserTemplate($this->email);
             $this->Body = $this->body;
             $this->AltBody = "L'utente con email {$this->email} si è cancellato dalla newsletter";
             $this->send();
