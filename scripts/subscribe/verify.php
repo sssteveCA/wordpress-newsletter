@@ -1,4 +1,5 @@
 <?php
+use Newsletter\Classes\Email\EmailManager;
 
 require_once("../../../../../wp-load.php");
 require_once("../../enums/languages.php");
@@ -20,14 +21,20 @@ require_once("../../traits/modeltrait.php");
 require_once("../../traits/sqltrait.php");
 require_once("../../traits/usertrait.php");
 require_once("../../traits/usercommontrait.php");
+require_once("../../traits/emailmanagertrait.php");
+require_once("../../traits/templatetrait.php");
+require_once("../../vendor/autoload.php");
 require_once("../../classes/general.php");
 require_once("../../classes/properties.php");
 require_once("../../classes/htmlcode.php");
+require_once("../../classes/template.php");
 require_once("../../classes/database/tables/table.php");
 require_once("../../classes/database/model.php");
 require_once("../../classes/database/models/user.php");
+require_once("../../classes/email/emailmanager.php");
 require_once("../../classes/subscribe/verifyemail.php");
 
+use Dotenv\Dotenv;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 use Newsletter\Classes\Subscribe\VerifyEmailErrors as Vee;
@@ -101,5 +108,24 @@ $js_arr = [
 $html = HtmlCode::genericHtml($title,$body,$style,$css_arr,$js_arr);
 
 echo $html;
+
+/**
+ * Send the mail notify to the admin when a new user signs up to the newsletter
+ */
+function sendNewSubscriberNotify(array $params){
+    $dotenv = Dotenv::createImmutable("../../");
+    $dotenv->safeLoad();
+    $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
+    $fromNickname = isset($params['fromNickname']) ? $params['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
+    $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
+    $password = isset($params['password']) ? $params['password'] : $_ENV['EMAIL_PASSWORD'];
+    $port = isset($params['port']) ? $params['port'] : $_ENV['EMAIL_PORT'];
+    $emData = [
+        'from' => $from, 'email' => $params['email'], 'fromNickname' => $fromNickname,
+        'host' => $host, 'operation' => $params['operation'],
+        'password' => $password, 'port' => $port, 'subject' => $params['subject']
+    ];
+    $emailManager = new EmailManager($emData);
+}
 
 ?>
