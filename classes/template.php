@@ -5,6 +5,7 @@ namespace Newsletter\Classes;
 use Newsletter\Enums\Langs;
 use Newsletter\Classes\Properties;
 use Newsletter\Traits\TemplateTrait;
+use Newsletter\Interfaces\Constants as C;
 
 class Template{
 
@@ -86,11 +87,14 @@ HTML;
      */
     public static function mailTemplate(string $lang, array $params): string{
         $facebookLogo = Properties::facebookLogoUrl();
+        //file_put_contents(C::FILE_LOG,"Template mail template facebook logo => {$facebookLogo}\r\n",FILE_APPEND);
         $facebookPage = Properties::facebookPageUrl();
         $instagramLogo = Properties::instagramLogoUrl();
+        //file_put_contents(C::FILE_LOG,"Template mail template instagram logo => {$instagramLogo}\r\n",FILE_APPEND);
         $instagramProfile = Properties::instagramProfileUrl();
         $youtubeChannel = Properties::youtubeChannelUrl();
         $youtubeLogo = Properties::youtubeLogoUrl();
+        //file_put_contents(C::FILE_LOG,"Template mail template youtube logo => {$youtubeLogo}\r\n",FILE_APPEND);
         $messages = Template::mailTemplateMessages($lang,$params);
         $htmlTemplate = <<<HTML
 <!DOCTYPE html>
