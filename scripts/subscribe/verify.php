@@ -77,6 +77,12 @@ if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
         switch($verifyemailE){
             case 0:
                 $message = Properties::subscribeCompleted($lang);
+                $emData = [
+                    'email' => $verifyemail->getVerifiedUser()->getEmail(),
+                    'operation' => EmailManager::EMAIL_NEW_SUBSCRIBER,
+                    'subject' => 'Nuovo iscritto alla newsletter'
+                ];
+                sendNewSubscriberNotify($emData);
                 break;
             case Vee::FROM_USER_NOT_FOUND:
                 http_response_code(400);
@@ -110,7 +116,7 @@ $html = HtmlCode::genericHtml($title,$body,$style,$css_arr,$js_arr);
 echo $html;
 
 /**
- * Send the mail notify to the admin when a new user signs up to the newsletter
+ * Send the mail to the admin when a new user signs up to the newsletter
  */
 function sendNewSubscriberNotify(array $params){
     $dotenv = Dotenv::createImmutable("../../");
@@ -126,6 +132,7 @@ function sendNewSubscriberNotify(array $params){
         'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
     $emailManager = new EmailManager($emData);
+    $emailManager->sendNewSubscriberNotify();
 }
 
 ?>
