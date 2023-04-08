@@ -35,7 +35,7 @@ HTML;
     }
 
     /**
-     * Temkplate mail sent when a uyser is added by the admin
+     * Mail sent when a user is added by admin
      */
     public static function addUserAdminTemplate(string $lang, array $params): string{
         $messages = Template::addUserAdminMessages($lang,$params);
@@ -59,7 +59,7 @@ HTML;
     }
 
     /**
-     * Template mail sent to the user when is removed from the administrator
+     * Mail sent to the user when is removed from the administrator
      */
     public static function deleteUserTemplate(string $lang, array $params): string{
         $messages = Template::deleteUserMessages($lang,$params);
@@ -160,6 +160,24 @@ HTML;
 </html>
 HTML;
         return $htmlTemplate;
+    }
+
+    /**
+     * Mail sent to the admin when a new user has subscribed to the newsletter
+     */
+    public static function newSubscriberTemplate(string $email): string{
+        return <<<HTML
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>Nuovo iscritto alla newsletter</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div style="padding: 40px 20px; text-align: center;">Un utente con email {$email} si è iscritto alla newsletter</div>
+    </body>
+</html>
+HTML;
     }
 
     /**
