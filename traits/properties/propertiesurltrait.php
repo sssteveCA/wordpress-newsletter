@@ -41,8 +41,7 @@ trait PropertiesUrlTrait{
      * Get the facebook logo URL
      */
     public static function facebookLogoUrl(): string{
-        $plugin_dir = Properties::pluginsUrl();
-        return $plugin_dir."/assets/images/facebook_logo.png";
+        return Properties::pluginUrl()."assets/images/facebook_logo.png";
     }
 
     /**
@@ -61,8 +60,7 @@ trait PropertiesUrlTrait{
      * Get the instagram logo URL
      */
     public static function instagramLogoUrl(): string{
-        $plugin_dir = Properties::pluginsUrl();
-        return $plugin_dir."/assets/images/instagram_logo.png";
+        return Properties::pluginUrl()."assets/images/instagram_logo.png";
     }
 
     /**
@@ -90,7 +88,9 @@ trait PropertiesUrlTrait{
     /**
      * Get the current plugin home URL 
      */
-    public static function pluginUrl(string $plugin):string {return plugin_dir_url($plugin);}
+    public static function pluginUrl():string {
+        return plugin_dir_url("newsletter/newsletter.php");
+    }
 
     /**
      * Get the terms and conditions document URL
@@ -106,14 +106,14 @@ trait PropertiesUrlTrait{
      * Get the unsubscribe script URL
      */
     public static function unsubscribeUrl(): string{
-        return Properties::pluginUrl("newsletter/newsletter.php")."scripts/subscribe/preunsubscribe.php";
+        return Properties::pluginUrl()."scripts/subscribe/preunsubscribe.php";
     }
 
     /**
      * Get the account verify URL
      */
     public static function verifyUrl(): string{
-        return Properties::pluginUrl("newsletter/newsletter.php")."scripts/subscribe/verify.php";
+        return Properties::pluginUrl()."scripts/subscribe/verify.php";
     }
 
     /**
@@ -127,8 +127,7 @@ trait PropertiesUrlTrait{
      * Get the YouTube logo URL
      */
     public static function youtubeLogoUrl(): string{
-        $plugin_dir = Properties::pluginsUrl();
-        return $plugin_dir."/assets/images/youtube_logo.png";
+        return Properties::pluginUrl()."assets/images/youtube_logo.jpg";
     }
 }
 ?>
