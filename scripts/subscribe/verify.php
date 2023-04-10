@@ -106,7 +106,7 @@ else{
 
 $css_arr = [
     ['href' => '../../node_modules/bootstrap/dist/css/bootstrap.min.css'],
-    ['href' => '../../css/wp/verify.css']
+    ['href' => '../../dist/css/wp/verify.css']
 ];
 $js_arr = [
     ["../../node_modules/bootstrap/dist/js/bootstrap.min.js"]

@@ -1,8 +1,6 @@
 # WordPress newsletter
 <div>This is a plugin for WordPress sites that allows you to send newsletters to subscribers</div>
 <br>
-<div>This plugin requires <a href="https://getbootstrap.com/docs/5.0/getting-started/download/">Bootstrap v5.2</a> to work properly. You can enqueue the needed files from the node_modules/bootstrap/dist directory, if they aren't already on your site.</div>
-<br>
 <div>To send the email it's used <a href="https://github.com/PHPMailer/PHPMailer">PHPMailer library</a> with SMTP authentication</div>
 <div>
   <h2>Features</h2>
