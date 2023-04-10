@@ -113,6 +113,16 @@ use Newsletter\Enums\Langs;
 add_action('wp_enqueue_scripts','nl_libraries');
 function nl_libraries(){
    wp_enqueue_script(C::H_JS_AXIOS_LIB);
+   //If there is a Bootstrap CSS file already enqueued, remove it
+   if(wp_style_is('BootstrapCss')){
+      wp_dequeue_style('BootstrapCss');
+   }
+   //If there is a Bootstrap JS file already enqueued, remove it
+   if(wp_script_is('BootstrapJs')){
+      wp_dequeue_script('BootstrapJs');
+   }
+   wp_enqueue_style(C::H_CSS_BOOTSTRAP);
+   wp_enqueue_script(C::H_JS_BOOTSTRAP);
 }
 
  add_action('wp_enqueue_scripts','nl_scripts',11);
@@ -141,10 +151,10 @@ function nl_after_load(){
    wp_register_script(C::H_JS_AXIOS_LIB,$axiosJs,[],null);
 
    //Register this files if you don't have Bootstrap in your Wordpress site 
-   /* $bootstrapCss = $plugin_dir.C::REL_CSS_BOOTSTRAP;
+   $bootstrapCss = $plugin_dir.C::REL_CSS_BOOTSTRAP;
    $bootstrapJs = $plugin_dir.C::REL_JS_BOOTSTRAP;
    wp_register_style(C::H_CSS_BOOTSTRAP,$bootstrapCss,[],null);
-   wp_register_script(C::H_JS_BOOTSTRAP,$bootstrapJs,[],null); */
+   wp_register_script(C::H_JS_BOOTSTRAP,$bootstrapJs,[],null);
 
    if(is_admin()){
       $adminCssAdd = $plugin_dir.C::REL_CSS_ADMIN_ADD;
