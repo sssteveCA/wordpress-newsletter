@@ -29,7 +29,7 @@ $arr_data = [
     'scripts' => [
         /* [ 'src' => '../../node_modules/axios/dist/axios.min.js' ], */
         [ 'src' => '../../node_modules/bootstrap/dist/js/bootstrap.min.js' ],
-        [ 'src' => '../../js/scripts/preunsubscribe.js', 'type' => 'module' ]  
+        [ 'src' => '../../dist/js/scripts/preunsubscribe.js', 'type' => 'module' ]  
     ]
 ];
 

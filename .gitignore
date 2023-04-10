@@ -1,10 +1,7 @@
-*.css
 .env
-*.js
-!webpack.config.js
 *.txt
 dist
 node_modules
 vendor
 *.map
-ts/namespaces/constants.ts
+src/ts/namespaces/constants.ts
