@@ -110,15 +110,17 @@ use Newsletter\Enums\Langs;
 
  }
 
-add_action('wp_enqueue_scripts','nl_libraries');
+add_action('wp_enqueue_scripts','nl_libraries',11);
 function nl_libraries(){
    //wp_enqueue_script(C::H_JS_AXIOS_LIB);
-   //If there is a Bootstrap CSS file already enqueued, remove it
+   //If there is a Bootstrap CSS file already enqueued, don't load
    if(wp_style_is('BootstrapCss')){
+      wp_deregister_style('BootstrapCss');
       wp_dequeue_style('BootstrapCss');
    }
-   //If there is a Bootstrap JS file already enqueued, remove it
+   //If there is a Bootstrap JS file already enqueued, don't load
    if(wp_script_is('BootstrapJs')){
+      wp_deregister_script('BootstrapJs');
       wp_dequeue_script('BootstrapJs');
    }
    wp_enqueue_style(C::H_CSS_BOOTSTRAP);
