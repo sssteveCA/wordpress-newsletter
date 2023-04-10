@@ -1,6 +1,7 @@
 *.css
 .env
 *.js
+!webpack.config.js
 *.txt
 dist
 node_modules
