@@ -2,6 +2,7 @@
 .env
 *.js
 *.txt
+dist
 node_modules
 vendor
 *.map
