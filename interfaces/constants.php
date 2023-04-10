@@ -25,19 +25,23 @@ interface Constants{
     const KEY_DONE = 'done';
     const KEY_EMPTY = 'empty';
     const KEY_MESSAGE = 'msg';
+
+    //Dir paths
+    const REL_DIST_CSS = 'dist/css/';
+    const REL_DIST_JS = 'dist/js/';
     
-    //Paths
-    const REL_CSS_ADMIN_ADD = 'css/admin/nl_admin_add.css';
-    const REL_CSS_ADMIN_DELETE = 'css/admin/nl_admin_delete.css';
-    const REL_CSS_ADMIN_SEND = 'css/admin/nl_admin_send.css';
+    //File paths
+    const REL_CSS_ADMIN_ADD = Constants::REL_DIST_CSS.'admin/nl_admin_add.css';
+    const REL_CSS_ADMIN_DELETE = Constants::REL_DIST_CSS.'admin/nl_admin_delete.css';
+    const REL_CSS_ADMIN_SEND = Constants::REL_DIST_CSS.'admin/nl_admin_send.css';
     const REL_CSS_BOOTSTRAP = 'node_modules/bootstrap/dist/css/bootstrap.min.css';
-    const REL_CSS_WP = 'css/wp/nl_wp.css';
-    const REL_JS_ADMIN_ADD = 'js/admin/nl_admin_add.js';
-    const REL_JS_ADMIN_DELETE = 'js/admin/nl_admin_delete.js';
-    const REL_JS_ADMIN_SEND = 'js/admin/nl_admin_send.js';
+    const REL_CSS_WP = Constants::REL_DIST_CSS.'wp/nl_wp.css';
+    const REL_JS_ADMIN_ADD = Constants::REL_DIST_JS.'admin/nl_admin_add.js';
+    const REL_JS_ADMIN_DELETE = Constants::REL_DIST_JS.'admin/nl_admin_delete.js';
+    const REL_JS_ADMIN_SEND = Constants::REL_DIST_JS.'admin/nl_admin_send.js';
     const REL_JS_AXIOS_LIB = 'node_modules/axios/dist/axios.min.js';
     const REL_JS_BOOTSTRAP = 'node_modules/bootstrap/dist/js/bootstrap.min.js';
-    const REL_JS_WP = 'js/wp/nl_wp.js';
+    const REL_JS_WP = Constants::REL_DIST_JS.'wp/nl_wp.js';
     const TABLE_USERS = "newsletter_users";
 
     //Slugs
