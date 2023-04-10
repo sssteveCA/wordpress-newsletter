@@ -1,8 +1,8 @@
-import { checkedEmailsList, emailSelection } from "../general/admincommon.js";
-import { GetSubscribersHtml, GetSubscribersHtmlInterface } from "../html/getsubscribershtml.js";
-import { Constants } from "../namespaces/constants.js";
-import DeleteUsers from "../requests/delete_users.js";
-import GetSubscribers from "../requests/get_subscribers.js";
+import { checkedEmailsList, emailSelection } from "../general/admincommon";
+import { GetSubscribersHtml, GetSubscribersHtmlInterface } from "../html/getsubscribershtml";
+import { Constants } from "../namespaces/constants";
+import DeleteUsers from "../requests/delete_users";
+import GetSubscribers from "../requests/get_subscribers";
 import { NlFormDataDelete } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{

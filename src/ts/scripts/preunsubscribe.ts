@@ -1,6 +1,6 @@
-import { Constants } from "../namespaces/constants.js";
-import { UnsubscribeUser } from "../requests/unsubscribe_user.js";
-import { NlUnsubscribeUserData } from "../types/types.js";
+import { Constants } from "../namespaces/constants";
+import { UnsubscribeUser } from "../requests/unsubscribe_user";
+import { NlUnsubscribeUserData } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
     const spinner = document.getElementById('nl_spinner') as HTMLDivElement;
