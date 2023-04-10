@@ -1,6 +1,6 @@
-import { GetSubscriber } from "../types/types.js";
-import { Constants } from "../namespaces/constants.js";
-import { clientGet } from "../config/axios_instances.js";
+import { GetSubscriber } from "../types/types";
+import { Constants } from "../namespaces/constants";
+import { clientGet } from "../config/axios_instances";
 
 
 /**

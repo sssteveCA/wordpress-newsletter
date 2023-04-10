@@ -1,8 +1,7 @@
-//import axios from '../../node_modules/axios/index.js';
-import { AxiosStatic } from '../../node_modules/axios/index.js';
-import { Constants } from '../namespaces/constants.js';
-//import axios from '../../node_modules/axios/index.js';
-declare const axios: AxiosStatic;
+//import axios from '../../node_modules/axios/index';
+import axios from 'axios';
+import { Constants } from '../namespaces/constants';
+//import axios from '../../node_modules/axios/index';
 
 export const clientGet = axios.create({
     baseURL: Constants.HOME_URL,

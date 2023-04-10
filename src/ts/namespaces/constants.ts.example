@@ -1,5 +1,5 @@
 
-/** Place your values in a file called constants.ts */
+/* Place your values in a file called constants.ts */
 export namespace Constants{
     export const HOME_URL:string = ""; //Your Wordpress site base URL
     export const PLUGIN_DIR: string = "/wp-content/plugins/newsletter"; 

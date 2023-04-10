@@ -1,5 +1,5 @@
 
-import { BsMdDialogData } from "../types/types.js";
+import { BsMdDialogData } from "../types/types";
 
 declare const bootstrap: any;
 

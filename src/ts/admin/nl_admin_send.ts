@@ -1,9 +1,9 @@
-import { checkedEmailsList, emailSelection } from "../general/admincommon.js";
-import { GetSubscribersHtml, GetSubscribersHtmlInterface } from "../html/getsubscribershtml.js";
-import { Constants } from "../namespaces/constants.js";
-import GetSubscribers from "../requests/get_subscribers.js";
-import SendEmail from "../requests/send_email.js";
-import { NlFormDataSend } from "../types/types.js";
+import { checkedEmailsList, emailSelection } from "../general/admincommon";
+import { GetSubscribersHtml, GetSubscribersHtmlInterface } from "../html/getsubscribershtml";
+import { Constants } from "../namespaces/constants";
+import GetSubscribers from "../requests/get_subscribers";
+import SendEmail from "../requests/send_email";
+import { NlFormDataSend } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
     const form: HTMLFormElement = document.getElementById('nl_form_send') as HTMLFormElement;

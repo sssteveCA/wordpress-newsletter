@@ -1,9 +1,7 @@
-import { AxiosStatic } from "../../node_modules/axios/index.js";
-import { clientPost } from "../config/axios_instances.js";
-import { Constants } from "../namespaces/constants.js";
-import { NlFormDataSend } from "../types/types.js";
-
-declare const axios: AxiosStatic;
+import axios from 'axios';
+import { clientPost } from "../config/axios_instances";
+import { Constants } from "../namespaces/constants";
+import { NlFormDataSend } from "../types/types";
 
 
 export default class SendEmail{

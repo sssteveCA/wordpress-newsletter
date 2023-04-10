@@ -100,7 +100,7 @@ if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
     if(http_response_code() == 200)
         $response = [ C::KEY_DONE => true, C::KEY_MESSAGE => $message ];
     else 
-        $response = [ C::KEY_DONE => true, C::KEY_MESSAGE => $message ];
+        $response = [ C::KEY_DONE => false, C::KEY_MESSAGE => $message ];
     echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 }//if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
 else{

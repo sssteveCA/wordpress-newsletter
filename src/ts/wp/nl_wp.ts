@@ -1,7 +1,7 @@
-import { messageDialog } from "../general/functions.js";
-import { Constants } from "../namespaces/constants.js";
-import { NewUser } from "../requests/new_user.js";
-import {BsMdDialogData, NlFormData, NlFormDataElements} from "../types/types.js";
+import { messageDialog } from "../general/functions";
+import { Constants } from "../namespaces/constants";
+import { NewUser } from "../requests/new_user";
+import {BsMdDialogData, NlFormData, NlFormDataElements} from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
     const form: HTMLFormElement = document.getElementById("nl_form") as HTMLFormElement;

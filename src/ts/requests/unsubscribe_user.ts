@@ -1,11 +1,9 @@
-import { NlUnsubscribeUserData } from "../types/types.js";
-import { Languages } from "../enums/enums.js";
-import { Constants } from "../namespaces/constants.js";
-import { Messages } from "../namespaces/messages.js";
-import { clientGet } from "../config/axios_instances.js";
-import { AxiosStatic } from "../../node_modules/axios/index.js";
-
-declare const axios: AxiosStatic;
+import axios from 'axios';
+import { NlUnsubscribeUserData } from "../types/types";
+import { Languages } from "../enums/enums";
+import { Constants } from "../namespaces/constants";
+import { Messages } from "../namespaces/messages";
+import { clientGet } from "../config/axios_instances";
 
 export class UnsubscribeUser{
 

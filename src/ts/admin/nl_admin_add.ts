@@ -1,5 +1,5 @@
-import { Constants } from "../namespaces/constants.js";
-import { AddUserAdmin } from "../requests/add_user_admin.js";
+import { Constants } from "../namespaces/constants";
+import { AddUserAdmin } from "../requests/add_user_admin";
 import { NlFormDataAdd } from "../types/types";
 
 window.addEventListener('DOMContentLoaded', ()=>{
