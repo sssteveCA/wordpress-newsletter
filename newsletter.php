@@ -112,7 +112,7 @@ use Newsletter\Enums\Langs;
 
 add_action('wp_enqueue_scripts','nl_libraries');
 function nl_libraries(){
-   wp_enqueue_script(C::H_JS_AXIOS_LIB);
+   //wp_enqueue_script(C::H_JS_AXIOS_LIB);
    //If there is a Bootstrap CSS file already enqueued, remove it
    if(wp_style_is('BootstrapCss')){
       wp_dequeue_style('BootstrapCss');
@@ -147,8 +147,8 @@ function nl_form_signup(){
 add_action('wp_loaded','nl_after_load');
 function nl_after_load(){
    $plugin_dir = Properties::pluginUrl();
-   $axiosJs = $plugin_dir.C::REL_JS_AXIOS_LIB;
-   wp_register_script(C::H_JS_AXIOS_LIB,$axiosJs,[],null);
+   /* $axiosJs = $plugin_dir.C::REL_JS_AXIOS_LIB;
+   wp_register_script(C::H_JS_AXIOS_LIB,$axiosJs,[],null); */
 
    //Register this files if you don't have Bootstrap in your Wordpress site 
    $bootstrapCss = $plugin_dir.C::REL_CSS_BOOTSTRAP;

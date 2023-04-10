@@ -39,7 +39,7 @@ interface Constants{
     const REL_JS_ADMIN_ADD = Constants::REL_DIST_JS.'admin/nl_admin_add.js';
     const REL_JS_ADMIN_DELETE = Constants::REL_DIST_JS.'admin/nl_admin_delete.js';
     const REL_JS_ADMIN_SEND = Constants::REL_DIST_JS.'admin/nl_admin_send.js';
-    const REL_JS_AXIOS_LIB = 'node_modules/axios/dist/axios.min.js';
+    //const REL_JS_AXIOS_LIB = 'node_modules/axios/dist/axios.min.js';
     const REL_JS_BOOTSTRAP = 'node_modules/bootstrap/dist/js/bootstrap.min.js';
     const REL_JS_WP = Constants::REL_DIST_JS.'wp/nl_wp.js';
     const TABLE_USERS = "newsletter_users";
