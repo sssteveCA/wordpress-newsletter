@@ -15,6 +15,7 @@ interface Constants{
     const H_CSS_ADMIN_FORM_SEND = 'nlAdminCssSend';
     const H_JS_ADMIN_FORM_SEND = 'nlAdminJsSend';
     const H_CSS_ADMIN_FORM_SETTINGS = 'nlAdminCssSettings';
+    const H_JS_ADMIN_FORM_SETTINGS = 'nlAdminJsSettings';
     const H_JS_AXIOS_LIB = 'nlAxiosLib';
     const H_CSS_BOOTSTRAP = 'nlBootstrapCss';
     const H_JS_BOOTSTRAP = 'nlBootstrapJs';
@@ -41,6 +42,7 @@ interface Constants{
     const REL_JS_ADMIN_ADD = Constants::REL_DIST_JS.'admin/nl_admin_add.js';
     const REL_JS_ADMIN_DELETE = Constants::REL_DIST_JS.'admin/nl_admin_delete.js';
     const REL_JS_ADMIN_SEND = Constants::REL_DIST_JS.'admin/nl_admin_send.js';
+    const REL_JS_ADMIN_SETTINGS = Constants::REL_DIST_JS.'admin/nl_admin_settings.js';
     //const REL_JS_AXIOS_LIB = 'node_modules/axios/dist/axios.min.js';
     const REL_JS_BOOTSTRAP = 'node_modules/bootstrap/dist/js/bootstrap.min.js';
     const REL_JS_WP = Constants::REL_DIST_JS.'wp/nl_wp.js';

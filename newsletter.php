@@ -79,6 +79,7 @@ use Newsletter\Enums\Langs;
       }
       else if($page == C::SLUG_ADMIN_FORM_SETTINGS){
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_SETTINGS);
+         wp_enqueue_script(C::H_JS_ADMIN_FORM_SETTINGS);
       }
    }//if(isset($_REQUEST['page'])){   
  }
@@ -185,7 +186,9 @@ function nl_after_load(){
          }
          else if($page == C::SLUG_ADMIN_FORM_SETTINGS){
             $adminCssSettings = $plugin_dir.C::REL_CSS_ADMIN_SETTINGS;
+            $adminJsSettings = $plugin_dir.C::REL_JS_ADMIN_SETTINGS;
             wp_register_style(C::H_CSS_ADMIN_FORM_SETTINGS,$adminCssSettings,[],null);
+            wp_register_script(C::H_JS_ADMIN_FORM_SETTINGS,$adminJsSettings,[],null,true);
          }
       }//if(isset($_REQUEST['page'])){
    }//if(is_admin()){
@@ -214,6 +217,7 @@ function nl_add_script_tags($tag, $handle, $src){
       case C::H_JS_ADMIN_FORM_ADD:
       case C::H_JS_ADMIN_FORM_DELETE:
       case C::H_JS_ADMIN_FORM_SEND:
+      case C::H_JS_ADMIN_FORM_SETTINGS:
          $tag = '<script type="module" src="'.esc_url($src).'"></script>';
          break;
       default:
