@@ -262,6 +262,35 @@ HTML;
             </div>
         <div>
     </div>
+    <div class="container mt-5 d-none">
+        <div class="row mt-5">
+            <h5>Pagine Privacy Policy</h5>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_privacy_policy_it" class="form-label">Pagina italiana</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_privacy_policy_it">
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_privacy_policy_es" class="form-label">Pagina spagnola</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_privacy_policy_es">
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_privacy_policy_en" class="form-label">Pagina inglese</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_privacy_policy_en">
+            </div>
+        <div>
+    </div>
 </form>
 HTML;
     }
