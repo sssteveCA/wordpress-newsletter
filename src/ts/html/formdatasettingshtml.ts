@@ -45,8 +45,11 @@ export default class FormDataSettingsHtml{
         this._cb_pages_enabled.contacts_pages.addEventListener('change',()=>{
             if(this._cb_pages_enabled.contacts_pages.checked){
                 if(this._cb_langs.lang_it.checked) this._input_contacts_pages.lang_it.disabled = false;
+                else this._input_contacts_pages.lang_it.disabled = true;
                 if(this._cb_langs.lang_es.checked) this._input_contacts_pages.lang_es.disabled = false;
+                else this._input_contacts_pages.lang_es.disabled = true;
                 if(this._cb_langs.lang_en.checked) this._input_contacts_pages.lang_en.disabled = false;
+                else this._input_contacts_pages.lang_en.disabled = true;
             }
             else{
                 const input_contacts_pages: NodeListOf<HTMLInputElement> = this._container_contacts_pages.querySelectorAll('input[type="text"]') as NodeListOf<HTMLInputElement>;
@@ -70,6 +73,7 @@ export default class FormDataSettingsHtml{
                 else{
                     cbs_pages_enaled.forEach(cb_page_enable => cb_page_enable.disabled = true)
                 }
+                this.triggerOnCbLangChange();
             })
         })
         
@@ -82,8 +86,11 @@ export default class FormDataSettingsHtml{
         this._cb_pages_enabled.privacy_policy_pages.addEventListener('change',()=>{
             if(this._cb_pages_enabled.privacy_policy_pages.checked){
                 if(this._cb_langs.lang_it.checked) this._input_privacy_policy_pages.lang_it.disabled = false;
+                else this._input_privacy_policy_pages.lang_it.disabled = true;
                 if(this._cb_langs.lang_es.checked) this._input_privacy_policy_pages.lang_es.disabled = false;
+                else this._input_privacy_policy_pages.lang_es.disabled = true;
                 if(this._cb_langs.lang_en.checked) this._input_privacy_policy_pages.lang_en.disabled = false;
+                else this._input_privacy_policy_pages.lang_en.disabled = true;
             }
             else{
                 const input_privacy_policy_pages: NodeListOf<HTMLInputElement> = this._container_privacy_pages.querySelectorAll('input[type="text"]') as NodeListOf<HTMLInputElement>;
@@ -109,5 +116,14 @@ export default class FormDataSettingsHtml{
             else this._input_social_links.youtube.disabled = true;
         })
 
+    }
+
+    /**
+     * When a language checkbox value change, trigger change event for pages enabled checkbox
+     */
+    private triggerOnCbLangChange(): void{
+        const change_event: Event = new Event('change');
+        this._cb_pages_enabled.contacts_pages.dispatchEvent(change_event);
+        this._cb_pages_enabled.privacy_policy_pages.dispatchEvent(change_event);
     }
 }
