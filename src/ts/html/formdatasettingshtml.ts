@@ -18,6 +18,7 @@ export default class FormDataSettingsHtml{
     constructor(data: NlFormDataSettings){
         this.assignValues(data);
         this.checkboxLangsChange();
+        this.checkboxSocialChange();
     }
 
     private assignValues(data: NlFormDataSettings){
@@ -53,5 +54,24 @@ export default class FormDataSettingsHtml{
             })
         })
         
+    }
+
+    /**
+     * When a social checkbox item value change
+     */
+    private checkboxSocialChange(): void{
+        this._cb_social.facebook.addEventListener('change',()=>{
+            if(this._cb_social.facebook.checked)this._input_social_links.facebook.disabled = false;
+            else this._input_social_links.facebook.disabled = true;
+        })
+        this._cb_social.instagram.addEventListener('change',()=>{
+            if(this._cb_social.instagram.checked) this._input_social_links.instagram.disabled = false;
+            else this._input_social_links.instagram.disabled = true;
+        })
+        this._cb_social.youtube.addEventListener('change',()=>{
+            if(this._cb_social.youtube.checked) this._input_social_links.youtube.disabled = false;
+            else this._input_social_links.youtube.disabled = true;
+        })
+
     }
 }
