@@ -195,7 +195,7 @@ HTML;
     <h2 class="text-center">Impostazioni</h2>
 </div>
 <form id="nl_settings" method="post" action="#">
-    <div class="container">
+    <div id="nl_container_langs" class="container">
         <div class="row">
             <h5>Lingue</h5>
         </div>
@@ -214,7 +214,7 @@ HTML;
             </div>
         </div>
     </div>
-    <div class="container mt-5">
+    <div id="nl_container_social" class="container mt-5">
         <div class="row">
             <h5>Social</h5>
         </div>
@@ -232,8 +232,28 @@ HTML;
                 <label class="form-check-label" for="nl_cb_youtube">Youtube</label>
             </div>
         </div>
+        <div id="nl_row_social_links" class="row mt-3">
+            <div class="col-12 col-md-4">
+                <label for="nl_input_facebook" class="form-label">Pagina facebook</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_input_facebook">
+            </div>
+            <div class="col-12 col-md-4">
+                <label for="nl_input_instagram" class="form-label">Pagina instagram</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_input_instagram">
+            </div>
+            <div class="col-12 col-md-4">
+                <label for="nl_input_youtube" class="form-label">Pagina youtube</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_input_youtube">
+            </div>
+        </div>
     </div>
-    <div class="container mt-5">
+    <div id="nl_container_main_pages" class="container mt-5">
     <div class="row">
             <h5>Pagine principali</h5>
         </div>
@@ -262,7 +282,7 @@ HTML;
             </div>
         <div>
     </div>
-    <div class="container mt-5">
+    <div id="nl_container_contacts_pages" class="container mt-5">
         <div class="row">
             <h5>Pagine contatti</h5>
         </div>
@@ -291,7 +311,7 @@ HTML;
             </div>
         <div>
     </div>
-    <div class="container mt-5">
+    <div id="nl_container_privacy_pages" class="container mt-5">
         <div class="row">
             <h5>Pagine Privacy Policy</h5>
         </div>
@@ -320,7 +340,7 @@ HTML;
             </div>
         </div>
     </div>
-    <div class="container mt-5">
+    <div id="nl_container_buttons" class="container mt-5">
         <div class="row flex-column flex-md-row justify-content-center justify-content-md-around">
             <div class="col text-center">
                 <button type="submit" class="btn btn-primary">AGGIORNA</button>
