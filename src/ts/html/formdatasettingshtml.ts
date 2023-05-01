@@ -19,7 +19,8 @@ export default class FormDataSettingsHtml{
         this.assignValues(data);
         this.checkboxLangsChange();
         this.checkboxSocialChange();
-        this.checkboxContactsPageChange();
+        this.checkboxContactsPagesChange();
+        this.checkboxPrivacyPolicyPagesChange();
     }
 
     private assignValues(data: NlFormDataSettings){
@@ -40,7 +41,7 @@ export default class FormDataSettingsHtml{
     /**
      * When the contacts pages enabled checkbox value change 
      */
-    private checkboxContactsPageChange(): void{
+    private checkboxContactsPagesChange(): void{
         this._cb_pages_enabled.contacts_pages.addEventListener('change',()=>{
             if(this._cb_pages_enabled.contacts_pages.checked){
                 if(this._cb_langs.lang_it.checked) this._input_contacts_pages.lang_it.disabled = false;
@@ -72,6 +73,23 @@ export default class FormDataSettingsHtml{
             })
         })
         
+    }
+
+    /**
+     * When the privacy policy pages enabled checkbox value change 
+     */
+    private checkboxPrivacyPolicyPagesChange(): void{
+        this._cb_pages_enabled.privacy_policy_pages.addEventListener('change',()=>{
+            if(this._cb_pages_enabled.privacy_policy_pages.checked){
+                if(this._cb_langs.lang_it.checked) this._input_privacy_policy_pages.lang_it.disabled = false;
+                if(this._cb_langs.lang_es.checked) this._input_privacy_policy_pages.lang_es.disabled = false;
+                if(this._cb_langs.lang_en.checked) this._input_privacy_policy_pages.lang_en.disabled = false;
+            }
+            else{
+                const input_privacy_policy_pages: NodeListOf<HTMLInputElement> = this._container_privacy_pages.querySelectorAll('input[type="text"]') as NodeListOf<HTMLInputElement>;
+                input_privacy_policy_pages.forEach(input_privacy_policy_page => input_privacy_policy_page.disabled = true)
+            }
+        })
     }
 
     /**
