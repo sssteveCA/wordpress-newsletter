@@ -213,7 +213,9 @@ HTML;
                 <label class="form-check-label" for="nl_cb_lang_it">Inglese</label>
             </div>
         </div>
-        <div class="row mt-5">
+    </div>
+    <div class="container mt-5">
+        <div class="row">
             <h5>Social</h5>
         </div>
         <div class="row flex-column flex-md-row">
@@ -230,6 +232,35 @@ HTML;
                 <label class="form-check-label" for="nl_cb_youtube">Youtube</label>
             </div>
         </div>
+    </div>
+    <div class="container mt-5 d-none">
+        <div class="row mt-5">
+            <h5>Pagine contatti</h5>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_contacts_it" class="form-label">Pagina italiana</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_contacts_it">
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_contacts_es" class="form-label">Pagina spagnola</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_contacts_es">
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_contacts_en" class="form-label">Pagina inglese</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_contacts_en">
+            </div>
+        <div>
     </div>
 </form>
 HTML;
