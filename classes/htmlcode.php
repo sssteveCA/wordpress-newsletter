@@ -10,7 +10,7 @@ class HtmlCode{
      * Admin subscriber add form
      */
     public static function adminAddForm(): string{
-        $html = <<<HTML
+        return <<<HTML
 <div>
     <h2 class="text-center">Aggiungi utente alla newsletter</h2>
 </div>
@@ -73,14 +73,13 @@ class HtmlCode{
     </div>
 </form>
 HTML;
-        return $html;
     }
     
     /**
      * Admin subscriber delete form
      */
     public static function adminDelForm(): string{
-        $html =<<<HTML
+        return <<<HTML
         <div>
             <h2 class="text-center">Elimina iscritti dalla newsletter</h2>
         </div>
@@ -123,15 +122,14 @@ HTML;
                 </div>
             </div>
         </form>
-        HTML;   
-                return $html; 
+        HTML;
     }
 
     /**
      * Admin newsletter send form
      */
     public static function adminSenderForm(): string{
-        $html =<<<HTML
+        return <<<HTML
 <div>
     <h2 class="text-center">Invia mail agli iscritti</h2>
 </div>
@@ -186,7 +184,38 @@ HTML;
     </div>
 </form>
 HTML;
-        return $html;
+    }
+
+    /**
+     * Admin newsletter settings form
+     */
+    public static function adminSettingsForm(): string{
+        return <<<HTML
+<div>
+    <h2 class="text-center">Impostazioni</h2>
+</div>
+<form id="nl_settings" method="post" action="#">
+    <div class="container">
+        <div class="row">
+            <h5>Lingue</h5>
+        </div>
+        <div class="row flex-column flex-md-row">
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_lang_it">
+                <label class="form-check-label" for="nl_cb_lang_it">Italiano</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_lang_es">
+                <label class="form-check-label" for="nl_cb_lang_es">Spagnolo</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_lang_it">
+                <label class="form-check-label" for="nl_cb_lang_it">Inglese</label>
+            </div>
+        </div>
+    </div>
+</form>
+HTML;
     }
 
     /**
@@ -215,7 +244,7 @@ HTML;
         if(!empty($scripts_map)){
             foreach($scripts_map as $script) $scriptsS .= $script;
         }
-        $html = <<<HTML
+        return <<<HTML
 <!DOCTYPE html>
 <html>
     <head>
@@ -232,7 +261,6 @@ HTML;
     </body>
 </html>
 HTML;
-        return $html;
     }
 
     /**
@@ -346,7 +374,7 @@ HTML;
      * @param array $params
      */
     public static function wpSignupForm(array $params): string{
-        $html =<<<HTML
+        return <<<HTML
 <fieldset id="nl_form_fieldset" class="position-relative w-50 mx-auto border border-primary d-flex flex-column align-items-center" style="margin-bottom: 50px; min-width: 300px;">
     <legend class="text-center">{$params['title']}</legend>
     <h2 class="text-center"></h2>
@@ -397,7 +425,6 @@ HTML;
     </form>
 </fieldset>
 HTML;
-        return $html;
     }
 
     /**

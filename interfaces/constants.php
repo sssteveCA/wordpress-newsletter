@@ -48,5 +48,6 @@ interface Constants{
     const SLUG_ADMIN_FORM_ADD = 'nl_submenu_add';
     const SLUG_ADMIN_FORM_DELETE = 'nl_submenu_del';
     const SLUG_ADMIN_FORM_SEND = 'nl_submenu_send';
+    const SLUG_ADMIN_FORM_SETTINGS = 'nl_submenu_settings';
 }
 ?>

@@ -86,6 +86,7 @@ use Newsletter\Enums\Langs;
     add_submenu_page('nl_menu','Invia mail','Invia mail','administrator',C::SLUG_ADMIN_FORM_SEND,C::SLUG_ADMIN_FORM_SEND);
     add_submenu_page('nl_menu','Aggiungi utente','Aggiungi utente','administrator',C::SLUG_ADMIN_FORM_ADD,C::SLUG_ADMIN_FORM_ADD);
     add_submenu_page('nl_menu','Elimina iscritti','Elimina iscritti','administrator',C::SLUG_ADMIN_FORM_DELETE,C::SLUG_ADMIN_FORM_DELETE);
+    add_submenu_page('nl_menu','Impostazioni','Impostazioni','administrator',C::SLUG_ADMIN_FORM_SETTINGS,C::SLUG_ADMIN_FORM_SETTINGS);
     remove_submenu_page('nl_menu','nl_menu');
  }
 
@@ -103,6 +104,10 @@ use Newsletter\Enums\Langs;
  function nl_submenu_send(){
     $sendHtml = HtmlCode::adminSenderForm();
     echo $sendHtml;
+ }
+
+ function nl_submenu_settings(){
+   echo "";
  }
 
  add_action('init','nl_init');
