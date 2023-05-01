@@ -119,6 +119,28 @@ export default class FormDataSettingsHtml{
     }
 
     /**
+     * When the user submit the form
+     * @param callback the function to invoke when the user submit the form
+     */
+    public onFormSubmit(callback: (data: object) => void): void{
+        this._form.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            let form_data: object = {
+                facebook_page: '',
+                instagram_page: '',
+                youtube_page: '',
+                contacts_page_it: '',
+                contacts_page_es: '',
+                contacts_page_en: '',
+                privacy_policy_page_it: '',
+                privacy_policy_page_es: '',
+                privacy_policy_page_en: '',
+            }
+            callback(form_data)
+        })
+    }
+
+    /**
      * When a language checkbox value change, trigger change event for pages enabled checkbox
      */
     private triggerOnCbLangChange(): void{
