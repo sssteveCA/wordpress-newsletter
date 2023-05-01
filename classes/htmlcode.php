@@ -329,7 +329,7 @@ HTML;
     <div id="nl_container_buttons" class="container mt-5">
         <div class="row flex-column flex-md-row justify-content-center justify-content-md-around">
             <div class="col text-center">
-                <button type="submit" class="btn btn-primary">AGGIORNA</button>
+                <button id="nl_primary_button" type="button" class="btn btn-primary">AGGIORNA</button>
             </div>
             <div class="col text-center">
                 <button type="reset" class="btn btn-danger">ANNULLA</button>

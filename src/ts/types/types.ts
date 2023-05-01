@@ -60,35 +60,54 @@ export type NlFormDataSend = {
  * HTML Settings form items references for FormDataSettingsHtml class
  */
 export type NlFormDataSettings = {
-    form: HTMLFormElement,
-    container_langs: HTMLDivElement,
-    cb_langs: NlFormDataSettingsInputLangs,
-    container_pages_enabled: HTMLDivElement,
-    cb_pages_enabled: NlFormDataSettingsInputPagesEnabled,
-    cb_social: NlFormDataSettingsInputSocial,
-    row_social_links: HTMLDivElement,
-    input_social_links: NlFormDataSettingsInputSocial,
-    container_contacts_pages: HTMLDivElement,
-    input_contacts_pages: NlFormDataSettingsInputLangs,
-    container_privacy_pages: HTMLDivElement,
-    input_privacy_policy_pages: NlFormDataSettingsInputLangs
+    container_langs: HTMLDivElement;
+    cb_langs: NlFormDataSettingsInputLangs;
+    container_pages_enabled: HTMLDivElement;
+    cb_pages_enabled: NlFormDataSettingsInputPagesEnabled;
+    cb_social: NlFormDataSettingsInputSocial;
+    row_social_links: HTMLDivElement;
+    input_social_links: NlFormDataSettingsInputSocial;
+    container_contacts_pages: HTMLDivElement;
+    input_contacts_pages: NlFormDataSettingsInputLangs;
+    container_privacy_pages: HTMLDivElement;
+    input_privacy_policy_pages: NlFormDataSettingsInputLangs;
+    buttons: NlFormDataSettingsButtons;
+}
+
+/**
+ * The data of the admin settings form to send to the server
+ */
+export type NlFormPostDataSettings = {
+    facebook_page: string;
+    instagram_page: string;
+    youtube_page: string;
+    contacts_page_it: string;
+    contacts_page_es: string;
+    contacts_page_en: string;
+    privacy_policy_page_it: string;
+    privacy_policy_page_es: string;
+    privacy_policy_page_en: string;
 }
 
 export type NlFormDataSettingsInputPagesEnabled = {
-    contacts_pages: HTMLInputElement,
-    privacy_policy_pages: HTMLInputElement,
+    contacts_pages: HTMLInputElement;
+    privacy_policy_pages: HTMLInputElement;
 }
 
 export type NlFormDataSettingsInputLangs = {
-    lang_it: HTMLInputElement,
-    lang_es: HTMLInputElement,
-    lang_en: HTMLInputElement,
+    lang_it: HTMLInputElement;
+    lang_es: HTMLInputElement;
+    lang_en: HTMLInputElement;
 }
 
 export type NlFormDataSettingsInputSocial = {
-    facebook: HTMLInputElement,
-    instagram: HTMLInputElement,
-    youtube: HTMLInputElement,
+    facebook: HTMLInputElement;
+    instagram: HTMLInputElement;
+    youtube: HTMLInputElement;
+}
+
+export type NlFormDataSettingsButtons = {
+    primary: HTMLButtonElement;
 }
 
 export type NlUnsubscribeUserData = {

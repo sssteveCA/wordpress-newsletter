@@ -3,7 +3,6 @@ import { NlFormDataSettings } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
     const fds_data: NlFormDataSettings = {
-        form: document.getElementById('nl_form_settings') as HTMLFormElement,
         container_pages_enabled: document.getElementById('nl_container_pages_enabled') as HTMLDivElement,
         cb_pages_enabled: {
             contacts_pages: document.getElementById('nl_cb_contacts_pages') as HTMLInputElement,
@@ -37,7 +36,13 @@ window.addEventListener('DOMContentLoaded',()=>{
             lang_it: document.getElementById('nl_page_privacy_policy_it') as HTMLInputElement,
             lang_es: document.getElementById('nl_page_privacy_policy_es') as HTMLInputElement,
             lang_en: document.getElementById('nl_page_privacy_policy_en') as HTMLInputElement,
+        },
+        buttons: {
+            primary: document.getElementById('nl_primary_button') as HTMLButtonElement
         }
     }
     const fds: FormDataSettingsHtml = new FormDataSettingsHtml(fds_data)
+    fds.onFormSubmit((data) => {
+        console.log(data);
+    });
 });

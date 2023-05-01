@@ -1,8 +1,7 @@
-import { NlFormDataSettings, NlFormDataSettingsInputLangs, NlFormDataSettingsInputPagesEnabled, NlFormDataSettingsInputSocial } from "../types/types"
+import { NlFormDataSettings, NlFormDataSettingsButtons, NlFormDataSettingsInputLangs, NlFormDataSettingsInputPagesEnabled, NlFormDataSettingsInputSocial, NlFormPostDataSettings } from "../types/types"
 
 export default class FormDataSettingsHtml{
 
-    private _form: HTMLFormElement;
     private _container_langs: HTMLDivElement;
     private _cb_langs: NlFormDataSettingsInputLangs;
     private _container_pages_enabled: HTMLDivElement;
@@ -14,6 +13,7 @@ export default class FormDataSettingsHtml{
     private _input_contacts_pages: NlFormDataSettingsInputLangs;
     private _container_privacy_pages: HTMLDivElement;
     private _input_privacy_policy_pages: NlFormDataSettingsInputLangs;
+    private _buttons: NlFormDataSettingsButtons;
 
     constructor(data: NlFormDataSettings){
         this.assignValues(data);
@@ -24,7 +24,6 @@ export default class FormDataSettingsHtml{
     }
 
     private assignValues(data: NlFormDataSettings){
-        this._form = data.form;
         this._container_langs = data.container_langs;
         this._cb_langs = data.cb_langs;
         this._container_pages_enabled = data.container_pages_enabled;
@@ -36,6 +35,7 @@ export default class FormDataSettingsHtml{
         this._input_contacts_pages = data.input_contacts_pages;
         this._container_privacy_pages = data.container_privacy_pages;
         this._input_privacy_policy_pages = data.input_privacy_policy_pages;
+        this._buttons = data.buttons;
     }
 
     /**
@@ -122,10 +122,9 @@ export default class FormDataSettingsHtml{
      * When the user submit the form
      * @param callback the function to invoke when the user submit the form
      */
-    public onFormSubmit(callback: (data: object) => void): void{
-        this._form.addEventListener('submit',(e)=>{
-            e.preventDefault();
-            let form_data: object = {
+    public onFormSubmit(callback: (data: NlFormPostDataSettings) => void): void{
+        this._buttons.primary.addEventListener('click',()=>{
+            let form_data: NlFormPostDataSettings = {
                 facebook_page: '',
                 instagram_page: '',
                 youtube_page: '',
