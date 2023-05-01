@@ -56,6 +56,44 @@ export type NlFormDataSend = {
     emails: string[];
 };
 
+export type NlFormDataSettings = {
+    form: HTMLFormElement,
+    container_pages_enabled: HTMLDivElement,
+    cb_pages_enabled: {
+        contacts_pages: HTMLInputElement,
+        privacy_policy_pages: HTMLInputElement,
+    },
+    container_langs: HTMLDivElement,
+    cb_langs: {
+        lang_it: HTMLInputElement,
+        lang_es: HTMLInputElement,
+        lang_en: HTMLInputElement,
+    },
+    cb_social: {
+        facebook: HTMLInputElement,
+        instagram: HTMLInputElement,
+        youtube: HTMLInputElement,
+    },
+    row_social_links: HTMLDivElement,
+    input_social_links: {
+        facebook: HTMLInputElement,
+        instagram: HTMLInputElement,
+        youtube: HTMLInputElement, 
+    },
+    container_contacts_pages: HTMLDivElement,
+    input_contacts_pages: {
+        lang_it: HTMLInputElement,
+        lang_es: HTMLInputElement,
+        lang_en: HTMLInputElement,
+    },
+    container_privacy_pages: HTMLDivElement,
+    input_privacy_policy_pages: {
+        lang_it: HTMLInputElement,
+        lang_es: HTMLInputElement,
+        lang_en: HTMLInputElement,
+    }
+}
+
 export type NlUnsubscribeUserData = {
     lang?: string;
     unsubscribe_code: string;

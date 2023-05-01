@@ -195,6 +195,21 @@ HTML;
     <h2 class="text-center">Impostazioni</h2>
 </div>
 <form id="nl_form_settings" method="post" action="#">
+    <div id="nl_container_pages_enabled" class="container mt-5">
+        <div class="row">
+            <h5>Pagine da includere</h5>
+        </div>
+        <div class="row flex-column flex-md-row">
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_contacts_pages">
+                <label class="form-check-label" for="nl_cb_contacts_pages">Pagine contatti</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_privacy_policy">
+                <label class="form-check-label" for="nl_cb_privacy_policy">Pagine privacy policy</label>
+            </div>
+        </div>
+    </div>
     <div id="nl_container_langs" class="container">
         <div class="row">
             <h5>Lingue</h5>
@@ -252,42 +267,6 @@ HTML;
                 <input type="text" class="form-control" id="nl_input_youtube">
             </div>
         </div>
-    </div>
-    <div class="container mt-5 mb-3 fs-6 h6">
-        <div class="row">
-            <div class="col">
-            Gli indirizzi URL seguenti possono essere specificati anche senza la parte del protocollo e del dominio se si riferiscono a contenuti di questo sito.
-            </div>
-        </div>
-    </div>
-    <div id="nl_container_main_pages" class="container mt-5">
-        <div class="row">
-            <h5>Pagine principali</h5>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-4">
-                <label for="nl_page_home_it" class="form-label">Pagina italiana</label>
-            </div>
-            <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_page_home_it">
-            </div>
-        <div>
-        <div class="row">
-            <div class="col-12 col-md-4">
-                <label for="nl_page_home_es" class="form-label">Pagina spagnola</label>
-            </div>
-            <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_page_home_es">
-            </div>
-        <div>
-        <div class="row">
-            <div class="col-12 col-md-4">
-                <label for="nl_page_home_en" class="form-label">Pagina inglese</label>
-            </div>
-            <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_page_home_en">
-            </div>
-        <div>
     </div>
     <div id="nl_container_contacts_pages" class="container mt-5">
         <div class="row">
