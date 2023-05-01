@@ -4,17 +4,7 @@ use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\Properties;
 
 require_once("../../../../../wp-load.php");
-require_once("../../enums/languages.php");
-require_once("../../traits/properties/messages/newusertrait.php");
-require_once("../../traits/properties/messages/othertrait.php");
-require_once("../../traits/properties/messages/verifytrait.php");
-require_once("../../traits/properties/messages/preunsubscribetrait.php");
-require_once("../../traits/properties/messages/unsubscribetrait.php");
-require_once("../../traits/properties/propertiesmessagestrait.php");
-require_once("../../traits/properties/propertiesurltrait.php");
-require_once("../../classes/properties.php");
-require_once("../../classes/general.php");
-require_once("../../classes/htmlcode.php");
+require_once("../../vendor/autoload.php");
 
 if(!isset($_REQUEST['lang'])) $_REQUEST['lang'] = 'en';
 $lang = General::languageCode($_REQUEST['lang']);
