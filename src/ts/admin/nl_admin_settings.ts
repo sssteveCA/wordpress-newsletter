@@ -43,6 +43,5 @@ window.addEventListener('DOMContentLoaded',()=>{
     }
     const fds: FormDataSettingsHtml = new FormDataSettingsHtml(fds_data)
     fds.onFormSubmit((data) => {
-        console.log(data);
     });
 });

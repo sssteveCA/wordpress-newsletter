@@ -124,16 +124,24 @@ export default class FormDataSettingsHtml{
      */
     public onFormSubmit(callback: (data: NlFormPostDataSettings) => void): void{
         this._buttons.primary.addEventListener('click',()=>{
-            let form_data: NlFormPostDataSettings = {
-                facebook_page: this._input_social_links.facebook.value,
-                instagram_page: this._input_social_links.instagram.value,
-                youtube_page: this._input_social_links.youtube.value,
-                contacts_page_it: this._input_contacts_pages.lang_it.value,
-                contacts_page_es: this._input_contacts_pages.lang_es.value,
-                contacts_page_en: this._input_contacts_pages.lang_en.value,
-                privacy_policy_page_it: this._input_privacy_policy_pages.lang_it.value,
-                privacy_policy_page_es: this._input_privacy_policy_pages.lang_es.value,
-                privacy_policy_page_en: this._input_privacy_policy_pages.lang_en.value,
+
+            const contact_page_it: string|null = (this._cb_langs.lang_it.checked && this._cb_pages_enabled.contacts_pages.checked) ? this._input_contacts_pages.lang_it.value : null;
+            const contact_page_es: string|null = (this._cb_langs.lang_es.checked && this._cb_pages_enabled.contacts_pages.checked) ? this._input_contacts_pages.lang_es.value : null;
+            const contact_page_en: string|null = (this._cb_langs.lang_en.checked && this._cb_pages_enabled.contacts_pages.checked) ? this._input_contacts_pages.lang_en.value : null;
+            const privacy_policy_page_it: string|null = (this._cb_langs.lang_it.checked && this._cb_pages_enabled.privacy_policy_pages.checked) ? this._input_privacy_policy_pages.lang_it.value : null;
+            const privacy_policy_page_es: string|null = (this._cb_langs.lang_es.checked && this._cb_pages_enabled.privacy_policy_pages.checked) ? this._input_privacy_policy_pages.lang_es.value : null;
+            const privacy_policy_page_en: string|null = (this._cb_langs.lang_en.checked && this._cb_pages_enabled.privacy_policy_pages.checked) ? this._input_privacy_policy_pages.lang_en.value : null;
+
+            const form_data: NlFormPostDataSettings = {
+                facebook_page: this._cb_social.facebook.checked ? this._input_social_links.facebook.value : null,
+                instagram_page: this._cb_social.instagram.checked ? this._input_social_links.instagram.value : null,
+                youtube_page: this._cb_social.youtube.checked ? this._input_social_links.youtube.value : null,
+                contacts_page_it: contact_page_it,
+                contacts_page_es: contact_page_es,
+                contacts_page_en: contact_page_en,
+                privacy_policy_page_it: privacy_policy_page_it,
+                privacy_policy_page_es: privacy_policy_page_es,
+                privacy_policy_page_en: privacy_policy_page_en,
             }
             callback(form_data)
         })

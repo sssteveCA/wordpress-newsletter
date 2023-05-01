@@ -78,15 +78,15 @@ export type NlFormDataSettings = {
  * The data of the admin settings form to send to the server
  */
 export type NlFormPostDataSettings = {
-    facebook_page: string;
-    instagram_page: string;
-    youtube_page: string;
-    contacts_page_it: string;
-    contacts_page_es: string;
-    contacts_page_en: string;
-    privacy_policy_page_it: string;
-    privacy_policy_page_es: string;
-    privacy_policy_page_en: string;
+    facebook_page: string|null;
+    instagram_page: string|null;
+    youtube_page: string|null;
+    contacts_page_it: string|null;
+    contacts_page_es: string|null;
+    contacts_page_en: string|null;
+    privacy_policy_page_it: string|null;
+    privacy_policy_page_es: string|null;
+    privacy_policy_page_en: string|null;
 }
 
 export type NlFormDataSettingsInputPagesEnabled = {
