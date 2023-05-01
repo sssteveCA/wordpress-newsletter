@@ -209,8 +209,8 @@ HTML;
                 <label class="form-check-label" for="nl_cb_lang_es">Spagnolo</label>
             </div>
             <div class="col">
-                <input type="checkbox" class="form-check-input" id="nl_cb_lang_it">
-                <label class="form-check-label" for="nl_cb_lang_it">Inglese</label>
+                <input type="checkbox" class="form-check-input" id="nl_cb_lang_en">
+                <label class="form-check-label" for="nl_cb_lang_en">Inglese</label>
             </div>
         </div>
     </div>
@@ -318,7 +318,17 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_privacy_policy_en">
             </div>
-        <div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row flex-column flex-md-row justify-content-center justify-content-md-around">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary">AGGIORNA</button>
+            </div>
+            <div class="col text-center">
+                <button type="reset" class="btn btn-danger">ANNULLA</button>
+            </div>
+        </div>
     </div>
 </form>
 HTML;

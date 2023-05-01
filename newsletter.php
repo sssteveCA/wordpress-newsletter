@@ -92,22 +92,19 @@ use Newsletter\Enums\Langs;
 
  
  function nl_submenu_add(){
-      $addHtml = HtmlCode::adminAddForm();
-      echo $addHtml;
+      echo HtmlCode::adminAddForm();
  }
 
  function nl_submenu_del(){
-    $delHtml = HtmlCode::adminDelForm();
-    echo $delHtml;
+    echo HtmlCode::adminDelForm();
  }
 
  function nl_submenu_send(){
-    $sendHtml = HtmlCode::adminSenderForm();
-    echo $sendHtml;
+    echo HtmlCode::adminSenderForm();
  }
 
  function nl_submenu_settings(){
-   echo "";
+   echo HtmlCode::adminSettingsForm();
  }
 
  add_action('init','nl_init');
