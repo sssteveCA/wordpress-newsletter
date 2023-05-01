@@ -194,7 +194,7 @@ HTML;
 <div>
     <h2 class="text-center">Impostazioni</h2>
 </div>
-<form id="nl_settings" method="post" action="#">
+<form id="nl_form_settings" method="post" action="#">
     <div id="nl_container_langs" class="container">
         <div class="row">
             <h5>Lingue</h5>
@@ -253,8 +253,15 @@ HTML;
             </div>
         </div>
     </div>
+    <div class="container mt-5 mb-3 fs-6 h6">
+        <div class="row">
+            <div class="col">
+            Gli indirizzi URL seguenti possono essere specificati anche senza la parte del protocollo e del dominio se si riferiscono a contenuti di questo sito.
+            </div>
+        </div>
+    </div>
     <div id="nl_container_main_pages" class="container mt-5">
-    <div class="row">
+        <div class="row">
             <h5>Pagine principali</h5>
         </div>
         <div class="row">

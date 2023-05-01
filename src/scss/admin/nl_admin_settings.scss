@@ -1,0 +1,25 @@
+@use "../modules/globals";
+@use "sass:map";
+
+$xs: map.get(globals.$bs-breakpoints,'xs');
+$md: map.get(globals.$bs-breakpoints, 'md');
+
+@mixin settings-style(){
+    form#nl_form_settings{
+        div.container{
+            div.row{
+                >div{
+                    @media only screen and (min-width: #{$xs}){
+                        margin: 10px 0px;
+                    }
+                    @media only screen and (min-width: #{$md}){
+                        margin: 0px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@include settings-style();

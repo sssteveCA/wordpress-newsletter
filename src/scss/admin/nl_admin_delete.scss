@@ -1,7 +1,7 @@
 @use "sass:map";
 @use "../modules/globals";
 
-$xsm-breakpoint: map.get(globals.$bs-breakpoints,'xsm');
+$xsm-breakpoint: map.get(globals.$bs-breakpoints,'xs');
 $md-breakpoint: map.get(globals.$bs-breakpoints,'md');
 $lg-breakpoint: map.get(globals.$bs-breakpoints,'lg');
 

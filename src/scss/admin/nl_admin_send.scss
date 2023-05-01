@@ -2,7 +2,7 @@
 @use "../modules/globals";
 
 $lg-breakpoint: map.get(globals.$bs-breakpoints,'lg');
-$xsm-breakpoint: map.get(globals.$bs-breakpoints,'xsm');
+$xsm-breakpoint: map.get(globals.$bs-breakpoints,'xs');
 
 @function nl_send_container_widths($width){
     $widths-map: ();
