@@ -56,12 +56,15 @@ export type NlFormDataSend = {
     emails: string[];
 };
 
+/**
+ * HTML Settings form items references for FormDataSettingsHtml class
+ */
 export type NlFormDataSettings = {
     form: HTMLFormElement,
-    container_pages_enabled: HTMLDivElement,
-    cb_pages_enabled: NlFormDataSettingsInputPagesEnabled,
     container_langs: HTMLDivElement,
     cb_langs: NlFormDataSettingsInputLangs,
+    container_pages_enabled: HTMLDivElement,
+    cb_pages_enabled: NlFormDataSettingsInputPagesEnabled,
     cb_social: NlFormDataSettingsInputSocial,
     row_social_links: HTMLDivElement,
     input_social_links: NlFormDataSettingsInputSocial,

@@ -1,7 +1,8 @@
+import FormDataSettingsHtml from "../html/formdatasettingshtml";
 import { NlFormDataSettings } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
-    const asf_data: NlFormDataSettings = {
+    const fds_data: NlFormDataSettings = {
         form: document.getElementById('nl_form_settings') as HTMLFormElement,
         container_pages_enabled: document.getElementById('nl_container_pages_enabled') as HTMLDivElement,
         cb_pages_enabled: {
@@ -38,4 +39,5 @@ window.addEventListener('DOMContentLoaded',()=>{
             lang_en: document.getElementById('nl_page_privacy_policy_en') as HTMLInputElement,
         }
     }
+    const fds: FormDataSettingsHtml = new FormDataSettingsHtml(fds_data)
 });

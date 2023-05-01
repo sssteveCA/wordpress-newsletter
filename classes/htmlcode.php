@@ -195,21 +195,6 @@ HTML;
     <h2 class="text-center">Impostazioni</h2>
 </div>
 <form id="nl_form_settings" method="post" action="#">
-    <div id="nl_container_pages_enabled" class="container mt-5">
-        <div class="row">
-            <h5>Pagine da includere</h5>
-        </div>
-        <div class="row flex-column flex-md-row">
-            <div class="col">
-                <input type="checkbox" class="form-check-input" id="nl_cb_contacts_pages">
-                <label class="form-check-label" for="nl_cb_contacts_pages">Pagine contatti</label>
-            </div>
-            <div class="col">
-                <input type="checkbox" class="form-check-input" id="nl_cb_privacy_policy">
-                <label class="form-check-label" for="nl_cb_privacy_policy">Pagine privacy policy</label>
-            </div>
-        </div>
-    </div>
     <div id="nl_container_langs" class="container">
         <div class="row">
             <h5>Lingue</h5>
@@ -226,6 +211,21 @@ HTML;
             <div class="col">
                 <input type="checkbox" class="form-check-input" id="nl_cb_lang_en">
                 <label class="form-check-label" for="nl_cb_lang_en">Inglese</label>
+            </div>
+        </div>
+    </div>
+    <div id="nl_container_pages_enabled" class="container mt-5">
+        <div class="row">
+            <h5>Pagine da includere</h5>
+        </div>
+        <div class="row flex-column flex-md-row">
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_contacts_pages" disabled>
+                <label class="form-check-label" for="nl_cb_contacts_pages">Pagine contatti</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_privacy_policy" disabled>
+                <label class="form-check-label" for="nl_cb_privacy_policy">Pagine privacy policy</label>
             </div>
         </div>
     </div>
@@ -252,19 +252,19 @@ HTML;
                 <label for="nl_input_facebook" class="form-label">Pagina facebook</label>
             </div>
             <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_input_facebook">
+                <input type="text" class="form-control" id="nl_input_facebook" disabled>
             </div>
             <div class="col-12 col-md-4">
                 <label for="nl_input_instagram" class="form-label">Pagina instagram</label>
             </div>
             <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_input_instagram">
+                <input type="text" class="form-control" id="nl_input_instagram" disabled>
             </div>
             <div class="col-12 col-md-4">
                 <label for="nl_input_youtube" class="form-label">Pagina youtube</label>
             </div>
             <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_input_youtube">
+                <input type="text" class="form-control" id="nl_input_youtube" disabled>
             </div>
         </div>
     </div>
@@ -277,7 +277,7 @@ HTML;
                 <label for="nl_page_contacts_it" class="form-label">Pagina italiana</label>
             </div>
             <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_page_contacts_it">
+                <input type="text" class="form-control" id="nl_page_contacts_it" disabled>
             </div>
         <div>
         <div class="row">
@@ -285,7 +285,7 @@ HTML;
                 <label for="nl_page_contacts_es" class="form-label">Pagina spagnola</label>
             </div>
             <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_page_contacts_es">
+                <input type="text" class="form-control" id="nl_page_contacts_es" disabled>
             </div>
         <div>
         <div class="row">
@@ -293,7 +293,7 @@ HTML;
                 <label for="nl_page_contacts_en" class="form-label">Pagina inglese</label>
             </div>
             <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_page_contacts_en">
+                <input type="text" class="form-control" id="nl_page_contacts_en" disabled>
             </div>
         <div>
     </div>
@@ -306,7 +306,7 @@ HTML;
                 <label for="nl_page_privacy_policy_it" class="form-label">Pagina italiana</label>
             </div>
             <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_page_privacy_policy_it">
+                <input type="text" class="form-control" id="nl_page_privacy_policy_it" disabled>
             </div>
         <div>
         <div class="row">
@@ -314,7 +314,7 @@ HTML;
                 <label for="nl_page_privacy_policy_es" class="form-label">Pagina spagnola</label>
             </div>
             <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_page_privacy_policy_es">
+                <input type="text" class="form-control" id="nl_page_privacy_policy_es" disabled>
             </div>
         <div>
         <div class="row">
@@ -322,7 +322,7 @@ HTML;
                 <label for="nl_page_privacy_policy_en" class="form-label">Pagina inglese</label>
             </div>
             <div class="col-12 col-md-8">
-                <input type="text" class="form-control" id="nl_page_privacy_policy_en">
+                <input type="text" class="form-control" id="nl_page_privacy_policy_en" disabled>
             </div>
         </div>
     </div>
