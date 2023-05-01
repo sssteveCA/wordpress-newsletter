@@ -125,15 +125,15 @@ export default class FormDataSettingsHtml{
     public onFormSubmit(callback: (data: NlFormPostDataSettings) => void): void{
         this._buttons.primary.addEventListener('click',()=>{
             let form_data: NlFormPostDataSettings = {
-                facebook_page: '',
-                instagram_page: '',
-                youtube_page: '',
-                contacts_page_it: '',
-                contacts_page_es: '',
-                contacts_page_en: '',
-                privacy_policy_page_it: '',
-                privacy_policy_page_es: '',
-                privacy_policy_page_en: '',
+                facebook_page: this._input_social_links.facebook.value,
+                instagram_page: this._input_social_links.instagram.value,
+                youtube_page: this._input_social_links.youtube.value,
+                contacts_page_it: this._input_contacts_pages.lang_it.value,
+                contacts_page_es: this._input_contacts_pages.lang_es.value,
+                contacts_page_en: this._input_contacts_pages.lang_en.value,
+                privacy_policy_page_it: this._input_privacy_policy_pages.lang_it.value,
+                privacy_policy_page_es: this._input_privacy_policy_pages.lang_es.value,
+                privacy_policy_page_en: this._input_privacy_policy_pages.lang_en.value,
             }
             callback(form_data)
         })
