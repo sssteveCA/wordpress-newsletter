@@ -213,6 +213,23 @@ HTML;
                 <label class="form-check-label" for="nl_cb_lang_it">Inglese</label>
             </div>
         </div>
+        <div class="row mt-5">
+            <h5>Social</h5>
+        </div>
+        <div class="row flex-column flex-md-row">
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_facebook">
+                <label class="form-check-label" for="nl_cb_facebook">Facebook</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_instagram">
+                <label class="form-check-label" for="nl_cb_instagram">Instagram</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_youtube">
+                <label class="form-check-label" for="nl_cb_youtube">Youtube</label>
+            </div>
+        </div>
     </div>
 </form>
 HTML;
