@@ -233,8 +233,37 @@ HTML;
             </div>
         </div>
     </div>
-    <div class="container mt-5 d-none">
-        <div class="row mt-5">
+    <div class="container mt-5">
+    <div class="row">
+            <h5>Pagine principali</h5>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_home_it" class="form-label">Pagina italiana</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_home_it">
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_home_es" class="form-label">Pagina spagnola</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_home_es">
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_home_en" class="form-label">Pagina inglese</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_home_en">
+            </div>
+        <div>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
             <h5>Pagine contatti</h5>
         </div>
         <div class="row">
@@ -262,8 +291,8 @@ HTML;
             </div>
         <div>
     </div>
-    <div class="container mt-5 d-none">
-        <div class="row mt-5">
+    <div class="container mt-5">
+        <div class="row">
             <h5>Pagine Privacy Policy</h5>
         </div>
         <div class="row">
