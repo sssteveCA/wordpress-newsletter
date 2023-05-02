@@ -1,4 +1,5 @@
 <?php
+use Newsletter\Classes\Database\Tables\Settings;
 /**
  * Plugin Name: Newsletter
  * Description: This plugin allows send email to subscribers
@@ -10,27 +11,9 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
- require_once(ABSPATH."wp-admin/includes/plugin.php");
- require_once(ABSPATH."wp-admin/includes/upgrade.php");
- require_once("enums/languages.php");
- require_once("interfaces/constants.php");
- require_once("interfaces/exceptionmessages.php");
- require_once("exceptions/notsettedexception.php");
- require_once("exceptions/incorrectvariableformatexception.php");
- require_once("traits/properties/messages/activationmailtrait.php");
- require_once("traits/properties/messages/newusertrait.php");
- require_once("traits/properties/messages/othertrait.php");
- require_once("traits/properties/messages/preunsubscribetrait.php");
- require_once("traits/properties/messages/unsubscribetrait.php");
- require_once("traits/properties/messages/verifytrait.php");
- require_once("traits/properties/propertiesmessagestrait.php");
- require_once("traits/properties/propertiesurltrait.php");
- require_once("traits/errortrait.php");
- require_once("traits/sqltrait.php");
- require_once("classes/properties.php");
- require_once("classes/htmlcode.php");
- require_once("classes/database/tables/table.php");
- require_once("classes/database/tables/users.php");
+require_once(ABSPATH."wp-admin/includes/plugin.php");
+require_once(ABSPATH."wp-admin/includes/upgrade.php");
+require_once("vendor/autoload.php");
 
  use Newsletter\Classes\Database\Tables\Users;
  use Newsletter\Interfaces\Constants as C;
@@ -40,17 +23,19 @@ use Newsletter\Enums\Langs;
 
  register_activation_hook(__FILE__,'nl_set_table');
  function nl_set_table(){
-    $data = ['tableName' => C::TABLE_USERS];
-    $users = new Users($data);
-    $create = $users->getSqlCreate();
-    dbDelta($create);
+    $users = new Users(['tableName' => C::TABLE_USERS]);
+    $create_users = $users->getSqlCreate();
+    $settings = new Settings(['tableName' => C::TABLE_SETTINGS]);
+    $create_settings = $settings->getSqlCreate();
+    dbDelta([$create_users,$create_settings]);
  }
 
  register_uninstall_hook(__FILE__,'nl_delete_table');
  function nl_delete_table(){
-    $data = ['tableName' => C::TABLE_USERS];
-    $users = new Users($data);
+    $users = new Users(['tableName' => C::TABLE_USERS]);
     $users->dropTable();
+    $settings = new Settings(['tableName' => C::TABLE_SETTINGS]);
+    $settings->dropTable();
  }
 
  add_action('admin_enqueue_scripts','nl_admin_scripts',11);

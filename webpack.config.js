@@ -1,4 +1,3 @@
-
 const {join,resolve} = require('path')
 
 const scssPath = join(__dirname,'src','scss')

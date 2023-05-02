@@ -46,6 +46,8 @@ interface Constants{
     //const REL_JS_AXIOS_LIB = 'node_modules/axios/dist/axios.min.js';
     const REL_JS_BOOTSTRAP = 'node_modules/bootstrap/dist/js/bootstrap.min.js';
     const REL_JS_WP = Constants::REL_DIST_JS.'wp/nl_wp.js';
+
+    const TABLE_SETTINGS = "newsletter_settings";
     const TABLE_USERS = "newsletter_users";
 
     //Slugs

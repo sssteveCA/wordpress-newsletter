@@ -23,7 +23,7 @@ class Users extends Table{
     }
 
     /**
-     * Set the creation query for this table
+     * Set the creation query for the users table
      */
     private function setSqlCreate(): void{
         $this->sql_create = <<<SQL
