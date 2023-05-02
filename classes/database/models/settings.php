@@ -7,8 +7,6 @@ use Newsletter\Traits\SqlTrait;
 
 class Settings extends Models{
 
-    use ErrorTrait,SqlTrait;
-
     /**
      * The languages of the available pages
      */
@@ -40,6 +38,7 @@ class Settings extends Models{
     private array $privacy_policy_pages;
 
     public function __construct(array $data){
+        parent::__construct($data);
         $this->assignValues($data);
     }
 
@@ -71,6 +70,25 @@ class Settings extends Models{
         $this->social_pages = isset($data['social_pages']) ? $data['social_pages'] : [];
         $this->contact_pages = isset($data['contact_pages']) ? $data['contact_pages'] : [];
         $this->privacy_policy_pages = isset($data['privacy_policy_pages']) ? $data['privacy_policy_pages'] : [];
+    }
+
+    /**
+     * Get all the newsletter settings
+     */
+    public function getSettings(): bool{
+        $this->errno = 0;
+        //Select all table rows 
+        $results = parent::get('',[]);
+        if($this->errno == 0){
+            $this->lang_status = (isset($results['lang_status'])) ? $results['lang_status'] : [];
+            $this->included_pages_status = (isset($results['included_pages_status'])) ? $results['included_pages_status'] : [];
+            $this->socials_status = (isset($results['socials_status'])) ? $results['socials_status'] : [];
+            $this->social_pages = (isset($results['social_pages'])) ? $results['social_pages'] : [];
+            $this->contact_pages = (isset($results['contact_pages'])) ? $results['contact_pages'] : [];
+            $this->privacy_policy_pages = (isset($results['lang_status'])) ? $results['lang_status'] : [];
+            return true;
+        }//if($this->errno == 0){
+        return false;
     }
 
 

@@ -59,7 +59,7 @@ class Users extends Models implements Ue{
         $this->errno = 0;
         $delete_array = $this->setDeleteArray($where);
         if($delete_array != null){
-            $delQuery = parent::delete($delete_array["where"],$delete_array["where_format"]);
+            parent::delete($delete_array["where"],$delete_array["where_format"]);
             if($this->errno == 0)return true;
         }//if($delete_array != null){
         return false;
