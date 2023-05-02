@@ -12,12 +12,12 @@ trait SettingsTrait{
      */
     private function setInsertQuery(): array{
         $array_values = [
-             'lang_status' => $this->lang_status,
-             'included_pages_status' => $this->included_pages_status,
-             'socials_status' => $this->socials_status,
-             'social_pages' => $this->social_pages,
-             'contact_pages' => $this->contact_pages,
-             'privacy_policy_pages' => $this->privacy_policy_pages
+             'lang_status' => json_encode($this->lang_status,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
+             'included_pages_status' => json_encode($this->included_pages_status,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
+             'socials_status' => json_encode($this->socials_status,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
+             'social_pages' => json_encode($this->social_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
+             'contact_pages' => json_encode($this->contact_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
+             'privacy_policy_pages' => json_encode($this->privacy_policy_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)        
         ];
         $columns = "(";
         $values = [];

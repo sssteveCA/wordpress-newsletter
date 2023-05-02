@@ -67,12 +67,12 @@ class Settings extends Models{
     }
 
     private function assignValues(array $data){
-        $this->lang_status = $data['lang_status'];
-        $this->included_pages_status = $data['included_pages_status'];
-        $this->socials_status = $data['socials_status'];
-        $this->social_pages = $data['social_pages'];
-        $this->contact_pages = $data['contact_pages'];
-        $this->privacy_policy_pages = $data['privacy_policy_pages'];
+        $this->lang_status = isset($data['lang_status']) ? $data['lang_status'] : [];
+        $this->included_pages_status = isset($data['included_pages_status']) ? $data['included_pages_status'] : [];
+        $this->socials_status = isset($data['socials_status']) ? $data['socials_status'] : [];
+        $this->social_pages = isset($data['social_pages']) ? $data['social_pages'] : [];
+        $this->contact_pages = isset($data['contact_pages']) ? $data['contact_pages'] : [];
+        $this->privacy_policy_pages = isset($data['privacy_policy_pages']) ? $data['privacy_policy_pages'] : [];
     }
 
     /**
@@ -99,10 +99,9 @@ class Settings extends Models{
      */
     public function insertSettings(): bool{
         $this->errno = 0;
-        $sql = <<<SQL
-INSERT INTO `{$this->fullTableName}`;
-SQL;
-        $values = [];
+        $insert_query = $this->setInsertQuery();
+        parent::insert($insert_query['sql'],$insert_query['values']);
+        if($this->errno == 0) return true;
         return false;
     }
 

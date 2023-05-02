@@ -15,9 +15,9 @@ require_once(ABSPATH."wp-admin/includes/plugin.php");
 require_once(ABSPATH."wp-admin/includes/upgrade.php");
 require_once("vendor/autoload.php");
 
- use Newsletter\Classes\Database\Tables\Users;
- use Newsletter\Interfaces\Constants as C;
- use Newsletter\Classes\HtmlCode;
+use Newsletter\Classes\Database\Tables\Users;
+use Newsletter\Interfaces\Constants as C;
+use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\Properties;
 use Newsletter\Enums\Langs;
 
@@ -28,6 +28,8 @@ use Newsletter\Enums\Langs;
     $settings = new Settings(['tableName' => C::TABLE_SETTINGS]);
     $create_settings = $settings->getSqlCreate();
     dbDelta([$create_users,$create_settings]);
+    $settings_mode = new \Newsletter\Classes\Database\Models\Settings(['tableName' => C::TABLE_SETTINGS]);
+    $settings_mode->insertSettings();
  }
 
  register_uninstall_hook(__FILE__,'nl_delete_table');
