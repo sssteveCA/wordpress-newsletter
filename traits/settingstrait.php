@@ -19,22 +19,17 @@ trait SettingsTrait{
              'contact_pages' => json_encode($this->contact_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
              'privacy_policy_pages' => json_encode($this->privacy_policy_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)        
         ];
-        $columns = "(";
         $values = [];
-        $value_formats = "(";
-        foreach($array_values as $column => $value){
-            $columns .= "`{$column}`";
-            array_push($values,$value);
-            $value_formats .= "%s";
-            if(array_key_last($array_values) != $column){
-                $columns .= ",";
+        $value_formats = "";
+        foreach($array_values as $setting => $value){
+            array_push($values,$setting,$value);
+            $value_formats .= "( %s, %s )";
+            if(array_key_last($array_values) != $setting){
                 $value_formats .= ",";
             }
         }
-        $columns .= ")";
-        $value_formats .= ")";
         $sql = <<<SQL
-INSERT INTO `{$this->fullTableName}` {$columns} VALUES {$value_formats} ;
+INSERT INTO `{$this->fullTableName}` (`setting_name`,`setting_value`) VALUES {$value_formats};
 SQL;
         return [ 'sql' => $sql, 'values' => $values ];
     }
