@@ -113,7 +113,7 @@ class Users extends Models implements Ue{
      */
     public function updateUsers(array $data, array $where, array $format = [], array $where_f = []): bool{
         $this->errno = 0;
-        $update = parent::update($data,$where,$format,$where_f);
+        parent::update($data,$where,$format,$where_f);
         if($this->errno != 0)return false;
         return true;
     }
