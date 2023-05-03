@@ -19,6 +19,7 @@
   "scripts": {
     "build": "webpack --mode=production",
     "dev": "webpack --mode=development",
+    "dev:watch": "webpack watch --mode=development",
     "serve": "webpack server"
   }
 }

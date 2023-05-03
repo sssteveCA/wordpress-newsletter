@@ -1,6 +1,5 @@
 import { clientGet } from "../config/axios_instances";
 import { Constants } from "../namespaces/constants";
-import axios from "axios";
 
 export default class GetSettings{
 
@@ -72,6 +71,7 @@ export default class GetSettings{
                 console.log(res)
                 response = JSON.parse(res)
             }).catch(err =>{
+                console.warn(err)
                 throw err;
             })
         }catch(e){

@@ -5,13 +5,13 @@ import { Constants } from '../namespaces/constants';
 
 export const clientGet = axios.create({
     baseURL: Constants.HOME_URL,
-    timeout: 10000,
+    timeout: 20000,
     responseType: 'text'
 });
 
 export const clientPost = axios.create({
     baseURL: Constants.HOME_URL,
-    timeout: 10000,
+    timeout: 20000,
     headers: {
         'Content-Type' : 'application-json', 'Accept': 'application/json'
     },
