@@ -56,6 +56,13 @@ export default class FormDataSettingsSetHtml{
         this._cb_langs.lang_it.checked = (this._data.lang_status.it) ? true : false;
         this._cb_langs.lang_es.checked = (this._data.lang_status.es) ? true : false;
         this._cb_langs.lang_en.checked = (this._data.lang_status.en) ? true : false;
+        const change_event: Event = new Event('change');
+        if(this._cb_langs.lang_it.checked)
+            this._cb_langs.lang_it.dispatchEvent(change_event);
+        if(this._cb_langs.lang_es.checked)
+            this._cb_langs.lang_es.dispatchEvent(change_event);
+        if(this._cb_langs.lang_en.checked)
+            this._cb_langs.lang_en.dispatchEvent(change_event);
     }
 
     /**
@@ -73,6 +80,13 @@ export default class FormDataSettingsSetHtml{
         this._cb_social.facebook.checked = (this._data.socials_status.facebook) ? true : false;
         this._cb_social.instagram.checked = (this._data.socials_status.instagram) ? true : false;
         this._cb_social.youtube.checked = (this._data.socials_status.youtube) ? true : false;
+        const change_event: Event = new Event('change');
+        if(this._cb_social.facebook.checked)
+            this._cb_social.facebook.dispatchEvent(change_event);
+        if(this._cb_social.instagram.checked)
+            this._cb_social.instagram.dispatchEvent(change_event);
+        if(this._cb_social.youtube.checked)
+            this._cb_social.youtube.dispatchEvent(change_event);
     }
 
     /**
@@ -101,6 +115,5 @@ export default class FormDataSettingsSetHtml{
         this._input_privacy_policy_pages.lang_es.value = (this._data.privacy_policy_pages.es) ? this._data.privacy_policy_pages.es as string : "";
         this._input_privacy_policy_pages.lang_en.value = (this._data.privacy_policy_pages.en) ? this._data.privacy_policy_pages.en as string : "";
     }
-
 
 }
