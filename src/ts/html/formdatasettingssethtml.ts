@@ -18,6 +18,10 @@ export default class FormDataSettingsSetHtml{
         this.assignValues(data);
     }
 
+    get data(){return this._data;}
+
+    set data(data: NlSettingsData){ this._data = data; }
+
     private assignValues(data: NlFormDataSettingsSet): void{
         this._data = data.data;
         this._container_langs = data.container_langs;
@@ -31,5 +35,20 @@ export default class FormDataSettingsSetHtml{
         this._input_contacts_pages = data.input_contacts_pages;
         this._container_privacy_pages = data.container_privacy_pages;
         this._input_privacy_policy_pages = data.input_privacy_policy_pages;
+    }
+
+    public setSettingsForm(): void{
+        if(this._data){
+
+        }//if(this._data){
+    }
+
+    /**
+     * Change the language checkbox values
+     */
+    private setLangCheckboxes(): void{
+        this._cb_langs.lang_it.checked = (this._data.lang_status.it) ? true : false;
+        this._cb_langs.lang_es.checked = (this._data.lang_status.es) ? true : false;
+        this._cb_langs.lang_en.checked = (this._data.lang_status.en) ? true : false;
     }
 }
