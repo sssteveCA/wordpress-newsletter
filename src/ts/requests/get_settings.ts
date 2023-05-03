@@ -1,4 +1,6 @@
+import { clientGet } from "../config/axios_instances";
 import { Constants } from "../namespaces/constants";
+import axios from "axios";
 
 export default class GetSettings{
 
@@ -49,6 +51,39 @@ export default class GetSettings{
      get social_pages(){ return this._social_pages};
      get contact_pages(){ return this._contact_pages};
      get privacy_policy_pages(){ return this._privacy_policy_pages};
+     get errno(){return this._errno;}
+     get error(){
+        switch(this._errno){
+            case GetSettings.ERR_FETCH:
+                this._error = GetSettings.ERR_FETCH_MSG;
+                break;
+            default:
+                this._error = null;
+                break;
+        }
+        return this._error;
+    }
 
-    
+    public async getSettings(): Promise<object>{
+        let response: object = {}
+        this._errno = 0;
+        try{
+            await this.getSettingsPromise().then(res => {
+                console.log(res)
+                response = JSON.parse(res)
+            }).catch(err =>{
+                throw err;
+            })
+        }catch(e){
+            this._errno = GetSettings.ERR_FETCH;
+            response = {done: false}
+        }
+        return response;
+    }
+
+    private async getSettingsPromise(): Promise<string>{
+        return await new Promise<string>((resolve,reject)=>{
+            clientGet.get(GetSettings.FETCH_URL).then(res => resolve(res.data)).catch(err => reject(err));
+        });
+    }
 }
