@@ -44,7 +44,7 @@ export default class FormDataSettingsSetHtml{
     }
 
     /**
-     * Change the language checkbox values
+     * Set the language checkbox state
      */
     private setLangCheckboxes(): void{
         this._cb_langs.lang_it.checked = (this._data.lang_status.it) ? true : false;
@@ -53,10 +53,23 @@ export default class FormDataSettingsSetHtml{
     }
 
     /**
-     * Change the page enabled checkbox values
+     * Set the page enabled checkbox state
      */
     private setPageEnabledCheckboxes(): void{
         this._cb_pages_enabled.contacts_pages.checked = (this._data.included_pages_status.contacts_pages) ? true : false;
         this._cb_pages_enabled.privacy_policy_pages.checked = (this._data.included_pages_status.privacy_policy_pages) ? true : false;
     }
+
+    /**
+     * Set the social checkboxes state
+     */
+    private setSocialCheckboxes(): void{
+        this._cb_social.facebook.checked = (this._data.socials_status.facebook) ? true : false;
+        this._cb_social.instagram.checked = (this._data.socials_status.instagram) ? true : false;
+        this._cb_social.youtube.checked = (this._data.socials_status.youtube) ? true : false;
+    }
+
+    
+
+
 }
