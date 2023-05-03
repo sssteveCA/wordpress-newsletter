@@ -51,4 +51,12 @@ export default class FormDataSettingsSetHtml{
         this._cb_langs.lang_es.checked = (this._data.lang_status.es) ? true : false;
         this._cb_langs.lang_en.checked = (this._data.lang_status.en) ? true : false;
     }
+
+    /**
+     * Change the page enabled checkbox values
+     */
+    private setPageEnabledCheckboxes(): void{
+        this._cb_pages_enabled.contacts_pages.checked = (this._data.included_pages_status.contacts_pages) ? true : false;
+        this._cb_pages_enabled.privacy_policy_pages.checked = (this._data.included_pages_status.privacy_policy_pages) ? true : false;
+    }
 }
