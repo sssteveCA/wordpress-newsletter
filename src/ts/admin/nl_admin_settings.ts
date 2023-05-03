@@ -64,8 +64,6 @@ window.addEventListener('DOMContentLoaded',()=>{
                 container_privacy_pages: fds.container_privacy_pages,
                 input_privacy_policy_pages: fds.input_privacy_policy_pages,
             }
-            console.log("fds_set_data");
-            console.log(fds_set_data);
             const fds_set: FormDataSettingsSetHtml = new FormDataSettingsSetHtml(fds_set_data)
             fds_set.setSettingsForm();
         }//if(obj[Constants.KEY_DONE]){
