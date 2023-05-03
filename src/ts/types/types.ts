@@ -20,6 +20,9 @@ export type GetSubscriber = {
     lang: string;
 }
 
+/**
+ * Newsletter subscribe form values
+ */
 export type NlFormData = {
     name?: string;
     surname?: string;
@@ -29,6 +32,9 @@ export type NlFormData = {
     lang: string;
 };
 
+/**
+ * Newsletter subscribe form elements
+ */
 export type NlFormDataElements = {
     name: HTMLInputElement;
     surname: HTMLInputElement;
@@ -78,7 +84,7 @@ export type NlFormDataSettings = {
  * Type needed by FormDataSettingsSetHtml class to manipulate the DOM depending on the settings data received
  */
 export type NlFormDataSettingsSet = {
-    data: object;
+    data: NlSettingsData;
 } & Omit<NlFormDataSettings,"buttons">
 
 /**
@@ -115,6 +121,32 @@ export type NlFormDataSettingsInputSocial = {
 
 export type NlFormDataSettingsButtons = {
     primary: HTMLButtonElement;
+}
+
+export type NlLanguages = {
+    en?: boolean|string;
+    es?: boolean|string;
+    it?: boolean|string;
+}
+
+/**
+ * This object contains the settings properties getted from the DB
+ */
+export type NlSettingsData = {
+    lang_status: NlLanguages,
+    included_pages_status: {
+        contacts_pages: boolean, privacy_policy_pages: boolean
+    },
+    socials_status: NlSocials,
+    social_pages: NlSocials,
+    contact_pages: NlLanguages,
+    privacy_policy_pages: NlLanguages
+}
+
+export type NlSocials = {
+    facebook?: boolean|string;
+    instagram?: boolean|string;
+    youtube?: boolean|string;
 }
 
 export type NlUnsubscribeUserData = {

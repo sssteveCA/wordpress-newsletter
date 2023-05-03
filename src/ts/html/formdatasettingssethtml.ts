@@ -1,7 +1,7 @@
-import { NlFormDataSettingsInputLangs, NlFormDataSettingsInputPagesEnabled, NlFormDataSettingsInputSocial, NlFormDataSettingsSet } from "../types/types";
+import { NlFormDataSettingsInputLangs, NlFormDataSettingsInputPagesEnabled, NlFormDataSettingsInputSocial, NlFormDataSettingsSet, NlSettingsData } from "../types/types";
 
 export default class FormDataSettingsSetHtml{
-    private _data: object;
+    private _data: NlSettingsData;
     private _container_langs: HTMLDivElement;
     private _cb_langs: NlFormDataSettingsInputLangs;
     private _container_pages_enabled: HTMLDivElement;
