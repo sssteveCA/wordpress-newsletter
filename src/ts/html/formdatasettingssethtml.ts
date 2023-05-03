@@ -69,7 +69,14 @@ export default class FormDataSettingsSetHtml{
         this._cb_social.youtube.checked = (this._data.socials_status.youtube) ? true : false;
     }
 
-    
+    /**
+     * Set the social profile URL input tag values
+     */
+    private setSocialProfileURLs(): void{
+        this._input_social_links.facebook.value = (this._data.social_pages.facebook) ? this._data.social_pages.facebook as string : "";
+        this._input_social_links.instagram.value = (this._data.social_pages.instagram) ? this._data.social_pages.instagram as string : "";
+        this._input_social_links.youtube.value = (this._data.social_pages.youtube) ? this._data.social_pages.youtube as string : "";
+    }
 
 
 }
