@@ -23,6 +23,7 @@ interface Constants{
     const H_JS_WP_FORM = 'nlNewsletterJs';
 
     const KEY_AJAX = 'ajax';
+    const KEY_DATA = 'data';
     //Keys
     const KEY_DONE = 'done';
     const KEY_EMPTY = 'empty';
