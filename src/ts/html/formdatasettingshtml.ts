@@ -23,6 +23,19 @@ export default class FormDataSettingsHtml{
         this.checkboxPrivacyPolicyPagesChange();
     }
 
+    get container_langs(){ return this._container_langs; }
+    get cb_langs(){ return this._cb_langs; }
+    get container_pages_enabled(){ return this._container_pages_enabled; }
+    get cb_pages_enabled(){ return this._cb_pages_enabled; }
+    get cb_social(){ return this._cb_social; }
+    get row_social_links(){ return this._row_social_links; }
+    get input_social_links(){ return this._input_social_links; }
+    get container_contacts_pages(){ return this._container_contacts_pages; }
+    get input_contacts_pages(){ return this._input_contacts_pages; }
+    get container_privacy_pages(){return this._container_contacts_pages; }
+    get input_privacy_policy_pages(){ return this._input_privacy_policy_pages; }
+    get buttons(){ return this._buttons };
+
     private assignValues(data: NlFormDataSettings){
         this._container_langs = data.container_langs;
         this._cb_langs = data.cb_langs;
