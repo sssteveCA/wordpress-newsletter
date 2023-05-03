@@ -70,12 +70,21 @@ export default class FormDataSettingsSetHtml{
     }
 
     /**
-     * Set the social profile URL input tag values
+     * Set the social profile URLs input tag values
      */
     private setSocialProfileURLs(): void{
         this._input_social_links.facebook.value = (this._data.social_pages.facebook) ? this._data.social_pages.facebook as string : "";
         this._input_social_links.instagram.value = (this._data.social_pages.instagram) ? this._data.social_pages.instagram as string : "";
         this._input_social_links.youtube.value = (this._data.social_pages.youtube) ? this._data.social_pages.youtube as string : "";
+    }
+
+    /**
+     * Set the contact page URLs input tag values
+     */
+    private setContactPageURLs(): void{
+        this._input_contacts_pages.lang_it.value = (this._data.contact_pages.it) ? this._data.contact_pages.it as string : "";
+        this._input_contacts_pages.lang_es.value = (this._data.contact_pages.es) ? this._data.contact_pages.es as string : "";
+        this._input_contacts_pages.lang_en.value = (this._data.contact_pages.en) ? this._data.contact_pages.en as string : "";
     }
 
 
