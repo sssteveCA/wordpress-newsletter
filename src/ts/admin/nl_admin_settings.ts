@@ -1,4 +1,5 @@
 import FormDataSettingsHtml from "../html/formdatasettingshtml";
+import GetSettings from "../requests/get_settings";
 import { NlFormDataSettings } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
@@ -44,4 +45,6 @@ window.addEventListener('DOMContentLoaded',()=>{
     const fds: FormDataSettingsHtml = new FormDataSettingsHtml(fds_data)
     fds.onFormSubmit((data) => {
     });
+    const gs: GetSettings = new GetSettings();
+    gs.getSettings();
 });

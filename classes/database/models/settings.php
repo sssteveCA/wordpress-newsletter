@@ -83,12 +83,12 @@ class Settings extends Models{
         //Select all table rows 
         $results = parent::get('',[]);
         if($this->errno == 0){
-            $this->lang_status = json_decode($results['lang_status'],true);
-            $this->included_pages_status = json_decode($results['included_pages_status'],true);
-            $this->socials_status = json_decode($results['socials_status'],true);
-            $this->social_pages = json_decode($results['social_pages'],true);
-            $this->contact_pages = json_decode($results['contact_pages'],true);
-            $this->privacy_policy_pages = json_decode($results['lang_status'],true);
+            $this->lang_status = isset($results['lang_status']) ? json_decode($results['lang_status'],true) : [];
+            $this->included_pages_status = isset($results['lang_status']) ? json_decode($results['included_pages_status'],true) : [];
+            $this->socials_status = isset($results['lang_status']) ? json_decode($results['socials_status'],true) : [];
+            $this->social_pages = isset($results['lang_status']) ? json_decode($results['social_pages'],true) : [];
+            $this->contact_pages = isset($results['lang_status']) ? json_decode($results['contact_pages'],true) : [];
+            $this->privacy_policy_pages = isset($results['lang_status']) ? json_decode($results['lang_status'],true) : [];
             return true;
         }//if($this->errno == 0){
         return false;
