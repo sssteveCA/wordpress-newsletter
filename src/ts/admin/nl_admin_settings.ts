@@ -1,6 +1,7 @@
 import FormDataSettingsHtml from "../html/formdatasettingshtml";
+import { Constants } from "../namespaces/constants";
 import GetSettings from "../requests/get_settings";
-import { NlFormDataSettings } from "../types/types";
+import { NlFormDataSettings, NlFormDataSettingsSet } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
     const fds_data: NlFormDataSettings = {
@@ -46,5 +47,22 @@ window.addEventListener('DOMContentLoaded',()=>{
     fds.onFormSubmit((data) => {
     });
     const gs: GetSettings = new GetSettings();
-    gs.getSettings();
+    gs.getSettings().then(obj => {
+        if(obj[Constants.KEY_DONE]){
+            let fds_set_data: NlFormDataSettingsSet = {
+                data: obj[Constants.KEY_DATA],
+                container_pages_enabled: fds.container_pages_enabled,
+                cb_pages_enabled: fds.cb_pages_enabled,
+                container_langs: fds.container_langs,
+                cb_langs: fds.cb_langs,
+                cb_social: fds.cb_social,
+                row_social_links: fds.row_social_links,
+                input_social_links: fds.input_social_links,
+                container_contacts_pages: fds.container_contacts_pages,
+                input_contacts_pages: fds.input_contacts_pages,
+                container_privacy_pages: fds.container_privacy_pages,
+                input_privacy_policy_pages: fds.input_privacy_policy_pages,
+            }
+        }//if(obj[Constants.KEY_DONE]){
+    })
 });

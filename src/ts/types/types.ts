@@ -79,7 +79,7 @@ export type NlFormDataSettings = {
  */
 export type NlFormDataSettingsSet = {
     data: object;
-} & NlFormDataSettings;
+} & Omit<NlFormDataSettings,"buttons">
 
 /**
  * The data of the admin settings form to send to the server
