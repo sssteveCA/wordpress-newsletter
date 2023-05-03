@@ -1,4 +1,5 @@
 import FormDataSettingsHtml from "../html/formdatasettingshtml";
+import FormDataSettingsSetHtml from "../html/formdatasettingssethtml";
 import { Constants } from "../namespaces/constants";
 import GetSettings from "../requests/get_settings";
 import { NlFormDataSettings, NlFormDataSettingsSet } from "../types/types";
@@ -49,7 +50,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     const gs: GetSettings = new GetSettings();
     gs.getSettings().then(obj => {
         if(obj[Constants.KEY_DONE]){
-            let fds_set_data: NlFormDataSettingsSet = {
+            const fds_set_data: NlFormDataSettingsSet = {
                 data: obj[Constants.KEY_DATA],
                 container_pages_enabled: fds.container_pages_enabled,
                 cb_pages_enabled: fds.cb_pages_enabled,
@@ -63,6 +64,10 @@ window.addEventListener('DOMContentLoaded',()=>{
                 container_privacy_pages: fds.container_privacy_pages,
                 input_privacy_policy_pages: fds.input_privacy_policy_pages,
             }
+            console.log("fds_set_data");
+            console.log(fds_set_data);
+            const fds_set: FormDataSettingsSetHtml = new FormDataSettingsSetHtml(fds_set_data)
+            fds_set.setSettingsForm();
         }//if(obj[Constants.KEY_DONE]){
     })
 });

@@ -68,6 +68,7 @@ export default class GetSettings{
         this._errno = 0;
         try{
             await this.getSettingsPromise().then(res => {
+                console.log("get_settings getSettings data")
                 console.log(res)
                 response = JSON.parse(res)
             }).catch(err =>{

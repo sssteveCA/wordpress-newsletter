@@ -37,10 +37,16 @@ export default class FormDataSettingsSetHtml{
         this._input_privacy_policy_pages = data.input_privacy_policy_pages;
     }
 
+    /**
+     * Set the settings form values using the settings data obtained
+     */
     public setSettingsForm(): void{
-        if(this._data){
-
-        }//if(this._data){
+        this.setLangCheckboxes();
+        this.setPageEnabledCheckboxes();
+        this.setSocialCheckboxes();
+        this.setSocialProfileURLs();
+        this.setContactPageURLs();
+        this.setPrivacyPolicyPageURLs();
     }
 
     /**
@@ -85,6 +91,15 @@ export default class FormDataSettingsSetHtml{
         this._input_contacts_pages.lang_it.value = (this._data.contact_pages.it) ? this._data.contact_pages.it as string : "";
         this._input_contacts_pages.lang_es.value = (this._data.contact_pages.es) ? this._data.contact_pages.es as string : "";
         this._input_contacts_pages.lang_en.value = (this._data.contact_pages.en) ? this._data.contact_pages.en as string : "";
+    }
+
+    /**
+     * Set the privacy policy URLs input tag values
+     */
+    private setPrivacyPolicyPageURLs(): void{
+        this._input_privacy_policy_pages.lang_it.value = (this._data.privacy_policy_pages.it) ? this._data.privacy_policy_pages.it as string : "";
+        this._input_privacy_policy_pages.lang_es.value = (this._data.privacy_policy_pages.es) ? this._data.privacy_policy_pages.es as string : "";
+        this._input_privacy_policy_pages.lang_en.value = (this._data.privacy_policy_pages.en) ? this._data.privacy_policy_pages.en as string : "";
     }
 
 
