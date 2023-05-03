@@ -75,6 +75,13 @@ export type NlFormDataSettings = {
 }
 
 /**
+ * Type needed by FormDataSettingsSetHtml class to manipulate the DOM depending on the settings data received
+ */
+export type NlFormDataSettingsSet = {
+    data: object;
+} & NlFormDataSettings;
+
+/**
  * The data of the admin settings form to send to the server
  */
 export type NlFormPostDataSettings = {
