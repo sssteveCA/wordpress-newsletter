@@ -14,10 +14,6 @@ $response = [
     C::KEY_DATA => [], C::KEY_DONE => false, C::KEY_MESSAGE => ''
 ];
 
-$current_user = wp_get_current_user();
-$logged = ($current_user->ID != 0);
-$administrator = current_user_can('manage_options');
-
 try{
     $dotenv = Dotenv::createImmutable("../../../");
     $dotenv->load();
@@ -28,7 +24,7 @@ try{
     ];
     $authCheck = new AuthCheck($apiAuthArray);
     if($authCheck->getErrno() == 0){
-        $settings = new Settings([]);
+        $settings = new Settings(['tableName' => C::TABLE_SETTINGS]);
         $settings->getSettings();
         if($settings->getErrno() == 0){
             $response[C::KEY_DONE] = true;

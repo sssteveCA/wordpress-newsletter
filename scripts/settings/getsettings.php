@@ -17,7 +17,7 @@ $administrator = current_user_can('manage_options');
 
 if($logged && $administrator){
     try{
-        $settings = new Settings([]);
+        $settings = new Settings(['tableName' => C::TABLE_SETTINGS]);
         $settings->getSettings();
         if($settings->getErrno() == 0){
             $response[C::KEY_DONE] = true;
