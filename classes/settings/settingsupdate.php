@@ -4,6 +4,7 @@ namespace Newsletter\Classes\Settings;
 use Newsletter\Classes\Database\Models\Settings;
 use Newsletter\Traits\ErrorTrait;
 use Newsletter\Classes\Settings\SettingsUpdateErrors as Sue;
+use Newsletter\Interfaces\Constants as C;
 
 interface SettingsUpdateErrors{
 
@@ -81,6 +82,7 @@ class SettingsUpdate implements Sue{
 
     private function settingsUpdate(): bool{
         $settings_data = [
+            'tableName' => C::TABLE_SETTINGS,
             'lang_status' => $this->lang_status,
             'included_pages_status' => $this->included_pages_status,
             'socials_status' => $this->socials_status,

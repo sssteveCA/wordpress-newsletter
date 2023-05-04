@@ -19,21 +19,21 @@ $administrator = current_user_can('manage_options');
 if($logged && $administrator){
     $input = file_get_contents("php://input");
     $put = json_decode($input,true);
-    $ls_ok = (isset($put['lang_status']) && $put['lang_status'] != "");
-    $ips_ok = (isset($put['included_pages_status']) && $put['included_pages_status'] != "");
-    $ss_ok = (isset($put['socials_status']) && $put['socials_status'] != "");
-    $sp_ok = (isset($put['social_pages']) && $put['social_pages'] != "");
-    $cp_ok = (isset($put['contact_pages']) && $put['contact_pages'] != "");
-    $ppp_ok = (isset($put['privacy_policy_pages']) && $put['privacy_policy_pages'] != "");
+    $ls_ok = (isset($put['data']['lang_status']) && $put['data']['lang_status'] != "");
+    $ips_ok = (isset($put['data']['included_pages_status']) && $put['data']['included_pages_status'] != "");
+    $ss_ok = (isset($put['data']['socials_status']) && $put['data']['socials_status'] != "");
+    $sp_ok = (isset($put['data']['social_pages']) && $put['data']['social_pages'] != "");
+    $cp_ok = (isset($put['data']['contact_pages']) && $put['data']['contact_pages'] != "");
+    $ppp_ok = (isset($put['data']['privacy_policy_pages']) && $put['data']['privacy_policy_pages'] != "");
     if($ls_ok && $ips_ok && $ss_ok && $sp_ok && $cp_ok && $ppp_ok){
         try{
             $sc_data = [
-                'lang_status' => json_decode($put['lang_status'],true),
-                'included_pages_status' => json_decode($put['included_pages_status'],true),
-                'socials_status' => json_decode($put['socials_status'],true),
-                'social_pages' => json_decode($put['social_pages'],true),
-                'contact_pages' => json_decode($put['contact_pages'],true),
-                'privacy_policy_pages' => json_decode($put['privacy_policy_pages'],true),
+                'lang_status' => $put['data']['lang_status'],
+                'included_pages_status' => $put['data']['included_pages_status'],
+                'socials_status' => $put['data']['socials_status'],
+                'social_pages' => $put['data']['social_pages'],
+                'contact_pages' => $put['data']['contact_pages'],
+                'privacy_policy_pages' => $put['data']['privacy_policy_pages'],
             ];
             $settings_check = new SettingsCheck($sc_data);
             $su_data = [

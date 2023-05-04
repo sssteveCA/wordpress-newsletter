@@ -331,7 +331,7 @@ HTML;
             <div class="col d-flex justify-content-center">
                 <div>
                     <button id="nl_primary_button" type="button" class="btn btn-primary">AGGIORNA</button>
-                <div>
+                </div>
                 <div id="nl_spinner" class="spinner-border text-dark invisible ms-3" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>

@@ -111,17 +111,11 @@ class Settings extends Models{
     public function updateSettings(): bool{
         $this->errno = 0;
         parent::update(['setting_value' => json_encode($this->lang_status,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'lang_status'],["%s"]);
-        if($this->errno != 0) return false;
         parent::update(['setting_value' => json_encode($this->included_pages_status,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'included_pages_status'],["%s"]);
-        if($this->errno != 0) return false;
         parent::update(['setting_value' => json_encode($this->socials_status,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'socials_status'],["%s"]);
-        if($this->errno != 0) return false;
         parent::update(['setting_value' => json_encode($this->social_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'social_pages'],["%s"]);
-        if($this->errno != 0) return false;
         parent::update(['setting_value' => json_encode($this->contact_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'contact_pages'],["%s"]);
-        if($this->errno != 0) return false;
         parent::update(['setting_value' => json_encode($this->privacy_policy_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'privacy_policy_pages'],["%s"]);
-        if($this->errno != 0) return false;
         return true;
     }
 

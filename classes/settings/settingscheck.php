@@ -10,7 +10,7 @@ class SettingsCheck{
     /**
      * Keys allowed for included_pages_status property
      */
-    private static array $included_pages_key_allowed = ["contact_pages","privacy_policy_pages"];
+    private static array $included_pages_key_allowed = ["contacts_pages","privacy_policy_pages"];
 
     /**
      * Keys allowed for lang_status, contact_pages and privacy_policy_pages properties
@@ -68,7 +68,7 @@ class SettingsCheck{
      * Keep only the correct items in the array
      */
     private function filterInputArray(array $data){
-        $this->filterIncludedPagesArray($data['included_page_status']);
+        $this->filterIncludedPagesArray($data['included_pages_status']);
         $this->filterLanguageArrays($data['lang_status'],$data['contact_pages'],$data['privacy_policy_pages']);
         $this->filterSocialArrays($data['socials_status'],$data['social_pages']);
     }
