@@ -1,9 +1,18 @@
 <?php
 
 namespace Newsletter\Classes\Settings;
+use Newsletter\Classes\Database\Models\Settings;
 use Newsletter\Traits\ErrorTrait;
+use Newsletter\Classes\Settings\SettingsUpdateErrors as Sue;
 
-class SettingsUpdate{
+interface SettingsUpdateErrors{
+
+    const ERR_SETTINGS_UPDATE = 1;
+
+    const ERR_SETTINGS_UPDATE_MSG = "Errore durante l'aggiormamento delle impostazioni";
+}
+
+class SettingsUpdate implements Sue{
 
     use ErrorTrait;
 
@@ -39,6 +48,7 @@ class SettingsUpdate{
 
     public function __construct(array $data){
         $this->assignValues($data);
+        $this->settingsUpdate();
     }
 
     public function getLangStatus(){ return $this->lang_status; }
@@ -50,6 +60,9 @@ class SettingsUpdate{
 
     public function getError(){
         switch($this->errno){
+            case Sue::ERR_SETTINGS_UPDATE:
+                $this->error = Sue::ERR_SETTINGS_UPDATE_MSG;
+                break;
             default:
                 $this->error = null;
                 break;
@@ -64,6 +77,22 @@ class SettingsUpdate{
         $this->social_pages = $data['social_pages'];
         $this->contact_pages = $data['contact_pages'];
         $this->privacy_policy_pages = $data['privacy_policy_pages'];
+    }
+
+    private function settingsUpdate(): bool{
+        $settings_data = [
+            'lang_status' => $this->lang_status,
+            'included_pages_status' => $this->included_pages_status,
+            'socials_status' => $this->socials_status,
+            'social_pages' => $this->social_pages,
+            'contact_pages' => $this->contact_pages,
+            'privacy_policy_pages' => $this->privacy_policy_pages,
+        ];
+        $settings = new Settings($settings_data);
+        if($settings->updateSettings())
+            return true;
+        $this->errno = Sue::ERR_SETTINGS_UPDATE;
+        return false;
     }
 }
 ?>
