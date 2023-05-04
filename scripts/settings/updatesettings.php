@@ -35,8 +35,17 @@ if($logged && $administrator){
                 'privacy_policy_pages' => json_decode($put['privacy_policy_pages'],true),
             ];
             $settings_check = new SettingsCheck($sc_data);
+            $su_data = [
+                'lang_status' => $settings_check->getLangStatus(),
+                'included_pages_status' => $settings_check->getIncludedPagesStatus(),
+                'socials_status' => $settings_check->getSocialsStatus(),
+                'social_pages' => $settings_check->getSocialPages(),
+                'contact_pages' => $settings_check->getContactPages(),
+                'privacy_policy_pages' => $settings_check->getPrivacyPolicyPages(),
+            ];
         }catch(Exception $e){
-
+            http_response_code(500);
+            $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;
         }
     }//if($ls_ok && $ips_ok && $ss_ok && $sp_ok && $cp_ok && $ppp_ok){
     else{
