@@ -1,13 +1,11 @@
 <?php
 
 namespace Newsletter\Classes\Settings;
-use Newsletter\Traits\ErrorTrait;
 
 /**
  * This class check verify the provided user settings data and eventually correct them
  */
 class SettingsCheck{
-    use ErrorTrait;
 
     /**
      * Keys allowed for included_pages_status property
@@ -55,7 +53,7 @@ class SettingsCheck{
     private array $privacy_policy_pages = [];
 
     public function __construct(array $data){
-
+        $this->filterInputArray($data);
     }
 
     public function getLangStatus(){ return $this->lang_status; }
@@ -64,6 +62,16 @@ class SettingsCheck{
     public function getSocialPages(){ return $this->social_pages; }
     public function getContactPages(){ return $this->contact_pages; }
     public function getPrivacyPolicyPages(){ return $this->privacy_policy_pages; }
+
+
+    /**
+     * Keep only the correct items in the array
+     */
+    private function filterInputArray(array $data){
+        $this->filterIncludedPagesArray($data['included_page_status']);
+        $this->filterLanguageArrays($data['lang_status'],$data['contact_pages'],$data['privacy_policy_pages']);
+        $this->filterSocialArrays($data['socials_status'],$data['social_pages']);
+    }
 
     /**
      * Add only the included page status valid keys and values to the respective properties

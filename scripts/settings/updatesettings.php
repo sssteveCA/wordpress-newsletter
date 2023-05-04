@@ -3,6 +3,7 @@
 require_once("../../../../../wp-load.php");
 require_once("../../vendor/autoload.php");
 
+use Newsletter\Classes\Settings\SettingsCheck;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 
@@ -24,7 +25,19 @@ if($logged && $administrator){
     $cp_ok = (isset($put['contact_pages']) && $put['contact_pages'] != "");
     $ppp_ok = (isset($put['privacy_policy_pages']) && $put['privacy_policy_pages'] != "");
     if($ls_ok && $ips_ok && $ss_ok && $sp_ok && $cp_ok && $ppp_ok){
+        try{
+            $sc_data = [
+                'lang_status' => json_decode($put['lang_status'],true),
+                'included_pages_status' => json_decode($put['included_pages_status'],true),
+                'socials_status' => json_decode($put['socials_status'],true),
+                'social_pages' => json_decode($put['social_pages'],true),
+                'contact_pages' => json_decode($put['contact_pages'],true),
+                'privacy_policy_pages' => json_decode($put['privacy_policy_pages'],true),
+            ];
+            $settings_check = new SettingsCheck($sc_data);
+        }catch(Exception $e){
 
+        }
     }//if($ls_ok && $ips_ok && $ss_ok && $sp_ok && $cp_ok && $ppp_ok){
     else{
         http_response_code(400);
