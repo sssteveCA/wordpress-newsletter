@@ -38,7 +38,7 @@ class SettingsUpdate{
     private array $privacy_policy_pages = [];
 
     public function __construct(array $data){
-
+        $this->assignValues($data);
     }
 
     public function getLangStatus(){ return $this->lang_status; }
@@ -55,6 +55,15 @@ class SettingsUpdate{
                 break;
         }
         return $this->error;
+    }
+
+    private function assignValues(array $data){
+        $this->lang_status = $data['lang_status'];
+        $this->included_pages_status = $data['included_pages_status'];
+        $this->socials_status = $data['socials_status'];
+        $this->social_pages = $data['social_pages'];
+        $this->contact_pages = $data['contact_pages'];
+        $this->privacy_policy_pages = $data['privacy_policy_pages'];
     }
 }
 ?>
