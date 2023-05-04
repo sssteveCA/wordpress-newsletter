@@ -24,12 +24,13 @@ $current_user = wp_get_current_user();
 $logged = ($current_user->ID != 0);
 $administrator = current_user_can('manage_options');
 
+$input = file_get_contents("php://input");
+$post = json_decode($input,true);
+
 if(!isset($post['lang'])) $post['lang'] = 'en';
 $lang = General::languageCode($post['lang']);
 
 if($logged && $administrator){
-    $input = file_get_contents("php://input");
-    $post = json_decode($input,true);
     if(isset($post['email'],$post['lang_code']) && $post['email'] != '' && $post['lang_code'] != ''){
         $userData = [
             'tableName' => C::TABLE_USERS, 'email' => trim($post['email']), 'lang' => $post['lang_code']
