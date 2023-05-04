@@ -81,12 +81,24 @@ class SettingsCheck{
         $this->lang_status = array_filter($lang_status, function($value,$key){
             return (in_array($key,SettingsCheck::$language_key_allowed) && in_array($value,[false,true]));
         },ARRAY_FILTER_USE_BOTH);
-        $this->contact_pages = array_filter($contact_pages, function($value,$key){
+        $this->contact_pages = array_filter($contact_pages, function($key){
             return in_array($key,SettingsCheck::$language_key_allowed);
-        },ARRAY_FILTER_USE_BOTH);
-        $this->privacy_policy_pages = array_filter($privacy_policy_pages,function($value,$key){
+        },ARRAY_FILTER_USE_KEY);
+        $this->privacy_policy_pages = array_filter($privacy_policy_pages,function($key){
             return in_array($key,SettingsCheck::$language_key_allowed);
+        },ARRAY_FILTER_USE_KEY);
+    }
+
+    /**
+     * Add only the social valid keys and values to the respective properties
+     */
+    private function filterSocialArrays(array $socials_status, array $social_pages){
+        $this->socials_status = array_filter($socials_status,function($value,$key){
+            return (in_array($key,SettingsCheck::$socials_key_allowed) && in_array($value,[false,true]));
         },ARRAY_FILTER_USE_BOTH);
+        $this->social_pages = array_filter($social_pages,function($key){
+            return (in_array($key,SettingsCheck::$socials_key_allowed));
+        },ARRAY_FILTER_USE_KEY);
     }
 
 
