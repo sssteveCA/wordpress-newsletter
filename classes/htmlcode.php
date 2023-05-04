@@ -328,8 +328,13 @@ HTML;
     </div>
     <div id="nl_container_buttons" class="container mt-5">
         <div class="row flex-column flex-md-row justify-content-center justify-content-md-around">
-            <div class="col text-center">
-                <button id="nl_primary_button" type="button" class="btn btn-primary">AGGIORNA</button>
+            <div class="col d-flex justify-content-center">
+                <div>
+                    <button id="nl_primary_button" type="button" class="btn btn-primary">AGGIORNA</button>
+                <div>
+                <div id="nl_spinner" class="spinner-border text-dark invisible ms-3" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
             <div class="col text-center">
                 <button type="reset" class="btn btn-danger">ANNULLA</button>

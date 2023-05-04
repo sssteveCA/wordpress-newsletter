@@ -81,7 +81,7 @@ export default class UpdateSettings{
         this._errno = 0;
         try{
             await this.updateSettingsPromise().then(res =>{
-                console.log(res)
+                //console.log(res)
                 response = JSON.parse(res)
             }).catch(err => {
                 throw err;

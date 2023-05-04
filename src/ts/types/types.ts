@@ -87,21 +87,6 @@ export type NlFormDataSettingsSet = {
     data: NlSettingsData;
 } & Omit<NlFormDataSettings,"buttons">
 
-/**
- * The data of the admin settings form to send to the server
- */
-export type NlFormPostDataSettings = {
-    facebook_page: string|null;
-    instagram_page: string|null;
-    youtube_page: string|null;
-    contacts_page_it: string|null;
-    contacts_page_es: string|null;
-    contacts_page_en: string|null;
-    privacy_policy_page_it: string|null;
-    privacy_policy_page_es: string|null;
-    privacy_policy_page_en: string|null;
-}
-
 export type NlFormDataSettingsInputPagesEnabled = {
     contacts_pages: HTMLInputElement;
     privacy_policy_pages: HTMLInputElement;
@@ -142,8 +127,8 @@ export type NlSettingsData = {
 }
 
 export type NlPages = {
-    contacts_pages: boolean, 
-    privacy_policy_pages: boolean
+    contacts_pages?: boolean, 
+    privacy_policy_pages?: boolean
 }
 
 export type NlSocials = {

@@ -2,10 +2,11 @@ import FormDataSettingsHtml from "../html/formdatasettingshtml";
 import FormDataSettingsSetHtml from "../html/formdatasettingssethtml";
 import { Constants } from "../namespaces/constants";
 import GetSettings from "../requests/get_settings";
-import { NlFormDataSettings, NlFormDataSettingsSet } from "../types/types";
+import UpdateSettings from "../requests/update_settings";
+import { NlFormDataSettings, NlFormDataSettingsSet, NlSettingsData } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
-    const primary_button: HTMLButtonElement = document.getElementById('nl_primary_button') as HTMLButtonElement
+    const spinner: HTMLDivElement = document.getElementById('nl_spinner') as HTMLDivElement
     const fds_data: NlFormDataSettings = {
         container_pages_enabled: document.getElementById('nl_container_pages_enabled') as HTMLDivElement,
         cb_pages_enabled: {
@@ -42,11 +43,16 @@ window.addEventListener('DOMContentLoaded',()=>{
             lang_en: document.getElementById('nl_page_privacy_policy_en') as HTMLInputElement,
         },
         buttons: {
-            primary: primary_button
+            primary: document.getElementById('nl_primary_button') as HTMLButtonElement
         }
     }
     const fds: FormDataSettingsHtml = new FormDataSettingsHtml(fds_data)
     fds.onFormSubmit((data) => {
+        const us: UpdateSettings = new UpdateSettings(data)
+        spinner.classList.toggle('invisible')
+        us.updateSettings().then(obj => {
+            spinner.classList.toggle('invisible')
+        })
     });
     const gs: GetSettings = new GetSettings();
     gs.getSettings().then(obj => {
@@ -68,8 +74,5 @@ window.addEventListener('DOMContentLoaded',()=>{
             const fds_set: FormDataSettingsSetHtml = new FormDataSettingsSetHtml(fds_set_data)
             fds_set.setSettingsForm();
         }//if(obj[Constants.KEY_DONE]){
-    })
-    primary_button.addEventListener('click',()=>{
-        
     })
 });
