@@ -1,37 +1,38 @@
 import { clientGet } from "../config/axios_instances";
 import { Constants } from "../namespaces/constants";
+import { NlLanguages, NlPages, NlSocials } from "../types/types";
 
 export default class GetSettings{
 
     /**
      * The languages of the available pages
      */
-    private _lang_status: object;
+    private _lang_status: NlLanguages;
 
     /**
      * The inclusion status of the site pages attachable to the newsletter body
      */
-    private _included_pages_status: object;
+    private _included_pages_status: NlPages;
 
     /**
      * The social pages link to insert in the newsletter
      */
-    private _socials_status: object;
+    private _socials_status: NlSocials;
 
     /**
      * The social page links to be included in the newsletter
      */
-    private _social_pages: object;
+    private _social_pages: NlSocials;
 
     /**
      * The contact page links in the declared languages
      */
-    private _contact_pages: object;
+    private _contact_pages: NlLanguages;
 
     /**
-     * The privacy policy page links in the declared languages
+     * The privacy policy pages links in the declared languages
      */
-    private _privacy_policy_pages: object;
+    private _privacy_policy_pages: NlLanguages
 
     private _errno: number = 0;
     private _error: string|null = null;

@@ -5,6 +5,7 @@ import GetSettings from "../requests/get_settings";
 import { NlFormDataSettings, NlFormDataSettingsSet } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
+    const primary_button: HTMLButtonElement = document.getElementById('nl_primary_button') as HTMLButtonElement
     const fds_data: NlFormDataSettings = {
         container_pages_enabled: document.getElementById('nl_container_pages_enabled') as HTMLDivElement,
         cb_pages_enabled: {
@@ -41,7 +42,7 @@ window.addEventListener('DOMContentLoaded',()=>{
             lang_en: document.getElementById('nl_page_privacy_policy_en') as HTMLInputElement,
         },
         buttons: {
-            primary: document.getElementById('nl_primary_button') as HTMLButtonElement
+            primary: primary_button
         }
     }
     const fds: FormDataSettingsHtml = new FormDataSettingsHtml(fds_data)
@@ -67,5 +68,8 @@ window.addEventListener('DOMContentLoaded',()=>{
             const fds_set: FormDataSettingsSetHtml = new FormDataSettingsSetHtml(fds_set_data)
             fds_set.setSettingsForm();
         }//if(obj[Constants.KEY_DONE]){
+    })
+    primary_button.addEventListener('click',()=>{
+        
     })
 });

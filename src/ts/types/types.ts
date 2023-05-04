@@ -130,17 +130,20 @@ export type NlLanguages = {
 }
 
 /**
- * This object contains the settings properties getted from the DB
+ * This object contains the settings properties getted or replaced to the DB
  */
 export type NlSettingsData = {
     lang_status: NlLanguages,
-    included_pages_status: {
-        contacts_pages: boolean, privacy_policy_pages: boolean
-    },
+    included_pages_status: NlPages,
     socials_status: NlSocials,
     social_pages: NlSocials,
     contact_pages: NlLanguages,
     privacy_policy_pages: NlLanguages
+}
+
+export type NlPages = {
+    contacts_pages: boolean, 
+    privacy_policy_pages: boolean
 }
 
 export type NlSocials = {
