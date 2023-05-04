@@ -61,7 +61,7 @@ export default class SendEmail{
             }
             else{
                 this._errno = SendEmail.ERR_FETCH;
-            response = {done: false, msg: this.error}
+                response = {done: false, msg: this.error}
             }
         }
         return response;
