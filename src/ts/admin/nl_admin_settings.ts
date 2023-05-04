@@ -6,6 +6,7 @@ import UpdateSettings from "../requests/update_settings";
 import { NlFormDataSettings, NlFormDataSettingsSet, NlSettingsData } from "../types/types";
 
 window.addEventListener('DOMContentLoaded',()=>{
+    const response_div: HTMLDivElement = document.getElementById('nl_update_settings_response') as HTMLDivElement
     const spinner: HTMLDivElement = document.getElementById('nl_spinner') as HTMLDivElement
     const fds_data: NlFormDataSettings = {
         container_pages_enabled: document.getElementById('nl_container_pages_enabled') as HTMLDivElement,
@@ -48,10 +49,17 @@ window.addEventListener('DOMContentLoaded',()=>{
     }
     const fds: FormDataSettingsHtml = new FormDataSettingsHtml(fds_data)
     fds.onFormSubmit((data) => {
+        response_div.innerHTML = ""
         const us: UpdateSettings = new UpdateSettings(data)
         spinner.classList.toggle('invisible')
         us.updateSettings().then(obj => {
             spinner.classList.toggle('invisible')
+            if(obj[Constants.KEY_DONE])
+                response_div.style.color = 'green'
+            else
+                response_div.style.color = 'red'
+            response_div.innerHTML = obj[Constants.KEY_MESSAGE]
+                
         })
     });
     const gs: GetSettings = new GetSettings();

@@ -100,16 +100,18 @@ export default class UpdateSettings{
     }
 
     private async updateSettingsPromise(): Promise<string>{
+        let update_data: object = {
+            lang_status: this._lang_status,
+            included_pages_status: this._included_pages_status,
+            socials_status: this._socials_status,
+            social_pages: this._social_pages,
+            contact_pages: this._contact_pages,
+            privacy_policy_pages: this._privacy_policy_pages,
+        }
+        console.log(update_data)
         let promise: string = await new Promise<string>((resolve,reject)=>{
             clientPut.put(UpdateSettings.FETCH_URL,{
-                data: {
-                    lang_status: this._lang_status,
-                    included_pages_status: this._included_pages_status,
-                    socials_status: this._socials_status,
-                    social_pages: this._social_pages,
-                    contact_pages: this._contact_pages,
-                    privacy_policy_pages: this._privacy_policy_pages,
-                }
+                data: update_data
             }).then(res => resolve(res.data)).catch(err => reject(err))
         })
         return promise;

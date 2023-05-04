@@ -1,4 +1,5 @@
 <?php
+use Newsletter\Classes\Settings\SettingsUpdate;
 
 require_once("../../../../../wp-load.php");
 require_once("../../vendor/autoload.php");
@@ -43,6 +44,13 @@ if($logged && $administrator){
                 'contact_pages' => $settings_check->getContactPages(),
                 'privacy_policy_pages' => $settings_check->getPrivacyPolicyPages(),
             ];
+            $settings_update = new SettingsUpdate($su_data);
+            if($settings_update->getErrno() == 0){
+                $response = [
+                    C::KEY_DONE => true, C::KEY_MESSAGE => "Aggiornamento delle impostazioni completato con successo"
+                ];
+            }
+            else throw new Exception;
         }catch(Exception $e){
             http_response_code(500);
             $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;

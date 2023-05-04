@@ -341,6 +341,9 @@ HTML;
             </div>
         </div>
     </div>
+    <div class="row my-4">
+        <div id="nl_update_settings_response" class="col-12 text-center fw-bold fs-4"></div>
+    </div>
 </form>
 HTML;
     }
