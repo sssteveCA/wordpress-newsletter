@@ -4,6 +4,7 @@ use Dotenv\Dotenv;
 use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Classes\Settings\SettingsUpdate;
 use Newsletter\Classes\Settings\SettingsCheck;
+use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 
@@ -55,6 +56,9 @@ try{
         http_response_code(401);
         $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
     }
+}catch(NotSettedException $e){
+    http_response_code(401);
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(Exception $e){
     http_response_code(500);
     $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;
