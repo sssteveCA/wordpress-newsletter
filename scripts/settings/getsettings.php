@@ -27,7 +27,9 @@ if($logged && $administrator){
                 'socials_status' => $settings->getSocialsStatus(),
                 'social_pages' => $settings->getSocialPages(),
                 'contact_pages' => $settings->getContactPages(),
+                'cookie_policy_pages' => $settings->getCookiePolicyPages(),
                 'privacy_policy_pages' => $settings->getPrivacyPolicyPages(),
+                'terms_pages' => $settings->getTermsPages(),
             ];
         }//if($settings->getErrno() == 0){
         else throw new DataNotRetrievedException;
