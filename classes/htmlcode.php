@@ -363,7 +363,7 @@ HTML;
             </div>
         </div>
     </div>
-    <div id="nl_container_privacy_pages" class="container mt-5">
+    <div id="nl_container_terms_pages" class="container mt-5">
         <div class="row">
             <h5>Pagine Termini e condizioni</h5>
         </div>

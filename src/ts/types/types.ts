@@ -75,8 +75,12 @@ export type NlFormDataSettings = {
     input_social_links: NlFormDataSettingsInputSocial;
     container_contacts_pages: HTMLDivElement;
     input_contacts_pages: NlFormDataSettingsInputLangs;
+    container_cookie_pages: HTMLDivElement;
+    input_cookie_policy_pages: NlFormDataSettingsInputLangs;
     container_privacy_pages: HTMLDivElement;
     input_privacy_policy_pages: NlFormDataSettingsInputLangs;
+    container_terms_pages: HTMLDivElement;
+    input_terms_pages: NlFormDataSettingsInputLangs;
     buttons: NlFormDataSettingsButtons;
 }
 
@@ -89,7 +93,9 @@ export type NlFormDataSettingsSet = {
 
 export type NlFormDataSettingsInputPagesEnabled = {
     contacts_pages: HTMLInputElement;
+    cookie_policy_pages: HTMLInputElement;
     privacy_policy_pages: HTMLInputElement;
+    terms_pages: HTMLInputElement;
 }
 
 export type NlFormDataSettingsInputLangs = {
@@ -123,13 +129,16 @@ export type NlSettingsData = {
     socials_status: NlSocials,
     social_pages: NlSocials,
     contact_pages: NlLanguages,
-    privacy_policy_pages: NlLanguages
+    cookie_policy_pages: NlLanguages,
+    privacy_policy_pages: NlLanguages,
+    terms_pages: NlLanguages
 }
 
 export type NlPages = {
     contacts_pages?: boolean,
     cookies_pages?: boolean, 
-    privacy_policy_pages?: boolean
+    privacy_policy_pages?: boolean,
+    terms_pages?: boolean
 }
 
 export type NlSocials = {
