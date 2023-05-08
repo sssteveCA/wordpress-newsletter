@@ -17,7 +17,9 @@ trait SettingsTrait{
              'socials_status' => json_encode($this->socials_status,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
              'social_pages' => json_encode($this->social_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
              'contact_pages' => json_encode($this->contact_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
-             'privacy_policy_pages' => json_encode($this->privacy_policy_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)        
+             'cookie_policy_pages' => json_encode($this->contact_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
+             'privacy_policy_pages' => json_encode($this->privacy_policy_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),   
+             'terms_pages' => json_encode($this->terms_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)        
         ];
         $values = [];
         $value_formats = "";

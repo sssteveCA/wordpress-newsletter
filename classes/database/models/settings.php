@@ -102,8 +102,8 @@ class Settings extends Models{
             $this->socials_status = isset($results[2]['setting_value']) ? json_decode($results[2]['setting_value'],true) : [];
             $this->social_pages = isset($results[3]['setting_value']) ? json_decode($results[3]['setting_value'],true) : [];
             $this->contact_pages = isset($results[4]['setting_value']) ? json_decode($results[4]['setting_value'],true) : [];
-            $this->cookie_policy_pages = isset($results[5]['setting_value']) ? json_decode($results[5]['setting_value'],true) : [];
-            $this->privacy_policy_pages = isset($results[6]['setting_value']) ? json_decode($results[6]['setting_value'],true) : [];
+            $this->privacy_policy_pages = isset($results[5]['setting_value']) ? json_decode($results[5]['setting_value'],true) : [];
+            $this->cookie_policy_pages = isset($results[6]['setting_value']) ? json_decode($results[6]['setting_value'],true) : [];
             $this->terms_pages = isset($results[7]['setting_value']) ? json_decode($results[7]['setting_value'],true) : [];
             return true;
         }//if($this->errno == 0){
