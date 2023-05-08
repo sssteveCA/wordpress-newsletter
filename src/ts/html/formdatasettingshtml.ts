@@ -26,6 +26,7 @@ export default class FormDataSettingsHtml{
         this.checkboxContactsPagesChange();
         this.checkboxCookiePolicyPagesChange();
         this.checkboxPrivacyPolicyPagesChange();
+        this.checkboxTermsPagesChange();
     }
 
     get container_langs(){ return this._container_langs; }
@@ -141,6 +142,26 @@ export default class FormDataSettingsHtml{
             else{
                 const input_privacy_policy_pages: NodeListOf<HTMLInputElement> = this._container_privacy_pages.querySelectorAll('input[type="text"]') as NodeListOf<HTMLInputElement>;
                 input_privacy_policy_pages.forEach(input_privacy_policy_page => input_privacy_policy_page.disabled = true)
+            }
+        })
+    }
+
+    /**
+     * When the terms pages enabled checkbox value change
+     */
+    private checkboxTermsPagesChange(): void{
+        this._cb_pages_enabled.terms_pages.addEventListener('change',()=>{
+            if(this._cb_pages_enabled.terms_pages.checked){
+                if(this._cb_langs.lang_it.checked) this._input_terms_pages.lang_it.disabled = false;
+                else this._input_terms_pages.lang_it.disabled = true;
+                if(this._cb_langs.lang_es.checked) this._input_terms_pages.lang_es.disabled = false;
+                else this._input_terms_pages.lang_es.disabled = true;
+                if(this._cb_langs.lang_en.checked) this._input_terms_pages.lang_en.disabled = false;
+                else this._input_terms_pages.lang_en.disabled = true;
+            }
+            else{
+                const input_terms_pages: NodeListOf<HTMLInputElement> = this._container_terms_pages.querySelectorAll('input[type="text"]') as NodeListOf<HTMLInputElement>;
+                input_terms_pages.forEach(input_terms_page => input_terms_page.disabled = true)
             }
         })
     }
