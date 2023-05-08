@@ -10,7 +10,7 @@ class SettingsCheck{
     /**
      * Keys allowed for included_pages_status property
      */
-    private static array $included_pages_key_allowed = ["contacts_pages","privacy_policy_pages"];
+    private static array $included_pages_key_allowed = ["contacts_pages","cookie_policy_pages","privacy_policy_pages","terms_pages"];
 
     /**
      * Keys allowed for lang_status, contact_pages and privacy_policy_pages properties
@@ -48,9 +48,19 @@ class SettingsCheck{
     private array $contact_pages = [];
 
     /**
+     * The cookie policy pages links in the declared languages
+     */
+    private array $cookie_policy_pages = [];
+
+    /**
      * The privacy policy pages links in the declared languages
      */
     private array $privacy_policy_pages = [];
+
+    /**
+     * The terms pages links in the declared languages
+     */
+    private array $terms_pages = [];
 
     public function __construct(array $data){
         $this->filterInputArray($data);
@@ -61,7 +71,9 @@ class SettingsCheck{
     public function getSocialsStatus(){ return $this->socials_status; }
     public function getSocialPages(){ return $this->social_pages; }
     public function getContactPages(){ return $this->contact_pages; }
+    public function getCookiePolicyPages(){ return $this->cookie_policy_pages; }
     public function getPrivacyPolicyPages(){ return $this->privacy_policy_pages; }
+    public function getTermsPages(){ return $this->terms_pages; }
 
 
     /**
@@ -69,7 +81,7 @@ class SettingsCheck{
      */
     private function filterInputArray(array $data){
         $this->filterIncludedPagesArray($data['included_pages_status']);
-        $this->filterLanguageArrays($data['lang_status'],$data['contact_pages'],$data['privacy_policy_pages']);
+        $this->filterLanguageArrays($data['lang_status'],$data['contact_pages'],$data['cookie_policy_pages'],$data['privacy_policy_pages'],$data['terms_pages']);
         $this->filterSocialArrays($data['socials_status'],$data['social_pages']);
     }
 
@@ -85,14 +97,20 @@ class SettingsCheck{
     /**
      * Add only the language valid keys and values to the respective properties
      */
-    private function filterLanguageArrays(array $lang_status, array $contact_pages, array $privacy_policy_pages){
+    private function filterLanguageArrays(array $lang_status, array $contact_pages, array $cookie_policy_pages, array $privacy_policy_pages, array $terms_pages){
         $this->lang_status = array_filter($lang_status, function($value,$key){
             return (in_array($key,SettingsCheck::$language_key_allowed) && in_array($value,[false,true]));
         },ARRAY_FILTER_USE_BOTH);
         $this->contact_pages = array_filter($contact_pages, function($key){
             return in_array($key,SettingsCheck::$language_key_allowed);
         },ARRAY_FILTER_USE_KEY);
+        $this->cookie_policy_pages = array_filter($cookie_policy_pages, function($key){
+            return in_array($key,SettingsCheck::$language_key_allowed);
+        },ARRAY_FILTER_USE_KEY);
         $this->privacy_policy_pages = array_filter($privacy_policy_pages,function($key){
+            return in_array($key,SettingsCheck::$language_key_allowed);
+        },ARRAY_FILTER_USE_KEY);
+        $this->terms_pages = array_filter($terms_pages,function($key){
             return in_array($key,SettingsCheck::$language_key_allowed);
         },ARRAY_FILTER_USE_KEY);
     }
