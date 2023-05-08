@@ -43,9 +43,19 @@ class SettingsUpdate implements Sue{
     private array $contact_pages = [];
 
     /**
+     * The cookie policy pages links in the declared languages
+     */
+    private array $cookie_policy_pages = [];
+
+    /**
      * The privacy policy pages links in the declared languages
      */
     private array $privacy_policy_pages = [];
+
+    /**
+     * The terms pages links in the declared languages
+     */
+    private array $terms_pages = [];
 
     public function __construct(array $data){
         $this->assignValues($data);
@@ -57,7 +67,9 @@ class SettingsUpdate implements Sue{
     public function getSocialsStatus(){ return $this->socials_status; }
     public function getSocialPages(){ return $this->social_pages; }
     public function getContactPages(){ return $this->contact_pages; }
+    public function getCookiePolicyPages(){ return $this->cookie_policy_pages; }
     public function getPrivacyPolicyPages(){ return $this->privacy_policy_pages; }
+    public function getTermsPages(){ return $this->terms_pages; }
 
     public function getError(){
         switch($this->errno){
@@ -77,7 +89,9 @@ class SettingsUpdate implements Sue{
         $this->socials_status = $data['socials_status'];
         $this->social_pages = $data['social_pages'];
         $this->contact_pages = $data['contact_pages'];
+        $this->cookie_policy_pages = $data['cookie_policy_pages'];
         $this->privacy_policy_pages = $data['privacy_policy_pages'];
+        $this->terms_pages = $data['terms_pages'];
     }
 
     private function settingsUpdate(): bool{
@@ -88,7 +102,9 @@ class SettingsUpdate implements Sue{
             'socials_status' => $this->socials_status,
             'social_pages' => $this->social_pages,
             'contact_pages' => $this->contact_pages,
+            'cookie_policy_pages' => $this->cookie_policy_pages,
             'privacy_policy_pages' => $this->privacy_policy_pages,
+            'terms_pages' => $this->terms_pages,
         ];
         $settings = new Settings($settings_data);
         if($settings->updateSettings())
