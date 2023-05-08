@@ -37,9 +37,9 @@ export default class FormDataSettingsHtml{
     get row_social_links(){ return this._row_social_links; }
     get input_social_links(){ return this._input_social_links; }
     get container_contacts_pages(){ return this._container_contacts_pages; }
+    get input_contacts_pages(){ return this._input_contacts_pages; }
     get container_cookie_pages(){ return this._container_cookie_pages; }
     get input_cookie_policy_pages(){ return this._input_cookie_policy_pages; }
-    get input_contacts_pages(){ return this._input_contacts_pages; }
     get container_privacy_pages(){return this._container_contacts_pages; }
     get input_privacy_policy_pages(){ return this._input_privacy_policy_pages; }
     get container_terms_pages(){ return this._container_terms_pages; }
