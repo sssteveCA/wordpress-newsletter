@@ -175,19 +175,28 @@ CONTENT;
                     if(!empty($addresses))$this->clearAddresses();
                         $user = $this->checkSubscribedEmail($email);
                         if($user != null){
-                            $templateData = [
-                                'title' => $this->subject, 'user_email' => $email,
-                                'text' => $this->body, 'unsubscribe_code' => $user->getUnsubscCode()
-                            ];
-                            //echo "\r\n EmailManager sendNewsletterEmail template data => ".var_export($templateData,true)."\r\n";
                             $lang = $user->getLang();
-                            $htmlBody = Template::mailTemplate($lang,$templateData);
-                            $this->addAddress($email);
-                            $this->body = $htmlBody;
-                            $this->Body = $this->body;
-                            $this->AltBody = $this->body;
-                            $this->send();
-                            $log_content .= " => INVIATO\r\n";
+                            if($settings->getLangStatus()[$lang]){
+                                $templateData = [
+                                    'title' => $this->subject, 'user_email' => $email,
+                                    'text' => $this->body, 'unsubscribe_code' => $user->getUnsubscCode(),
+                                    'settings' => [
+                                        'included_pages_status' => $settings->getIncludedPagesStatus(),
+                                        'socials_status' => $settings->getSocialsStatus(),
+                                        'social_pages' => $settings->getSocialPages(),
+                                        'contact_pages' => $settings->getContactPages(),
+                                        'privacy_policy_pages' => $settings->getPrivacyPolicyPages()
+                                    ]
+                                ];
+                                //echo "\r\n EmailManager sendNewsletterEmail template data => ".var_export($templateData,true)."\r\n";
+                                $htmlBody = Template::mailTemplate($lang,$templateData);
+                                $this->addAddress($email);
+                                $this->body = $htmlBody;
+                                $this->Body = $this->body;
+                                $this->AltBody = $this->body;
+                                $this->send();
+                                $log_content .= " => INVIATO\r\n";
+                            }//if($settings->getLangStatus()[$user_lang]){
                         }//if($user != null){    
                 }//foreach($this->emailsList as $email){
                 file_put_contents(C::FILE_LOG,$log_content,FILE_APPEND);
