@@ -36,9 +36,19 @@ class Settings extends Models{
     private array $contact_pages;
 
     /**
+     * The cookie policy page links in the declared languages
+     */
+    private array $cookie_policy_pages;
+
+    /**
      * The privacy policy page links in the declared languages
      */
     private array $privacy_policy_pages;
+
+    /**
+     * The terms page links in the declared languages
+     */
+    private array $terms_pages;
 
     public function __construct(array $data){
         parent::__construct($data);
@@ -50,7 +60,9 @@ class Settings extends Models{
     public function getSocialsStatus(){ return $this->socials_status; }
     public function getSocialPages(){ return $this->social_pages; }
     public function getContactPages(){ return $this->contact_pages; }
+    public function getCookiePolicyPages(){ return $this->cookie_policy_pages; }
     public function getPrivacyPolicyPages(){ return $this->privacy_policy_pages; }
+    public function getTermsPages(){ return $this->terms_pages; }
 
     public function getError(){
         if($this->errno < parent::MAX_MODELS){
@@ -72,7 +84,9 @@ class Settings extends Models{
         $this->socials_status = isset($data['socials_status']) ? $data['socials_status'] : [];
         $this->social_pages = isset($data['social_pages']) ? $data['social_pages'] : [];
         $this->contact_pages = isset($data['contact_pages']) ? $data['contact_pages'] : [];
+        $this->cookie_policy_pages = isset($data['cookie_policy_pages']) ? $data['cookie_policy_pages'] : [];
         $this->privacy_policy_pages = isset($data['privacy_policy_pages']) ? $data['privacy_policy_pages'] : [];
+        $this->terms_pages = isset($data['terms_pages']) ? $data['terms_pages'] : [];
     }
 
     /**
@@ -88,7 +102,9 @@ class Settings extends Models{
             $this->socials_status = isset($results[2]['setting_value']) ? json_decode($results[2]['setting_value'],true) : [];
             $this->social_pages = isset($results[3]['setting_value']) ? json_decode($results[3]['setting_value'],true) : [];
             $this->contact_pages = isset($results[4]['setting_value']) ? json_decode($results[4]['setting_value'],true) : [];
-            $this->privacy_policy_pages = isset($results[5]['setting_value']) ? json_decode($results[5]['setting_value'],true) : [];
+            $this->cookie_policy_pages = isset($results[5]['setting_value']) ? json_decode($results[5]['setting_value'],true) : [];
+            $this->privacy_policy_pages = isset($results[6]['setting_value']) ? json_decode($results[6]['setting_value'],true) : [];
+            $this->terms_pages = isset($results[7]['setting_value']) ? json_decode($results[7]['setting_value'],true) : [];
             return true;
         }//if($this->errno == 0){
         return false;
@@ -115,7 +131,9 @@ class Settings extends Models{
         parent::update(['setting_value' => json_encode($this->socials_status,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'socials_status'],["%s"]);
         parent::update(['setting_value' => json_encode($this->social_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'social_pages'],["%s"]);
         parent::update(['setting_value' => json_encode($this->contact_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'contact_pages'],["%s"]);
+        parent::update(['setting_value' => json_encode($this->cookie_policy_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'cookie_policy_pages'],["%s"]);
         parent::update(['setting_value' => json_encode($this->privacy_policy_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'privacy_policy_pages'],["%s"]);
+        parent::update(['setting_value' => json_encode($this->terms_pages,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)],['setting_name' => 'terms_pages'],["%s"]);
         return true;
     }
 
