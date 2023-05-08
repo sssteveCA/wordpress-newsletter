@@ -120,7 +120,7 @@ HTML;
                     </td>
                 </tr>
 HTML;
-        if($settings['socials_stauts']['facebook'] || $settings['socials_stauts']['instagram'] || $settings['socials_stauts']['youtube']){
+        if($settings['socials_status']['facebook'] || $settings['socials_status']['instagram'] || $settings['socials_status']['youtube']){
             $htmlTemplate .= <<<HTML
                 <!-- Testo Social -->
                 <tr>
@@ -161,7 +161,7 @@ HTML;
             $htmlTemplate .= <<<HTML
                 </tr>
 HTML;
-        }//if($settings['socials_stauts']['facebook'] || $settings['socials_stauts']['instagram'] || $settings['socials_stauts']['youtube']){
+        }//if($settings['socials_status']['facebook'] || $settings['socials_status']['instagram'] || $settings['socials_status']['youtube']){
         $htmlTemplate .= <<<HTML
                 <!-- Footer -->
                 <tr>
