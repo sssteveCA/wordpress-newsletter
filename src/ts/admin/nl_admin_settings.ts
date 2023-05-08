@@ -12,7 +12,9 @@ window.addEventListener('DOMContentLoaded',()=>{
         container_pages_enabled: document.getElementById('nl_container_pages_enabled') as HTMLDivElement,
         cb_pages_enabled: {
             contacts_pages: document.getElementById('nl_cb_contacts_pages') as HTMLInputElement,
-            privacy_policy_pages: document.getElementById('nl_cb_privacy_policy') as HTMLInputElement
+            cookie_policy_pages: document.getElementById('nl_cb_cookie_policy') as HTMLInputElement,
+            privacy_policy_pages: document.getElementById('nl_cb_privacy_policy') as HTMLInputElement,
+            terms_pages: document.getElementById('nl_cb_terms') as HTMLInputElement
         },
         container_langs: document.getElementById('nl_container_langs') as HTMLDivElement,
         cb_langs: {
@@ -37,11 +39,23 @@ window.addEventListener('DOMContentLoaded',()=>{
             lang_es: document.getElementById('nl_page_contacts_es') as HTMLInputElement,
             lang_en: document.getElementById('nl_page_contacts_en') as HTMLInputElement,
         },
+        container_cookie_pages: document.getElementById('nl_container_cookie_pages') as HTMLDivElement,
+        input_cookie_policy_pages: {
+            lang_it: document.getElementById('nl_page_cookie_policy_it') as HTMLInputElement,
+            lang_es: document.getElementById('nl_page_cookie_policy_es') as HTMLInputElement,
+            lang_en: document.getElementById('nl_page_cookie_policy_en') as HTMLInputElement,
+        },
         container_privacy_pages: document.getElementById('nl_container_privacy_pages') as HTMLInputElement,
         input_privacy_policy_pages: {
             lang_it: document.getElementById('nl_page_privacy_policy_it') as HTMLInputElement,
             lang_es: document.getElementById('nl_page_privacy_policy_es') as HTMLInputElement,
             lang_en: document.getElementById('nl_page_privacy_policy_en') as HTMLInputElement,
+        },
+        container_terms_pages: document.getElementById('nl_container_terms_pages') as HTMLDivElement,
+        input_terms_pages: {
+            lang_it: document.getElementById('nl_page_terms_it') as HTMLInputElement,
+            lang_es: document.getElementById('nl_page_terms_es') as HTMLInputElement,
+            lang_en: document.getElementById('nl_page_terms_en') as HTMLInputElement,
         },
         buttons: {
             primary: document.getElementById('nl_primary_button') as HTMLButtonElement
@@ -76,8 +90,12 @@ window.addEventListener('DOMContentLoaded',()=>{
                 input_social_links: fds.input_social_links,
                 container_contacts_pages: fds.container_contacts_pages,
                 input_contacts_pages: fds.input_contacts_pages,
+                container_cookie_pages: fds.container_cookie_pages,
+                input_cookie_policy_pages: fds.input_cookie_policy_pages,
                 container_privacy_pages: fds.container_privacy_pages,
                 input_privacy_policy_pages: fds.input_privacy_policy_pages,
+                container_terms_pages: fds.container_terms_pages,
+                input_terms_pages: fds.input_terms_pages
             }
             const fds_set: FormDataSettingsSetHtml = new FormDataSettingsSetHtml(fds_set_data)
             fds_set.setSettingsForm();
