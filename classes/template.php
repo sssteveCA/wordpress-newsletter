@@ -161,15 +161,24 @@ HTML;
             $htmlTemplate .= <<<HTML
                 </tr>
 HTML;
-
         }//if($settings['socials_stauts']['facebook'] || $settings['socials_stauts']['instagram'] || $settings['socials_stauts']['youtube']){
         $htmlTemplate .= <<<HTML
                 <!-- Footer -->
                 <tr>
                     <td colspan="3" style="padding: 20px; font-size: 14px;">
                         {$messages['subscriber_message']}<br>
+HTML;
+        if($settings['included_pages_status']['contacts_pages']){
+            $htmlTemplate .= <<<HTML
                         {$messages['privacy_policy_page']}<br>
+HTML;
+        }//if($settings['included_pages_status']['contacts_pages']){
+        if($settings['included_pages_status']['privacy_policy_pages']){
+            $htmlTemplate .= <<<HTML
                         {$messages['contacts_page']}
+HTML;
+        }//if($settings['included_pages_status']['privacy_policy_pages']){
+        $htmlTemplate .= <<<HTML
                     </td>
                 </tr>
                 <tr style="background-color: rgba(14, 238, 144, 0.5);">
