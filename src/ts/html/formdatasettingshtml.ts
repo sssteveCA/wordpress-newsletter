@@ -11,8 +11,12 @@ export default class FormDataSettingsHtml{
     private _input_social_links: NlFormDataSettingsInputSocial;
     private _container_contacts_pages: HTMLDivElement;
     private _input_contacts_pages: NlFormDataSettingsInputLangs;
+    private _container_cookie_pages: HTMLDivElement;
+    private _input_cookie_policy_pages: NlFormDataSettingsInputLangs;
     private _container_privacy_pages: HTMLDivElement;
     private _input_privacy_policy_pages: NlFormDataSettingsInputLangs;
+    private _container_terms_pages: HTMLDivElement;
+    private _input_terms_pages: NlFormDataSettingsInputLangs;
     private _buttons: NlFormDataSettingsButtons;
 
     constructor(data: NlFormDataSettings){
@@ -20,7 +24,9 @@ export default class FormDataSettingsHtml{
         this.checkboxLangsChange();
         this.checkboxSocialChange();
         this.checkboxContactsPagesChange();
+        this.checkboxCookiePolicyPagesChange();
         this.checkboxPrivacyPolicyPagesChange();
+        this.checkboxTermsPagesChange();
     }
 
     get container_langs(){ return this._container_langs; }
@@ -32,8 +38,12 @@ export default class FormDataSettingsHtml{
     get input_social_links(){ return this._input_social_links; }
     get container_contacts_pages(){ return this._container_contacts_pages; }
     get input_contacts_pages(){ return this._input_contacts_pages; }
+    get container_cookie_pages(){ return this._container_cookie_pages; }
+    get input_cookie_policy_pages(){ return this._input_cookie_policy_pages; }
     get container_privacy_pages(){return this._container_contacts_pages; }
     get input_privacy_policy_pages(){ return this._input_privacy_policy_pages; }
+    get container_terms_pages(){ return this._container_terms_pages; }
+    get input_terms_pages(){ return this._input_terms_pages; }
     get buttons(){ return this._buttons };
 
     private assignValues(data: NlFormDataSettings){
@@ -46,8 +56,12 @@ export default class FormDataSettingsHtml{
         this._input_social_links = data.input_social_links;
         this._container_contacts_pages = data.container_contacts_pages;
         this._input_contacts_pages = data.input_contacts_pages;
+        this._container_cookie_pages = data.container_cookie_pages;
+        this._input_cookie_policy_pages = data.input_cookie_policy_pages;
         this._container_privacy_pages = data.container_privacy_pages;
         this._input_privacy_policy_pages = data.input_privacy_policy_pages;
+        this._container_terms_pages = data.container_terms_pages;
+        this._input_terms_pages = data.input_terms_pages;
         this._buttons = data.buttons;
     }
 
@@ -93,6 +107,26 @@ export default class FormDataSettingsHtml{
     }
 
     /**
+     * When the cookie policy pages enabled checkbox value change 
+     */
+    private checkboxCookiePolicyPagesChange(): void{
+        this._cb_pages_enabled.cookie_policy_pages.addEventListener('change',()=>{
+            if(this._cb_pages_enabled.cookie_policy_pages.checked){
+                if(this._cb_langs.lang_it.checked) this._input_cookie_policy_pages.lang_it.disabled = false;
+                else this._input_cookie_policy_pages.lang_it.disabled = true;
+                if(this._cb_langs.lang_es.checked) this._input_cookie_policy_pages.lang_es.disabled = false;
+                else this._input_cookie_policy_pages.lang_es.disabled = true;
+                if(this._cb_langs.lang_en.checked) this._input_cookie_policy_pages.lang_en.disabled = false;
+                else this._input_cookie_policy_pages.lang_en.disabled = true;
+            }
+            else{
+                const input_cookie_policy_pages: NodeListOf<HTMLInputElement> = this._container_cookie_pages.querySelectorAll('input[type="text"]') as NodeListOf<HTMLInputElement>;
+                input_cookie_policy_pages.forEach(input_cookie_policy_page => input_cookie_policy_page.disabled = true)
+            }
+        })
+    }
+
+    /**
      * When the privacy policy pages enabled checkbox value change 
      */
     private checkboxPrivacyPolicyPagesChange(): void{
@@ -108,6 +142,26 @@ export default class FormDataSettingsHtml{
             else{
                 const input_privacy_policy_pages: NodeListOf<HTMLInputElement> = this._container_privacy_pages.querySelectorAll('input[type="text"]') as NodeListOf<HTMLInputElement>;
                 input_privacy_policy_pages.forEach(input_privacy_policy_page => input_privacy_policy_page.disabled = true)
+            }
+        })
+    }
+
+    /**
+     * When the terms pages enabled checkbox value change
+     */
+    private checkboxTermsPagesChange(): void{
+        this._cb_pages_enabled.terms_pages.addEventListener('change',()=>{
+            if(this._cb_pages_enabled.terms_pages.checked){
+                if(this._cb_langs.lang_it.checked) this._input_terms_pages.lang_it.disabled = false;
+                else this._input_terms_pages.lang_it.disabled = true;
+                if(this._cb_langs.lang_es.checked) this._input_terms_pages.lang_es.disabled = false;
+                else this._input_terms_pages.lang_es.disabled = true;
+                if(this._cb_langs.lang_en.checked) this._input_terms_pages.lang_en.disabled = false;
+                else this._input_terms_pages.lang_en.disabled = true;
+            }
+            else{
+                const input_terms_pages: NodeListOf<HTMLInputElement> = this._container_terms_pages.querySelectorAll('input[type="text"]') as NodeListOf<HTMLInputElement>;
+                input_terms_pages.forEach(input_terms_page => input_terms_page.disabled = true)
             }
         })
     }
@@ -163,10 +217,20 @@ export default class FormDataSettingsHtml{
                     es: this._input_contacts_pages.lang_es.value,
                     it: this._input_contacts_pages.lang_it.value
                 },
+                cookie_policy_pages: {
+                    en: this._input_cookie_policy_pages.lang_en.value,
+                    es: this._input_cookie_policy_pages.lang_es.value,
+                    it: this._input_cookie_policy_pages.lang_it.value,
+                },
                 privacy_policy_pages: {
                     en: this._input_privacy_policy_pages.lang_en.value,
                     es: this._input_privacy_policy_pages.lang_es.value,
                     it: this._input_privacy_policy_pages.lang_it.value
+                },
+                terms_pages: {
+                    en: this._input_terms_pages.lang_en.value,
+                    es: this._input_terms_pages.lang_es.value,
+                    it: this._input_terms_pages.lang_it.value,
                 }
             }
             callback(form_data)

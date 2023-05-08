@@ -218,14 +218,22 @@ HTML;
         <div class="row">
             <h5>Pagine da includere</h5>
         </div>
-        <div class="row flex-column flex-md-row">
+        <div class="row flex-column flex-md-row flex-md-wrap">
             <div class="col">
                 <input type="checkbox" class="form-check-input" id="nl_cb_contacts_pages" disabled>
                 <label class="form-check-label" for="nl_cb_contacts_pages">Pagine contatti</label>
             </div>
             <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_cookie_policy" disabled>
+                <label class="form-check-label" for="nl_cb_cookie_policy">Pagine cookie policy</label>
+            </div>
+            <div class="col">
                 <input type="checkbox" class="form-check-input" id="nl_cb_privacy_policy" disabled>
                 <label class="form-check-label" for="nl_cb_privacy_policy">Pagine privacy policy</label>
+            </div>
+            <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_terms" disabled>
+                <label class="form-check-label" for="nl_cb_terms">Pagine Termini e condizioni</label>
             </div>
         </div>
     </div>
@@ -297,6 +305,35 @@ HTML;
             </div>
         <div>
     </div>
+    <div id="nl_container_cookie_pages" class="container mt-5">
+        <div class="row">
+            <h5>Pagine Cookie Policy</h5>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_cookie_policy_it" class="form-label">Pagina italiana</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_cookie_policy_it" disabled>
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_cookie_policy_es" class="form-label">Pagina spagnola</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_cookie_policy_es" disabled>
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_cookie_policy_en" class="form-label">Pagina inglese</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_cookie_policy_en" disabled>
+            </div>
+        </div>
+    </div>
     <div id="nl_container_privacy_pages" class="container mt-5">
         <div class="row">
             <h5>Pagine Privacy Policy</h5>
@@ -323,6 +360,35 @@ HTML;
             </div>
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_privacy_policy_en" disabled>
+            </div>
+        </div>
+    </div>
+    <div id="nl_container_terms_pages" class="container mt-5">
+        <div class="row">
+            <h5>Pagine Termini e condizioni</h5>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_terms_it" class="form-label">Pagina italiana</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_terms_it" disabled>
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_terms_es" class="form-label">Pagina spagnola</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_terms_es" disabled>
+            </div>
+        <div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="nl_page_terms_en" class="form-label">Pagina inglese</label>
+            </div>
+            <div class="col-12 col-md-8">
+                <input type="text" class="form-control" id="nl_page_terms_en" disabled>
             </div>
         </div>
     </div>

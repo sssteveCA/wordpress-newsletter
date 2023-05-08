@@ -11,8 +11,12 @@ export default class FormDataSettingsSetHtml{
     private _input_social_links: NlFormDataSettingsInputSocial;
     private _container_contacts_pages: HTMLDivElement;
     private _input_contacts_pages: NlFormDataSettingsInputLangs;
+    private _container_cookie_pages: HTMLDivElement;
+    private _input_cookie_policy_pages: NlFormDataSettingsInputLangs;
     private _container_privacy_pages: HTMLDivElement;
     private _input_privacy_policy_pages: NlFormDataSettingsInputLangs;
+    private _container_terms_pages: HTMLDivElement;
+    private _input_terms_pages: NlFormDataSettingsInputLangs;
 
     constructor(data: NlFormDataSettingsSet){
         this.assignValues(data);
@@ -33,8 +37,12 @@ export default class FormDataSettingsSetHtml{
         this._input_social_links = data.input_social_links;
         this._container_contacts_pages = data.container_contacts_pages;
         this._input_contacts_pages = data.input_contacts_pages;
+        this._container_cookie_pages = data.container_cookie_pages;
+        this._input_cookie_policy_pages = data.input_cookie_policy_pages;
         this._container_privacy_pages = data.container_privacy_pages;
         this._input_privacy_policy_pages = data.input_privacy_policy_pages;
+        this._container_terms_pages = data.container_terms_pages;
+        this._input_terms_pages = data.input_terms_pages;
     }
 
     /**
@@ -46,7 +54,9 @@ export default class FormDataSettingsSetHtml{
         this.setSocialCheckboxes();
         this.setSocialProfileURLs();
         this.setContactPageURLs();
+        this.setCookiePolicyPageURLs();
         this.setPrivacyPolicyPageURLs();
+        this.setTermsPageURLs();
     }
 
     /**
@@ -114,12 +124,30 @@ export default class FormDataSettingsSetHtml{
     }
 
     /**
+     * Set the cookie policy URLs input tag values
+     */
+    private setCookiePolicyPageURLs(): void{
+        this._input_cookie_policy_pages.lang_it.value = (this._data.cookie_policy_pages.it) ? this._data.cookie_policy_pages.it as string : "";
+        this._input_cookie_policy_pages.lang_es.value = (this._data.cookie_policy_pages.es) ? this._data.cookie_policy_pages.es as string : "";
+        this._input_cookie_policy_pages.lang_en.value = (this._data.cookie_policy_pages.en) ? this._data.cookie_policy_pages.en as string : "";
+    }
+
+    /**
      * Set the privacy policy URLs input tag values
      */
     private setPrivacyPolicyPageURLs(): void{
         this._input_privacy_policy_pages.lang_it.value = (this._data.privacy_policy_pages.it) ? this._data.privacy_policy_pages.it as string : "";
         this._input_privacy_policy_pages.lang_es.value = (this._data.privacy_policy_pages.es) ? this._data.privacy_policy_pages.es as string : "";
         this._input_privacy_policy_pages.lang_en.value = (this._data.privacy_policy_pages.en) ? this._data.privacy_policy_pages.en as string : "";
+    }
+
+    /**
+     * Set the terms URLs input tag values
+     */
+    private setTermsPageURLs(): void{
+        this._input_terms_pages.lang_it.value = (this._data.privacy_policy_pages.it) ? this._data.terms_pages.it as string : "";
+        this._input_terms_pages.lang_es.value = (this._data.privacy_policy_pages.es) ? this._data.terms_pages.es as string : "";
+        this._input_terms_pages.lang_en.value = (this._data.privacy_policy_pages.en) ? this._data.terms_pages.en as string : "";
     }
 
 }
