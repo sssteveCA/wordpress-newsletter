@@ -31,9 +31,19 @@ export default class UpdateSettings{
     private _contact_pages: NlLanguages;
 
     /**
+     * The cookie policy pages links in the declared languages
+     */
+    private _cookie_policy_pages: NlLanguages;
+
+    /**
      * The privacy policy pages links in the declared languages
      */
     private _privacy_policy_pages: NlLanguages
+
+    /**
+     * The terms pages links in the declared languages
+     */
+    private _terms_pages: NlLanguages;
 
     private _errno: number = 0;
     private _error: string|null = null;
@@ -53,7 +63,9 @@ export default class UpdateSettings{
     get socials_status(){ return this._socials_status};
     get social_pages(){ return this._social_pages};
     get contact_pages(){ return this._contact_pages};
+    get cookie_policy_pages(){ return this._cookie_policy_pages};
     get privacy_policy_pages(){ return this._privacy_policy_pages};
+    get terms_pages(){ return this._terms_pages};
     get errno(){return this._errno;}
     get error(){
         switch(this._errno){
@@ -73,7 +85,9 @@ export default class UpdateSettings{
         this._socials_status = data.socials_status;
         this._social_pages = data.social_pages;
         this._contact_pages = data.contact_pages;
+        this._cookie_policy_pages = data.cookie_policy_pages;
         this._privacy_policy_pages = data.privacy_policy_pages;
+        this._terms_pages = data.terms_pages;
     }
 
     public async updateSettings(): Promise<object>{
@@ -106,7 +120,9 @@ export default class UpdateSettings{
             socials_status: this._socials_status,
             social_pages: this._social_pages,
             contact_pages: this._contact_pages,
+            cookie_policy_pages: this._cookie_policy_pages,
             privacy_policy_pages: this._privacy_policy_pages,
+            terms_pages: this._terms_pages
         }
         console.log(update_data)
         let promise: string = await new Promise<string>((resolve,reject)=>{
