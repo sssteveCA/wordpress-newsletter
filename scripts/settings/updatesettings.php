@@ -29,27 +29,8 @@ if($logged && $administrator){
     $tp_ok = (isset($put['data']['terms_pages']) && $put['data']['terms_pages'] != "");
     if($ls_ok && $ips_ok && $ss_ok && $sp_ok && $cp_ok && $cpp_ok && $ppp_ok && $tp_ok){
         try{
-            $sc_data = [
-                'lang_status' => $put['data']['lang_status'],
-                'included_pages_status' => $put['data']['included_pages_status'],
-                'socials_status' => $put['data']['socials_status'],
-                'social_pages' => $put['data']['social_pages'],
-                'contact_pages' => $put['data']['contact_pages'],
-                'cookie_pages' => $put['data']['cookie_pages'],
-                'privacy_policy_pages' => $put['data']['privacy_policy_pages'],
-                'terms_pages' => $put['data']['terms_pages'],
-            ];
-            $settings_check = new SettingsCheck($sc_data);
-            $su_data = [
-                'lang_status' => $settings_check->getLangStatus(),
-                'included_pages_status' => $settings_check->getIncludedPagesStatus(),
-                'socials_status' => $settings_check->getSocialsStatus(),
-                'social_pages' => $settings_check->getSocialPages(),
-                'contact_pages' => $settings_check->getContactPages(),
-                'privacy_policy_pages' => $settings_check->getPrivacyPolicyPages(),
-            ];
-            $settings_update = new SettingsUpdate($su_data);
-            if($settings_update->getErrno() == 0){
+            $settings_update_errno = settingsUpdate($put['data']);
+            if($settings_update_errno == 0){
                 $response = [
                     C::KEY_DONE => true, C::KEY_MESSAGE => "Aggiornamento delle impostazioni completato con successo"
                 ];
@@ -71,4 +52,35 @@ else{
 }
 
 echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+
+/**
+ * Execute the query to update the settings table
+ * @param array $params the updated settings data
+ * @return int the error code or 0 if no error occurred
+ */
+function settingsUpdate(array $params): int{
+    $sc_data = [
+        'lang_status' => $params['lang_status'],
+        'included_pages_status' => $params['included_pages_status'],
+        'socials_status' => $params['socials_status'],
+        'social_pages' => $params['social_pages'],
+        'contact_pages' => $params['contact_pages'],
+        'cookie_policy_pages' => $params['cookie_policy_pages'],
+        'privacy_policy_pages' => $params['privacy_policy_pages'],
+        'terms_pages' => $params['terms_pages'],
+    ];
+    $settings_check = new SettingsCheck($sc_data);
+    $su_data = [
+        'lang_status' => $settings_check->getLangStatus(),
+        'included_pages_status' => $settings_check->getIncludedPagesStatus(),
+        'socials_status' => $settings_check->getSocialsStatus(),
+        'social_pages' => $settings_check->getSocialPages(),
+        'contact_pages' => $settings_check->getContactPages(),
+        'cookie_policy_pages' => $settings_check->getCookiePolicyPages(),
+        'privacy_policy_pages' => $settings_check->getPrivacyPolicyPages(),
+        'terms_pages' => $settings_check->getTermsPages()
+    ];
+    $settings_update = new SettingsUpdate($su_data);
+    return $settings_update->getErrno();
+}
 ?>
