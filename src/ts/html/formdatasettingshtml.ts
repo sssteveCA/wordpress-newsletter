@@ -24,6 +24,7 @@ export default class FormDataSettingsHtml{
         this.checkboxLangsChange();
         this.checkboxSocialChange();
         this.checkboxContactsPagesChange();
+        this.checkboxCookiePolicyPagesChange();
         this.checkboxPrivacyPolicyPagesChange();
     }
 
@@ -102,6 +103,26 @@ export default class FormDataSettingsHtml{
             })
         })
         
+    }
+
+    /**
+     * When the cookie policy pages enabled checkbox value change 
+     */
+    private checkboxCookiePolicyPagesChange(): void{
+        this._cb_pages_enabled.cookie_policy_pages.addEventListener('change',()=>{
+            if(this._cb_pages_enabled.cookie_policy_pages.checked){
+                if(this._cb_langs.lang_it.checked) this._input_cookie_policy_pages.lang_it.disabled = false;
+                else this._input_cookie_policy_pages.lang_it.disabled = true;
+                if(this._cb_langs.lang_es.checked) this._input_cookie_policy_pages.lang_es.disabled = false;
+                else this._input_cookie_policy_pages.lang_es.disabled = true;
+                if(this._cb_langs.lang_en.checked) this._input_cookie_policy_pages.lang_en.disabled = false;
+                else this._input_cookie_policy_pages.lang_en.disabled = true;
+            }
+            else{
+                const input_cookie_policy_pages: NodeListOf<HTMLInputElement> = this._container_cookie_pages.querySelectorAll('input[type="text"]') as NodeListOf<HTMLInputElement>;
+                input_cookie_policy_pages.forEach(input_cookie_policy_page => input_cookie_policy_page.disabled = true)
+            }
+        })
     }
 
     /**
