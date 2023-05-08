@@ -96,6 +96,7 @@ HTML;
         $youtubeLogo = Properties::youtubeLogoUrl();
         //file_put_contents(C::FILE_LOG,"Template mail template youtube logo => {$youtubeLogo}\r\n",FILE_APPEND);
         $messages = Template::mailTemplateMessages($lang,$params);
+        $settings = $params['settings'];
         $htmlTemplate = <<<HTML
 <!DOCTYPE html>
 <html lang="it">
@@ -124,30 +125,51 @@ HTML;
                         </div>
                     </td>
                 </tr>
+HTML;
+        if($settings['socials_stauts']['facebook'] || $settings['socials_stauts']['instagram'] || $settings['socials_stauts']['youtube']){
+            $htmlTemplate .= <<<HTML
                 <!-- Testo Social -->
                 <tr>
                     <td colspan="3" style="padding: 20px 20px 10px 20px; text-align: center;">
                         <strong style="font-size: 14px;"></strong>
                     </td>
                 </tr>
-                <!-- Link social -->
                 <tr>
+HTML;
+            if($settings['socials_status']['facebook']){
+                $htmlTemplate .= <<<HTML
+                <!-- Link social -->
                     <td colspan="1" style="padding:20px;">
-                        <a title ="Facebook" href="{$facebookPage}" target="_blank">
+                        <a title ="Facebook" href="{$settings['social_pages']['facebook']}" target="_blank">
                             <img id="imgFacebook" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$facebookLogo}" alt="Facebook" title="Facebook">
                         </a>
                     </td>
+HTML;
+            }//if($settings['socials_status']['facebook']){
+            if($settings['socials_status']['instagram']){
+                $htmlTemplate .= <<<HTML
                     <td colspan="1" style="padding:20px;">
-                        <a title="Instagram" href="{$instagramProfile}" target="_blank">
+                        <a title="Instagram" href="{$settings['social_pages']['instagram']}" target="_blank">
                             <img id="imgInstagram" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$instagramLogo}" alt="Instagram" title="Instagram">
                         </a>
                     </td>
-                    <td colspan="1" style="padding:20px;">
-                        <a title="Youtube" href="{$youtubeChannel}" target="_blank">
-                            <img id="imgYoutube" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$youtubeLogo}" alt="Youtube" title="Youtube"> 
-                        </a>
-                    </td>
+HTML;
+            }//if($settings['socials_status']['instagram']){
+            if($settings['socials_status']['youtube']){
+                $htmlTemplate .= <<<HTML
+                <td colspan="1" style="padding:20px;">
+                    <a title="Youtube" href="{$settings['social_pages']['youtube']}" target="_blank">
+                        <img id="imgYoutube" class="img" style="display: block; margin: auto; height: 45px; width: 45px;" src="{$youtubeLogo}" alt="Youtube" title="Youtube"> 
+                    </a>
+                </td>
+HTML;
+            }//if($settings['socials_status']['youtube']){
+            $htmlTemplate .= <<<HTML
                 </tr>
+HTML;
+
+        }//if($settings['socials_stauts']['facebook'] || $settings['socials_stauts']['instagram'] || $settings['socials_stauts']['youtube']){
+        $htmlTemplate .= <<<HTML
                 <!-- Footer -->
                 <tr>
                     <td colspan="3" style="padding: 20px; font-size: 14px;">
