@@ -136,7 +136,7 @@ export type NlSettingsData = {
 
 export type NlPages = {
     contacts_pages?: boolean,
-    cookies_policy_pages?: boolean, 
+    cookie_policy_pages?: boolean, 
     privacy_policy_pages?: boolean,
     terms_pages?: boolean
 }

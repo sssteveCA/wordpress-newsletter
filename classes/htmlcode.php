@@ -316,7 +316,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_cookie_policy_it" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_cookie_policy_es" class="form-label">Pagina spagnola</label>
@@ -324,7 +324,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_cookie_policy_es" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_cookie_policy_en" class="form-label">Pagina inglese</label>
@@ -345,7 +345,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_privacy_policy_it" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_privacy_policy_es" class="form-label">Pagina spagnola</label>
@@ -353,7 +353,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_privacy_policy_es" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_privacy_policy_en" class="form-label">Pagina inglese</label>
@@ -374,7 +374,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_terms_it" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_terms_es" class="form-label">Pagina spagnola</label>
@@ -382,7 +382,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_terms_es" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_terms_en" class="form-label">Pagina inglese</label>
@@ -497,10 +497,10 @@ HTML;
      * Get the values to be used in the frontend subscribe form
      * @param string $lang
      */
-    public static function subscribeFormValues(string $lang):array {
-        $privacyUrl = Properties::privacyUrl($lang);
-        $cookieUrl = Properties::cookieUrl($lang);
-        $termsUrl = Properties::termsUrl($lang);
+    public static function subscribeFormValues(string $lang, array $settings):array {
+        $privacyUrl = isset($settings['privacy_policy_pages'][$lang]) ? $settings['privacy_policy_pages'][$lang] : "" ;
+        $cookieUrl = isset($settings['cookie_policy_pages'][$lang]) ? $settings['cookie_policy_pages'][$lang] : "" ;
+        $termsUrl = isset($settings['terms_pages'][$lang]) ? $settings['terms_pages'][$lang] : "" ;
         if($lang == Langs::$langs["it"]){
             return [
                 "title" => "Newsletter",
@@ -598,7 +598,7 @@ HTML;
             </div>
 HTML;
     if($settings['included_pages_status']['cookie_policy_pages'] && $settings['included_pages_status']['privacy_policy_pages']){
-        $html = <<<HTML
+        $html .= <<<HTML
             <div class="row my-4">
                 <div class="col-12 form-check">
                     <input class="form-check-input" type="checkbox" value="1" id="nl_cb_privacy" name="cb_privacy" required>
@@ -608,7 +608,7 @@ HTML;
 HTML;
     }//if($settings['included_pages_status']['cookie_policy_pages'] && $settings['included_pages_status']['privacy_policy_pages']){
     if($settings['included_pages_status']['terms_pages']){
-        $html = <<<HTML
+        $html .= <<<HTML
             <div class="row my-4">
                 <div class="col-12 form-check">
                     <input class="form-check-input" type="checkbox" value="1" id="nl_cb_terms" name="cb_terms" required>
@@ -617,7 +617,7 @@ HTML;
             </div>
 HTML;
     }//if($settings['included_pages_status']['terms_pages']){
-    $html = <<<HTML
+    $html .= <<<HTML
             <div class="row my-4">
                 <div class="col-7 text-end">
                     <button id="nl_submit" type="submit" class="btn btn-dark mb-5" disabled>{$langParams['subscribe_text']}</button>
