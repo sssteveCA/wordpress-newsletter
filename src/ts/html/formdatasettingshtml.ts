@@ -200,7 +200,9 @@ export default class FormDataSettingsHtml{
                 },
                 included_pages_status: {
                     contacts_pages: this._cb_pages_enabled.contacts_pages.checked,
-                    privacy_policy_pages: this._cb_pages_enabled.privacy_policy_pages.checked
+                    cookie_policy_pages: this._cb_pages_enabled.cookie_policy_pages.checked,
+                    privacy_policy_pages: this._cb_pages_enabled.privacy_policy_pages.checked,
+                    terms_pages: this._cb_pages_enabled.terms_pages.checked
                 },
                 socials_status: {
                     facebook: this._cb_social.facebook.checked,

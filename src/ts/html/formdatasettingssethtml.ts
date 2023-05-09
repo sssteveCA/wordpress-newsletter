@@ -80,12 +80,18 @@ export default class FormDataSettingsSetHtml{
      */
     private setPageEnabledCheckboxes(): void{
         this._cb_pages_enabled.contacts_pages.checked = (this._data.included_pages_status.contacts_pages) ? true : false;
+        this._cb_pages_enabled.cookie_policy_pages.checked = (this._data.included_pages_status.cookie_policy_pages) ? true : false;
         this._cb_pages_enabled.privacy_policy_pages.checked = (this._data.included_pages_status.privacy_policy_pages) ? true : false;
+        this._cb_pages_enabled.terms_pages.checked = (this._data.included_pages_status.terms_pages) ? true : false;
         const change_event: Event = new Event('change');
         if(this._cb_pages_enabled.contacts_pages.checked)
             this._cb_pages_enabled.contacts_pages.dispatchEvent(change_event)
+        if(this._cb_pages_enabled.cookie_policy_pages.checked)
+            this._cb_pages_enabled.cookie_policy_pages.dispatchEvent(change_event)
         if(this._cb_pages_enabled.privacy_policy_pages.checked)
             this._cb_pages_enabled.privacy_policy_pages.dispatchEvent(change_event)
+        if(this._cb_pages_enabled.terms_pages.checked)
+            this._cb_pages_enabled.terms_pages.dispatchEvent(change_event)
         
     }
 

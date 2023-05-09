@@ -316,7 +316,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_cookie_policy_it" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_cookie_policy_es" class="form-label">Pagina spagnola</label>
@@ -324,7 +324,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_cookie_policy_es" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_cookie_policy_en" class="form-label">Pagina inglese</label>
@@ -345,7 +345,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_privacy_policy_it" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_privacy_policy_es" class="form-label">Pagina spagnola</label>
@@ -353,7 +353,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_privacy_policy_es" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_privacy_policy_en" class="form-label">Pagina inglese</label>
@@ -374,7 +374,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_terms_it" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_terms_es" class="form-label">Pagina spagnola</label>
@@ -382,7 +382,7 @@ HTML;
             <div class="col-12 col-md-8">
                 <input type="text" class="form-control" id="nl_page_terms_es" disabled>
             </div>
-        <div>
+        </div>
         <div class="row">
             <div class="col-12 col-md-4">
                 <label for="nl_page_terms_en" class="form-label">Pagina inglese</label>
@@ -497,10 +497,10 @@ HTML;
      * Get the values to be used in the frontend subscribe form
      * @param string $lang
      */
-    public static function subscribeFormValues(string $lang):array {
-        $privacyUrl = Properties::privacyUrl($lang);
-        $cookieUrl = Properties::cookieUrl($lang);
-        $termsUrl = Properties::termsUrl($lang);
+    public static function subscribeFormValues(string $lang, array $settings):array {
+        $privacyUrl = isset($settings['privacy_policy_pages'][$lang]) ? $settings['privacy_policy_pages'][$lang] : "" ;
+        $cookieUrl = isset($settings['cookie_policy_pages'][$lang]) ? $settings['cookie_policy_pages'][$lang] : "" ;
+        $termsUrl = isset($settings['terms_pages'][$lang]) ? $settings['terms_pages'][$lang] : "" ;
         if($lang == Langs::$langs["it"]){
             return [
                 "title" => "Newsletter",
@@ -570,45 +570,57 @@ HTML;
      * @param array $params
      */
     public static function wpSignupForm(array $params): string{
-        return <<<HTML
+        $langParams = $params['lang'];
+        $settings = $params['settings'];
+        $html = <<<HTML
 <fieldset id="nl_form_fieldset" class="position-relative w-50 mx-auto border border-primary d-flex flex-column align-items-center" style="margin-bottom: 50px; min-width: 300px;">
-    <legend class="text-center">{$params['title']}</legend>
+    <legend class="text-center">{$langParams['title']}</legend>
     <h2 class="text-center"></h2>
     <form id="nl_form" class="ml-5 mb-5 d-flex flex-column" action="#" method="post"> 
         <div class="container">
             <div class="row my-4">
                 <div class="col-12">
-                    <label for="nl_name" class="form-label">{$params['name_title']}</label>
+                    <label for="nl_name" class="form-label">{$langParams['name_title']}</label>
                     <input type="text" class="form-control" id="nl_name" name="name">
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col-12">
-                    <label for="nl_surname" class="form-label">{$params['surname_title']}</label>
+                    <label for="nl_surname" class="form-label">{$langParams['surname_title']}</label>
                     <input type="text" class="form-control" id="nl_surname" name="surname">
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col-12">
-                    <label for="nl_email" class="form-label">{$params['ea_title']}</label>
+                    <label for="nl_email" class="form-label">{$langParams['ea_title']}</label>
                     <input type="email" class="form-control" id="nl_email" name="email" required>
                 </div>
             </div>
+HTML;
+    if($settings['included_pages_status']['cookie_policy_pages'] && $settings['included_pages_status']['privacy_policy_pages']){
+        $html .= <<<HTML
             <div class="row my-4">
                 <div class="col-12 form-check">
                     <input class="form-check-input" type="checkbox" value="1" id="nl_cb_privacy" name="cb_privacy" required>
-                    <label class="form-check-label" for="nl_cb_privacy">{$params['cb_label1']}</label>
+                    <label class="form-check-label" for="nl_cb_privacy">{$langParams['cb_label1']}</label>
                 </div>
             </div>
+HTML;
+    }//if($settings['included_pages_status']['cookie_policy_pages'] && $settings['included_pages_status']['privacy_policy_pages']){
+    if($settings['included_pages_status']['terms_pages']){
+        $html .= <<<HTML
             <div class="row my-4">
                 <div class="col-12 form-check">
                     <input class="form-check-input" type="checkbox" value="1" id="nl_cb_terms" name="cb_terms" required>
-                    <label class="form-check-label" for="nl_cb_terms">{$params['cb_label2']}</label>
+                    <label class="form-check-label" for="nl_cb_terms">{$langParams['cb_label2']}</label>
                 </div>
             </div>
+HTML;
+    }//if($settings['included_pages_status']['terms_pages']){
+    $html .= <<<HTML
             <div class="row my-4">
                 <div class="col-7 text-end">
-                    <button id="nl_submit" type="submit" class="btn btn-dark mb-5" disabled>{$params['subscribe_text']}</button>
+                    <button id="nl_submit" type="submit" class="btn btn-dark mb-5" disabled>{$langParams['subscribe_text']}</button>
                 </div>
                 <div class="col-5">
                     <div id="nl_spinner" class="spinner-border text-dark invisible" role="status">
@@ -617,10 +629,11 @@ HTML;
                 </div>
             </div>
         </div>
-        <input type="hidden" id="nl_lang" name="lang" value="{$params['lang_code']}">
+        <input type="hidden" id="nl_lang" name="lang" value="{$langParams['lang_code']}">
     </form>
 </fieldset>
 HTML;
+    return $html;
     }
 
     /**
