@@ -1,4 +1,6 @@
 <?php
+
+use Newsletter\Classes\Database\Models\Settings as ModelsSettings;
 use Newsletter\Classes\Database\Tables\Settings;
 /**
  * Plugin Name: Newsletter
@@ -194,7 +196,23 @@ function nl_subscribe_form($atts){
       'lang' => Langs::$langs["en"]
    ],$atts);
    $langParams = HtmlCode::subscribeFormValues($a['lang']);
-   return HtmlCode::wpSignupForm($langParams);
+   $settings = new ModelsSettings(['tableName' => C::TABLE_SETTINGS]);
+   $settings->getSettings();
+   if($settings->getLangStatus()[$a['lang']]){
+      $formParams = [
+         'lang' => $langParams,
+         'settings' => [
+            'lang_status' => $settings->getLangStatus(),
+            'included_pages_status' => $settings->getIncludedPagesStatus(),
+            'cookie_policy_pages' => $settings->getCookiePolicyPages(),
+            'privacy_policy_pages' => $settings->getPrivacyPolicyPages(),
+            'terms_pages' => $settings->getTermsPages(),
+         ]
+      ];
+      return HtmlCode::wpSignupForm($formParams);
+   }//if($settings->getLangStatus()[$a['lang']]){
+   return "";
+   
 }
 
 add_filter('script_loader_tag','nl_add_script_tags',10,3);
