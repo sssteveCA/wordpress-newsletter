@@ -19,7 +19,8 @@ module.exports = {
         'js/admin/nl_admin_delete': join(tsPath,'admin/nl_admin_delete.ts'),
         'js/admin/nl_admin_send': join(tsPath,'admin/nl_admin_send.ts'),
         'js/admin/nl_admin_settings': join(tsPath,'admin/nl_admin_settings.ts'),
-        'js/scripts/preunsubscribe': join(tsPath,'scripts/preunsubscribe.ts')
+        'js/scripts/preunsubscribe': join(tsPath,'scripts/preunsubscribe.ts'),
+        'js/create_users': join(tsPath,'create_users.ts')
     },
     output: {
         path: resolve(__dirname,'dist'),
