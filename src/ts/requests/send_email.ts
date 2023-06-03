@@ -46,8 +46,6 @@ export default class SendEmail{
 
     public async sendNewsletter(): Promise<object>{
         return await this.sendNewsletterLoop().then(res => {
-            console.log("sendNewsletterLoop then")
-            console.log(res)
             return {
                 msg: 'Controlla tra qualche minuto nel file di log se la newsletter è stata inviata a tutti i destinatari'
             }
@@ -83,27 +81,18 @@ export default class SendEmail{
             let start = 0
             let end = sub_arr_lenght
             const iterations = (this._emails.length % 5 == 0) ? this._emails.length/5 : Math.floor(this._emails.length/5) + 1
-            console.log("iterations => "+iterations)
             let counter = 1
             const interval = setInterval(()=>{
-                console.log("start => "+start)
-                console.log("end => "+end)
                 let sub_arr = this._emails.slice(start,end)
-                console.log("sub_arr")
-                console.log(sub_arr)
-                const res = this.promise(sub_arr)
-                console.log("res")
-                console.log(res)
+                this.promise(sub_arr)
                 if(counter >= iterations){
-                    console.log("clearInterval")
                     clearInterval(interval)
                     resolve(true)
                 }
-                console.log("after clear interval") 
                 start += sub_arr_lenght
                 end += sub_arr_lenght
                 counter++
-            },3000)
+            },1000)
         })
         
     }

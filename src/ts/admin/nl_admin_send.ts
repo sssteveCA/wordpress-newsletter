@@ -33,12 +33,11 @@ window.addEventListener('DOMContentLoaded',()=>{
             console.log(data); */
             send_spinner.classList.remove("invisible");
             const se: SendEmail = new SendEmail(data);
-            setTimeout(()=>{
-                const response: object = se.sendNewsletter()
+            se.sendNewsletter().then(obj => {
                 send_spinner.classList.add("invisible");
                 email_send_response.style.color = 'grey';
-                email_send_response.innerHTML = response[Constants.KEY_MESSAGE];
-            },2000)
+                email_send_response.innerHTML = obj[Constants.KEY_MESSAGE];
+            })
         }//if(emails.length > 0){ 
         else{
             email_send_response.style.color = 'red';
