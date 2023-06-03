@@ -15,9 +15,7 @@ class Template{
      * Activation mail HTML body
      */
     public static function activationMailTemplate(string $lang, array $params): string{
-        //echo "template.php activationMailTemplate params => ".var_export($params,true)."\r\n";
         $messages = Template::activationMailMessages($lang,$params);
-        //echo "template.php activationMailTemplate moreInfo => ".var_export($moreInfo,true)."\r\n";
         $htmlTemplate = <<<HTML
 <!DOCTYPE html>
 <html lang="it">

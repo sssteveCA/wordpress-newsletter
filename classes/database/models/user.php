@@ -131,8 +131,6 @@ class User extends Model implements Ue{
     public function getUser(string $query, array $values){
         $user = parent::get($query,$values);
         if($user){
-            /* echo "User getUser result => \r\n";
-            var_dump($user); */
             $this->id = $user[User::$fields["id"]];
             $this->firstName = $user[User::$fields["firstName"]];
             $this->lastName = $user[User::$fields["lastName"]];

@@ -49,6 +49,10 @@ trait UsersTrait{
 
     /**
      * Set the array for the SELECT query to get multiple users
+     * @param array $where
+     * @return array|null
+     * @throws IncorrectVariableFormatException
+     * @
      */
     private function setSelectQuery(array $where): array|null{
         $this->errno = 0;
@@ -76,10 +80,7 @@ trait UsersTrait{
                     if($field != array_key_last($where)) $selectArray['query'] .= ",";
                     //else $selectArray['query'] .= ";";
                 }//if(in_array($field, Users::$fields)){
-                else{
-                    //echo "UsersTrait field exception => ".var_export($field,true)."\r\n";
-                    throw new IncorrectVariableFormatException(Ue::EXC_INVALID_FIELD);
-                } 
+                else throw new IncorrectVariableFormatException(Ue::EXC_INVALID_FIELD);
             }
             $selectArray['query'] .= "ORDER BY `{$classname::$fields['email']}` ASC";
             return $selectArray;

@@ -6,13 +6,11 @@ use Exception;
 use Newsletter\Classes\Database\Models\Settings;
 use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
-use Newsletter\Classes\Properties;
 use Newsletter\Classes\Template;
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Traits\EmailManagerTrait;
 use Newsletter\Traits\ErrorTrait;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use Newsletter\Interfaces\Constants as C;
 
 interface EmailManagerErrors extends ExceptionMessages{
@@ -86,8 +84,6 @@ class EmailManager extends PHPMailer{
                 $this->AltBody = $this->body;
                 $this->send();
             }catch(Exception $e){
-                /* echo "Mail Exception => ".$e->getMessage()."\r\n";
-                echo "Mail error => {$this->ErrorInfo}\r\n"; */
                 $this->errno = Eme::ERR_EMAIL_SEND;
             }
         }//if(isset($data['code'],$data['link'],$data['verifyUrl']) && $data['code'] != '' && $data['link'] != '' && $data['verifyUrl'] != ''){
@@ -136,7 +132,6 @@ class EmailManager extends PHPMailer{
                         $templateData = ['from' => $this->from];
                         $this->subject = Template::deleteUserMessages($lang,$templateData)["title"];
                         $this->body = Template::deleteUserTemplate($lang,$templateData);
-                        //echo "EmailManager sendUserDeleteNotify body => ".var_export($this->body,true)."\r\n";
                         $this->Subject = $this->subject;
                         $this->Body = $this->body;
                         $this->AltBody = $this->body;
@@ -144,7 +139,6 @@ class EmailManager extends PHPMailer{
                     }//if($del){ 
                 }//if($user != null){
             }catch(Exception $e){
-                //echo "Mail Exception => ".$e->getMessage()."\r\n";
                 $this->errno = Eme::ERR_EMAIL_SEND;
             }
         }//foreach($this->emailsList as $email){
@@ -188,7 +182,6 @@ CONTENT;
                                         'privacy_policy_pages' => $settings->getPrivacyPolicyPages()
                                     ]
                                 ];
-                                //echo "\r\n EmailManager sendNewsletterEmail template data => ".var_export($templateData,true)."\r\n";
                                 $htmlBody = Template::mailTemplate($lang,$templateData);
                                 $this->addAddress($email);
                                 $this->Body = $htmlBody;
@@ -202,7 +195,6 @@ CONTENT;
             }//if($settings->getSettings()){
         }catch(Exception $e){
             $log_content .= " => NON INVIATO\r\n";
-            //echo "Mail Exception => ".$e->getMessage()."\r\n";
             $this->errno = Eme::ERR_EMAIL_SEND;
         }
     }
@@ -230,14 +222,12 @@ CONTENT;
     public function sendUserUnsubscribeNotify(){
         $this->errno = 0;
         try{
-            //echo "EmailManager sendUserUnsubscribeNotify htmlBody => ".var_export($htmlBody,true)."\r\n";
             $this->addAddress($this->from);
             $this->body = Template::unsubscribedUserTemplate($this->email);
             $this->Body = $this->body;
             $this->AltBody = "L'utente con email {$this->email} si è cancellato dalla newsletter";
             $this->send();
         }catch(Exception $e){
-            //echo "Mail Exception => ".$e->getMessage()."\r\n";
             $this->errno = Eme::ERR_EMAIL_SEND;
         }
     }

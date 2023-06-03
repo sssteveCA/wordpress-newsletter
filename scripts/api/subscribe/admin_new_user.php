@@ -47,7 +47,6 @@ try{
                 $userData['firstName'] = $post['name'];
                 $userData['lastName'] = $post['surname'];
             }//if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
-            //echo "Admin new User userData => ".var_export($userData,true)."\r\n";
             $user = new User($userData);
             $ausData = ['user' => $user];
             $aus = new AdminUserSubscribe($ausData);

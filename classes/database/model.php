@@ -129,9 +129,6 @@ SQL;
         $sql = <<<SQL
 UPDATE `{$this->fullTableName}` SET {$sets} {$wheres} LIMIT 1;
 SQL;
-        /* echo "model update values => \r\n";
-        var_dump($values);
-        echo "\r\nModel update query => {$sql}\r\n"; */
         $this->query = $this->wpdb->prepare($sql,$values);
         $this->queries[] = $this->query;
         $update = $this->wpdb->query($this->query);

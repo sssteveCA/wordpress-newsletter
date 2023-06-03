@@ -55,7 +55,6 @@ if(isset($_REQUEST['unsubscCode']) && $_REQUEST['unsubscCode'] != ""){
                 throw new Exception;
         }
     }catch(Exception $e){
-        //echo "Unsubsribe exception\n ".$e->getMessage();
         http_response_code(500);
         $message = Properties::unknownError($lang);
     }
@@ -102,7 +101,6 @@ function sendUserUnsubscribeNotify(array $params):int{
         'host' => $host, 'operation' => $params['operation'],
         'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
-    //echo "unsubscribe sendUserUnsubscribeNotify emData => ".var_export($emData,true)."\r\n";
     $emailManager = new EmailManager($emData);
     $emailManager->sendUserUnsubscribeNotify();
     return 0;

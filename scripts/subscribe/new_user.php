@@ -55,7 +55,6 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 $aeData = [
                     'verCode' => $verCode, 'email' => $email, 'lang' => $lang, 'link' => $link, 'operation' => $operation, 'subject' => $subject, 'verifyUrl' => $verifyUrl
                 ];
-                //echo "new_user ae_data => ".var_export($aeData,true)."\r\n";
                 $email = sendActivationMail($aeData);
                 switch($email){
                     case 0:
@@ -83,7 +82,6 @@ if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email']
                 throw new Exception;
         }
     }catch(Exception $e){
-        //echo "Exception\n";
         http_response_code(500);
         $response[C::KEY_MESSAGE] = Properties::unknownError($lang);
     }
@@ -113,12 +111,10 @@ function sendActivationMail(array $params): int{
         'host' => $host, 'operation' => $params['operation'],
         'password' => $password, 'port' => $port, 'subject' => $params['subject']
     ];
-    //echo "new_user sendActivationMail em_data => ".var_export($emData,true)."\r\n";
     $emailManager = new EmailManager($emData);
     $activationMailData = [
         'verCode' => $params['verCode'], 'lang' => $params['lang'], 'link' => $params['link'], 'verifyUrl' => $params['verifyUrl']
     ];
-    //echo "new_user sendActivationMail activationMail_data => ".var_export($activationMailData,true)."\r\n";
     $emailManager->sendActivationMail($activationMailData);
     $emErrno = $emailManager->getErrno();
     return $emErrno;
