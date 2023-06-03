@@ -33,12 +33,12 @@ window.addEventListener('DOMContentLoaded',()=>{
             console.log(data); */
             send_spinner.classList.remove("invisible");
             const se: SendEmail = new SendEmail(data);
-            se.sendEmail().then(obj => {
+            setTimeout(()=>{
+                const response: object = se.sendNewsletter()
                 send_spinner.classList.add("invisible");
-                if(obj[Constants.KEY_DONE] == true) email_send_response.style.color = 'green';
-                else email_send_response.style.color = 'red';
-                email_send_response.innerHTML = obj[Constants.KEY_MESSAGE];
-            });
+                email_send_response.style.color = 'grey';
+                email_send_response.innerHTML = response[Constants.KEY_MESSAGE];
+            },2000)
         }//if(emails.length > 0){ 
         else{
             email_send_response.style.color = 'red';

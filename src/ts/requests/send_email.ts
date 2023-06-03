@@ -44,33 +44,22 @@ export default class SendEmail{
         this._message = data.message;
     }
 
-    public async sendEmail(): Promise<object>{
-        this._errno = 0;
-        let response: object = {};
-        try{
-            await this.sendEmailPromise().then(res => {
-                //console.log(res);
-                response = JSON.parse(res);
-            }).catch(err => {
-                throw err;
-            });
-        }catch(e){
-            if(e instanceof axios.AxiosError){
-                const stringError: string = e.response?.data;
-                response = JSON.parse(stringError);
-            }
-            else{
-                this._errno = SendEmail.ERR_FETCH;
-                response = {done: false, msg: this.error}
-            }
+    public sendNewsletter(): object{
+        this.sendNewsletterLoop()
+        return {
+            message: 'Controlla tra qualche minuto nel file di log se la newsletter è stata inviata a tutti i destinatari'
         }
-        return response;
     }
 
-    private async sendEmailPromise(): Promise<string>{
+    /**
+     * Exceute the request for newsletter sending
+     * @param emails the recipients of the newsletter
+     * @returns the response
+     */
+    private async promise(emails: string[]): Promise<string>{
         return await new Promise<string>((resolve,reject)=>{
             clientPost.post(SendEmail.FETCH_URL,{
-                emails: this._emails,
+                emails: emails,
                 subject: this._subject,
                 body: this._message  
             }).then(res => {
@@ -80,4 +69,25 @@ export default class SendEmail{
             });
         });
     }
+
+    /**
+     * The loop that execute the request multiple time for each rescipients group
+     */
+    private sendNewsletterLoop(): void{
+        let sub_arr_lenght = 5
+        let start = 0
+        let end = sub_arr_lenght
+        const iterations = (this._emails.length % 5 == 0) ? this._emails.length/5 : Math.floor(this._emails.length/5) + 1
+        let counter = 1
+        const interval = setInterval(()=>{
+            let sub_arr = this._emails.slice(start,end)
+            const res = this.promise(sub_arr)
+            if(counter >= iterations) clearInterval(interval)
+            start += sub_arr_lenght
+            end += sub_arr_lenght
+            counter++
+        },3000)
+    }
+
+
 }
