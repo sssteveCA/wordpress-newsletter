@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { clientPost } from "../config/axios_instances";
+import { clientPost, clientPostNoTimeout } from "../config/axios_instances";
 import { Constants } from "../namespaces/constants";
 import { NlFormDataSend } from "../types/types";
 
@@ -58,7 +58,7 @@ export default class SendEmail{
      */
     private async promise(emails: string[]): Promise<string>{
         return await new Promise<string>((resolve,reject)=>{
-            clientPost.post(SendEmail.FETCH_URL,{
+            clientPostNoTimeout.post(SendEmail.FETCH_URL,{
                 emails: emails,
                 subject: this._subject,
                 body: this._message  

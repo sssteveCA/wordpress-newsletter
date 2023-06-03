@@ -18,6 +18,14 @@ export const clientPost = axios.create({
     timeout: 20000,
 });
 
+export const clientPostNoTimeout = axios.create({
+    baseURL: Constants.HOME_URL,
+    headers: {
+        'Content-Type' : 'application-json', 'Accept': 'application/json'
+    },
+    responseType: 'text',
+})
+
 export const clientPut = axios.create({
     baseURL: Constants.HOME_URL,
     headers: {
