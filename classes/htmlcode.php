@@ -129,6 +129,24 @@ HTML;
     }
 
     /**
+     * Admin newsletter send status form
+     */
+    public static function adminLogForm(): string{
+        return <<<HTML
+        <div>
+            <h2 class="text-center">Stato di invio delle newsletter ai destinatari indicati</h2>
+        </div>
+        <form id="nl_log_newsletter" method="post" action="#">
+            <div id="nl_table_container" class="mb-3 mt-4">
+            </div>
+            <div class="d-flex justify-content-center">
+                <button id="nl_log_bt_delete" type="button" class="btn btn-danger">CANCELLA</button>
+            </div>
+        </form>
+HTML;
+    }
+
+    /**
      * Admin newsletter send form
      */
     public static function adminSenderForm(): string{
