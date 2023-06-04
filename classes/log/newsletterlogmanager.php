@@ -22,6 +22,7 @@ class NewsletterLogManager implements Nlme{
     use ErrorTrait;
 
     private array $loginfo = [];
+    private int $filesize = 0;
     private string $file_path;
 
     public function __construct(string $file_path){
@@ -30,6 +31,7 @@ class NewsletterLogManager implements Nlme{
     }
 
     public function getLogInfo(){ return $this->loginfo; }
+    public function getFileSize(){ return $this->filesize; }
     public function getError(){
         switch($this->errno){
             case Nlme::ERR_INVALID_FILE:
@@ -51,12 +53,16 @@ class NewsletterLogManager implements Nlme{
         if(file_exists($this->file_path) && is_file($this->file_path)){
             $handle = fopen($this->file_path,'r');
             if($handle !== false){
-                while($log_item = fscanf($handle,"SUBJECT: %s RECIPIENT: %s DATE: %s")){
-                    list($subject,$recipient,$date) = $log_item;
-                    $nli = new NewsletterLogInfo($subject,$recipient,$date);
-                    $this->loginfo[] = $nli;
+                $this->filesize = filesize($this->file_path);
+                if($this->filesize > 0){
+                    while($log_item = fscanf($handle,"SUBJECT: %s RECIPIENT: %s DATE: %s")){
+                        list($subject,$recipient,$date) = $log_item;
+                        $nli = new NewsletterLogInfo($subject,$recipient,$date);
+                        $this->loginfo[] = $nli;
+                    }
+                    fclose($handle);
                 }
-                fclose($handle);
+                
             }
             else $this->errno = Nlme::ERR_READ_FILE;
         }//if(file_exists($this->file_path) && is_file($this->file_path)){
