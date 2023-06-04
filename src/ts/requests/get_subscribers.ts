@@ -14,7 +14,7 @@ export default class GetSubscribers{
 
     public static ERR_FETCH: number = 1;
 
-    private static ERR_FETCH_MSG: string = "Errore durante l'esecuzione della richiesta";
+    private static ERR_FETCH_MSG: string = "Impossibile ottenere la lista degli iscritti";
 
     private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/browser/emailsending/getsubscribers.php";
 
@@ -52,7 +52,7 @@ export default class GetSubscribers{
         }catch(e){
             this._errno = GetSubscribers.ERR_FETCH;
             response = {
-                done: false, msg: ""
+                done: false, msg: this.error
             };
         }
         return response;
