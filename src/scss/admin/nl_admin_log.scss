@@ -1,0 +1,21 @@
+@use "sass:map";
+@use "../modules/globals";
+
+@mixin admin-log{
+    form#nl_log_newsletter{
+        >div:nth-child(2){
+            width: clamp(250px, 70%, 800px);
+            @media only screen and (min-width: map.get(globals.$bs-breakpoints,'xs')){
+                height: 350px;
+            }
+            @media only screen and (min-width: map.get(globals.$bs-breakpoints,'lg')){
+                height: 650px;
+            }
+            border: 1px solid black;
+            border-radius: 5%;
+            overflow: auto;
+        }
+    }
+}
+
+@include admin-log;
