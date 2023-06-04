@@ -18,6 +18,7 @@ module.exports = {
         'js/wp/nl_wp': join(tsPath,'wp/nl_wp.ts'),
         'js/admin/nl_admin_add': join(tsPath,'admin/nl_admin_add.ts'),
         'js/admin/nl_admin_delete': join(tsPath,'admin/nl_admin_delete.ts'),
+        'js/admin/nl_admin_log': join(tsPath, 'admin/nl_admin_log.ts'),
         'js/admin/nl_admin_send': join(tsPath,'admin/nl_admin_send.ts'),
         'js/admin/nl_admin_settings': join(tsPath,'admin/nl_admin_settings.ts'),
         'js/scripts/preunsubscribe': join(tsPath,'scripts/preunsubscribe.ts'),
