@@ -1,6 +1,4 @@
 <?php
-use Newsletter\Classes\Api\AuthCheck;
-
 require_once("../../../../../../wp-load.php");
 require_once("../../../vendor/autoload.php");
 
@@ -9,6 +7,9 @@ use Newsletter\Interfaces\Messages as M;
 use Dotenv\Dotenv;
 use Newsletter\Exceptions\NotSettedException;
 use Newsletter\Exceptions\WrongCredentialsException;
+use Newsletter\Classes\Api\AuthCheck;
+use Newsletter\Classes\Log\NewsletterLogManager;
+use Newsletter\Classes\Log\NewsletterLogManagerErrors as Nlme;
 
 $response = [
     C::KEY_DONE => false, C::KEY_EMPTY => false, C::KEY_MESSAGE => ''
@@ -24,7 +25,15 @@ try{
     ];
     $authCheck = new AuthCheck($apiAuthArray);
     if($authCheck->getErrno() == 0){
-
+        $nlm = new NewsletterLogManager(plugin_dir_path("newsletter/newsletter.php")."log_files/newsletter_status.log");
+        switch($nlm->getErrno()){
+            case 0:
+                break;
+            case Nlme::ERR_INVALID_FILE:
+                break;
+            default:
+                throw new Exception;
+        }
     }//if($authCheck->getErrno() == 0){
     else throw new WrongCredentialsException;
 }catch(NotSettedException|WrongCredentialsException $e){

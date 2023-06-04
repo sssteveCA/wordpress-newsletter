@@ -5,11 +5,7 @@ namespace Newsletter\Exceptions;
 use Exception;
 use Throwable;
 
-/**
- * Exception thrown when the variable has not the expected format
- */
-class IncorrectVariableFormatException extends Exception{
-
+class FileNotFoundException extends Exception{
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);

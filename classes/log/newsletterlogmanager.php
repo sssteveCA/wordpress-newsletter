@@ -56,6 +56,7 @@ class NewsletterLogManager implements Nlme{
                     $nli = new NewsletterLogInfo($subject,$recipient,$date);
                     $this->loginfo[] = $nli;
                 }
+                fclose($handle);
             }
             else $this->errno = Nlme::ERR_READ_FILE;
         }//if(file_exists($this->file_path) && is_file($this->file_path)){
