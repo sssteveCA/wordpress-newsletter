@@ -1,8 +1,8 @@
 <?php
 use Newsletter\Classes\Settings\SettingsUpdate;
 
-require_once("../../../../../wp-load.php");
-require_once("../../vendor/autoload.php");
+require_once("../../../../../../wp-load.php");
+require_once("../../../vendor/autoload.php");
 
 use Newsletter\Classes\Settings\SettingsCheck;
 use Newsletter\Interfaces\Constants as C;

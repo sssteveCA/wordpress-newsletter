@@ -1,8 +1,8 @@
 <?php
 use Newsletter\Classes\Email\EmailManager;
 
-require_once("../../../../../wp-load.php");
-require_once("../../vendor/autoload.php");
+require_once("../../../../../../wp-load.php");
+require_once("../../../vendor/autoload.php");
 
 use Dotenv\Dotenv;
 use Newsletter\Interfaces\Constants as C;

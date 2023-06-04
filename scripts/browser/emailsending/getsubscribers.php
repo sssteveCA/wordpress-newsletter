@@ -1,7 +1,7 @@
 <?php
 
-require_once("../../../../../wp-load.php");
-require_once("../../vendor/autoload.php");
+require_once("../../../../../../wp-load.php");
+require_once("../../../vendor/autoload.php");
 
 use Newsletter\Classes\Database\Models\Users;
 use Newsletter\Classes\Database\ModelErrors as Me;

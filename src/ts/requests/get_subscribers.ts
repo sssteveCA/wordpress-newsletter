@@ -16,7 +16,7 @@ export default class GetSubscribers{
 
     private static ERR_FETCH_MSG: string = "Errore durante l'esecuzione della richiesta";
 
-    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/emailsending/getsubscribers.php";
+    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/browser/emailsending/getsubscribers.php";
 
     constructor(){
 

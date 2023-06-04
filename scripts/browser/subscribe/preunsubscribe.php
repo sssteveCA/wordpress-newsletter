@@ -3,8 +3,8 @@ use Newsletter\Classes\General;
 use Newsletter\Classes\HtmlCode;
 use Newsletter\Classes\Properties;
 
-require_once("../../../../../wp-load.php");
-require_once("../../vendor/autoload.php");
+require_once("../../../../../../wp-load.php");
+require_once("../../../vendor/autoload.php");
 
 if(!isset($_REQUEST['lang'])) $_REQUEST['lang'] = 'en';
 $lang = General::languageCode($_REQUEST['lang']);

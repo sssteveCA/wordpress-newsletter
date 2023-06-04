@@ -13,7 +13,7 @@ export class NewUser{
     private _errno: number = 0;
     private _error: string|null = null;
 
-    private static NEWUSER_URL:string = Constants.PLUGIN_DIR+"/scripts/subscribe/new_user.php";
+    private static NEWUSER_URL:string = Constants.PLUGIN_DIR+"/scripts/browser/subscribe/new_user.php";
 
     public static ERR_FETCH: number = 1;
     public static ERR_INVALID_DATA: number = 2;

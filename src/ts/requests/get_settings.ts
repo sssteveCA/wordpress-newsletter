@@ -51,7 +51,7 @@ export default class GetSettings{
 
     private static ERR_FETCH_MSG: string = "Errore durante l'esecuzione della richiesta";
 
-    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/settings/getsettings.php";
+    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/browser/settings/getsettings.php";
 
     constructor(){}
      

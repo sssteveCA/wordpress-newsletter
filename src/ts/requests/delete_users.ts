@@ -13,7 +13,7 @@ export default class DeleteUsers{
 
     private static ERR_FETCH_MSG: string = "Errore durante l'invio della mail";
 
-    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/subscribe/delete_user.php";
+    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/browser/subscribe/delete_user.php";
 
     constructor(data: NlFormDataDelete){
         this._emails = data.emails;

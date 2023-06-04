@@ -52,7 +52,7 @@ export default class UpdateSettings{
 
     private static ERR_FETCH_MSG: string = "Errore durante l'esecuzione della richiesta";
 
-    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/settings/updatesettings.php";
+    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/browser/settings/updatesettings.php";
 
     constructor(data: NlSettingsData){
         this.assignValues(data);

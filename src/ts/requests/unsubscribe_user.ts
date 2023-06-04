@@ -16,7 +16,7 @@ export class UnsubscribeUser{
 
     private static ERR_FETCH_MSG: string = Messages.ERR_UNSUBSCRIBE_USER;
 
-    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/subscribe/unsubscribe.php";
+    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/browser/subscribe/unsubscribe.php";
 
     constructor(data: NlUnsubscribeUserData){
         if(data.lang)
