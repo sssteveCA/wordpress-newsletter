@@ -19,7 +19,8 @@ $administrator = current_user_can('manage_options');
 
 if($logged && $administrator){
     try{
-        $nlm = new NewsletterLogManager(plugin_dir_path("newsletter/newsletter.php")."log_files/newsletter_status.log");
+        $log_path = sprintf("%s/newsletter/log_files/newsletter_status.log",WP_PLUGIN_DIR);
+        $nlm = new NewsletterLogManager($log_path);
         switch($nlm->getErrno()){
             case 0:
                 if($nlm->getFileSize() > 0){

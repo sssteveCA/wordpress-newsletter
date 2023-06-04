@@ -6,10 +6,10 @@
         >div:first-child{
             width: clamp(250px, 70%, 800px);
             @media only screen and (min-width: map.get(globals.$bs-breakpoints,'xs')){
-                height: 350px;
+                height: 300px;
             }
             @media only screen and (min-width: map.get(globals.$bs-breakpoints,'lg')){
-                height: 650px;
+                height: 500px;
             }
             border: 1px solid black;
             border-radius: 5%;

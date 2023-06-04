@@ -81,7 +81,7 @@ use Newsletter\Enums\Langs;
  function nl_menu(){
     add_menu_page('Newsletter','Newsletter','administrator','nl_menu','','',1);
     add_submenu_page('nl_menu','Invia mail','Invia mail','administrator',C::SLUG_ADMIN_FORM_SEND,C::SLUG_ADMIN_FORM_SEND);
-    add_submenu_page('nl_menu','tato invio delle newsletter','Stato invio delle newsletter','administrator',C::SLUG_ADMIN_FORM_LOG,C::SLUG_ADMIN_FORM_LOG);
+    add_submenu_page('nl_menu','Stato invio delle newsletter','Stato invio delle newsletter','administrator',C::SLUG_ADMIN_FORM_LOG,C::SLUG_ADMIN_FORM_LOG);
     add_submenu_page('nl_menu','Aggiungi utente','Aggiungi utente','administrator',C::SLUG_ADMIN_FORM_ADD,C::SLUG_ADMIN_FORM_ADD);
     add_submenu_page('nl_menu','Elimina iscritti','Elimina iscritti','administrator',C::SLUG_ADMIN_FORM_DELETE,C::SLUG_ADMIN_FORM_DELETE);
     add_submenu_page('nl_menu','Impostazioni','Impostazioni','administrator',C::SLUG_ADMIN_FORM_SETTINGS,C::SLUG_ADMIN_FORM_SETTINGS);

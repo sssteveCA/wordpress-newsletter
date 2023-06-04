@@ -55,15 +55,16 @@ class NewsletterLogManager implements Nlme{
             if($handle !== false){
                 $this->filesize = filesize($this->file_path);
                 if($this->filesize > 0){
-                    while($log_item = fscanf($handle,"SUBJECT: %s RECIPIENT: %s DATE: %s")){
-                        list($subject,$recipient,$date) = $log_item;
-                        $nli = new NewsletterLogInfo($subject,$recipient,$date);
-                        $this->loginfo[] = $nli;
-                    }
+                    $regex = '/SUBJECT:\s*"([a-z0-9\s]+)"\s*RECIPIENT:\s*"([a-z0-9\s\.@]+)"\s*DATE:\s*"([0-9\s:\-]+)"/i';
+                    while($file_line = fgets($handle)){
+                        if(preg_match($regex,$file_line,$matches)){
+                            $nli = new NewsletterLogInfo($matches[1],$matches[2],$matches[3]);
+                            $this->loginfo[] = $nli;
+                        } 
+                    }//while(($file_line = fgets($handle) !== false)){
                     fclose($handle);
-                }
-                
-            }
+                }//if($this->filesize > 0){
+            }//if($handle !== false){
             else $this->errno = Nlme::ERR_READ_FILE;
         }//if(file_exists($this->file_path) && is_file($this->file_path)){
         else $this->errno = Nlme::ERR_INVALID_FILE;    
