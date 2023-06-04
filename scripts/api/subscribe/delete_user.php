@@ -12,6 +12,7 @@ use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Exceptions\MailNotSentException;
+use Newsletter\Exceptions\WrongCredentialsException;
 
 $response = [
     C::KEY_DONE => false, C::KEY_MESSAGE => ''
@@ -56,12 +57,9 @@ try{
             $response[C::KEY_MESSAGE] = M::ERR_MISSING_FORM_VALUES;
         }
     }//if($authCheck->getErrno() == 0){
-    else{
-        http_response_code(401);
-        $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
-    }  
-}catch(NotSettedException $nse){
-    http_response_code(400);
+    else throw new WrongCredentialsException;
+}catch(NotSettedException|WrongCredentialsException $e){
+    http_response_code(401);
     $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(MailNotSentException $mnse){
     http_response_code(500);

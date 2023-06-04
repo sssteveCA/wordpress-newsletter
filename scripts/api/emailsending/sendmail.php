@@ -10,6 +10,7 @@ use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Classes\Email\EmailManager;
 use Newsletter\Exceptions\MailNotSentException;
 use Newsletter\Exceptions\NotSettedException;
+use Newsletter\Exceptions\WrongCredentialsException;
 use Newsletter\Interfaces\Constants as C;
 
 $response = [
@@ -59,12 +60,9 @@ try{
             $response[C::KEY_MESSAGE] = M::ERR_MISSING_FORM_VALUES;
         }
     }//if($authCheck->getErrno() == 0){
-    else{
-        http_response_code(401);
-        $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
-    }
-}catch(NotSettedException $nse){
-    http_response_code(400);
+    else throw new WrongCredentialsException;
+}catch(NotSettedException|WrongCredentialsException $e){
+    http_response_code(401);
     $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(MailNotSentException $mnse){
     http_response_code(500);

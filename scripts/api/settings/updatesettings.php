@@ -5,6 +5,7 @@ use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Classes\Settings\SettingsUpdate;
 use Newsletter\Classes\Settings\SettingsCheck;
 use Newsletter\Exceptions\NotSettedException;
+use Newsletter\Exceptions\WrongCredentialsException;
 use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 
@@ -54,11 +55,8 @@ try{
             $response[C::KEY_MESSAGE] = M::ERR_MISSING_FORM_VALUES;
         }
     }//if($authCheck->getErrno() == 0){
-    else{
-        http_response_code(401);
-        $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
-    }
-}catch(NotSettedException $e){
+    else throw new WrongCredentialsException;
+}catch(NotSettedException|WrongCredentialsException $e){
     http_response_code(401);
     $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(Exception $e){

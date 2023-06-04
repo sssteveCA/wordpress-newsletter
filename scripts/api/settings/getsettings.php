@@ -5,6 +5,7 @@ use Newsletter\Interfaces\Constants as C;
 use Newsletter\Interfaces\Messages as M;
 use Newsletter\Classes\Database\Models\Settings;
 use Newsletter\Exceptions\DataNotRetrievedException;
+use Newsletter\Exceptions\WrongCredentialsException;
 
 require_once("../../../../../../wp-load.php");
 require_once("../../../vendor/autoload.php");
@@ -41,10 +42,10 @@ try{
         }//if($settings->getErrno() == 0){
         else throw new DataNotRetrievedException;
     }//if($authCheck->getErrno() == 0){
-    else{
-        http_response_code(401);
-        $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
-    }
+    else throw new WrongCredentialsException;
+}catch(WrongCredentialsException $e){
+    http_response_code(401);
+    $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(Exception $e){
     http_response_code(500);
     $response[C::KEY_MESSAGE] = M::ERR_UNKNOWN;

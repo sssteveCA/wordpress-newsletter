@@ -11,6 +11,7 @@ use Newsletter\Interfaces\Messages as M;
 use Dotenv\Dotenv;
 use Newsletter\Classes\Api\AuthCheck;
 use Newsletter\Exceptions\NotSettedException;
+use Newsletter\Exceptions\WrongCredentialsException;
 
 $response = [
     C::KEY_DONE => false, C::KEY_EMPTY => false, C::KEY_MESSAGE => '','subscribers' => [] 
@@ -45,11 +46,8 @@ try{
                 throw new Exception;
         }
     }//if($authCheck->getErrno() == 0){
-    else{
-        http_response_code(401);
-        $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
-    }
-}catch(NotSettedException $nse){
+    else throw new WrongCredentialsException;
+}catch(NotSettedException|WrongCredentialsException $e){
     http_response_code(401);
     $response[C::KEY_MESSAGE] = M::ERR_UNAUTHORIZED;
 }catch(Exception $e){

@@ -4,6 +4,6 @@ dist
 node_modules
 vendor
 *.map
-log/
+log_files/
 src/ts/namespaces/constants.ts
 src/ts/create_users.ts
