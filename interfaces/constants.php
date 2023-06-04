@@ -12,6 +12,7 @@ interface Constants{
     const H_JS_ADMIN_FORM_ADD = 'nlAdminJsAdd';
     const H_CSS_ADMIN_FORM_DELETE = 'nlAdminCssDelete';
     const H_JS_ADMIN_FORM_DELETE = 'nlAdminJsDelete';
+    const H_CSS_ADMIN_FORM_LOG = 'nlAdminCssLog';
     const H_CSS_ADMIN_FORM_SEND = 'nlAdminCssSend';
     const H_JS_ADMIN_FORM_SEND = 'nlAdminJsSend';
     const H_CSS_ADMIN_FORM_SETTINGS = 'nlAdminCssSettings';
@@ -36,6 +37,7 @@ interface Constants{
     //File paths
     const REL_CSS_ADMIN_ADD = Constants::REL_DIST_CSS.'admin/nl_admin_add.css';
     const REL_CSS_ADMIN_DELETE = Constants::REL_DIST_CSS.'admin/nl_admin_delete.css';
+    const REL_CSS_ADMIN_LOG = Constants::REL_DIST_CSS.'admin/nl_admin_log.css';
     const REL_CSS_ADMIN_SEND = Constants::REL_DIST_CSS.'admin/nl_admin_send.css';
     const REL_CSS_ADMIN_SETTINGS = Constants::REL_DIST_CSS.'admin/nl_admin_settings.css';
     const REL_CSS_BOOTSTRAP = 'node_modules/bootstrap/dist/css/bootstrap.min.css';

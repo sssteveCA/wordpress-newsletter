@@ -12,6 +12,7 @@ module.exports = {
         'css/wp/verify': join(scssPath,'wp/verify.scss'),
         'css/admin/nl_admin_add': join(scssPath,'admin/nl_admin_add.scss'),
         'css/admin/nl_admin_delete': join(scssPath,'admin/nl_admin_delete.scss'),
+        'css/admin/nl_admin_log': join(scssPath,'admin/nl_admin_log.scss'),
         'css/admin/nl_admin_send': join(scssPath,'admin/nl_admin_send.scss'),
         'css/admin/nl_admin_settings': join(scssPath,'admin/nl_admin_settings.scss'),
         'js/wp/nl_wp': join(tsPath,'wp/nl_wp.ts'),

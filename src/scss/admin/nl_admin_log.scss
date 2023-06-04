@@ -3,7 +3,7 @@
 
 @mixin admin-log{
     form#nl_log_newsletter{
-        >div:nth-child(2){
+        >div:first-child{
             width: clamp(250px, 70%, 800px);
             @media only screen and (min-width: map.get(globals.$bs-breakpoints,'xs')){
                 height: 350px;

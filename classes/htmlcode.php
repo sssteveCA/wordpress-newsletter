@@ -136,7 +136,7 @@ HTML;
         <div>
             <h2 class="text-center">Stato di invio delle newsletter ai destinatari indicati</h2>
         </div>
-        <form id="nl_log_newsletter" class="d-flex flex-column justify-content-center" method="post" action="#">
+        <form id="nl_log_newsletter" class="d-flex flex-column align-items-center" method="post" action="#">
             <div id="nl_table_container" class="mb-3 mt-4">
             </div>
             <div class="d-flex justify-content-center">

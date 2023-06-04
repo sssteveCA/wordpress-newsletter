@@ -62,6 +62,9 @@ use Newsletter\Enums\Langs;
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_DELETE);
          wp_enqueue_script(C::H_JS_ADMIN_FORM_DELETE);
       }
+      else if($page == C::SLUG_ADMIN_FORM_LOG){
+         wp_enqueue_style(C::H_CSS_ADMIN_FORM_LOG);
+      }
       else if($page == C::SLUG_ADMIN_FORM_SEND){
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_SEND);
          wp_enqueue_script(C::H_JS_ADMIN_FORM_SEND);
@@ -155,6 +158,10 @@ function nl_after_load(){
             $adminJsDel = $plugin_dir.C::REL_JS_ADMIN_DELETE;
             wp_register_style(C::H_CSS_ADMIN_FORM_DELETE,$adminCssDel,[],null);
             wp_register_script(C::H_JS_ADMIN_FORM_DELETE,$adminJsDel,[],null,true);
+         }
+         else if($page == C::SLUG_ADMIN_FORM_LOG){
+            $adminCssLog = $plugin_dir.C::REL_CSS_ADMIN_LOG;
+            wp_register_style(C::H_CSS_ADMIN_FORM_LOG,$adminCssLog,[],null);
          }
          else if($page == C::SLUG_ADMIN_FORM_SEND){
             $adminCssSend = $plugin_dir.C::REL_CSS_ADMIN_SEND;
