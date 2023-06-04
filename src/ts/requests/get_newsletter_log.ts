@@ -1,3 +1,4 @@
+import { clientGet } from "../config/axios_instances";
 import LogInfoItem from "../models/loginfoitem";
 import { Constants } from "../namespaces/constants";
 
@@ -29,5 +30,33 @@ export default class GetNewsletterLog{
                 break;
         }
          return this._error; 
+    }
+
+    public async getNewsletterLog(): Promise<object>{
+        this._errno = 0;
+        let response: object = {};
+        try{
+            await this.getNewsletterLogPromise().then(res => {
+                //console.log(res)
+                response = JSON.parse(res)
+                if(response[Constants.KEY_DONE] && !response[Constants.KEY_EMPTY])
+                    this._log = response['loginfo']
+            }).catch(err => {
+                throw err;
+            })
+        }catch(e){
+            this._errno = GetNewsletterLog.ERR_FETCH;
+            response = { done: false, msg: this.error }
+        }
+        return response;
+    }
+
+    private async getNewsletterLogPromise(): Promise<string>{
+        let promise = await new Promise<string>((resolve,reject)=>{
+            clientGet.get(GetNewsletterLog.FETCH_URL)
+                .then(res => resolve(res.data))
+                .catch(err => reject(err));
+        });
+        return promise;
     }
 }
