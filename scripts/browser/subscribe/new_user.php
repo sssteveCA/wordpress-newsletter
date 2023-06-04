@@ -99,8 +99,8 @@ echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
  * @return int the error code or 0 if no error occurs while email sending
  */
 function sendActivationMail(array $params): int{
-    $dotenv = Dotenv::createImmutable("../../");
-    $dotenv->safeLoad();
+    $dotenv = Dotenv::createImmutable("../../../");
+    $dotenv->load();
     $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
     $fromNickname = isset($params['fromNickname']) ? $params['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
     $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];

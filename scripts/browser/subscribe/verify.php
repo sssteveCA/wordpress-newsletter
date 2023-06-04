@@ -87,8 +87,8 @@ echo $html;
  * Send the mail to the admin when a new user signs up to the newsletter
  */
 function sendNewSubscriberNotify(array $params){
-    $dotenv = Dotenv::createImmutable("../../");
-    $dotenv->safeLoad();
+    $dotenv = Dotenv::createImmutable("../../../");
+    $dotenv->load();
     $from = isset($params['from']) ? $params['from'] : $_ENV['EMAIL_USERNAME'];
     $fromNickname = isset($params['fromNickname']) ? $params['fromNickname'] : $_ENV['EMAIL_NICKNAME'];
     $host = isset($params['host']) ? $params['host'] : $_ENV['EMAIL_HOST'];
