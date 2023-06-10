@@ -47,6 +47,20 @@ class NewsletterLogManager implements Nlme{
     }
 
     /**
+     * Return the log info objects array as associative array
+     * @return array
+     */
+    public function getLogInfoAssociative(): array{
+        $log_info_array = [];
+        foreach($this->getLogInfo() as $item){
+            $log_info_array[] = [
+                'subject' => $item->getSubject(), 'recipient' => $item->getRecipient(), 'date' => $item->getDate()
+            ];
+        }//foreach($this->getLogInfo() as $item){
+        return $log_info_array;
+    }
+
+    /**
      * Fetch the newsletter log information from the file
      */
     private function readFile(){

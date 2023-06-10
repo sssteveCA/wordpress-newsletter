@@ -24,8 +24,9 @@ if($logged && $administrator){
         switch($nlm->getErrno()){
             case 0:
                 if($nlm->getFileSize() > 0){
+                    $log_info_array = $nlm->getLogInfoAssociative();
                     $response = [
-                        C::KEY_DONE => true, C::KEY_EMPTY => false, C::KEY_MESSAGE => '', 'loginfo' => $nlm->getLogInfo()
+                        C::KEY_DONE => true, C::KEY_EMPTY => false, C::KEY_MESSAGE => '', 'loginfo' => $log_info_array
                     ];
                 }//if($nlm->getFileSize() > 0){
                 else $response = [
