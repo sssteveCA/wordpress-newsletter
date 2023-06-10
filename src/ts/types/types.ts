@@ -121,6 +121,20 @@ export type NlLanguages = {
 }
 
 /**
+ * The single row of the newsletter log entire content
+ */
+export type NlLogItem = {
+    subject: string;
+    recipient: string;
+    date: string;
+}
+
+export type NlGetNewsletterLogHtml = {
+    log_info: NlLogItem[];
+    table_container: HTMLDivElement;
+}
+
+/**
  * This object contains the settings properties getted or replaced to the DB
  */
 export type NlSettingsData = {
