@@ -21,6 +21,7 @@ if($logged && $administrator){
     try{
         $log_path = sprintf("%s/newsletter%s",WP_PLUGIN_DIR,C::REL_NEWSLETTER_LOG);
         $nlm = new NewsletterLogManager($log_path);
+        $nlm->readFile();
         switch($nlm->getErrno()){
             case 0:
                 if($nlm->getFileSize() > 0){

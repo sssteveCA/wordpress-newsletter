@@ -9,9 +9,11 @@ use Newsletter\Classes\Models\NewsletterLogInfo;
 interface NewsletterLogManagerErrors{
     const ERR_INVALID_FILE = 1;
     const ERR_READ_FILE = 2;
+    const ERR_DELETE_FILE = 3;
 
     const ERR_INVALID_FILE_MSG = "Il percorso indicato non contiene un file valido";
     const ERR_READ_FILE_MSG = "Impossibile leggere il file";
+    const ERR_DELETE_FILE_MSG = "Impossibile cancellare il file";
 }
 
 /**
@@ -40,10 +42,25 @@ class NewsletterLogManager implements Nlme{
             case Nlme::ERR_READ_FILE:
                 $this->error = Nlme::ERR_READ_FILE_MSG;
                 break;
+            case Nlme::ERR_DELETE_FILE:
+                $this->error = Nlme::ERR_DELETE_FILE_MSG;
+                break;
             default:
                 $this->error = null;
         }
         return $this->error;
+    }
+
+    /**
+     * Delete the newsletter log file
+     */
+    public function deleteFile(){
+        $this->errno = 0;
+        if(file_exists($this->file_path) && is_file($this->file_path)){
+            $delete = unlink($this->file_path);
+            if(!$delete) $this->errno = Nlme::ERR_DELETE_FILE;
+        }//if(file_exists($this->file_path) && is_file($this->file_path)){
+        else $this->errno = Nlme::ERR_INVALID_FILE;
     }
 
     /**
@@ -63,7 +80,8 @@ class NewsletterLogManager implements Nlme{
     /**
      * Fetch the newsletter log information from the file
      */
-    private function readFile(){
+    public function readFile(){
+        $this->errno = 0;
         if(file_exists($this->file_path) && is_file($this->file_path)){
             $handle = fopen($this->file_path,'r');
             if($handle !== false){
