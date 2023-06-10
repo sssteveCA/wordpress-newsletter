@@ -4,6 +4,7 @@
 @mixin admin-log{
     form#nl_log_newsletter{
         >div:first-child{
+            @include table;
             width: clamp(250px, 70%, 800px);
             @media only screen and (min-width: map.get(globals.$bs-breakpoints,'xs')){
                 height: 300px;
@@ -14,6 +15,14 @@
             border: 1px solid black;
             border-radius: 5%;
             overflow: auto;
+        }
+    }
+}
+
+@mixin table{
+    table{
+        th,td{
+            text-align: center;
         }
     }
 }

@@ -12,6 +12,10 @@ window.addEventListener('DOMContentLoaded',()=>{
                 log_info: obj['loginfo'], table_container: table_container
             }
             const nlh: GetNewsletterLogHtml = new GetNewsletterLogHtml(nlh_data)
+        }//if(obj[Constants.KEY_DONE]){
+        else{
+            table_container.style.color = 'red'
+            table_container.innerHTML = obj[Constants.KEY_MESSAGE];
         }
     })
 })
