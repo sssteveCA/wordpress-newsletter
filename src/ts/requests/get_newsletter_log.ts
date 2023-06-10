@@ -16,8 +16,6 @@ export default class GetNewsletterLog{
 
     private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/browser/log/getnewsletterlog.php";
 
-    constructor(){}
-
     get log(){ return this._log; }
     get errno(){ return this._errno; }
     get error(){

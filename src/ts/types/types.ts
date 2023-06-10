@@ -130,7 +130,7 @@ export type NlLogItem = {
 }
 
 export type NlGetNewsletterLogHtml = {
-    log_info: NlLogItem[];
+    response: object;
     table_container: HTMLDivElement;
 }
 

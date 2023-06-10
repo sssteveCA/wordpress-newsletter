@@ -139,8 +139,20 @@ HTML;
         <form id="nl_log_newsletter" class="d-flex flex-column align-items-center" method="post" action="#">
             <div id="nl_table_container" class="mb-3 mt-4">
             </div>
-            <div class="d-flex justify-content-center">
-                <button id="nl_log_bt_delete" type="button" class="btn btn-danger">CANCELLA</button>
+            <div class="container">
+                <div class="row my-4">
+                    <div class="col-7 text-end">
+                        <button id="nl_log_bt_delete" type="button" class="btn btn-danger">CANCELLA</button>
+                    </div>
+                    <div class="col-5">
+                        <div id="nl_delete_log_spinner" class="spinner-border text-dark invisible" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div id="nl_log_delete_response" class="col-12 text-center fw-bold fs-4"></div>
+                </div>
             </div>
         </form>
 HTML;
