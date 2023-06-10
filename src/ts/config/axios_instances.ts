@@ -3,6 +3,12 @@ import axios from 'axios';
 import { Constants } from '../namespaces/constants';
 //import axios from '../../node_modules/axios/index';
 
+export const clientDelete = axios.create({
+    baseURL: Constants.HOME_URL,
+    responseType: 'text',
+    timeout: 20000
+})
+
 export const clientGet = axios.create({
     baseURL: Constants.HOME_URL,
     responseType: 'text',
