@@ -14,7 +14,7 @@ export default class GetNewsletterLog{
 
     private static ERR_FETCH_MSG: string = "Impossibile leggere il file di log";
 
-    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/browser/emailsending/getnewsletterlog.php";
+    private static FETCH_URL: string = Constants.PLUGIN_DIR+"/scripts/browser/log/getnewsletterlog.php";
 
     constructor(){}
 

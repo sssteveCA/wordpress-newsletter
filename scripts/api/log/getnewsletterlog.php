@@ -26,7 +26,8 @@ try{
     ];
     $authCheck = new AuthCheck($apiAuthArray);
     if($authCheck->getErrno() == 0){
-        $nlm = new NewsletterLogManager(plugin_dir_path("newsletter/newsletter.php")."log_files/newsletter_status.log");
+        $log_path = sprintf("%s/newsletter%s",WP_PLUGIN_DIR,C::REL_NEWSLETTER_LOG);
+        $nlm = new NewsletterLogManager($log_path);
         switch($nlm->getErrno()){
             case 0:
                 if($nlm->getFileSize() > 0){

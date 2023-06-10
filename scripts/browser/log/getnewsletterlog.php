@@ -19,7 +19,7 @@ $administrator = current_user_can('manage_options');
 
 if($logged && $administrator){
     try{
-        $log_path = sprintf("%s/newsletter/log_files/newsletter_status.log",WP_PLUGIN_DIR);
+        $log_path = sprintf("%s/newsletter%s",WP_PLUGIN_DIR,C::REL_NEWSLETTER_LOG);
         $nlm = new NewsletterLogManager($log_path);
         switch($nlm->getErrno()){
             case 0:
