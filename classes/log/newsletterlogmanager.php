@@ -98,7 +98,7 @@ class NewsletterLogManager implements Nlme{
             if($handle !== false){
                 $this->filesize = filesize($this->file_path);
                 if($this->filesize > 0){
-                    $regex = '/SUBJECT:\s*"([a-z0-9\s]+)"\s*RECIPIENT:\s*"([a-z0-9\s\.@]+)"\s*DATE:\s*"([0-9\s:\-]+)\s*SENDED:\s*(true|false)\s*"/i';
+                    $regex = '/SUBJECT:\s*"([a-z0-9\s]+)"\s*RECIPIENT:\s*"([a-z0-9\s\.@]+)"\s*DATE:\s*"([0-9\s:\-]+)"\s*SENDED:\s*(true|false)\s*/i';
                     while($file_line = fgets($handle)){
                         if(preg_match($regex,$file_line,$matches)){
                             $nli = new NewsletterLogInfo($matches[1],$matches[2],$matches[3],$matches[4]);
@@ -127,7 +127,8 @@ class NewsletterLogManager implements Nlme{
         if($handle !== false){
             $content = array_reduce($loginfo,function($carry,$item){
                 if($item instanceof NewsletterLogInfo){
-                    $carry .= sprintf("SUBJECT: %s RECIPIENT: %s DATE: %s SENDED: %s\r\n",$item->getSubject(),$item->getRecipient(),$item->getDate(),$item->wasSended());
+                    $was_sended = $item->wasSended() ? 'true' : 'false';
+                    $carry .= sprintf('SUBJECT: "%s" RECIPIENT: "%s" DATE: "%s" SENDED: %s%s',$item->getSubject(),$item->getRecipient(),$item->getDate(),$was_sended,PHP_EOL);
                     return $carry;
                 }
                 return $carry;

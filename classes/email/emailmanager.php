@@ -179,11 +179,11 @@ class EmailManager extends PHPMailer{
                             $this->Body = $htmlBody;
                             $this->AltBody = $this->body;
                             $this->send();
-                            $log_data[] = new NewsletterLogInfo($this->subject,$email,date('Y-m-d'),true);
+                            $log_data[] = new NewsletterLogInfo($this->subject,$email,date('d-m-Y H:i:s'),true);
                         }//if($settings->getLangStatus()[$user_lang]){
                     }//if($user != null){    
                 }catch(Exception $e){
-                    $log_data[] = new NewsletterLogInfo($this->subject,$email,date('Y-m-d'),false);
+                    $log_data[] = new NewsletterLogInfo($this->subject,$email,date('d-m-Y H:i:s'),false);
                 }
             }//foreach($this->emailsList as $email){
             $log_path = sprintf("%s/newsletter%s",WP_PLUGIN_DIR,C::REL_NEWSLETTER_LOG);
