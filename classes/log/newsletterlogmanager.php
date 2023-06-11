@@ -81,7 +81,7 @@ class NewsletterLogManager implements Nlme{
         $log_info_array = [];
         foreach($this->loginfo as $item){
             $log_info_array[] = [
-                'subject' => $item->getSubject(), 'recipient' => $item->getRecipient(), 'date' => $item->getDate()
+                'subject' => $item->getSubject(), 'recipient' => $item->getRecipient(), 'date' => $item->getDate(), 'sended' => $item->wasSended()
             ];
         }//foreach($this->getLogInfo() as $item){
         return $log_info_array;
@@ -98,10 +98,10 @@ class NewsletterLogManager implements Nlme{
             if($handle !== false){
                 $this->filesize = filesize($this->file_path);
                 if($this->filesize > 0){
-                    $regex = '/SUBJECT:\s*"([a-z0-9\s]+)"\s*RECIPIENT:\s*"([a-z0-9\s\.@]+)"\s*DATE:\s*"([0-9\s:\-]+)"/i';
+                    $regex = '/SUBJECT:\s*"([a-z0-9\s]+)"\s*RECIPIENT:\s*"([a-z0-9\s\.@]+)"\s*DATE:\s*"([0-9\s:\-]+)\s*SENDED:\s*(true|false)\s*"/i';
                     while($file_line = fgets($handle)){
                         if(preg_match($regex,$file_line,$matches)){
-                            $nli = new NewsletterLogInfo($matches[1],$matches[2],$matches[3]);
+                            $nli = new NewsletterLogInfo($matches[1],$matches[2],$matches[3],$matches[4]);
                             $this->loginfo[] = $nli;
                         } 
                     }//while(($file_line = fgets($handle) !== false)){
@@ -127,7 +127,7 @@ class NewsletterLogManager implements Nlme{
         if($handle !== false){
             $content = array_reduce($loginfo,function($carry,$item){
                 if($item instanceof NewsletterLogInfo){
-                    $carry .= sprintf("SUBJECT: %s RECIPIENT: %s DATE: %s\r\n",$item->getSubject(),$item->getRecipient(),$item->getDate());
+                    $carry .= sprintf("SUBJECT: %s RECIPIENT: %s DATE: %s SENDED: %s\r\n",$item->getSubject(),$item->getRecipient(),$item->getDate(),$item->wasSended());
                     return $carry;
                 }
                 return $carry;
