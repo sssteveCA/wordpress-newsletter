@@ -123,6 +123,12 @@ class NewsletterLogManager implements Nlme{
      */
     public function writeFile(array $loginfo): bool{
         $this->errno = 0;
+        if(!file_exists(dirname($this->file_path))){
+            if(!mkdir(dirname($this->file_path))){
+                $this->errno = Nlme::ERR_WRITE_FILE;
+                return false;
+            }
+        }
         $handle = fopen($this->file_path,'a');
         if($handle !== false){
             $content = array_reduce($loginfo,function($carry,$item){
