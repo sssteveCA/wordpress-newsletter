@@ -124,8 +124,6 @@ export default class UpdateSettings{
             privacy_policy_pages: this._privacy_policy_pages,
             terms_pages: this._terms_pages
         }
-        console.log("Update settings promise")
-        console.log(update_data)
         let promise: string = await new Promise<string>((resolve,reject)=>{
             clientPut.put(UpdateSettings.FETCH_URL,{
                 data: update_data

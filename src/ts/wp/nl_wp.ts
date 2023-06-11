@@ -37,9 +37,9 @@ window.addEventListener('DOMContentLoaded',()=>{
                 }//if(res[Constants.KEY_DONE] == true){
             });
         });
-    }//if(form){
-    if(formEls.cb_privacy || formEls.cb_terms) checkboxEvents(formEls);
-    else formEls.bt_submit.disabled = false;
+        if(formEls.cb_privacy || formEls.cb_terms) checkboxEvents(formEls);
+        else formEls.bt_submit.disabled = false;
+    }//if(form){  
 });
 
 /**
@@ -73,6 +73,7 @@ function checkboxEvents(formEls: NlFormDataElements): void{
                     if(!formEls.cb_terms || (formEls.cb_terms && formEls.cb_terms.checked)) formEls.bt_submit.disabled = false
                     else formEls.bt_submit.disabled = true
                 }//if(formEls.cb_privacy?.checked){
+                else formEls.bt_submit.disabled = true
             });
         }//if(formEls.cb_privacy){
         if(formEls.cb_terms){
@@ -81,8 +82,10 @@ function checkboxEvents(formEls: NlFormDataElements): void{
                     if(!formEls.cb_privacy || (formEls.cb_privacy && formEls.cb_privacy.checked)) formEls.bt_submit.disabled = false
                 else formEls.bt_submit.disabled = true
                 }//if(formEls.cb_terms?.checked){  
+                else formEls.bt_submit.disabled = true
             })
         }//if(formEls.cb_terms){
         if(!(formEls.cb_privacy && formEls.cb_terms)) formEls.bt_submit.disabled = false
+        formEls.bt_submit.disabled = true
     }//if(formEls.bt_submit){
 }

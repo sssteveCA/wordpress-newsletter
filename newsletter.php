@@ -30,7 +30,18 @@ use Newsletter\Enums\Langs;
     $settings = new Settings(['tableName' => C::TABLE_SETTINGS]);
     $create_settings = $settings->getSqlCreate();
     dbDelta([$create_users,$create_settings]);
-    $settings_mode = new \Newsletter\Classes\Database\Models\Settings(['tableName' => C::TABLE_SETTINGS]);
+    $settings_data = [
+      'tableName' => C::TABLE_SETTINGS,
+      'lang_status' => ["en" => false,"es" => false,"it" => false],
+      'included_pages_status' => ["contacts_pages" => false,"cookie_policy_pages" => false,"privacy_policy_pages" => false,"terms_pages" => false],
+      'socials_status' => ["facebook" => false,"instagram" => false,"youtube" => false],
+      'social_pages' => ["facebook" => "","instagram" => "","youtube" => ""],
+      'contact_pages' => ["en" => "","es" => "","it" => ""],
+      'cookie_policy_pages' => ["en" => "","es" => "","it" => ""],
+      'privacy_policy_pages' => ["en" => "","es" => "","it" => ""],
+      'terms_pages' => ["en" => "","es" => "","it" => ""],
+    ];
+    $settings_mode = new \Newsletter\Classes\Database\Models\Settings($settings_data);
     $settings_mode->insertSettings();
  }
 
@@ -204,6 +215,7 @@ function nl_subscribe_form($atts){
          'privacy_policy_pages' => $settings->getPrivacyPolicyPages(),
          'terms_pages' => $settings->getTermsPages(),
       ];
+      
    }//if($settings->getLangStatus()[$a['lang']]){
    else $settingsParams = [ 'lang_status' => $a['lang'] ];
    $langParams = HtmlCode::subscribeFormValues($a['lang'], $settingsParams);
