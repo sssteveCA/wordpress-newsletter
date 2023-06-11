@@ -4,6 +4,8 @@ namespace Newsletter\Classes\Email;
 
 use Exception;
 use Newsletter\Classes\Database\Models\Settings;
+use Newsletter\Classes\Log\NewsletterLogManager;
+use Newsletter\Classes\Models\NewsletterLogInfo;
 use Newsletter\Interfaces\ExceptionMessages;
 use Newsletter\Classes\Email\EmailManagerErrors as Eme;
 use Newsletter\Classes\Template;
@@ -146,57 +148,49 @@ class EmailManager extends PHPMailer{
 
     /**
      * Send the newletter to indicated subscribers
+     * @throws Exception
      */
     public function sendNewsletterMail(){
         $this->errno = 0;
-        $log_content = "";
-        try{
-            $settings = new Settings(['tableName' => C::TABLE_SETTINGS]);
-            if($settings->getSettings()){
-                $sub_body = substr($this->body,0,300);
-                $log_content .= <<<CONTENT
-------------------------------------------------
-CONTENUTO MAIL: {$sub_body}
-
-CONTENT;
-                file_put_contents(C::FILE_LOG,$log_content,FILE_APPEND);
-                foreach($this->emailsList as $email){
-                    $log_content .= <<<CONTENT
-    
-    INDIRIZZO EMAIL: {$email}
-    CONTENT;
+        $log_data = [];
+        $settings = new Settings(['tableName' => C::TABLE_SETTINGS]);
+        if($settings->getSettings()){
+            foreach($this->emailsList as $email){
+                try{
                     $addresses = $this->getAllRecipientAddresses();
                     if(!empty($addresses))$this->clearAddresses();
-                        $user = $this->checkSubscribedEmail($email);
-                        if($user != null){
-                            $lang = $user->getLang();
-                            if($settings->getLangStatus()[$lang]){
-                                $templateData = [
-                                    'title' => $this->subject, 'user_email' => $email,
-                                    'text' => $this->body, 'unsubscribe_code' => $user->getUnsubscCode(),
-                                    'settings' => [
-                                        'included_pages_status' => $settings->getIncludedPagesStatus(),
-                                        'socials_status' => $settings->getSocialsStatus(),
-                                        'social_pages' => $settings->getSocialPages(),
-                                        'contact_pages' => $settings->getContactPages(),
-                                        'privacy_policy_pages' => $settings->getPrivacyPolicyPages()
-                                    ]
-                                ];
-                                $htmlBody = Template::mailTemplate($lang,$templateData);
-                                $this->addAddress($email);
-                                $this->Body = $htmlBody;
-                                $this->AltBody = $this->body;
-                                $this->send();
-                                $log_content .= " => INVIATO\r\n";
-                            }//if($settings->getLangStatus()[$user_lang]){
-                        }//if($user != null){    
-                }//foreach($this->emailsList as $email){
-                file_put_contents(C::FILE_LOG,$log_content,FILE_APPEND);
-            }//if($settings->getSettings()){
-        }catch(Exception $e){
-            $log_content .= " => NON INVIATO\r\n";
-            $this->errno = Eme::ERR_EMAIL_SEND;
-        }
+                    $user = $this->checkSubscribedEmail($email);
+                    if($user != null){
+                        $lang = $user->getLang();
+                        if($settings->getLangStatus()[$lang]){
+                            $templateData = [
+                                'title' => $this->subject, 'user_email' => $email,
+                                'text' => $this->body, 'unsubscribe_code' => $user->getUnsubscCode(),
+                                'settings' => [
+                                    'included_pages_status' => $settings->getIncludedPagesStatus(),
+                                    'socials_status' => $settings->getSocialsStatus(),
+                                    'social_pages' => $settings->getSocialPages(),
+                                    'contact_pages' => $settings->getContactPages(),
+                                    'privacy_policy_pages' => $settings->getPrivacyPolicyPages()
+                                ]
+                            ];
+                            $htmlBody = Template::mailTemplate($lang,$templateData);
+                            $this->addAddress($email);
+                            $this->Body = $htmlBody;
+                            $this->AltBody = $this->body;
+                            $this->send();
+                            $log_data[] = new NewsletterLogInfo($this->subject,$email,date('d-m-Y H:i:s'),true);
+                        }//if($settings->getLangStatus()[$user_lang]){
+                    }//if($user != null){    
+                }catch(Exception $e){
+                    $log_data[] = new NewsletterLogInfo($this->subject,$email,date('d-m-Y H:i:s'),false);
+                }
+            }//foreach($this->emailsList as $email){
+            $log_path = sprintf("%s/newsletter%s",WP_PLUGIN_DIR,C::REL_NEWSLETTER_LOG);
+            $nlm = new NewsletterLogManager($log_path);
+            $nlm->writeFile($log_data);
+        }//if($settings->getSettings()){
+        else throw new Exception;
     }
 
     /**

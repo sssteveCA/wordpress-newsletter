@@ -73,7 +73,7 @@ export default class SendEmail{
     }
 
     /**
-     * The loop that execute the request multiple time for each rescipients group
+     * The loop that execute the request multiple time for each recipients group
      */
     private async sendNewsletterLoop(): Promise<boolean>{
         return await new Promise<boolean>((resolve)=>{

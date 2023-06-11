@@ -32,14 +32,16 @@ export default class GetNewsletterLogHtml{
             <th scope="col">OGGETTO</th>
             <th scope="col">DESTINATARIO</th>
             <th scope="col">DATA</th>
+            <th scope="col">INVIATA</th>
         </tr>
     </thead>
     <tbody>
         `;
         html += this._loginfo.reduce((accumulator,currentValue) => {
+            const sended: string = currentValue.sended ? 'SÌ' : 'NO'
             return `${accumulator}
         <tr>
-            <td>${currentValue.subject}</td><td>${currentValue.recipient}</td><td>${currentValue.date}</td>
+            <td>${currentValue.subject}</td><td>${currentValue.recipient}</td><td>${currentValue.date}</td><td>${sended}</td>
         </tr>     
             `;
         },'')

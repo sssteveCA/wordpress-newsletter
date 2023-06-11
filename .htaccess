@@ -7,7 +7,7 @@ RedirectMatch 403 interfaces\/.*\.php
 RedirectMatch 403 traits\/.*\.php
 RedirectMatch 403 vendor\/.*\.php
 
-<FilesMatch "\.(ts|scss|txt|json|lock)$">
+<FilesMatch "\.(ts|scss|txt|json|lock|log)$">
     Order allow,deny
     Deny from all
 </FilesMatch>

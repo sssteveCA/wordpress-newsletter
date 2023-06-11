@@ -127,6 +127,7 @@ export type NlLogItem = {
     subject: string;
     recipient: string;
     date: string;
+    sended: boolean;
 }
 
 export type NlGetNewsletterLogHtml = {

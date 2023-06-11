@@ -35,7 +35,7 @@ export default class GetNewsletterLog{
         let response: object = {};
         try{
             await this.getNewsletterLogPromise().then(res => {
-                console.log(res)
+                //console.log(res)
                 response = JSON.parse(res)
                 if(response[Constants.KEY_DONE] && !response[Constants.KEY_EMPTY])
                     this._log = response['loginfo']

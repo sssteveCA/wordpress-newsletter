@@ -10,10 +10,12 @@ interface NewsletterLogManagerErrors{
     const ERR_INVALID_FILE = 1;
     const ERR_READ_FILE = 2;
     const ERR_DELETE_FILE = 3;
+    const ERR_WRITE_FILE = 4;
 
     const ERR_INVALID_FILE_MSG = "Il percorso indicato non contiene un file valido";
     const ERR_READ_FILE_MSG = "Impossibile leggere il file";
     const ERR_DELETE_FILE_MSG = "Impossibile cancellare il file";
+    const ERR_WRITE_FILE_MSG = "Impossibile scrivere sul file";
 }
 
 /**
@@ -45,22 +47,30 @@ class NewsletterLogManager implements Nlme{
             case Nlme::ERR_DELETE_FILE:
                 $this->error = Nlme::ERR_DELETE_FILE_MSG;
                 break;
+            case Nlme::ERR_WRITE_FILE:
+                $this->error = Nlme::ERR_WRITE_FILE_MSG;
+                break;
             default:
                 $this->error = null;
+                break;
         }
         return $this->error;
     }
 
     /**
      * Delete the newsletter log file
+     * @return bool
      */
-    public function deleteFile(){
+    public function deleteFile(): bool{
         $this->errno = 0;
         if(file_exists($this->file_path) && is_file($this->file_path)){
             $delete = unlink($this->file_path);
-            if(!$delete) $this->errno = Nlme::ERR_DELETE_FILE;
+            if($delete) return true;
+            $this->errno = Nlme::ERR_DELETE_FILE;
+            return false;
         }//if(file_exists($this->file_path) && is_file($this->file_path)){
-        else $this->errno = Nlme::ERR_INVALID_FILE;
+        $this->errno = Nlme::ERR_INVALID_FILE;
+        return false;
     }
 
     /**
@@ -69,9 +79,9 @@ class NewsletterLogManager implements Nlme{
      */
     public function getLogInfoAssociative(): array{
         $log_info_array = [];
-        foreach($this->getLogInfo() as $item){
+        foreach($this->loginfo as $item){
             $log_info_array[] = [
-                'subject' => $item->getSubject(), 'recipient' => $item->getRecipient(), 'date' => $item->getDate()
+                'subject' => $item->getSubject(), 'recipient' => $item->getRecipient(), 'date' => $item->getDate(), 'sended' => $item->wasSended()
             ];
         }//foreach($this->getLogInfo() as $item){
         return $log_info_array;
@@ -79,29 +89,58 @@ class NewsletterLogManager implements Nlme{
 
     /**
      * Fetch the newsletter log information from the file
+     * @return  bool
      */
-    public function readFile(){
+    public function readFile(): bool{
         $this->errno = 0;
         if(file_exists($this->file_path) && is_file($this->file_path)){
             $handle = fopen($this->file_path,'r');
             if($handle !== false){
                 $this->filesize = filesize($this->file_path);
                 if($this->filesize > 0){
-                    $regex = '/SUBJECT:\s*"([a-z0-9\s]+)"\s*RECIPIENT:\s*"([a-z0-9\s\.@]+)"\s*DATE:\s*"([0-9\s:\-]+)"/i';
+                    $regex = '/SUBJECT:\s*"([a-z0-9\s]+)"\s*RECIPIENT:\s*"([a-z0-9\s\.@]+)"\s*DATE:\s*"([0-9\s:\-]+)"\s*SENDED:\s*(true|false)\s*/i';
                     while($file_line = fgets($handle)){
                         if(preg_match($regex,$file_line,$matches)){
-                            $nli = new NewsletterLogInfo($matches[1],$matches[2],$matches[3]);
+                            $nli = new NewsletterLogInfo($matches[1],$matches[2],$matches[3],$matches[4]);
                             $this->loginfo[] = $nli;
                         } 
                     }//while(($file_line = fgets($handle) !== false)){
                     fclose($handle);
                 }//if($this->filesize > 0){
+                return true;
             }//if($handle !== false){
-            else $this->errno = Nlme::ERR_READ_FILE;
+            $this->errno = Nlme::ERR_READ_FILE;
+            return false;
         }//if(file_exists($this->file_path) && is_file($this->file_path)){
-        else $this->errno = Nlme::ERR_INVALID_FILE;    
-        
-        
+        $this->errno = Nlme::ERR_INVALID_FILE;
+        return false;
+    }
+
+    /**
+     * Write the log information on a file
+     * @param array $loginfo
+     * @return bool
+     */
+    public function writeFile(array $loginfo): bool{
+        $this->errno = 0;
+        $handle = fopen($this->file_path,'a');
+        if($handle !== false){
+            $content = array_reduce($loginfo,function($carry,$item){
+                if($item instanceof NewsletterLogInfo){
+                    $was_sended = $item->wasSended() ? 'true' : 'false';
+                    $carry .= sprintf('SUBJECT: "%s" RECIPIENT: "%s" DATE: "%s" SENDED: %s%s',$item->getSubject(),$item->getRecipient(),$item->getDate(),$was_sended,PHP_EOL);
+                    return $carry;
+                }
+                return $carry;
+            },'');
+            $writed = fwrite($handle,$content);
+            fclose($handle);
+            if($writed !== false) return true;
+            $this->errno = Nlme::ERR_WRITE_FILE;
+            return false;
+        }//if($handle !== false){
+        $this->errno = Nlme::ERR_WRITE_FILE;
+        return false;
     }
 }
 ?>
