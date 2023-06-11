@@ -18,7 +18,7 @@
       <ul>
         <li>Menu to set some newsletter options</li>
         <li>Admin panel to select the subscribers to whom the newsletter</li>
-        <li>*Log to show the sending status of the newsletters</li>
+        <li>Log to show the sending status of the newsletters</li>
         <li>Admin panel to delete the selected subscribers from the newsletter contacts list</li>
         <li>Admin panel to add a new user skipping the email verification procedure</li>
       </ul>
@@ -28,6 +28,4 @@
   <br><br>
   <div><a href="https://user-images.githubusercontent.com/95185311/204027983-ec64b742-0e26-4a9f-b967-6e8227043832.mp4">Quick demo video</a></div>
   </div>
-  <br><br>
-  <div>*These features are not available yet</div>
 </div>
