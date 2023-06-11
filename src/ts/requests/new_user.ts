@@ -51,8 +51,8 @@ export class NewUser{
         if(data.name) this._name = data.name;
         if(data.surname) this._surname = data.surname;
         this._email = data.email;
-        this._cb_privacy = data.cb_privacy;
-        this._cb_terms = data.cb_terms;
+        if(data.cb_privacy)this._cb_privacy = data.cb_privacy;
+        if(data.cb_terms)this._cb_terms = data.cb_terms;
         this._lang = data.lang;
     }
 
@@ -89,10 +89,13 @@ export class NewUser{
 
     private async newUserPromise(): Promise<string>{
         return await new Promise<string>((resolve,reject)=>{
-            let postData: NlFormData = {
-                name: this._name as string, surname: this._surname as string, email: this._email, cb_privacy: this._cb_privacy, 
-                cb_terms: this._cb_terms, lang: this._lang
+            const postData: NlFormData = {
+                email: this._email, lang: this._lang
             };
+            if(this._name)postData.name = this._name
+            if(this._surname)postData.surname = this._surname
+            if(this._cb_privacy)postData.cb_privacy = this._cb_privacy
+            if(this._cb_terms)postData.cb_terms = this._cb_terms
             /* console.log("new_user.ts newUserPromise postData => ");
             console.log(postData); */
             clientPost.post(NewUser.NEWUSER_URL,postData).then(res => {

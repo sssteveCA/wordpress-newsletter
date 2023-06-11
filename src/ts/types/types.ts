@@ -27,8 +27,8 @@ export type NlFormData = {
     name?: string;
     surname?: string;
     email: string;
-    cb_privacy: string;
-    cb_terms: string;
+    cb_privacy?: string;
+    cb_terms?: string;
     lang: string;
 };
 
@@ -39,8 +39,8 @@ export type NlFormDataElements = {
     name: HTMLInputElement;
     surname: HTMLInputElement;
     email: HTMLInputElement;
-    cb_privacy: HTMLInputElement;
-    cb_terms: HTMLInputElement;
+    cb_privacy?: HTMLInputElement;
+    cb_terms?: HTMLInputElement;
     lang: HTMLInputElement;
     bt_submit: HTMLButtonElement;
 }
