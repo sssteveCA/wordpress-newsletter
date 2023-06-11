@@ -29,62 +29,71 @@ if(!isset($post['lang'])) $post['lang'] = 'en';
 $lang = General::languageCode($post['lang']);
 
 if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email'] != '' && $post['cb_privacy'] == '1' && $post['cb_terms'] == '1'){
-    $userData = [
-        'tableName' => C::TABLE_USERS,'email' => trim($post['email']), 'lang' => $lang
-    ];
-    if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
-        $userData['firstName'] = $post['name'];
-        $userData['lastName'] = $post['surname'];
-    }
-    //var_dump($userData);
-    try{
-        $user = new User($userData);
-        $usData = [
-            'user' => $user
+    $not_isset = !isset($post['cb_privacy'],$post['cb_terms']);
+    $cb_privacy = (isset($post['cb_privacy']) && $post['cb_privacy'] == '1');
+    $cb_terms = (isset($post['cb_terms']) && $post['cb_terms'] == '1');
+    if($not_isset || ($cb_privacy || $cb_terms)){
+        $userData = [
+            'tableName' => C::TABLE_USERS,'email' => trim($post['email']), 'lang' => $lang
         ];
-        $userSubscribe = new UserSubscribe($usData);
-        $us_error = $userSubscribe->getErrno();
-        switch($us_error){
-            case 0:
-                $verCode = $userSubscribe->getUser()->getVerCode();
-                $email = $userSubscribe->getUser()->getEmail();
-                $subject = Template::activationMailTitle($lang);
-                $verifyUrl = Properties::verifyUrl();
-                $link = $verifyUrl."?lang=".$lang."&verCode=".$verCode;
-                $operation = EmailManager::EMAIL_ACTIVATION;
-                $aeData = [
-                    'verCode' => $verCode, 'email' => $email, 'lang' => $lang, 'link' => $link, 'operation' => $operation, 'subject' => $subject, 'verifyUrl' => $verifyUrl
-                ];
-                $email = sendActivationMail($aeData);
-                switch($email){
-                    case 0:
-                        $response[C::KEY_MESSAGE] = Properties::completeSubscribe($lang);
-                        $response[C::KEY_DONE] = true;
-                        break;
-                    case Eme::ERR_EMAIL_SEND:
-                        $query = "WHERE `".User::$fields["email"]."` = %s";
-                        $values = [$user->getEmail()];
-                        $user->deleteUser($query,$values);
-                        throw new MailNotSentException;
-                    default:
-                        throw new Exception;
-                }
-                break;
-            case Usee::INCORRECT_EMAIL:
-                http_response_code(400);
-                $response[C::KEY_MESSAGE] = Properties::wrongEmailFormat($lang);
-                break;
-            case Usee::EMAIL_EXISTS:
-                http_response_code(400);
-                $response[C::KEY_MESSAGE] = Properties::emailExists($lang);
-                break;
-            default:
-                throw new Exception;
+        if(isset($post['name'],$post['surname']) && $post['name'] != '' && $post['surname'] != ''){
+            $userData['firstName'] = $post['name'];
+            $userData['lastName'] = $post['surname'];
         }
-    }catch(Exception $e){
-        http_response_code(500);
-        $response[C::KEY_MESSAGE] = Properties::unknownError($lang);
-    }
+        //var_dump($userData);
+        try{
+            $user = new User($userData);
+            $usData = [
+                'user' => $user
+            ];
+            $userSubscribe = new UserSubscribe($usData);
+            $us_error = $userSubscribe->getErrno();
+            switch($us_error){
+                case 0:
+                    $verCode = $userSubscribe->getUser()->getVerCode();
+                    $email = $userSubscribe->getUser()->getEmail();
+                    $subject = Template::activationMailTitle($lang);
+                    $verifyUrl = Properties::verifyUrl();
+                    $link = $verifyUrl."?lang=".$lang."&verCode=".$verCode;
+                    $operation = EmailManager::EMAIL_ACTIVATION;
+                    $aeData = [
+                        'verCode' => $verCode, 'email' => $email, 'lang' => $lang, 'link' => $link, 'operation' => $operation, 'subject' => $subject, 'verifyUrl' => $verifyUrl
+                    ];
+                    $email = sendActivationMail($aeData);
+                    switch($email){
+                        case 0:
+                            $response[C::KEY_MESSAGE] = Properties::completeSubscribe($lang);
+                            $response[C::KEY_DONE] = true;
+                            break;
+                        case Eme::ERR_EMAIL_SEND:
+                            $query = "WHERE `".User::$fields["email"]."` = %s";
+                            $values = [$user->getEmail()];
+                            $user->deleteUser($query,$values);
+                            throw new MailNotSentException;
+                        default:
+                            throw new Exception;
+                    }
+                    break;
+                case Usee::INCORRECT_EMAIL:
+                    http_response_code(400);
+                    $response[C::KEY_MESSAGE] = Properties::wrongEmailFormat($lang);
+                    break;
+                case Usee::EMAIL_EXISTS:
+                    http_response_code(400);
+                    $response[C::KEY_MESSAGE] = Properties::emailExists($lang);
+                    break;
+                default:
+                    throw new Exception;
+            }
+        }catch(Exception $e){
+            http_response_code(500);
+            $response[C::KEY_MESSAGE] = Properties::unknownError($lang);
+        }
+    }//if($not_isset || ($cb_privacy || $cb_terms)){
+    else{
+        http_response_code(400);
+        $response[C::KEY_MESSAGE] = Properties::fillRequiredFields($lang);
+    }  
 }//if(isset($post['email'],$post['cb_privacy'],$post['cb_terms']) && $post['email'] != '' && $post['cb_privacy'] == '1' && $post['cb_terms']){
 else{
     http_response_code(400);

@@ -24,6 +24,23 @@ trait NewUserTrait{
     }
 
     /**
+     * Get the not filled required message for the new user form
+     * @param string $lang the user language
+     * @return string the not fileld required message
+     */
+    public static function fillRequiredFields(string $lang): string{
+        if($lang == Langs::$langs["it"]){
+            return "Compila tutti i campi richiesti per continuare";
+        }
+        else if($lang == Langs::$langs["es"]){
+            return "Rellene todos los campos obligatorios para continuar";
+        }
+        else{
+            return "Fill in all the required fields to continue";
+        }
+    }
+
+    /**
      * Get the user email already exists message in user language
      * @param string $lang the user language
      * @return string the user email already message
