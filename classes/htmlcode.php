@@ -607,7 +607,7 @@ HTML;
 <fieldset id="nl_form_fieldset" class="position-relative w-50 mx-auto border border-primary d-flex flex-column align-items-center">
     <legend class="text-center">{$params['legend_title']}</legend>
     <h2 class="text-center">{$params['h2_title']}</h2>
-    <form id="nl_form" class="ml-5 mb-5 d-flex flex-column" action="{$actionUrl}">
+    <form id="nl_form" class="ml-5 mb-5 d-flex flex-column w-100" action="{$actionUrl}">
         <div class="container">
             <div class="row my-4">
                 <div class="col-12">

@@ -204,11 +204,11 @@ function nl_subscribe_form($atts){
          'privacy_policy_pages' => $settings->getPrivacyPolicyPages(),
          'terms_pages' => $settings->getTermsPages(),
       ];
-      $langParams = HtmlCode::subscribeFormValues($a['lang'], $settingsParams);
-      $formParams = [ 'lang' => $langParams, 'settings' => $settingsParams ];
-      return HtmlCode::wpSignupForm($formParams);
    }//if($settings->getLangStatus()[$a['lang']]){
-   return "";  
+   else $settingsParams = [ 'lang_status' => $a['lang'] ];
+   $langParams = HtmlCode::subscribeFormValues($a['lang'], $settingsParams);
+   $formParams = [ 'lang' => $langParams, 'settings' => $settingsParams];
+   return HtmlCode::wpSignupForm($formParams);
 }
 
 add_filter('script_loader_tag','nl_add_script_tags',10,3);
