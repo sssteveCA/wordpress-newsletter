@@ -1,13 +1,18 @@
 <?php
 
 namespace Newsletter\Classes\Settings;
+
+use Newsletter\Classes\Database\Models\Settings;
+use Newsletter\Classes\Properties;
+use Newsletter\Interfaces\Constants as C;
+use Newsletter\Interfaces\Messages as M;
 use Newsletter\Traits\ErrorTrait;
 use WP_Error;
 use Newsletter\Classes\Settings\GetSettingsErrors as Gse;
 
 interface GetSettingsErrors{
-    const ERR_FETCH_URL = 1;
-    const ERR_FETCH_URL_MSG = "Errore durante l'esecuzione della richiesta";
+    const ERR_GET_DATA = 1;
+    const ERR_GET_DATA_MSG = "Impossibile ottenere i dati richiesti";
 }
 
 /**
@@ -19,32 +24,41 @@ class GetSettings implements Gse{
 
     private string $html = '';
 
-    private const FETCH_URL = '/wp-content/plugins/newsletter/scripts/browser/settings/getsettings.php';
-
     public function __construct(){
-        $response = $this->request();
+        $data = $this->getData();
     }
 
-    private function request(): array{
-        $response = wp_remote_get(self::FETCH_URL);
-        if(!$response instanceof WP_Error){
-            $body = wp_remote_retrieve_body($response);
-            if($body != ''){
-                $bodyArr = json_decode($body,true);
-                return $bodyArr;
-            }
-            else $this->errno = Gse::ERR_FETCH_URL;
-        }//if(!$response instanceof WP_Error){
-        else $this->errno = Gse::ERR_FETCH_URL;
-        return [];
+    private function getData(): array{
+        $settings = new Settings(['tableName' => C::TABLE_SETTINGS]);
+        $settings->getSettings();
+        if($settings->getErrno() == 0){
+            return [
+                C::KEY_DONE => true,
+                C::KEY_DATA => [
+                    'lang_status' => $settings->getLangStatus(),
+                    'included_pages_status' => $settings->getIncludedPagesStatus(),
+                    'socials_status' => $settings->getSocialsStatus(),
+                    'social_pages' => $settings->getSocialPages(),
+                    'contact_pages' => $settings->getContactPages(),
+                    'cookie_policy_pages' => $settings->getCookiePolicyPages(),
+                    'privacy_policy_pages' => $settings->getPrivacyPolicyPages(),
+                    'terms_pages' => $settings->getTermsPages(),
+                ]
+            ];
+        }
+        else $this->errno = Gse::ERR_GET_DATA;
+        return [
+            C::KEY_DONE => false,
+            C::KEY_MESSAGE => M::ERR_UNAUTHORIZED
+        ];
     }
 
     public function getHtml(){ return $this->html; }
 
     public function getError(){
         switch($this->errno){
-            case Gse::ERR_FETCH_URL:
-                $this->error = Gse::ERR_FETCH_URL_MSG;
+            case Gse::ERR_GET_DATA:
+                $this->error = Gse::ERR_GET_DATA_MSG;
                 break;
             default:
                 $this->error = null;

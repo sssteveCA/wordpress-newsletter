@@ -2,6 +2,7 @@
 
 use Newsletter\Classes\Database\Models\Settings as ModelsSettings;
 use Newsletter\Classes\Database\Tables\Settings;
+use Newsletter\Classes\Settings\GetSettings;
 /**
  * Plugin Name: Newsletter
  * Description: This plugin allows send email to subscribers
@@ -104,7 +105,10 @@ use Newsletter\Enums\Langs;
  function nl_submenu_del(){ echo HtmlCode::adminDelForm(); }
  function nl_submenu_log(){ echo HtmlCode::adminLogForm(); }
  function nl_submenu_send(){ echo HtmlCode::adminSenderForm(); }
- function nl_submenu_settings(){ echo HtmlCode::adminSettingsForm(); }
+ function nl_submenu_settings(){ 
+   $getSettings = new GetSettings();
+   echo HtmlCode::adminSettingsForm();
+ }
 
 /*  add_action('init','nl_init');
  function nl_init(){} */
