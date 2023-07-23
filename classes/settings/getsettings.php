@@ -243,7 +243,7 @@ HTML;
         <h5>Pagine contatti</h5>
     </div>
 HTML;
-        $disabled = !$langStatus['it'] ? '': ' disabled';
+        $disabled = $langStatus['it'] ? '': ' disabled';
         $value = $contactPages['it'];
         $html .= <<<HTML
     <div class="row">
@@ -255,7 +255,7 @@ HTML;
         </div>
     </div>
 HTML;
-        $disabled = !$langStatus['es'] ? '': ' disabled';
+        $disabled = $langStatus['es'] ? '': ' disabled';
         $value = $contactPages['es'];
         $html .= <<<HTML
     <div class="row">
@@ -267,7 +267,7 @@ HTML;
         </div>
     </div>
 HTML;
-        $disabled = !$langStatus['en'] ? '': ' disabled';
+        $disabled = $langStatus['en'] ? '': ' disabled';
         $value = $contactPages['en'];
         $html .= <<<HTML
     <div class="row">
@@ -281,6 +281,54 @@ HTML;
 HTML;
         $html .= <<<HTML
 </div>
+HTML;
+        return $html;
+    }
+
+    private function setCookiePolicyPageURLs(): string{
+        $langStatus = $this->data[C::KEY_DATA]['lang_status'];
+        $cookiePolicyPages = $this->data[C::KEY_DATA]['cookie_policy_pages'];
+        $html = <<<HTML
+<div id="nl_container_cookie_pages" class="container mt-5">
+    <div class="row">
+        <h5>Pagine Cookie Policy</h5>
+    </div>
+HTML;
+        $disabled = !$langStatus['it'] ? ' disabled' : '';
+        $value = $cookiePolicyPages['it'];
+        $html .= <<<HTML
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="nl_page_cookie_policy_it" class="form-label">Pagina italiana</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control" id="nl_page_cookie_policy_it" value="{$value}"{$disabled}>
+        </div>
+    </div>
+HTML;
+    $disabled = !$langStatus['es'] ? ' disabled' : '';
+    $value = $cookiePolicyPages['es'];
+    $html .= <<<HTML
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="nl_page_cookie_policy_es" class="form-label">Pagina spagnola</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control" id="nl_page_cookie_policy_es" value="{$value}"{$disabled}>
+        </div>
+    </div>
+HTML;
+    $disabled = !$langStatus['en'] ? ' disabled' : '';
+    $value = $cookiePolicyPages['en'];
+    $html .= <<<HTML
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="nl_page_cookie_policy_en" class="form-label">Pagina inglese</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control" id="nl_page_cookie_policy_en" value="{$value}"{$disabled}>
+        </div>
+    </div>
 HTML;
         return $html;
     }
