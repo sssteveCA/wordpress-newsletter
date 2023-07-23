@@ -107,7 +107,7 @@ use Newsletter\Enums\Langs;
  function nl_submenu_send(){ echo HtmlCode::adminSenderForm(); }
  function nl_submenu_settings(){ 
    $getSettings = new GetSettings();
-   echo HtmlCode::adminSettingsForm();
+   echo $getSettings->getHtml();
  }
 
 /*  add_action('init','nl_init');

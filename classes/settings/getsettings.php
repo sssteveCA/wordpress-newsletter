@@ -28,9 +28,7 @@ class GetSettings implements Gse{
 
     public function __construct(){
         $this->getData();
-        if($this->errno == 0){
-
-        }
+        if($this->errno == 0) $this->setHtml();
     }
 
     public function getHtml(){ return $this->html; }
@@ -70,6 +68,27 @@ class GetSettings implements Gse{
             C::KEY_DONE => false,
             C::KEY_MESSAGE => M::ERR_UNAUTHORIZED
         ];
+    }
+
+    private function setHtml(): void{
+        $html = <<<HTML
+<div>
+    <h2 class="text-center">Impostazioni</h2>
+</div>
+<form id="nl_form_settings" method="post" action="#">
+HTML;
+        $html .= $this->setLangCheckboxes();
+        $html .= $this->setPageEnabledCheckboxes();
+        $html .= $this->setSocialCheckBoxes();
+        $html .= $this->setSocialProfileURLs();
+        $html .= $this->setContactPagesUrl();
+        $html .= $this->setCookiePolicyPageURLs();
+        $html .= $this->setPrivacyPolicyPageURLs();
+        $html .= $this->setTermsPageURLs();
+        $html .= <<<HTML
+</form>
+HTML;
+        $this->html = $html;
     }
 }
 
