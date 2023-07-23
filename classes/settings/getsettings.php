@@ -156,7 +156,7 @@ HTML;
     }
 
     private function setSocialCheckBoxes(): string{
-        $socials = $this->data[C::KEY_DATA]['socials_status'];
+        $socialsStatus = $this->data[C::KEY_DATA]['socials_status'];
         $html = <<<HTML
 <div id="nl_container_social" class="container mt-5">
     <div class="row">
@@ -164,21 +164,21 @@ HTML;
     </div>
     <div class="row flex-column flex-md-row">
 HTML;
-        $checked = $socials['facebook'] ? ' checked' : '';
+        $checked = $socialsStatus['facebook'] ? ' checked' : '';
         $html .= <<<HTML
         <div class="col">
                 <input type="checkbox" class="form-check-input" id="nl_cb_facebook"{$checked}>
                 <label class="form-check-label" for="nl_cb_facebook">Facebook</label>
         </div>
 HTML;
-        $checked = $socials['instagram'] ? ' checked' : '';
+        $checked = $socialsStatus['instagram'] ? ' checked' : '';
         $html .= <<<HTML
         <div class="col">
                 <input type="checkbox" class="form-check-input" id="nl_cb_instagram"{$checked}>
                 <label class="form-check-label" for="nl_cb_instagram">Instagram</label>
         </div>
 HTML;
-        $checked = $socials['youtube'] ? ' checked' : '';
+        $checked = $socialsStatus['youtube'] ? ' checked' : '';
         $html .= <<<HTML
         <div class="col">
                 <input type="checkbox" class="form-check-input" id="nl_cb_youtube"{$checked}>
@@ -187,6 +187,48 @@ HTML;
 HTML;
         $html .= <<<HTML
     </div>
+</div>
+HTML;
+        return $html;
+    }
+
+    private function setSocialProfileURLs(): string{
+        $socialsStatus = $this->data[C::KEY_DATA]['socials_status'];
+        $socialPages = $this->data[C::KEY_DATA]['social_pages'];
+        $html = <<<HTML
+<div id="nl_row_social_links" class="row mt-3">
+HTML;
+        $disabled = ($socialsStatus['facebook']) ? ' disabled': '';
+        $url = $socialPages['facebook'];
+        $html .= <<<HTML
+    <div class="col-12 col-md-4">
+        <label for="nl_input_facebook" class="form-label">Pagina facebook</label>
+    </div>
+    <div class="col-12 col-md-8">
+        <input type="text" class="form-control" id="nl_input_facebook" value="{$url}" {$disabled}>
+    </div>
+HTML;
+    $disabled = ($socialsStatus['instagram']) ? ' disabled': '';
+    $url = $socialPages['instagram'];
+    $html .= <<<HTML
+    <div class="col-12 col-md-4">
+    <label for="nl_input_instagram" class="form-label">Pagina instagram</label>
+    </div>
+    <div class="col-12 col-md-8">
+    <input type="text" class="form-control" id="nl_input_instagram" value="{$url}" {$disabled}>
+    </div>
+HTML;
+    $disabled = ($socialsStatus['youtube']) ? ' disabled': '';
+    $url = $socialPages['youtube'];
+    $html .= <<<HTML
+    <div class="col-12 col-md-4">
+    <label for="nl_input_youtube" class="form-label">Pagina youtube</label>
+    </div>
+    <div class="col-12 col-md-8">
+    <input type="text" class="form-control" id="nl_input_youtube" value="{$url}" {$disabled}>
+    </div>
+HTML;
+        $html .= <<<HTML
 </div>
 HTML;
         return $html;
