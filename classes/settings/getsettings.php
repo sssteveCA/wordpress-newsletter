@@ -154,6 +154,43 @@ HTML;
 HTML;
         return $html;
     }
+
+    private function setSocialCheckBoxes(): string{
+        $socials = $this->data[C::KEY_DATA]['socials_status'];
+        $html = <<<HTML
+<div id="nl_container_social" class="container mt-5">
+    <div class="row">
+        <h5>Social</h5>
+    </div>
+    <div class="row flex-column flex-md-row">
+HTML;
+        $checked = $socials['facebook'] ? ' checked' : '';
+        $html .= <<<HTML
+        <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_facebook"{$checked}>
+                <label class="form-check-label" for="nl_cb_facebook">Facebook</label>
+        </div>
+HTML;
+        $checked = $socials['instagram'] ? ' checked' : '';
+        $html .= <<<HTML
+        <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_instagram"{$checked}>
+                <label class="form-check-label" for="nl_cb_instagram">Instagram</label>
+        </div>
+HTML;
+        $checked = $socials['youtube'] ? ' checked' : '';
+        $html .= <<<HTML
+        <div class="col">
+                <input type="checkbox" class="form-check-input" id="nl_cb_youtube"{$checked}>
+                <label class="form-check-label" for="nl_cb_youtube">Youtube</label>
+        </div>
+HTML;
+        $html .= <<<HTML
+    </div>
+</div>
+HTML;
+        return $html;
+    }
 }
 
 ?>
