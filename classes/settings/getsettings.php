@@ -80,25 +80,72 @@ class GetSettings implements Gse{
     </div>
     <div class="row flex-column flex-md-row">
 HTML;
-        $checked = ($langStatus['it']) ? ' checked': '';
+        $checked = $langStatus['it'] ? ' checked': '';
         $html .= <<<HTML
         <div class="col">
             <input type="checkbox" class="form-check-input" id="nl_cb_lang_it"{$checked}>
             <label class="form-check-label" for="nl_cb_lang_it">Italiano</label>
         </div>
 HTML;
-        $checked = ($langStatus['es']) ? ' checked': '';
+        $checked = $langStatus['es'] ? ' checked': '';
         $html .= <<<HTML
         <div class="col">
             <input type="checkbox" class="form-check-input" id="nl_cb_lang_es"{$checked}>
             <label class="form-check-label" for="nl_cb_lang_es">Spagnolo</label>
         </div>
 HTML;
-        $checked = ($langStatus['en']) ? ' checked': '';
+        $checked = $langStatus['en'] ? ' checked': '';
         $html .= <<<HTML
         <div class="col">
             <input type="checkbox" class="form-check-input" id="nl_cb_lang_en"{$checked}>
             <label class="form-check-label" for="nl_cb_lang_en">Inglese</label>
+        </div>
+HTML;
+        $html .= <<<HTML
+    </div>
+</div>
+HTML;
+        return $html;
+    }
+
+    private function setPageEnabledCheckboxes(): string{
+        $langStatus = $this->data[C::KEY_DATA]['lang_status'];
+        $disabled = (!$langStatus['it'] && !$langStatus['es'] && !$langStatus['en']) ? ' disabled': '';
+        $includedPagesStatus = $this->data[C::KEY_DATA]['included_pages_status'];
+        $html = <<<HTML
+<div id="nl_container_pages_enabled" class="container mt-5">
+        <div class="row">
+            <h5>Pagine da includere</h5>
+        </div>
+        <div class="row flex-column flex-md-row flex-md-wrap">
+HTML;
+        
+        $checked = $includedPagesStatus['contacts_pages'] ? ' checked': '';
+        $html .= <<<HTML
+        <div class="col">
+            <input type="checkbox" class="form-check-input" id="nl_cb_contacts_pages" {$checked}{$disabled}>
+            <label class="form-check-label" for="nl_cb_contacts_pages">Pagine contatti</label>
+        </div>
+HTML;
+        $checked = $includedPagesStatus['cookie_policy_pages'] ? ' checked': '';
+        $html .= <<<HTML
+        <div class="col">
+            <input type="checkbox" class="form-check-input" id="nl_cb_cookie_policy" {$checked}{$disabled}>
+            <label class="form-check-label" for="nl_cb_cookie_policy">Pagine cookie policy</label>
+        </div>
+HTML;
+        $checked = $includedPagesStatus['privacy_policy_pages'] ? ' checked': '';
+        $html .= <<<HTML
+        <div class="col">
+            <input type="checkbox" class="form-check-input" id="nl_cb_privacy_policy" {$checked}{$disabled}>
+            <label class="form-check-label" for="nl_cb_privacy_policy">Pagine privacy policy</label>
+        </div>
+HTML;
+        $checked = $includedPagesStatus['terms_pages'] ? ' checked': '';
+        $html .= <<<HTML
+        <div class="col">
+            <input type="checkbox" class="form-check-input" id="nl_cb_terms" {$checked}{$disabled}>
+            <label class="form-check-label" for="nl_cb_terms">Pagine Termini e condizioni</label>
         </div>
 HTML;
         $html .= <<<HTML
