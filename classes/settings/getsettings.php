@@ -198,7 +198,7 @@ HTML;
         $html = <<<HTML
 <div id="nl_row_social_links" class="row mt-3">
 HTML;
-        $disabled = ($socialsStatus['facebook']) ? ' disabled': '';
+        $disabled = !$socialsStatus['facebook'] ? ' disabled': '';
         $url = $socialPages['facebook'];
         $html .= <<<HTML
     <div class="col-12 col-md-4">
@@ -208,7 +208,7 @@ HTML;
         <input type="text" class="form-control" id="nl_input_facebook" value="{$url}" {$disabled}>
     </div>
 HTML;
-    $disabled = ($socialsStatus['instagram']) ? ' disabled': '';
+    $disabled = !$socialsStatus['instagram'] ? ' disabled': '';
     $url = $socialPages['instagram'];
     $html .= <<<HTML
     <div class="col-12 col-md-4">
@@ -218,7 +218,7 @@ HTML;
     <input type="text" class="form-control" id="nl_input_instagram" value="{$url}" {$disabled}>
     </div>
 HTML;
-    $disabled = ($socialsStatus['youtube']) ? ' disabled': '';
+    $disabled = !$socialsStatus['youtube'] ? ' disabled': '';
     $url = $socialPages['youtube'];
     $html .= <<<HTML
     <div class="col-12 col-md-4">
@@ -226,6 +226,57 @@ HTML;
     </div>
     <div class="col-12 col-md-8">
     <input type="text" class="form-control" id="nl_input_youtube" value="{$url}" {$disabled}>
+    </div>
+HTML;
+        $html .= <<<HTML
+</div>
+HTML;
+        return $html;
+    }
+
+    private function setContactPagesUrl(): string{
+        $langStatus = $this->data[C::KEY_DATA]['lang_status'];
+        $contactPages = $this->data[C::KEY_DATA]['contact_pages'];
+        $html = <<<HTML
+ <div id="nl_container_contacts_pages" class="container mt-5">
+    <div class="row">
+        <h5>Pagine contatti</h5>
+    </div>
+HTML;
+        $disabled = !$langStatus['it'] ? '': ' disabled';
+        $value = $contactPages['it'];
+        $html .= <<<HTML
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="nl_page_contacts_it" class="form-label">Pagina italiana</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control" id="nl_page_contacts_it" value="{$value}"{$disabled}>
+        </div>
+    </div>
+HTML;
+        $disabled = !$langStatus['es'] ? '': ' disabled';
+        $value = $contactPages['es'];
+        $html .= <<<HTML
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="nl_page_contacts_es" class="form-label">Pagina spagnola</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control" id="nl_page_contacts_es" value="{$value}"{$disabled}>
+        </div>
+    </div>
+HTML;
+        $disabled = !$langStatus['en'] ? '': ' disabled';
+        $value = $contactPages['en'];
+        $html .= <<<HTML
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="nl_page_contacts_en" class="form-label">Pagina inglese</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control" id="nl_page_contacts_en" value="{$value}"{$disabled}>
+        </div>
     </div>
 HTML;
         $html .= <<<HTML
