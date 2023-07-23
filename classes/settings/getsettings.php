@@ -332,6 +332,54 @@ HTML;
 HTML;
         return $html;
     }
+
+    private function setPrivacyPolicyPageURLs(): string{
+        $langStatus = $this->data[C::KEY_DATA]['lang_status'];
+        $privacyPolicyPages = $this->data[C::KEY_DATA]['privacy_policy_pages'];
+        $html = <<<HTML
+<div id="nl_container_privacy_pages" class="container mt-5">
+    <div class="row">
+        <h5>Pagine Privacy Policy</h5>
+    </div>
+HTML;
+        $disabled = !$langStatus['it'] ? ' disabled' : '';
+        $value = $privacyPolicyPages['it'];
+        $html .= <<<HTML
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="nl_page_privacy_policy_it" class="form-label">Pagina italiana</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control" id="nl_page_privacy_policy_it" value="{$value}"{$disabled}>
+        </div>
+    </div>
+HTML;
+    $disabled = !$langStatus['es'] ? ' disabled' : '';
+    $value = $privacyPolicyPages['es'];
+    $html .= <<<HTML
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="nl_page_privacy_policy_es" class="form-label">Pagina spagnola</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control" id="nl_page_privacy_policy_es" value="{$value}"{$disabled}>
+        </div>
+    </div>
+HTML;
+    $disabled = !$langStatus['en'] ? ' disabled' : '';
+    $value = $privacyPolicyPages['en'];
+    $html .= <<<HTML
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="nl_page_privacy_policy_en" class="form-label">Pagina inglese</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <input type="text" class="form-control" id="nl_page_privacy_policy_en" value="{$value}"{$disabled}>
+        </div>
+    </div>
+HTML;
+        return $html;
+    }
 }
 
 ?>
