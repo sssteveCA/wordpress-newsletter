@@ -109,6 +109,10 @@ use Newsletter\Enums\Langs;
 /*  add_action('init','nl_init');
  function nl_init(){} */
 
+add_filter('http_request_timeout',function($timeout){
+   return 15;
+});
+
 add_action('wp_enqueue_scripts','nl_libraries',11);
 function nl_libraries(){
    //wp_enqueue_script(C::H_JS_AXIOS_LIB);
