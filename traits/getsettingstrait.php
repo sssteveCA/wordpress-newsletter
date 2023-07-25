@@ -146,6 +146,7 @@ HTML;
                 <label class="form-check-label" for="nl_cb_youtube">Youtube</label>
         </div>
 HTML;
+        $html .= $this->setSocialProfileURLs();
         $html .= <<<HTML
     </div>
 </div>

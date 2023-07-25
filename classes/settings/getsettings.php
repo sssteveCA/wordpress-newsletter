@@ -83,7 +83,6 @@ HTML;
         $html .= $this->setLangCheckboxes();
         $html .= $this->setPageEnabledCheckboxes();
         $html .= $this->setSocialCheckBoxes();
-        $html .= $this->setSocialProfileURLs();
         $html .= $this->setContactPagesUrl();
         $html .= $this->setCookiePolicyPageURLs();
         $html .= $this->setPrivacyPolicyPageURLs();
