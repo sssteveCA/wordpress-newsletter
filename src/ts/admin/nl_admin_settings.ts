@@ -76,28 +76,23 @@ window.addEventListener('DOMContentLoaded',()=>{
                 
         })
     });
-    const gs: GetSettings = new GetSettings();
-    gs.getSettings().then(obj => {
-        if(obj[Constants.KEY_DONE]){
-            const fds_set_data: NlFormDataSettingsSet = {
-                container_pages_enabled: fds.container_pages_enabled,
-                cb_pages_enabled: fds.cb_pages_enabled,
-                container_langs: fds.container_langs,
-                cb_langs: fds.cb_langs,
-                cb_social: fds.cb_social,
-                row_social_links: fds.row_social_links,
-                input_social_links: fds.input_social_links,
-                container_contacts_pages: fds.container_contacts_pages,
-                input_contacts_pages: fds.input_contacts_pages,
-                container_cookie_pages: fds.container_cookie_pages,
-                input_cookie_policy_pages: fds.input_cookie_policy_pages,
-                container_privacy_pages: fds.container_privacy_pages,
-                input_privacy_policy_pages: fds.input_privacy_policy_pages,
-                container_terms_pages: fds.container_terms_pages,
-                input_terms_pages: fds.input_terms_pages
-            }
-            const fds_set: FormDataSettingsSetHtml = new FormDataSettingsSetHtml(fds_set_data)
-            fds_set.setSettingsForm();
-        }//if(obj[Constants.KEY_DONE]){
-    })
+    const fds_set_data: NlFormDataSettingsSet = {
+        container_pages_enabled: fds.container_pages_enabled,
+        cb_pages_enabled: fds.cb_pages_enabled,
+        container_langs: fds.container_langs,
+        cb_langs: fds.cb_langs,
+        cb_social: fds.cb_social,
+        row_social_links: fds.row_social_links,
+        input_social_links: fds.input_social_links,
+        container_contacts_pages: fds.container_contacts_pages,
+        input_contacts_pages: fds.input_contacts_pages,
+        container_cookie_pages: fds.container_cookie_pages,
+        input_cookie_policy_pages: fds.input_cookie_policy_pages,
+        container_privacy_pages: fds.container_privacy_pages,
+        input_privacy_policy_pages: fds.input_privacy_policy_pages,
+        container_terms_pages: fds.container_terms_pages,
+        input_terms_pages: fds.input_terms_pages
+    }
+    const fds_set: FormDataSettingsSetHtml = new FormDataSettingsSetHtml(fds_set_data)
+    fds_set.setSettingsForm();
 });
