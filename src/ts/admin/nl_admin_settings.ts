@@ -1,7 +1,6 @@
 import FormDataSettingsHtml from "../html/formdatasettingshtml";
 import FormDataSettingsSetHtml from "../html/formdatasettingssethtml";
 import { Constants } from "../namespaces/constants";
-import GetSettings from "../requests/get_settings";
 import UpdateSettings from "../requests/update_settings";
 import { NlFormDataSettings, NlFormDataSettingsSet, NlSettingsData } from "../types/types";
 

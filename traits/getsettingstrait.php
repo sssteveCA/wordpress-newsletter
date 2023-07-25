@@ -347,7 +347,7 @@ HTML;
         $langStatus = $this->data[C::KEY_DATA]['lang_status'];
         $termsPages = $this->data[C::KEY_DATA]['terms_pages'];
         $html = <<<HTML
-<div id="nl_container_privacy_pages" class="container mt-5">
+<div id="nl_container_terms_pages" class="container mt-5">
     <div class="row">
         <h5>Pagine Termini e condizioni</h5>
     </div>
