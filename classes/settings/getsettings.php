@@ -63,11 +63,14 @@ class GetSettings implements Gse{
                 ]
             ];
         }
-        else $this->errno = Gse::ERR_GET_DATA;
-        $this->data = [
-            C::KEY_DONE => false,
-            C::KEY_MESSAGE => M::ERR_UNAUTHORIZED
-        ];
+        else{
+            $this->errno = Gse::ERR_GET_DATA;
+            $this->data = [
+                C::KEY_DONE => false,
+                C::KEY_MESSAGE => M::ERR_UNAUTHORIZED
+            ];
+        } 
+        
     }
 
     private function setHtml(): void{
@@ -85,6 +88,7 @@ HTML;
         $html .= $this->setCookiePolicyPageURLs();
         $html .= $this->setPrivacyPolicyPageURLs();
         $html .= $this->setTermsPageURLs();
+        $html .= $this->setFormButtons();
         $html .= <<<HTML
 </form>
 HTML;
