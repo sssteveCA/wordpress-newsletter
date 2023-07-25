@@ -84,7 +84,7 @@ use Newsletter\Enums\Langs;
       }
       else if($page == C::SLUG_ADMIN_FORM_SETTINGS){
          wp_enqueue_style(C::H_CSS_ADMIN_FORM_SETTINGS);
-         wp_enqueue_script(C::H_JS_ADMIN_FORM_SETTINGS);
+         //wp_enqueue_script(C::H_JS_ADMIN_FORM_SETTINGS);
       }
    }//if(isset($_REQUEST['page'])){   
  }

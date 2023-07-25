@@ -80,7 +80,6 @@ window.addEventListener('DOMContentLoaded',()=>{
     gs.getSettings().then(obj => {
         if(obj[Constants.KEY_DONE]){
             const fds_set_data: NlFormDataSettingsSet = {
-                data: obj[Constants.KEY_DATA],
                 container_pages_enabled: fds.container_pages_enabled,
                 cb_pages_enabled: fds.cb_pages_enabled,
                 container_langs: fds.container_langs,

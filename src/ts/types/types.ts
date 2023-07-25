@@ -88,7 +88,6 @@ export type NlFormDataSettings = {
  * Type needed by FormDataSettingsSetHtml class to manipulate the DOM depending on the settings data received
  */
 export type NlFormDataSettingsSet = {
-    data: NlSettingsData;
 } & Omit<NlFormDataSettings,"buttons">
 
 export type NlFormDataSettingsInputPagesEnabled = {
