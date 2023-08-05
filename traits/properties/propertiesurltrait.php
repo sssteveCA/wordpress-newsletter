@@ -106,14 +106,14 @@ trait PropertiesUrlTrait{
      * Get the unsubscribe script URL
      */
     public static function unsubscribeUrl(): string{
-        return Properties::pluginUrl()."scripts/subscribe/preunsubscribe.php";
+        return Properties::pluginUrl()."scripts/browser/subscribe/preunsubscribe.php";
     }
 
     /**
      * Get the account verify URL
      */
     public static function verifyUrl(): string{
-        return Properties::pluginUrl()."scripts/subscribe/verify.php";
+        return Properties::pluginUrl()."scripts/browser/subscribe/verify.php";
     }
 
     /**
