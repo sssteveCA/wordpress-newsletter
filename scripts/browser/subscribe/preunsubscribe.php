@@ -14,12 +14,12 @@ $arr_data = [
     'body' => '',
     'style_tag' => '',
     'styles' => [
-        ['href' => '../../node_modules/bootstrap/dist/css/bootstrap.min.css']
+        ['href' => '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
     ],
     'scripts' => [
-        /* [ 'src' => '../../node_modules/axios/dist/axios.min.js' ], */
-        [ 'src' => '../../node_modules/bootstrap/dist/js/bootstrap.min.js' ],
-        [ 'src' => '../../dist/js/scripts/preunsubscribe.js', 'type' => 'module' ]  
+        /* [ 'src' => '../../../node_modules/axios/dist/axios.min.js' ], */
+        [ 'src' => '../../../node_modules/bootstrap/dist/js/bootstrap.min.js' ],
+        [ 'src' => '../../../dist/js/scripts/preunsubscribe.js', 'type' => 'module' ]  
     ]
 ];
 
