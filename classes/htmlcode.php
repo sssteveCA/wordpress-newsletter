@@ -459,6 +459,7 @@ HTML;
     public static function genericHtml(string $title, string $body, string $styleTag = "",array $styles = [], array $scripts = []):string{
         $stylesS = "";
         $scriptsS = "";
+        $content = "";
         $styles_map = array_map(function($style){
             return '<link rel="stylesheet" href="'.$style['href'].'">';
         },$styles);
@@ -473,7 +474,7 @@ HTML;
         if(!empty($scripts_map)){
             foreach($scripts_map as $script) $scriptsS .= $script;
         }
-        return <<<HTML
+        $content .= <<<HTML
 <!DOCTYPE html>
 <html>
     <head>
@@ -490,6 +491,7 @@ HTML;
     </body>
 </html>
 HTML;
+    return $content;
     }
 
     /**

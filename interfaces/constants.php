@@ -21,6 +21,7 @@ interface Constants{
     const H_JS_AXIOS_LIB = 'nlAxiosLib';
     const H_CSS_BOOTSTRAP = 'nlBootstrapCss';
     const H_JS_BOOTSTRAP = 'nlBootstrapJs';
+    const H_JS_PREUNSUBSCRIBE = 'nlPreUnsubscribe';
     const H_CSS_WP_FORM = 'nlNewsletterCss';
     const H_JS_WP_FORM = 'nlNewsletterJs';
 
@@ -50,6 +51,7 @@ interface Constants{
     const REL_JS_ADMIN_SETTINGS = Constants::REL_DIST_JS.'admin/nl_admin_settings.js';
     //const REL_JS_AXIOS_LIB = 'node_modules/axios/dist/axios.min.js';
     const REL_JS_BOOTSTRAP = 'node_modules/bootstrap/dist/js/bootstrap.min.js';
+    const REL_JS_PREUNSUBSCRIBE = Constants::REL_DIST_JS.'scripts/preunsubscribe.js';
     const REL_JS_WP = Constants::REL_DIST_JS.'wp/nl_wp.js';
 
     const REL_NEWSLETTER_LOG = '/log_files/newsletter_status.log';
