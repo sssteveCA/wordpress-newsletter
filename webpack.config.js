@@ -8,6 +8,7 @@ const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries')
 
 module.exports = {
     entry: {
+        'css/scripts/unsubscribe': join(scssPath,'scripts/unsubscribe.scss'),
         'css/wp/nl_wp': join(scssPath,'wp/nl_wp.scss'),
         'css/wp/verify': join(scssPath,'wp/verify.scss'),
         'css/admin/nl_admin_add': join(scssPath,'admin/nl_admin_add.scss'),

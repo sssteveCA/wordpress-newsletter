@@ -141,6 +141,8 @@ function nl_scripts(){
     if(is_page_template(C::REL_TEMPLATE_PREUNSUBSCRIBE)){
       wp_enqueue_script(C::H_JS_PREUNSUBSCRIBE);
     }
+    else if(is_page_template(C::REL_TEMPLATE_UNSUBSCRIBE)){
+    }
 
 }
 
