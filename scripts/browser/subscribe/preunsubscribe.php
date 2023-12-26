@@ -17,12 +17,17 @@ $arr_data = [
 if(isset($_REQUEST["unsubscCode"]) && $_REQUEST["unsubscCode"]){
     $script_path = "./unsubscribe.php";
     $unsubsc_code = $_REQUEST["unsubscCode"];
-    $arr_data['body'] = HtmlCode::preUnsubscribeForm($lang,$script_path,$unsubsc_code);
+    $preUnsubscribeForm = HtmlCode::preUnsubscribeForm($lang,$script_path,$unsubsc_code);
+    $arr_data['body'] = <<<HTML
+<div class="nl-preunsubscribe">
+{$preUnsubscribeForm}
+</div>
+HTML;
 }//if(isset($_REQUEST["unsubscCode"]) && $_REQUEST["unsubscCode"]){
 else{
     $error_message = Properties::preUnsubscribeErrorMessage($lang);
     $arr_data['body'] = <<<HTML
-<div class="container">
+<div class="container nl-preunsubscribe">
     <div class="row justify-content-center mt-5">
         <div class="col-12 col-md-10 col-lg-8">{$error_message}</div>
     </div>

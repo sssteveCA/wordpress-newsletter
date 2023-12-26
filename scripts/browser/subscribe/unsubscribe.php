@@ -73,7 +73,7 @@ if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
 }//if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
 else{
     $body = <<<HTML
-<div>{$message}</div>
+<div class="nl-unsubscribe">{$message}</div>
 HTML;
     $html = HtmlCode::genericHtml($title,$body);
     echo $html;

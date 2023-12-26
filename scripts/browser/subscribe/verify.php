@@ -56,7 +56,7 @@ if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
         $message = Properties::unknownError($lang);
     }
     $body = <<<HTML
-<div>{$message}</div>
+<div class="nl-verify">{$message}</div>
 HTML;
 }//if(isset($_REQUEST['verCode']) && $_REQUEST['verCode'] != ''){
 else{

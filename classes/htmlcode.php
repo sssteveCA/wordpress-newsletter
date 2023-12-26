@@ -487,7 +487,11 @@ HTML;
         </style>
     </head>
     <body>
-        {$body}
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                {$body}
+            </main>
+        </div>
     </body>
 </html>
 HTML;

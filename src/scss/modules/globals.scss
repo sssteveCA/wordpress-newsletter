@@ -1,4 +1,21 @@
+@use "sass:map";
 
 $bs-breakpoints: (
     'xs': 0px, 'sm': 576px, 'md': 768px, 'lg': 992px, 'xl': 1200px, 'xxl': 1400px
 );
+
+$script-div-map : (
+    'padding-top': 20px,
+    'text-align': center,
+    'font-size': 20px,
+    'font-weight': bold
+);
+
+@mixin script-div($class,$properties){
+    div#{$class} div{
+        padding-top: map.get($properties,'padding-top');
+        text-align: map.get($properties,'text-align');
+        font-size: map.get($properties,'font-size');
+        font-weight: map.get($properties,'font-weight');
+    }
+}
