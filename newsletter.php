@@ -138,6 +138,10 @@ function nl_libraries(){
 function nl_scripts(){
     wp_enqueue_style(C::H_CSS_WP_FORM);
     wp_enqueue_script(C::H_JS_WP_FORM);
+    if(is_page_template(C::REL_TEMPLATE_PREUNSUBSCRIBE)){
+      wp_enqueue_script(C::H_JS_PREUNSUBSCRIBE);
+    }
+
 }
 
 add_action('wp_footer','nl_form_signup');
@@ -205,6 +209,10 @@ function nl_after_load(){
       wp_register_style(C::H_CSS_WP_FORM,$wpCss,[],null);
       wp_register_script(C::H_JS_WP_FORM,$wpJs,[],null,true);
    }
+   if(is_page_template(C::REL_TEMPLATE_PREUNSUBSCRIBE)){
+      $preUnsubscribeJs = $plugin_dir.C::REL_JS_PREUNSUBSCRIBE;
+      wp_register_script(C::H_JS_PREUNSUBSCRIBE,$preUnsubscribeJs,[],null,true);
+   }
 
 }
 
@@ -240,6 +248,7 @@ function nl_add_script_tags($tag, $handle, $src){
       case C::H_JS_ADMIN_FORM_LOG:
       case C::H_JS_ADMIN_FORM_SEND:
       case C::H_JS_ADMIN_FORM_SETTINGS:
+      case C::H_JS_PREUNSUBSCRIBE:
          $tag = '<script type="module" src="'.esc_url($src).'"></script>';
          break;
       default:

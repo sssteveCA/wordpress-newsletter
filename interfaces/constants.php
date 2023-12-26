@@ -56,6 +56,8 @@ interface Constants{
 
     const REL_NEWSLETTER_LOG = '/log_files/newsletter_status.log';
 
+    const REL_TEMPLATE_PREUNSUBSCRIBE = 'scripts/browser/subscribe/preunsubscribe.php';
+
     const TABLE_SETTINGS = "newsletter_settings";
     const TABLE_USERS = "newsletter_users";
 
