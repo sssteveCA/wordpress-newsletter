@@ -72,18 +72,10 @@ if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
     echo json_encode($response,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 }//if(isset($_REQUEST[C::KEY_AJAX]) && $_REQUEST[C::KEY_AJAX] == '1'){
 else{
-    $style = <<<HTML
-div{
-    padding-top: 20px; 
-    text-align: center; 
-    font-size: 20px; 
-    font-weight: bold;
-}
-HTML;
     $body = <<<HTML
 <div>{$message}</div>
 HTML;
-    $html = HtmlCode::genericHtml($title,$body,$style);
+    $html = HtmlCode::genericHtml($title,$body);
     echo $html;
 }
 
