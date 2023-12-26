@@ -23,6 +23,7 @@ interface Constants{
     const H_JS_BOOTSTRAP = 'nlBootstrapJs';
     consT H_CSS_UNSUBSCRIBE = 'nlUnsubscribeCss';
     const H_JS_PREUNSUBSCRIBE = 'nlPreUnsubscribeJs';
+    const H_CSS_VERIFY = 'nlVerifyCss';
     const H_CSS_WP_FORM = 'nlNewsletterCss';
     const H_JS_WP_FORM = 'nlNewsletterJs';
 
