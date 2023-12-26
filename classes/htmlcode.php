@@ -454,9 +454,15 @@ HTML;
      * @return string the HTML page content
      */
     public static function genericHtml(string $title, string $body):string{
-        $header = get_header();
-        $sidebar = get_sidebar();
-        $footer = get_footer();
+        ob_start();
+        get_header();
+        $header = ob_get_clean();
+        ob_start();
+        get_sidebar();
+        $sidebar = ob_get_clean();
+        ob_start();
+        get_footer();
+        $footer = ob_get_clean();
         $content = <<<HTML
 {$header}
 <div id="primary" class="content-area">
