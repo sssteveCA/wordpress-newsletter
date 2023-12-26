@@ -22,6 +22,7 @@ interface Constants{
     const H_CSS_BOOTSTRAP = 'nlBootstrapCss';
     const H_JS_BOOTSTRAP = 'nlBootstrapJs';
     consT H_CSS_UNSUBSCRIBE = 'nlUnsubscribeCss';
+    const H_CSS_PREUNSUBSCRIBE = 'nlPreUnsubscribeCss';
     const H_JS_PREUNSUBSCRIBE = 'nlPreUnsubscribeJs';
     const H_CSS_VERIFY = 'nlVerifyCss';
     const H_CSS_WP_FORM = 'nlNewsletterCss';
@@ -45,6 +46,9 @@ interface Constants{
     const REL_CSS_ADMIN_SEND = Constants::REL_DIST_CSS.'admin/nl_admin_send.css';
     const REL_CSS_ADMIN_SETTINGS = Constants::REL_DIST_CSS.'admin/nl_admin_settings.css';
     const REL_CSS_BOOTSTRAP = 'node_modules/bootstrap/dist/css/bootstrap.min.css';
+    const REL_CSS_PREUNSUBSCRIBE = Constants::REL_DIST_CSS.'scripts/preunsubscribe.css';
+    const REL_CSS_UNSUBSCRIBE = Constants::REL_DIST_CSS.'scripts/unsubscribe.css';
+    const REL_CSS_VERIFY = Constants::REL_DIST_CSS.'scripts/verify.css';
     const REL_CSS_WP = Constants::REL_DIST_CSS.'wp/nl_wp.css';
     const REL_JS_ADMIN_ADD = Constants::REL_DIST_JS.'admin/nl_admin_add.js';
     const REL_JS_ADMIN_DELETE = Constants::REL_DIST_JS.'admin/nl_admin_delete.js';
@@ -54,8 +58,6 @@ interface Constants{
     //const REL_JS_AXIOS_LIB = 'node_modules/axios/dist/axios.min.js';
     const REL_JS_BOOTSTRAP = 'node_modules/bootstrap/dist/js/bootstrap.min.js';
     const REL_JS_PREUNSUBSCRIBE = Constants::REL_DIST_JS.'scripts/preunsubscribe.js';
-    const REL_CSS_UNSUBSCRIBE = Constants::REL_DIST_CSS.'scripts/unsubscribe.css';
-    const REL_CSS_VERIFY = Constants::REL_DIST_CSS.'scripts/verify.css';
     const REL_JS_WP = Constants::REL_DIST_JS.'wp/nl_wp.js';
 
     const REL_NEWSLETTER_LOG = '/log_files/newsletter_status.log';

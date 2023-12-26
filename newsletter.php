@@ -138,8 +138,10 @@ function nl_libraries(){
 function nl_scripts(){
     wp_enqueue_style(C::H_CSS_WP_FORM);
     wp_enqueue_script(C::H_JS_WP_FORM);
-    if(is_page_template(C::REL_TEMPLATE_PREUNSUBSCRIBE))
+    if(is_page_template(C::REL_TEMPLATE_PREUNSUBSCRIBE)){
+      wp_enqueue_style(C::H_CSS_PREUNSUBSCRIBE);
       wp_enqueue_script(C::H_JS_PREUNSUBSCRIBE);
+    }
     else if(is_page_template(C::REL_TEMPLATE_UNSUBSCRIBE))
       wp_enqueue_style(C::H_CSS_UNSUBSCRIBE);
    else if(is_page_template(C::REL_TEMPLATE_VERIFY))
@@ -213,7 +215,9 @@ function nl_after_load(){
       wp_register_script(C::H_JS_WP_FORM,$wpJs,[],null,true);
    }
    if(is_page_template(C::REL_TEMPLATE_PREUNSUBSCRIBE)){
+      $preUnsubscribeCss = $plugin_dir.C::REL_CSS_PREUNSUBSCRIBE;
       $preUnsubscribeJs = $plugin_dir.C::REL_JS_PREUNSUBSCRIBE;
+      wp_register_style(C::H_CSS_PREUNSUBSCRIBE,$preUnsubscribeCss,[],null);
       wp_register_script(C::H_JS_PREUNSUBSCRIBE,$preUnsubscribeJs,[],null,true);
    }
    else if(is_page_template(C::REL_TEMPLATE_UNSUBSCRIBE)){

@@ -1,3 +1,5 @@
+@use "./../modules/globals";
+
 $verCodeWidth: clamp(200px, calc(100% - 50px) ,600px);
 
 @mixin verify-form-style($inputWidth){
@@ -17,13 +19,5 @@ $verCodeWidth: clamp(200px, calc(100% - 50px) ,600px);
     }
 }
 
-@mixin verify-divs(){
-    div.nl-verify div{
-        padding-top: 20px; 
-        text-align: center; 
-        font-size: 20px; 
-        font-weight: bold;
-    }
-}
-
 @include verify-form-style($verCodeWidth);
+@include globals.script-div(".nl-verify",globals.$script-div-map);
