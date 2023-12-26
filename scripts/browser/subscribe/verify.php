@@ -14,14 +14,6 @@ use Newsletter\Classes\General;
 use Newsletter\Classes\Properties;
 
 $html = "";
-$style = <<<HTML
-div{
-    padding-top: 20px; 
-    text-align: center; 
-    font-size: 20px; 
-    font-weight: bold;
-}
-HTML;
 $body = "";
 
 if(!isset($_REQUEST['lang'])) $_REQUEST['lang'] = 'en';
@@ -72,14 +64,7 @@ else{
     $body = HtmlCode::wpSignupVerifyForm(basename(__FILE__),$params);
 }
 
-$css_arr = [
-    ['href' => '../../node_modules/bootstrap/dist/css/bootstrap.min.css'],
-    ['href' => '../../dist/css/wp/verify.css']
-];
-$js_arr = [
-    ["../../node_modules/bootstrap/dist/js/bootstrap.min.js"]
-];
-$html = HtmlCode::genericHtml($title,$body,$style,$css_arr,$js_arr);
+$html = HtmlCode::genericHtml($title,$body);
 
 echo $html;
 

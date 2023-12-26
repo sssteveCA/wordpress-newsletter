@@ -12,15 +12,6 @@ $lang = General::languageCode($_REQUEST['lang']);
 $arr_data = [
     'title' => Properties::preUnsubscribeTitle($lang),
     'body' => '',
-    'style_tag' => '',
-    'styles' => [
-        /* ['href' => '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'] */
-    ],
-    'scripts' => [
-        /* [ 'src' => '../../../node_modules/axios/dist/axios.min.js' ],
-        [ 'src' => '../../../node_modules/bootstrap/dist/js/bootstrap.min.js' ],
-        [ 'src' => '../../../dist/js/scripts/preunsubscribe.js', 'type' => 'module' ]   */
-    ]
 ];
 
 if(isset($_REQUEST["unsubscCode"]) && $_REQUEST["unsubscCode"]){
@@ -39,5 +30,5 @@ else{
 HTML;
 }
 
-echo HtmlCode::genericHtml($arr_data['title'],$arr_data['body'],$arr_data['style_tag'],$arr_data['styles'],$arr_data['scripts']);
+echo HtmlCode::genericHtml($arr_data['title'],$arr_data['body']);
 ?>
