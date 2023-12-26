@@ -12,7 +12,7 @@ $script-div-map : (
 );
 
 @mixin script-div($class,$properties){
-    div#{$class} div{
+    div#{$class}{
         padding-top: map.get($properties,'padding-top');
         text-align: map.get($properties,'text-align');
         font-size: map.get($properties,'font-size');
