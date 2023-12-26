@@ -142,6 +142,7 @@ function nl_scripts(){
       wp_enqueue_script(C::H_JS_PREUNSUBSCRIBE);
     }
     else if(is_page_template(C::REL_TEMPLATE_UNSUBSCRIBE)){
+      wp_enqueue_style(C::H_CSS_UNSUBSCRIBE);
     }
 
 }
@@ -215,7 +216,10 @@ function nl_after_load(){
       $preUnsubscribeJs = $plugin_dir.C::REL_JS_PREUNSUBSCRIBE;
       wp_register_script(C::H_JS_PREUNSUBSCRIBE,$preUnsubscribeJs,[],null,true);
    }
-
+   else if(is_page_template(C::REL_TEMPLATE_UNSUBSCRIBE)){
+      $unsubscribeCss = $plugin_dir.C::REL_CSS_UNSUBSCRIBE;
+      wp_register_style(C::H_CSS_UNSUBSCRIBE,$unsubscribeCss,[],null);
+   }
 }
 
 add_shortcode('nl_subscribe','nl_subscribe_form');
